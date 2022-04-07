@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         CheckingGround();
         
     }
+
     void Run()
     {
         movement = Input.GetAxisRaw( "Horizontal" );
