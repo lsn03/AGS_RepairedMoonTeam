@@ -760,6 +760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TextName: {fileID: 599688802}
   TextLog: {fileID: 876399182}
+  inputField: {fileID: 2005101824}
 --- !u!1 &1339164330
 GameObject:
   m_ObjectHideFlags: 0

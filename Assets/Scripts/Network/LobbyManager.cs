@@ -6,10 +6,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Text TextName;
     [SerializeField] private Text TextLog;
+    [SerializeField] private InputField inputField;
 
     private void Start()
     {
-        TextName.text = PlayerPrefs.GetString( "name" );
+        inputField.text = PlayerPrefs.GetString( "name" );
         PhotonNetwork.NickName = TextName.text;
         Log( "welcome" );
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -42,6 +43,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void SaveName()
     {
         PlayerPrefs.SetString( "name", TextName.text );
+        PhotonNetwork.NickName = PlayerPrefs.GetString( "name" );
     }
     private void Log(string message)
     {

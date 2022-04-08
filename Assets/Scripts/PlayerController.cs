@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Range(0,10f),SerializeField] float jumpForce;
@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public bool isGrounded;
     [SerializeField] public Transform GroundCheck;
+    [SerializeField] private Text TextName;
 
     private PhotonView photonView;
 
@@ -24,6 +25,9 @@ public class PlayerController : MonoBehaviour
         GroundCheckRadius = GroundCheck.GetComponent<CircleCollider2D>().radius;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         photonView = GetComponent<PhotonView>();
+        TextName.text = photonView.Owner.NickName;
+        if (photonView.Owner.IsLocal)
+            Camera.main.GetComponent<CameraWatchToPlayer>().player = gameObject.transform;
     }
 
     private float movement;
