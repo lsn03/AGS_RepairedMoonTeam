@@ -1,34 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
     [Range(0,10f),SerializeField] float jumpForce;
     [Range(0,10f),SerializeField] float speed;
 
-    [SerializeField]public bool isGrounded;
-   [SerializeField]  public Transform GroundCheck;
+    [SerializeField] public bool isGrounded;
+    [SerializeField] public Transform GroundCheck;
 
+    private PhotonView photonView;
 
     public LayerMask Ground;
 
     Rigidbody2D  _rigidbody2D;
 
-    void Awake()
-    {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
+
     public float GroundCheckRadius;
     void Start()
     {
         GroundCheckRadius = GroundCheck.GetComponent<CircleCollider2D>().radius;
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        photonView = GetComponent<PhotonView>();
     }
 
     private float movement;
     void Update()
     {
-
+        if ( !photonView.IsMine ) return;
         Run();
         Jump();
         CheckingGround();
