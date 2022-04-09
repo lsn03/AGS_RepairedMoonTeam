@@ -192,6 +192,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   TextName: {fileID: 8918187019833919514}
+  Spawn: {fileID: 5262759516164223518, guid: fe4a8e7444c83484497b8743c23f0f44, type: 3}
   bulletPrefab: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
   bulletSpawn: {fileID: 4934843302535480352}
   facingRight: 1

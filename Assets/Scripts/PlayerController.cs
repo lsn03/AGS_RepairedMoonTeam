@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Text TextName;
 
-    
+    [SerializeField] public Transform Spawn;
 
     private PhotonView photonView;
 
@@ -93,8 +93,13 @@ public class PlayerController : MonoBehaviour
 
         if ( health <= 0f || transform.position.y < -20f )
         {
-          
-            transform.position = new Vector2( Random.Range(-6f, 6f), -2f );
+
+            var SpawnPoint = new Vector3[Spawn.childCount];
+            for ( int j = 0; j < Spawn.childCount; j++ )
+                SpawnPoint[j] = Spawn.GetChild( j ).transform.position;
+            Vector2 _ = SpawnPoint[Random.Range(0,Spawn.childCount)];
+
+            transform.position = new Vector2(_.x, _.y);
             health = 100f;
             Debug.Log( "Die" );
         }
