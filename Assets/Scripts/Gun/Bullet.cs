@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     {
         Invoke( "DestroyBullet", destroyTime );
         photonView = GetComponent<PhotonView>();
+        
     }
     void Update()
     {

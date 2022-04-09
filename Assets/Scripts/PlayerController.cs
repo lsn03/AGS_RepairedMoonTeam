@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public bool isGrounded;
     [SerializeField] public Transform GroundCheck;
+    public float GroundCheckRadius;
+    public LayerMask Ground;
+
     [SerializeField] private Text TextName;
 
     private PhotonView photonView;
@@ -17,13 +20,11 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
 
-    public LayerMask Ground;
-
     Rigidbody2D  _rigidbody2D;
 
     private float health = 100f;
 
-    public float GroundCheckRadius;
+    public bool facingRight = true;
 
     void Start()
     {
@@ -44,8 +45,8 @@ public class PlayerController : MonoBehaviour
         JumpUp();
         JumpDown();
         CheckingGround();
-
-
+        Flip();
+        
     }
 
     void Run()
@@ -87,5 +88,29 @@ public class PlayerController : MonoBehaviour
             health = 100f;
             Debug.Log( "Die" );
         }
+    }
+    public void Flip()
+    {
+        if ( movement < 0f && facingRight )
+        {
+            Spin();
+        }
+        else if ( movement > 0f && !facingRight )
+        {
+            Spin();
+        }
+    }
+
+    public void Spin()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+        TextName.GetComponent<RectTransform>().transform.localScale = theScale;
+    }
+    public bool check()
+    {
+        return facingRight;
     }
 }

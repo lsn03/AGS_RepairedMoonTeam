@@ -16,10 +16,13 @@ public class Pistol : MonoBehaviour
 
     private PhotonView photonView;
 
+    PlayerController player;
+
     // Start is called before the first frame update
     void Start()
     {
         photonView = GetComponent<PhotonView>();
+        player = GetComponent<PlayerController>();
     }
     
     // Update is called once per frame
@@ -28,19 +31,35 @@ public class Pistol : MonoBehaviour
         if ( !photonView.IsMine ) return;
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position;
         float rotateZ = Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
-        if ( ( rotateZ + offset ) > maxAxis )
-        {
-            Gun.transform.rotation = Quaternion.Euler( 0f, 0f, maxAxis );
-        }
-        else if( ( rotateZ + offset ) < minAxis )
-        {
-            Gun.transform.rotation = Quaternion.Euler( 0f, 0f, minAxis );
-        }
+        Debug.Log( rotateZ );
+        if (player.facingRight)
+            if ( ( rotateZ + offset ) > maxAxis )
+            {
+                Gun.transform.rotation = Quaternion.Euler( 0f, 0f, maxAxis );
+            }
+            else if( ( rotateZ + offset ) < minAxis )
+            {
+                Gun.transform.rotation = Quaternion.Euler( 0f, 0f, minAxis );
+            }
+            else
+            {
+                Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
+            }
         else
         {
-            Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
+            if ( ( rotateZ + offset ) > maxAxis )
+            {
+                Gun.transform.rotation = Quaternion.Euler( 0f, 0f, -maxAxis );
+            }
+            else if ( ( rotateZ + offset ) < minAxis )
+            {
+                Gun.transform.rotation = Quaternion.Euler( 0f, 0f, -minAxis );
+            }
+            else
+            {
+                Gun.transform.rotation = Quaternion.Euler( 0f, 0f, (rotateZ + offset));
+            }
         }
-        
 
         if ( timeShot <= 0 )
         {
