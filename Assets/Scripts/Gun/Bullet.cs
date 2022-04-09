@@ -9,31 +9,34 @@ public class Bullet : MonoBehaviour
     public float destroyTime;
     public float damage = 25f;
 
-    
+    private PhotonView photonView;
+
     private void Start()
     {
         Invoke( "DestroyBullet", destroyTime );
+        photonView = GetComponent<PhotonView>();
     }
     void Update()
     {
-       
+        
         transform.Translate( new Vector2(1,0) * speed * Time.deltaTime );
     }
 
     void DestroyBullet()
     {
-        Destroy( gameObject );
+        PhotonNetwork.Destroy( gameObject );
     }
     public void OnTriggerEnter2D( Collider2D collision )
     {
   
-        Enemy enemy = collision.GetComponent<Enemy>();
-        if ( enemy != null )
+        PlayerController  Player = collision.GetComponent<PlayerController>();
+        //BlockToDestroy blackToDestroy = collision.GetComponent<BlockToDestroy>();
+        if ( Player != null && !photonView.IsMine )
         {
-            enemy.TakeDamage( damage );
+            Player.TakeDamage( damage );
             
         }
         DestroyBullet();
-
     }
+
 }
