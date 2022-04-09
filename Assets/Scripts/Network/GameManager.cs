@@ -5,12 +5,24 @@ using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
 
+
 public class GameManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject player;
-    private void Start()
+
+    [SerializeField] public Transform Spawn;
+
+    
+
+
+
+    public void Start()
     {
-        PhotonNetwork.Instantiate( player.name, new Vector2(Random.Range(-6,6),-2 ),Quaternion.identity);
+        var SpawnPoint = new Vector3[Spawn.childCount];
+        for ( int j = 0; j < Spawn.childCount; j++ )
+            SpawnPoint[j] = Spawn.GetChild( j ).transform.position;
+        Vector2 _ = SpawnPoint[Random.Range(0,Spawn.childCount)];
+        PhotonNetwork.Instantiate( player.name, new Vector2(_.x,_.y  ),Quaternion.identity);
     }
     public void Leave()
     {

@@ -187,13 +187,14 @@ MonoBehaviour:
   speed: 3.55
   isGrounded: 0
   GroundCheck: {fileID: 4934843300888385163}
-  TextName: {fileID: 8918187019833919514}
-  bulletPrefab: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
-  bulletSpawn: {fileID: 4934843302535480352}
+  GroundCheckRadius: 0
   Ground:
     serializedVersion: 2
     m_Bits: 64
-  GroundCheckRadius: 0
+  TextName: {fileID: 8918187019833919514}
+  bulletPrefab: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
+  bulletSpawn: {fileID: 4934843302535480352}
+  facingRight: 1
 --- !u!61 &4934843300594342927
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -511,7 +512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4934843302535480353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.82, y: 0.04, z: 0}
+  m_LocalPosition: {x: 1.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4934843300840405766}

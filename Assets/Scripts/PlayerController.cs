@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+
 public class PlayerController : MonoBehaviour
 {
     [Range(0,10f),SerializeField] float jumpForce;
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Text TextName;
 
+    
+
     private PhotonView photonView;
 
     public GameObject bulletPrefab;
@@ -26,7 +29,9 @@ public class PlayerController : MonoBehaviour
 
     public bool facingRight = true;
 
-    void Start()
+    
+    
+    public void Start()
     {
         GroundCheckRadius = GroundCheck.GetComponent<CircleCollider2D>().radius;
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -46,6 +51,7 @@ public class PlayerController : MonoBehaviour
         JumpDown();
         CheckingGround();
         Flip();
+        Die();
         
     }
 
@@ -80,11 +86,15 @@ public class PlayerController : MonoBehaviour
         Debug.Log( health );
         Die();
     }
+    
     public void Die()
     {
-        if ( health <= 0f || transform.position.x < -50f )
+        
+
+        if ( health <= 0f || transform.position.y < -20f )
         {
-            transform.position = new Vector2( Random.Range( -6, 6 ), -2 );
+          
+            transform.position = new Vector2( Random.Range(-6f, 6f), -2f );
             health = 100f;
             Debug.Log( "Die" );
         }
@@ -108,9 +118,5 @@ public class PlayerController : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
         TextName.GetComponent<RectTransform>().transform.localScale = theScale;
-    }
-    public bool check()
-    {
-        return facingRight;
     }
 }
