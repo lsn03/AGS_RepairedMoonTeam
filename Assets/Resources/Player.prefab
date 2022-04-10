@@ -316,8 +316,6 @@ MonoBehaviour:
   shotDir: {fileID: 4934843302535480352}
   Gun: {fileID: 4934843300840405767}
   startTime: 0.51
-  minAxis: -52
-  maxAxis: 54
 --- !u!1 &4934843300840405767
 GameObject:
   m_ObjectHideFlags: 0
