@@ -29,15 +29,15 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter2D( Collider2D collision )
     {
-  
+        Debug.Log( "SelfDamage" );
         PlayerController  Player = collision.GetComponent<PlayerController>();
         //BlockToDestroy blackToDestroy = collision.GetComponent<BlockToDestroy>();
         if ( Player != null && !photonView.IsMine )
         {
             Player.TakeDamage( damage );
-            
+            DestroyBullet();
         }
-        DestroyBullet();
+        
     }
 
 }

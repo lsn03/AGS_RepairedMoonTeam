@@ -117,6 +117,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Spin()
+
     {
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;

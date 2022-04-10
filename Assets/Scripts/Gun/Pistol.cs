@@ -11,18 +11,17 @@ public class Pistol : MonoBehaviour
     public GameObject Gun;
     public float startTime;
     private float timeShot;
-    [SerializeField] float minAxis;
-    [SerializeField] float maxAxis;
 
     private PhotonView photonView;
 
     PlayerController player;
-
+  
     // Start is called before the first frame update
     void Start()
     {
         photonView = GetComponent<PhotonView>();
         player = GetComponent<PlayerController>();
+        
     }
     
     // Update is called once per frame
@@ -31,12 +30,23 @@ public class Pistol : MonoBehaviour
         if ( !photonView.IsMine ) return;
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position;
         float rotateZ = Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
-        
-        
-        Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
-            
+
        
         
+        Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
+
+
+        Vector3 LocalScale = Vector3.one;
+        if (rotateZ>90 || rotateZ < -90 )
+        {
+            LocalScale.x = -1f;
+        }
+        else
+        {
+            LocalScale.x = 1f;
+        }
+
+        transform.localScale = LocalScale;
 
         if ( timeShot <= 0 )
         {
@@ -50,7 +60,5 @@ public class Pistol : MonoBehaviour
         {
             timeShot -= Time.deltaTime;
         }
-
-        
     }
 }
