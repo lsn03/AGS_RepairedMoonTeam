@@ -66,40 +66,11 @@ public class PlayerController : MonoBehaviour
         CheckingGround();
         Flip();
         Die();
-
-        for ( int i = 0; i < items.Length; i++ )
-        {
-            if ( Input.GetKeyDown( ( i + 1 ).ToString() ) )
-            {
-                EquipIem( i );
-                break;
-            }
-        }
-
-        if ( Input.GetAxisRaw( "Mouse ScrollWheel" ) > 0f )
-        {
-            if ( itemIndex >= items.Length - 1 )
-            {
-                EquipIem( 0 );
-            }
-            else
-            {
-                EquipIem( itemIndex + 1 );
-            }
-
-        }
-        else if ( Input.GetAxisRaw( "Mouse ScrollWheel" ) < 0f )
-        {
-            if ( itemIndex <= 0 )
-            {
-                EquipIem( items.Length - 1 );
-            }
-            else
-            {
-                EquipIem( itemIndex - 1 );
-            }
-
-        }
+        SwitchGunByButton();
+        SwitchGunByScrollWheel();
+        
+        
+        
     }
 
     void Run()
@@ -188,4 +159,43 @@ public class PlayerController : MonoBehaviour
 
         previousItemIndex = itemIndex;
     }
+    void SwitchGunByButton()
+    {
+        for ( int i = 0; i < items.Length; i++ )
+        {
+            if ( Input.GetKeyDown( ( i + 1 ).ToString() ) )
+            {
+                EquipIem( i );
+                break;
+            }
+        }
+    }
+    void SwitchGunByScrollWheel()
+    {
+        if ( Input.GetAxisRaw( "Mouse ScrollWheel" ) > 0f )
+        {
+            if ( itemIndex >= items.Length - 1 )
+            {
+                EquipIem( 0 );
+            }
+            else
+            {
+                EquipIem( itemIndex + 1 );
+            }
+
+        }
+        else if ( Input.GetAxisRaw( "Mouse ScrollWheel" ) < 0f )
+        {
+            if ( itemIndex <= 0 )
+            {
+                EquipIem( items.Length - 1 );
+            }
+            else
+            {
+                EquipIem( itemIndex - 1 );
+            }
+
+        }
+    }
+
 }
