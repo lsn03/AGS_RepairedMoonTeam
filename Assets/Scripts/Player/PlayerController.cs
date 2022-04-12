@@ -82,7 +82,10 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
         {
             items[itemIndex].Use();
         }
-        
+        if ( transform.position.y < -15f )
+        {
+            Die();
+        }
     }
 
     void Run()
