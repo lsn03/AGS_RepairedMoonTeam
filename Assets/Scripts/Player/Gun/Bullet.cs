@@ -11,16 +11,15 @@ public class Bullet : MonoBehaviour
 
     private PhotonView photonView;
 
+    public Rigidbody2D _rigidbody2D;
+
+
     private void Start()
     {
         Invoke( "DestroyBullet", destroyTime );
         photonView = GetComponent<PhotonView>();
+        _rigidbody2D.velocity = transform.right * speed;
         
-    }
-    void Update()
-    {
-        
-        transform.Translate( new Vector2(1,0) * speed * Time.deltaTime );
     }
 
     void DestroyBullet()

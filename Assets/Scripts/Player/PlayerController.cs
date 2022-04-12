@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [Range(0,10f),SerializeField] float jumpForce;
     [Range(0,10f),SerializeField] float speed;
+    private float movement;
 
     [SerializeField] public bool isGrounded;
     [SerializeField] public Transform GroundCheck;
@@ -17,20 +18,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Text TextName;
 
     [SerializeField] public Transform Spawn;
-
+    public GameObject Gun;
     private PhotonView photonView;
-
-    public GameObject bulletPrefab;
-    public Transform bulletSpawn;
 
     Rigidbody2D  _rigidbody2D;
 
     private float health = 100f;
 
     public bool facingRight = true;
+    Vector3[] SpawnPoint;
+    private void Awake()
+    {
+        SpawnPoint = new Vector3[Spawn.childCount];
+        for ( int j = 0; j < Spawn.childCount; j++ )
+            SpawnPoint[j] = Spawn.GetChild( j ).transform.position;
+    }
 
-    
-    
     public void Start()
     {
         GroundCheckRadius = GroundCheck.GetComponent<CircleCollider2D>().radius;
@@ -38,11 +41,12 @@ public class PlayerController : MonoBehaviour
         photonView = GetComponent<PhotonView>();
         TextName.text = photonView.Owner.NickName;
         if ( photonView.Owner.IsLocal )
+        {
             Camera.main.GetComponent<CameraWatchToPlayer>().player = gameObject.transform;
-
+        }
     }
 
-    private float movement;
+    
     void Update()
     {
         if ( !photonView.IsMine ) return;
@@ -52,7 +56,6 @@ public class PlayerController : MonoBehaviour
         CheckingGround();
         Flip();
         Die();
-        
     }
 
     void Run()
@@ -89,14 +92,10 @@ public class PlayerController : MonoBehaviour
     
     public void Die()
     {
-        
-
         if ( health <= 0f || transform.position.y < -20f )
         {
 
-            var SpawnPoint = new Vector3[Spawn.childCount];
-            for ( int j = 0; j < Spawn.childCount; j++ )
-                SpawnPoint[j] = Spawn.GetChild( j ).transform.position;
+            
             Vector2 _ = SpawnPoint[Random.Range(0,Spawn.childCount)];
 
             transform.position = new Vector2(_.x, _.y);
@@ -122,7 +121,9 @@ public class PlayerController : MonoBehaviour
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
-        transform.localScale = theScale;
-        TextName.GetComponent<RectTransform>().transform.localScale = theScale;
+
+        transform.Rotate (0f,180f,0f);
+        Gun.transform.position = new Vector3( Gun.transform.position .x, Gun.transform.position .y, Gun.transform.position.z*-1);
+        TextName.GetComponent<RectTransform>().transform.Rotate( 0f, 180f, 0f );
     }
 }

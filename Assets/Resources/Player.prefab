@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 5091782658577975700}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000095367, y: 0.0000047684}
-  m_SizeDelta: {x: 201.69, y: 78.64}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5622134633269802843
 CanvasRenderer:
@@ -89,12 +89,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4934843300594342924}
   - component: {fileID: 4934843300594342925}
-  - component: {fileID: 4934843300594342926}
   - component: {fileID: 4934843300594342927}
   - component: {fileID: 4934843300594342920}
   - component: {fileID: 4170087461372825264}
   - component: {fileID: 8841098261804287518}
   - component: {fileID: 3452721438286740181}
+  - component: {fileID: 4934843300594342926}
   - component: {fileID: 7321993464922053602}
   m_Layer: 0
   m_Name: Player
@@ -171,31 +171,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4934843300594342926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4934843300594342921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c9b22981c90a3340a6d129322783b22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 5.9
-  speed: 3.55
-  isGrounded: 0
-  GroundCheck: {fileID: 4934843300888385163}
-  GroundCheckRadius: 0
-  Ground:
-    serializedVersion: 2
-    m_Bits: 64
-  TextName: {fileID: 8918187019833919514}
-  Spawn: {fileID: 5262759516164223518, guid: fe4a8e7444c83484497b8743c23f0f44, type: 3}
-  bulletPrefab: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
-  bulletSpawn: {fileID: 4934843302535480352}
-  facingRight: 1
 --- !u!61 &4934843300594342927
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -299,6 +274,30 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &4934843300594342926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4934843300594342921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c9b22981c90a3340a6d129322783b22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 5.9
+  speed: 3.55
+  isGrounded: 0
+  GroundCheck: {fileID: 4934843300888385163}
+  GroundCheckRadius: 0
+  Ground:
+    serializedVersion: 2
+    m_Bits: 64
+  TextName: {fileID: 8918187019833919514}
+  Spawn: {fileID: 5262759516164223518, guid: fe4a8e7444c83484497b8743c23f0f44, type: 3}
+  Gun: {fileID: 4934843300840405767}
+  facingRight: 1
 --- !u!114 &7321993464922053602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,8 +311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
-  Ammo: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
-  shotDir: {fileID: 4934843302535480352}
+  bullet: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
+  bulletSpawn: {fileID: 4934843302535480352}
   Gun: {fileID: 4934843300840405767}
   startTime: 0.51
 --- !u!1 &4934843300840405767
@@ -464,7 +463,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4934843300888385156}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.01999998, y: -0.46000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -553,7 +552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.03, y: 0.82}
+  m_AnchoredPosition: {x: 0, y: 0.82}
   m_SizeDelta: {x: 116.1925, y: 66.8932}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7520558496398680217

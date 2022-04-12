@@ -6,8 +6,8 @@ using UnityEngine;
 public class Pistol : MonoBehaviour
 {
     public float offset;
-    public GameObject Ammo;
-    public Transform shotDir;
+    public GameObject bullet;
+    public Transform bulletSpawn;
     public GameObject Gun;
     public float startTime;
     private float timeShot;
@@ -36,23 +36,25 @@ public class Pistol : MonoBehaviour
         Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
 
 
-        Vector3 LocalScale = Vector3.one;
-        if (rotateZ>90 || rotateZ < -90 )
-        {
-            LocalScale.x = -1f;
-        }
-        else
-        {
-            LocalScale.x = 1f;
-        }
 
-        transform.localScale = LocalScale;
+
+        //Vector3 LocalScale = Vector3.one;
+        //if (rotateZ>90 || rotateZ < -90 )
+        //{
+        //    LocalScale.x = -1f;
+        //}
+        //else
+        //{
+        //    LocalScale.x = 1f;
+        //}
+
+        //transform.localScale = LocalScale;
 
         if ( timeShot <= 0 )
         {
             if ( Input.GetMouseButton( 0 ) )
             {
-                PhotonNetwork.Instantiate( Ammo.name, shotDir.position, Gun.transform.rotation );
+                PhotonNetwork.Instantiate( bullet.name, bulletSpawn.position, Gun.transform.rotation );
                 timeShot = startTime;
             }
         }
