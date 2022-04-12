@@ -34,11 +34,16 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
     int itemIndex;
     int previousItemIndex=-1;
 
+    float maxHP = 100f;
+    float currentHP ;
 
-
-
+    PlayerManager playerManager;
     private void Awake()
     {
+        currentHP = maxHP;
+
+
+
         SpawnPoint = new Vector3[Spawn.childCount];
         for ( int j = 0; j < Spawn.childCount; j++ )
             SpawnPoint[j] = Spawn.GetChild( j ).transform.position;
@@ -49,6 +54,8 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
         GroundCheckRadius = GroundCheck.GetComponent<CircleCollider2D>().radius;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         photonView = GetComponent<PhotonView>();
+        playerManager = PhotonView.Find((int) photonView.InstantiationData[0]).GetComponent<PlayerManager>();
+
         TextName.text = photonView.Owner.NickName;
         if ( photonView.Owner.IsLocal )
         {
@@ -67,7 +74,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
         JumpDown();
         CheckingGround();
         Flip();
-        Die();
+        
         SwitchGunByButton();
         SwitchGunByScrollWheel();
 
@@ -107,23 +114,43 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
     {
         Debug.Log( "took damage" + damage);
 
+        photonView.RPC( "RPC_TakeDamage", RpcTarget.All, damage );
+
         //health -= damage;
         //Debug.Log( health );
         //Die();
     }
 
+    [PunRPC]
+    void RPC_TakeDamage(float damage)
+    {
+        if ( !photonView.IsMine )
+        {
+            return;
+        }
+        currentHP -= damage;
+        if ( currentHP <= 0 )
+        {
+            Die();
+        }
+        Debug.Log( "Took damage " + damage );
+    }
+
     public void Die()
     {
-        if ( health <= 0f || transform.position.y < -20f )
-        {
+
+        playerManager.Die();
+
+        //if ( health <= 0f || transform.position.y < -20f )
+        //{
 
 
-            Vector2 _ = SpawnPoint[Random.Range(0,Spawn.childCount)];
+        //    Vector2 _ = SpawnPoint[Random.Range(0,Spawn.childCount)];
 
-            transform.position = new Vector2( _.x, _.y );
-            health = 100f;
-            Debug.Log( "Die" );
-        }
+        //    transform.position = new Vector2( _.x, _.y );
+        //    health = 100f;
+        //    Debug.Log( "Die" );
+        //}
     }
     public void Flip()
     {

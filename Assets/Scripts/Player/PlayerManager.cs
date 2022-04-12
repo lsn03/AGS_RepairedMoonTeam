@@ -8,6 +8,7 @@ using System.IO;
 public class PlayerManager : MonoBehaviour
 {
     PhotonView photonView;
+    GameObject controller;
 
     private void Awake()
     {
@@ -23,11 +24,12 @@ public class PlayerManager : MonoBehaviour
     }
     void CreateController()
     {
-        PhotonNetwork.Instantiate( "Player", Vector3.zero, Quaternion.identity );
+        controller = PhotonNetwork.Instantiate( "Player", Vector3.zero, Quaternion.identity,0,new object[] {photonView.ViewID } );
     }
     // Update is called once per frame
-    void Update()
+    public void Die()
     {
-        
+        PhotonNetwork.Destroy( controller );
+        CreateController();
     }
 }
