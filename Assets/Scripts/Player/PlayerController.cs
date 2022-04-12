@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Realtime;
 
-public class PlayerController : MonoBehaviourPunCallbacks
+public class PlayerController : MonoBehaviourPunCallbacks,IDamage
 {
     [Range(0,10f),SerializeField] float jumpForce;
     [Range(0,10f),SerializeField] float speed;
@@ -105,9 +105,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     public void TakeDamage( float damage )
     {
-        health -= damage;
-        Debug.Log( health );
-        Die();
+        Debug.Log( "took damage" + damage);
+
+        //health -= damage;
+        //Debug.Log( health );
+        //Die();
     }
 
     public void Die()
@@ -170,13 +172,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
             PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
         }
     }
-    public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hashtable changedProps )
-    {
-        if(!photonView.IsMine && targetPlayer == photonView.Owner )
-        {
-            EquipIem( ( int )changedProps["itemIndex"] );
-        }
-    }
+
+    //public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hashtable changedProps )
+    //{
+    //    if(!photonView.IsMine && targetPlayer == photonView.Owner )
+    //    {
+            
+    //        EquipIem( ( int )changedProps["itemIndex"] );
+    //    }
+    //}
 
     void SwitchGunByButton()
     {
@@ -216,5 +220,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         }
     }
+
+
 
 }

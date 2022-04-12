@@ -6,5 +6,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="New Gun")]
 public class GunIno : ItemInfo
 {
-    
+    public float damage;
 }
