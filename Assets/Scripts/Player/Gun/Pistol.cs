@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : MonoBehaviour
+public class Pistol : Gun
 {
     public float offset;
     public GameObject bullet;
@@ -23,27 +23,33 @@ public class Pistol : MonoBehaviour
         player = GetComponent<PlayerController>();
         
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if ( !photonView.IsMine ) return;
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position;
-        float rotateZ = Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
-        
-        Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
 
-        if ( timeShot <= 0 )
+    // Update is called once per frame
+    //void Update()
+    //{
+    //    if ( !photonView.IsMine ) return;
+    //    Gun.SetActive( true );
+    //    Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position;
+    //    float rotateZ = Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
+
+    //    Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
+
+
+    //}
+    public override void Use()
+    {
+        Shoot();
+    }
+    public void Shoot()
+    {
+        
         {
-            if ( Input.GetMouseButton( 0 ) )
+            //if ( Input.GetMouseButton( 0 ) )
             {
-                PhotonNetwork.Instantiate( bullet.name, bulletSpawn.position, Gun.transform.rotation );
-                timeShot = startTime;
+                PhotonNetwork.Instantiate( bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation );
+               // timeShot = startTime;
             }
         }
-        else
-        {
-            timeShot -= Time.deltaTime;
-        }
+        
     }
 }

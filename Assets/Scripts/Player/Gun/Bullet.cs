@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public ItemInfo itemInfo;
     public float speed;
     public float destroyTime;
     public float damage = 25f;
@@ -31,9 +32,10 @@ public class Bullet : MonoBehaviour
         Debug.Log( "SelfDamage" );
         PlayerController  Player = collision.GetComponent<PlayerController>();
         //BlockToDestroy blackToDestroy = collision.GetComponent<BlockToDestroy>();
-        if ( Player != null && !photonView.IsMine )
+        if ( Player != null )
         {
-            Player.TakeDamage( damage );
+            Debug.Log( "enemy damaged" );
+            Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
             DestroyBullet();
         }
         
