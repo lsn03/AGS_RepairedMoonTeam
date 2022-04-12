@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Photon.Realtime;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     [Range(0,10f),SerializeField] float jumpForce;
     [Range(0,10f),SerializeField] float speed;
@@ -149,16 +151,30 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-
         itemIndex = _index;
         items[itemIndex].itemGameObject.SetActive( true );
+        
         if ( previousItemIndex != -1 )
         {
             items[previousItemIndex].itemGameObject.SetActive( false );
         }
 
         previousItemIndex = itemIndex;
+        if ( photonView.IsMine )
+        {
+            Hashtable hash = new Hashtable();
+            hash.Add( "itemIndex", itemIndex );
+            PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
+        }
     }
+    public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hashtable changedProps )
+    {
+        if(!photonView.IsMine && targetPlayer == photonView.Owner )
+        {
+            EquipIem( ( int )changedProps["itemIndex"] );
+        }
+    }
+
     void SwitchGunByButton()
     {
         for ( int i = 0; i < items.Length; i++ )
