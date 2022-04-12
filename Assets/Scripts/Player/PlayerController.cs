@@ -27,6 +27,14 @@ public class PlayerController : MonoBehaviour
 
     public bool facingRight = true;
     Vector3[] SpawnPoint;
+
+    [SerializeField] Item[] items;
+    int itemIndex;
+    int previousItemIndex=-1;
+
+
+
+
     private void Awake()
     {
         SpawnPoint = new Vector3[Spawn.childCount];
@@ -44,9 +52,11 @@ public class PlayerController : MonoBehaviour
         {
             Camera.main.GetComponent<CameraWatchToPlayer>().player = gameObject.transform;
         }
+
+        EquipIem( 0 );
     }
 
-    
+
     void Update()
     {
         if ( !photonView.IsMine ) return;
@@ -56,6 +66,40 @@ public class PlayerController : MonoBehaviour
         CheckingGround();
         Flip();
         Die();
+
+        for ( int i = 0; i < items.Length; i++ )
+        {
+            if ( Input.GetKeyDown( ( i + 1 ).ToString() ) )
+            {
+                EquipIem( i );
+                break;
+            }
+        }
+
+        if ( Input.GetAxisRaw( "Mouse ScrollWheel" ) > 0f )
+        {
+            if ( itemIndex >= items.Length - 1 )
+            {
+                EquipIem( 0 );
+            }
+            else
+            {
+                EquipIem( itemIndex + 1 );
+            }
+
+        }
+        else if ( Input.GetAxisRaw( "Mouse ScrollWheel" ) < 0f )
+        {
+            if ( itemIndex <= 0 )
+            {
+                EquipIem( items.Length - 1 );
+            }
+            else
+            {
+                EquipIem( itemIndex - 1 );
+            }
+
+        }
     }
 
     void Run()
@@ -89,16 +133,16 @@ public class PlayerController : MonoBehaviour
         Debug.Log( health );
         Die();
     }
-    
+
     public void Die()
     {
         if ( health <= 0f || transform.position.y < -20f )
         {
 
-            
+
             Vector2 _ = SpawnPoint[Random.Range(0,Spawn.childCount)];
 
-            transform.position = new Vector2(_.x, _.y);
+            transform.position = new Vector2( _.x, _.y );
             health = 100f;
             Debug.Log( "Die" );
         }
@@ -122,8 +166,26 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
 
-        transform.Rotate (0f,180f,0f);
-        Gun.transform.position = new Vector3( Gun.transform.position .x, Gun.transform.position .y, Gun.transform.position.z*-1);
+        transform.Rotate( 0f, 180f, 0f );
+        Gun.transform.position = new Vector3( Gun.transform.position.x, Gun.transform.position.y, Gun.transform.position.z * -1 );
         TextName.GetComponent<RectTransform>().transform.Rotate( 0f, 180f, 0f );
+    }
+
+    void EquipIem( int _index )
+    {
+        if ( _index == previousItemIndex )
+        {
+            return;
+        }
+
+
+        itemIndex = _index;
+        items[itemIndex].itemGameObject.SetActive( true );
+        if ( previousItemIndex != -1 )
+        {
+            items[previousItemIndex].itemGameObject.SetActive( false );
+        }
+
+        previousItemIndex = itemIndex;
     }
 }
