@@ -70,8 +70,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
         Die();
         SwitchGunByButton();
         SwitchGunByScrollWheel();
-        
-        
+
+        if ( Input.GetMouseButtonDown( 0 ) )
+        {
+            items[itemIndex].Use();
+        }
         
     }
 
