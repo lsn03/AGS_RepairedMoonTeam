@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: littleHp
   m_EditorClassIdentifier: 
   itemName: littleHp
-  addHp: 15
+  addHp: 7.5
   addHpPowerfull: 0
   addArmor: 0
   addArmorPowerfull: 0
