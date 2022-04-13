@@ -25,7 +25,8 @@ public class Bullet : MonoBehaviour
 
     void DestroyBullet()
     {
-        PhotonNetwork.Destroy( gameObject );
+        if (photonView.IsMine)
+            PhotonNetwork.Destroy( gameObject );
     }
     public void OnTriggerEnter2D( Collider2D collision )
     {
