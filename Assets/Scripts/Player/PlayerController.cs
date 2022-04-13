@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Realtime;
 
-public class PlayerController : MonoBehaviourPunCallbacks,IDamage
+public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp
 {
     [Range(0,10f),SerializeField] float jumpForce;
     [Range(0,10f),SerializeField] float speed;
@@ -114,16 +114,28 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
     {
         isGrounded = Physics2D.OverlapCircle( GroundCheck.position, GroundCheckRadius, Ground );
     }
-
+    public void AddHp( float hp )
+    {
+        Debug.Log( "Addhp added external hp" );
+        photonView.RPC( "RPC_AddHp", RpcTarget.All, hp );
+    }
     public void TakeDamage( float damage )
     {
-        Debug.Log( "took damage" + damage);
+        Debug.Log( "took damage" + damage );
 
         photonView.RPC( "RPC_TakeDamage", RpcTarget.All, damage );
+    }
 
-        //health -= damage;
-        //Debug.Log( health );
-        //Die();
+    [PunRPC]
+    void RPC_AddHp(float hp )
+    {
+        if ( !photonView.IsMine )
+        {
+            return;
+        }
+        currentHP += hp;
+        healthbarImage.fillAmount = currentHP / maxHP;
+        Debug.Log( "RPC added " + hp + "\n currentHp = " +currentHP );
     }
 
     [PunRPC]
