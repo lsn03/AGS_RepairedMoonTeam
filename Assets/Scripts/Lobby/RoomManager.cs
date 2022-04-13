@@ -27,6 +27,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnDisable();
         SceneManager.sceneLoaded -= OnSceneLoaded;
+       // DontDestroyOnLoad( gameObject );
+        //Destroy( gameObject );
     }
 
     void OnSceneLoaded(Scene scene,LoadSceneMode loadSceneMode)
@@ -34,16 +36,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if ( scene.buildIndex == 1 )
         {
             PhotonNetwork.Instantiate( "PlayerManager", Vector3.zero, Quaternion.identity );
+            Destroy( gameObject );
         }
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

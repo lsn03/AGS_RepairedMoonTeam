@@ -25,8 +25,6 @@ public class PlayerManager : MonoBehaviour
     void CreateController()
     {
         Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
-        Debug.Log( spawnpoint.position );
-        Debug.Log( spawnpoint.rotation );
         controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation,0,new object[] {photonView.ViewID } );
     }
     // Update is called once per frame
