@@ -58,14 +58,11 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
         {
             Camera.main.GetComponent<CameraWatchToPlayer>().player = gameObject.transform;
         }
-        if ( photonView.IsMine )
-        {
-            EquipIem( 0 );
-        }
-        else
+        if (! photonView.IsMine )
         {
             Destroy( ui );
         }
+        
         
     }
 
