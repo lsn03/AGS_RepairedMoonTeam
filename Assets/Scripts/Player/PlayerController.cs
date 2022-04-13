@@ -19,16 +19,13 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
 
     [SerializeField] private Text TextName;
 
-    [SerializeField] public Transform Spawn;
     public GameObject Gun;
     private PhotonView photonView;
 
     Rigidbody2D  _rigidbody2D;
 
-    private float health = 100f;
-
     public bool facingRight = true;
-    Vector3[] SpawnPoint;
+    
 
     [SerializeField] Item[] items;
     int itemIndex;
@@ -37,6 +34,9 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
     float maxHP = 100f;
     float currentHP ;
 
+    [SerializeField] Image healthbarImage;
+    [SerializeField] GameObject ui;
+
     PlayerManager playerManager;
     private void Awake()
     {
@@ -44,9 +44,6 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
 
 
 
-        SpawnPoint = new Vector3[Spawn.childCount];
-        for ( int j = 0; j < Spawn.childCount; j++ )
-            SpawnPoint[j] = Spawn.GetChild( j ).transform.position;
     }
 
     public void Start()
@@ -61,8 +58,15 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
         {
             Camera.main.GetComponent<CameraWatchToPlayer>().player = gameObject.transform;
         }
-
-        EquipIem( 0 );
+        if ( photonView.IsMine )
+        {
+            EquipIem( 0 );
+        }
+        else
+        {
+            Destroy( ui );
+        }
+        
     }
 
 
@@ -82,6 +86,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
         {
             items[itemIndex].Use();
         }
+
         if ( transform.position.y < -15f )
         {
             Die();
@@ -132,6 +137,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
             return;
         }
         currentHP -= damage;
+        healthbarImage.fillAmount = currentHP / maxHP;
         if ( currentHP <= 0 )
         {
             Die();
