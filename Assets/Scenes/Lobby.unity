@@ -1362,12 +1362,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 55
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
@@ -1863,6 +1863,7 @@ GameObject:
   - component: {fileID: 1173776154}
   - component: {fileID: 1173776159}
   - component: {fileID: 1173776158}
+  - component: {fileID: 1173776160}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1995,6 +1996,22 @@ MonoBehaviour:
   roomListItemPrefab: {fileID: 6310656033567340685, guid: ae93c2621c0d51d45bd62634689bae86, type: 3}
   PlayerListItemPrefab: {fileID: 6062410712991549083, guid: 65304968b91f51a499d8ba08e6b431b4, type: 3}
   startGameButton: {fileID: 1412526444}
+  leaveGameButton: {fileID: 0}
+  userNameText: {fileID: 599688802}
+  UserNameinputField: {fileID: 2005101824}
+--- !u!114 &1173776160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173776153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9b49a4546fa3441b1943d928c58169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  username: {fileID: 0}
 --- !u!1 &1217336152
 GameObject:
   m_ObjectHideFlags: 0
@@ -3906,7 +3923,7 @@ GameObject:
   - component: {fileID: 2005101825}
   - component: {fileID: 2005101824}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: UserName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

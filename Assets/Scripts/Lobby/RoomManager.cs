@@ -27,8 +27,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnDisable();
         SceneManager.sceneLoaded -= OnSceneLoaded;
-       // DontDestroyOnLoad( gameObject );
-        //Destroy( gameObject );
+
     }
 
     void OnSceneLoaded(Scene scene,LoadSceneMode loadSceneMode)

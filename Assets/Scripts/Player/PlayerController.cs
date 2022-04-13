@@ -62,8 +62,8 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage
         {
             Destroy( ui );
         }
-        
-        
+
+        EquipIem( 0 );
     }
 
 

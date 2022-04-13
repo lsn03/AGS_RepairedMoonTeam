@@ -16,7 +16,6 @@ public class SingleShot : Gun
     }
     IEnumerator Shoot()
     {
-       
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right );
         
         if ( hitInfo )

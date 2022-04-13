@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -25,6 +26,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject PlayerListItemPrefab;
     [SerializeField] GameObject startGameButton;
     [SerializeField] GameObject leaveGameButton;
+
+    [SerializeField] private Text userNameText;
+    [SerializeField] private InputField UserNameinputField;
     private void Awake()
     {
         Instance = this;
@@ -47,17 +51,29 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         MenuManager.Instance.OpenMenu( "title" );
         Debug.Log( "Joined to lobby" );
-        PhotonNetwork.NickName = "Player " +UnityEngine.Random.Range( 0, 1000 ).ToString("0000"); 
+        UserNameinputField.text = PlayerPrefs.GetString( "name" );
+        PhotonNetwork.NickName = userNameText.text;
     }
 
     public void CreateRoom()
     {
+        SaveName();
         if ( string.IsNullOrEmpty( roomNameInputField.text ) )
         {
-            return;
+            PhotonNetwork.CreateRoom( "Room "+UnityEngine.Random.Range(0,9999) );
+            MenuManager.Instance.OpenMenu( "loading" );
         }
-        PhotonNetwork.CreateRoom( roomNameInputField.text );
-        MenuManager.Instance.OpenMenu( "loading" );
+        else
+        {
+            PhotonNetwork.CreateRoom( roomNameInputField.text );
+            MenuManager.Instance.OpenMenu( "loading" );
+        }
+
+    }
+    private void SaveName()
+    {
+        PlayerPrefs.SetString( "name", userNameText.text );
+        PhotonNetwork.NickName = PlayerPrefs.GetString( "name" );
     }
     public override void OnJoinedRoom()
     {
@@ -113,8 +129,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     public void JoinRoom(RoomInfo info )
     {
+        SaveName();
         PhotonNetwork.JoinRoom( info.Name );
         MenuManager.Instance.OpenMenu( "loading" );
+
 
     }
     public override void OnPlayerEnteredRoom( Player newPlayer )
