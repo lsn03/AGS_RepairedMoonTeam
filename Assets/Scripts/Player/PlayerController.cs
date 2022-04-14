@@ -44,9 +44,6 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
     private void Awake()
     {
         currentHP = maxHP;
-        
-
-
     }
 
     public void Start()
@@ -91,6 +88,15 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
         {
             Die();
         }
+        if ( currentHP > maxHP )
+        {
+            currentHP -= Time.deltaTime;
+        }
+        if ( currentArmor > maxArmor )
+        {
+            currentArmor -= Time.deltaTime;
+        }
+        Debug.Log( currentHP + "\t" + currentArmor );
     }
 
     void Run()
@@ -129,7 +135,8 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
         {
             return;
         }
-        currentArmor += _littleArmor;
+        currentArmor = System.Math.Min( currentArmor + _littleArmor, maxArmor );
+       
         armorBarImage.fillAmount = currentArmor / maxArmor;
         Debug.Log( "Current Armor is: " + currentArmor );
     }
@@ -152,7 +159,8 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
         {
             return;
         }
-        currentHP += hp;
+        currentHP = System.Math.Min( currentHP + hp, maxHP );
+        //currentHP += hp;
         healthBarImage.fillAmount = currentHP / maxHP;
         Debug.Log( "RPC added " + hp + "\n currentHp = " +currentHP );
     }
@@ -164,7 +172,19 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
         {
             return;
         }
-        currentHP -= damage;
+
+        if ( currentArmor > 0 )
+        {
+
+            currentArmor = System.Math.Max( 0, currentArmor - damage );
+        }
+        else
+        {
+            currentHP -= damage;
+        }
+
+
+        armorBarImage.fillAmount = currentArmor / maxArmor;
         healthBarImage.fillAmount = currentHP / maxHP;
         if ( currentHP <= 0 )
         {
