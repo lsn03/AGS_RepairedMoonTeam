@@ -165,6 +165,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
         Debug.Log( "RPC added " + hp + "\n currentHp = " +currentHP );
     }
 
+    private float delta;
     [PunRPC]
     void RPC_TakeDamage(float damage)
     {
@@ -175,8 +176,17 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
 
         if ( currentArmor > 0 )
         {
-
-            currentArmor = System.Math.Max( 0, currentArmor - damage );
+            delta = currentArmor-damage;
+            if ( delta > 0 )
+            {
+                currentArmor = delta;
+            }
+            else
+            {
+                currentArmor = 0;
+                currentHP += delta;
+            }
+            
         }
         else
         {
