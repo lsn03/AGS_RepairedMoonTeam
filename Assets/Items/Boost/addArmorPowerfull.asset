@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32dcf9898e0097e4eae87ed24589d3c6, type: 3}
-  m_Name: bigArmor
+  m_Name: addArmorPowerfull
   m_EditorClassIdentifier: 
-  itemName: bigArmor
+  itemName: AddArmorPowerfull
   addHp: 0
   addHpPowerfull: 0
   addArmor: 0
-  addArmorPowerfull: 25
+  addArmorPowerfull: 30

@@ -2,42 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HpBoost : Boost
+public class LittleArmorBoost : Boost
 {
-    [SerializeField] public float reloadTime;
+    [SerializeField] float reloadTime;
     private float lostTime;
-    
-
+    private BoxCollider2D collider;
     public override void Use()
     {
-        Debug.Log( "Take little heart" );
+        
     }
-
-    private void Start()
+    void Start()
     {
         lostTime = reloadTime;
+        collider = gameObject.GetComponent<BoxCollider2D>();
     }
 
-    private void Update()
+    
+    void Update()
     {
-        if (!itemGameObject.active)
+        if ( !itemGameObject.active )
         {
             if ( lostTime > 0 )
             {
                 lostTime -= Time.deltaTime;
-               // Debug.Log( lostTime );
             }
             else
             {
                 lostTime = reloadTime;
                 itemGameObject.SetActive( true );
-                gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                collider.enabled = true;
             }
         }
-        
     }
-
-
 
     private void OnTriggerEnter2D( Collider2D collision )
     {
@@ -45,14 +41,12 @@ public class HpBoost : Boost
         if ( player != null )
         {
             Debug.Log( "OntriggerEnter" );
-            player.gameObject.GetComponent<IAddHp>()?.AddHp( ( ( BoostInfo )itemInfo ).addHp );
+            player.gameObject.GetComponent<IAddArmor>()?.AddArmor( ( ( BoostInfo )itemInfo ).addArmor );
             itemGameObject.SetActive( false );
-           
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+            collider.enabled = false;
         }
 
     }
 
-        
-    
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Realtime;
 
-public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp
+public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArmor
 {
     [Range(0,10f),SerializeField] float jumpForce;
     [Range(0,10f),SerializeField] float speed;
@@ -33,15 +33,18 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp
 
     float maxHP = 100f;
     float currentHP ;
+    float maxArmor = 100f;
+    float currentArmor = 0f;
 
-    [SerializeField] Image healthbarImage;
+    [SerializeField] Image healthBarImage;
+    [SerializeField] Image armorBarImage;
     [SerializeField] GameObject ui;
 
     PlayerManager playerManager;
     private void Awake()
     {
         currentHP = maxHP;
-
+        
 
 
     }
@@ -114,6 +117,22 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp
     {
         isGrounded = Physics2D.OverlapCircle( GroundCheck.position, GroundCheckRadius, Ground );
     }
+
+    public void AddArmor(float _littleArmor )
+    {
+        photonView.RPC( "RPC_AddArmor", RpcTarget.All, _littleArmor );
+    }
+    [PunRPC]
+    void RPC_AddArmor(float _littleArmor)
+    {
+        if ( !photonView.IsMine )
+        {
+            return;
+        }
+        currentArmor += _littleArmor;
+        armorBarImage.fillAmount = currentArmor / maxArmor;
+        Debug.Log( "Current Armor is: " + currentArmor );
+    }
     public void AddHp( float hp )
     {
         Debug.Log( "Addhp added external hp" );
@@ -134,7 +153,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp
             return;
         }
         currentHP += hp;
-        healthbarImage.fillAmount = currentHP / maxHP;
+        healthBarImage.fillAmount = currentHP / maxHP;
         Debug.Log( "RPC added " + hp + "\n currentHp = " +currentHP );
     }
 
@@ -146,7 +165,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp
             return;
         }
         currentHP -= damage;
-        healthbarImage.fillAmount = currentHP / maxHP;
+        healthBarImage.fillAmount = currentHP / maxHP;
         if ( currentHP <= 0 )
         {
             Die();
@@ -158,17 +177,6 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp
     {
 
         playerManager.Die();
-
-        //if ( health <= 0f || transform.position.y < -20f )
-        //{
-
-
-        //    Vector2 _ = SpawnPoint[Random.Range(0,Spawn.childCount)];
-
-        //    transform.position = new Vector2( _.x, _.y );
-        //    health = 100f;
-        //    Debug.Log( "Die" );
-        //}
     }
     public void Flip()
     {
@@ -192,6 +200,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp
         transform.Rotate( 0f, 180f, 0f );
         Gun.transform.position = new Vector3( Gun.transform.position.x, Gun.transform.position.y, Gun.transform.position.z * -1 );
         TextName.GetComponent<RectTransform>().transform.Rotate( 0f, 180f, 0f );
+        ui.GetComponent<RectTransform>().transform.Rotate( 0f, 180f, 0f );
     }
 
     void EquipIem( int _index )

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName ="Boost info")]
+
+[CreateAssetMenu( menuName = "Boost info" )]
 public class BoostInfo : ItemInfo
 {
     public float addHp;

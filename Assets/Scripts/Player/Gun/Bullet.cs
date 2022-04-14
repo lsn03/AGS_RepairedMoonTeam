@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter2D( Collider2D collision )
     {
-        Debug.Log( "SelfDamage" );
+        //Debug.Log( "SelfDamage" );
         PlayerController  Player = collision.GetComponent<PlayerController>();
         //BlockToDestroy blackToDestroy = collision.GetComponent<BlockToDestroy>();
         if ( Player != null )
