@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class SingleShot : Gun
 {
@@ -9,11 +10,25 @@ public class SingleShot : Gun
     public Transform bulletSpawn;
 
     public LineRenderer lineRenderer;
-
+    public PhotonView photonView;
     public override void Use()
     {
-        StartCoroutine( Shoot());
+         photonView.RPC( "Shoot", RpcTarget.All );
     }
+
+    void Start()
+    {
+
+        photonView = GetComponent<PhotonView>();
+
+    }
+
+    public void Update()
+    {
+        
+    }
+
+    [PunRPC]
     IEnumerator Shoot()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right );

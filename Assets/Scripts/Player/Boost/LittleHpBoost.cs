@@ -6,13 +6,13 @@ public class LittleHpBoost : Boost
 {
     [SerializeField] public float reloadTime;
     private float lostTime;
-    
+    private BoxCollider2D collider;
 
     public override void Use()
     {
         //Debug.Log( "Take little heart" );
     }
-    private BoxCollider2D collider;
+    
 
     private void Start()
     {
@@ -43,11 +43,11 @@ public class LittleHpBoost : Boost
 
     private void OnTriggerEnter2D( Collider2D collision )
     {
-        PlayerController player =  collision.GetComponent<PlayerController>();
-        if ( player != null )
+        HealthSystem health =  collision.GetComponent<HealthSystem>();
+        if ( health != null )
         {
             Debug.Log( "OntriggerEnter" );
-            player.gameObject.GetComponent<IAddHp>()?.AddHp( ( ( BoostInfo )itemInfo ).addHp );
+            health.gameObject.GetComponent<IAddHp>()?.AddHp( ( ( BoostInfo )itemInfo ).addHp );
             itemGameObject.SetActive( false );
 
             collider.enabled = false;

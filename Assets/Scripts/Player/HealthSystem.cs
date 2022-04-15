@@ -30,12 +30,15 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             Destroy( ui );
         }
     }
+    int cntPlayer;
     private void Update()
     {
+        if ( !photonView.IsMine ) return;
         if ( transform.position.y < -15f )
         {
             Die();
         }
+        cntPlayer =  PhotonNetwork.CurrentRoom.PlayerCount;
     }
     public void AddArmor( float _littleArmor )
     {
@@ -48,7 +51,8 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         {
             return;
         }
-        currentArmor = System.Math.Min( currentArmor + _littleArmor, maxArmor );
+        _littleArmor /= cntPlayer;
+        currentArmor = System.Math.Min( (currentArmor + _littleArmor), maxArmor );
 
         armorBarImage.fillAmount = currentArmor / maxArmor;
         Debug.Log( "Current Armor is: " + currentArmor );
@@ -68,17 +72,20 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     [PunRPC]
     void RPC_AddHp( float hp )
     {
+        hp /= cntPlayer;
         if ( !photonView.IsMine )
         {
             return;
         }
-        currentHP = System.Math.Min( currentHP + hp, maxHP );
+        currentHP = System.Math.Min( (currentHP + hp), maxHP );
 
         healthBarImage.fillAmount = currentHP / maxHP;
         Debug.Log( "RPC added " + hp + "\n currentHp = " + currentHP );
     }
 
     private float delta;
+
+
     [PunRPC]
     void RPC_TakeDamage( float damage )
     {
@@ -86,7 +93,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         {
             return;
         }
-
+        damage /= cntPlayer;
         if ( currentArmor > 0 )
         {
             delta = currentArmor - damage;
