@@ -37,11 +37,11 @@ public class LittleArmorBoost : Boost
 
     private void OnTriggerEnter2D( Collider2D collision )
     {
-        PlayerController player =  collision.GetComponent<PlayerController>();
-        if ( player != null )
+        HealthSystem health =  collision.GetComponent<HealthSystem>();
+        if ( health != null )
         {
             Debug.Log( "OntriggerEnter" );
-            player.gameObject.GetComponent<IAddArmor>()?.AddArmor( ( ( BoostInfo )itemInfo ).addArmor );
+            health.gameObject.GetComponent<IAddArmor>()?.AddArmor( ( ( BoostInfo )itemInfo ).addArmor );
             itemGameObject.SetActive( false );
 
             collider.enabled = false;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Realtime;
 
-public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArmor
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     [Range(0,10f),SerializeField] float jumpForce;
     [Range(0,10f),SerializeField] float speed;
@@ -31,20 +31,12 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
     int itemIndex;
     int previousItemIndex=-1;
 
-    float maxHP = 100f;
-    float currentHP ;
-    float maxArmor = 100f;
-    float currentArmor = 0f;
-
-    [SerializeField] Image healthBarImage;
-    [SerializeField] Image armorBarImage;
     [SerializeField] GameObject ui;
 
+
+
     PlayerManager playerManager;
-    private void Awake()
-    {
-        currentHP = maxHP;
-    }
+
 
     public void Start()
     {
@@ -58,10 +50,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
         {
             Camera.main.GetComponent<CameraWatchToPlayer>().player = gameObject.transform;
         }
-        if (! photonView.IsMine )
-        {
-            Destroy( ui );
-        }
+        
 
         EquipIem( 0 );
     }
@@ -84,19 +73,8 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
             items[itemIndex].Use();
         }
 
-        if ( transform.position.y < -15f )
-        {
-            Die();
-        }
-        if ( currentHP > maxHP )
-        {
-            currentHP -= Time.deltaTime;
-        }
-        if ( currentArmor > maxArmor )
-        {
-            currentArmor -= Time.deltaTime;
-        }
-        Debug.Log( currentHP + "\t" + currentArmor );
+        
+        
     }
 
     void Run()
@@ -124,90 +102,9 @@ public class PlayerController : MonoBehaviourPunCallbacks,IDamage,IAddHp,IAddArm
         isGrounded = Physics2D.OverlapCircle( GroundCheck.position, GroundCheckRadius, Ground );
     }
 
-    public void AddArmor(float _littleArmor )
-    {
-        photonView.RPC( "RPC_AddArmor", RpcTarget.All, _littleArmor );
-    }
-    [PunRPC]
-    void RPC_AddArmor(float _littleArmor)
-    {
-        if ( !photonView.IsMine )
-        {
-            return;
-        }
-        currentArmor = System.Math.Min( currentArmor + _littleArmor, maxArmor );
-       
-        armorBarImage.fillAmount = currentArmor / maxArmor;
-        Debug.Log( "Current Armor is: " + currentArmor );
-    }
-    public void AddHp( float hp )
-    {
-        Debug.Log( "Addhp added external hp" );
-        photonView.RPC( "RPC_AddHp", RpcTarget.All, hp );
-    }
-    public void TakeDamage( float damage )
-    {
-        Debug.Log( "took damage" + damage );
-
-        photonView.RPC( "RPC_TakeDamage", RpcTarget.All, damage );
-    }
-
-    [PunRPC]
-    void RPC_AddHp(float hp )
-    {
-        if ( !photonView.IsMine )
-        {
-            return;
-        }
-        currentHP = System.Math.Min( currentHP + hp, maxHP );
-        //currentHP += hp;
-        healthBarImage.fillAmount = currentHP / maxHP;
-        Debug.Log( "RPC added " + hp + "\n currentHp = " +currentHP );
-    }
-
-    private float delta;
-    [PunRPC]
-    void RPC_TakeDamage(float damage)
-    {
-        if ( !photonView.IsMine )
-        {
-            return;
-        }
-
-        if ( currentArmor > 0 )
-        {
-            delta = currentArmor-damage;
-            if ( delta > 0 )
-            {
-                currentArmor = delta;
-            }
-            else
-            {
-                currentArmor = 0;
-                currentHP += delta;
-            }
-            
-        }
-        else
-        {
-            currentHP -= damage;
-        }
+    
 
 
-        armorBarImage.fillAmount = currentArmor / maxArmor;
-        healthBarImage.fillAmount = currentHP / maxHP;
-        if ( currentHP <= 0 )
-        {
-            Die();
-        }
-        Debug.Log( "Took damage " + damage );
-    }
-
-    public void Die()
-    {
-
-        playerManager.Die();
-    }
     public void Flip()
     {
         if ( movement < 0f && facingRight )

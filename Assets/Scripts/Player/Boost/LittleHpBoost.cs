@@ -10,12 +10,14 @@ public class LittleHpBoost : Boost
 
     public override void Use()
     {
-        Debug.Log( "Take little heart" );
+        //Debug.Log( "Take little heart" );
     }
+    private BoxCollider2D collider;
 
     private void Start()
     {
         lostTime = reloadTime;
+        collider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -31,7 +33,7 @@ public class LittleHpBoost : Boost
             {
                 lostTime = reloadTime;
                 itemGameObject.SetActive( true );
-                gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                collider.enabled = true;
             }
         }
         
@@ -47,8 +49,8 @@ public class LittleHpBoost : Boost
             Debug.Log( "OntriggerEnter" );
             player.gameObject.GetComponent<IAddHp>()?.AddHp( ( ( BoostInfo )itemInfo ).addHp );
             itemGameObject.SetActive( false );
-           
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+            collider.enabled = false;
         }
 
     }
