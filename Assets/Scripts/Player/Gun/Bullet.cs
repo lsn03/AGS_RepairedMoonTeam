@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public ItemInfo itemInfo;
     public float speed;
     public float destroyTime;
-    public float damage = 25f;
+
 
     private PhotonView photonView;
 

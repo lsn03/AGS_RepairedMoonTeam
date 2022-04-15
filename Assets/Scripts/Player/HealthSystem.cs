@@ -14,6 +14,9 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     [SerializeField] Image armorBarImage;
     [SerializeField] GameObject ui;
 
+    [SerializeField] Text currentHpText;
+    [SerializeField] Text currentArmorText;
+
     PlayerManager playerManager;
     PhotonView photonView;
     private void Awake()
@@ -29,6 +32,8 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         {
             Destroy( ui );
         }
+        currentHpText.text = currentHP.ToString();
+        currentArmorText.text = currentArmor.ToString();
     }
     int cntPlayer;
     private void Update()
@@ -52,8 +57,11 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             return;
         }
         _littleArmor /= cntPlayer;
+        
         currentArmor = System.Math.Min( (currentArmor + _littleArmor), maxArmor );
-
+       
+        currentArmorText.text = currentArmor.ToString();
+        
         armorBarImage.fillAmount = currentArmor / maxArmor;
         Debug.Log( "Current Armor is: " + currentArmor );
     }
@@ -78,7 +86,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             return;
         }
         currentHP = System.Math.Min( (currentHP + hp), maxHP );
-
+        currentHpText.text = currentHP.ToString();
         healthBarImage.fillAmount = currentHP / maxHP;
         Debug.Log( "RPC added " + hp + "\n currentHp = " + currentHP );
     }
@@ -113,6 +121,8 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             currentHP -= damage;
         }
 
+        currentArmorText.text = currentArmor.ToString();
+        currentHpText.text = currentHP.ToString();
 
         armorBarImage.fillAmount = currentArmor / maxArmor;
         healthBarImage.fillAmount = currentHP / maxHP;

@@ -128,7 +128,6 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: c950c7a32b0c2804c8e777bac343e50a, type: 2}
   speed: 15.55
   destroyTime: 7.27
-  damage: 25
   _rigidbody2D: {fileID: -3620782714138338211}
 --- !u!114 &-5111014517800070371
 MonoBehaviour:
