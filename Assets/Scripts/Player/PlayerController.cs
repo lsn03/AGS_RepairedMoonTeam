@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     
 
     [SerializeField] Item[] items;
-    int itemIndex;
+     int itemIndex;
+ 
     int previousItemIndex=-1;
 
     [SerializeField] GameObject ui;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         
 
         EquipIem( 0 );
+        
     }
 
 
@@ -102,7 +104,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         isGrounded = Physics2D.OverlapCircle( GroundCheck.position, GroundCheckRadius, Ground );
     }
 
-    
+ 
 
 
     public void Flip()
@@ -126,7 +128,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         transform.Rotate( 0f, 180f, 0f );
         Gun.transform.position = new Vector3( Gun.transform.position.x, Gun.transform.position.y, Gun.transform.position.z * -1 );
-        TextName.GetComponent<RectTransform>().transform.Rotate( 0f, 180f, 0f );
+        TextName.GetComponent<RectTransform>().transform.localScale = theScale;
         ui.GetComponent<RectTransform>().transform.Rotate( 0f, 180f, 0f );
     }
 
@@ -152,6 +154,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             hash.Add( "itemIndex", itemIndex );
             PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
         }
+        
     }
 
     //public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hashtable changedProps )
@@ -170,6 +173,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             if ( Input.GetKeyDown( ( i + 1 ).ToString() ) )
             {
                 EquipIem( i );
+               
                 break;
             }
         }
@@ -181,10 +185,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
             if ( itemIndex >= items.Length - 1 )
             {
                 EquipIem( 0 );
+               
             }
             else
             {
                 EquipIem( itemIndex + 1 );
+              
             }
 
         }
@@ -193,10 +199,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
             if ( itemIndex <= 0 )
             {
                 EquipIem( items.Length - 1 );
+              
             }
             else
             {
                 EquipIem( itemIndex - 1 );
+               
             }
 
         }

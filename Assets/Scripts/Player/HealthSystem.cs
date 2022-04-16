@@ -39,10 +39,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     private void Update()
     {
         if ( !photonView.IsMine ) return;
-        if ( transform.position.y < -15f )
-        {
-            Die();
-        }
+        
         cntPlayer =  PhotonNetwork.CurrentRoom.PlayerCount;
     }
     public void AddArmor( float _littleArmor )

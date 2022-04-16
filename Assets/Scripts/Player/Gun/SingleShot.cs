@@ -22,11 +22,7 @@ public class SingleShot : Gun
         photonView = GetComponent<PhotonView>();
 
     }
-
-    public void Update()
-    {
-        
-    }
+    
 
     [PunRPC]
     IEnumerator Shoot()
@@ -45,8 +41,10 @@ public class SingleShot : Gun
             lineRenderer.SetPosition( 0, bulletSpawn.position );
             lineRenderer.SetPosition( 1, bulletSpawn.position + bulletSpawn.right * 50 ) ;
         }
-        lineRenderer.enabled = true;
+        if ( lineRenderer != null )
+            lineRenderer.enabled = true;
         yield return new WaitForSeconds( 0.02f );
-        lineRenderer.enabled = false;
+        if ( lineRenderer != null )
+            lineRenderer.enabled = false;
     }
 }
