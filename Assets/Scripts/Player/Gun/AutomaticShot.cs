@@ -15,11 +15,11 @@ public class AutomaticShot : Gun
     {
        
     }
-    PlayerController player;
+    
     void Start()
     {
         photonView = GetComponent<PhotonView>();
-        player = GetComponent<PlayerController>();
+    
        
     }
    [SerializeField,Range(0f,0.5f)]public  float spread;
@@ -48,9 +48,7 @@ public class AutomaticShot : Gun
     IEnumerator ShootAuto()
     {
 
-        {
-
-
+        
 
             RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right + new Vector3(x,y,0));
 
@@ -72,6 +70,6 @@ public class AutomaticShot : Gun
             if ( lineRenderer != null )
                 lineRenderer.enabled = false;
 
-        }
+        
     }
 }

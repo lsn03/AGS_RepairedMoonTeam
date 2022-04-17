@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5580693298390544465}
   - component: {fileID: 7686946766921594804}
   - component: {fileID: 2230813165201541849}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Armor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8363319730231374128}
   - component: {fileID: 1697735438327699355}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ArmorImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 456570214618448531}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ArmorObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

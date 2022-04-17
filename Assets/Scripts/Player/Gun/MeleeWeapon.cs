@@ -8,6 +8,8 @@ public class MeleeWeapon : Gun
     public float distance = 2f;
     public Transform bulletSpawn;
     PhotonView photonView;
+    public float startTime;
+    private float timeShot;
     public override void Use()
     {
         Shoot();
@@ -17,15 +19,32 @@ public class MeleeWeapon : Gun
         photonView = GetComponent<PhotonView>();
     }
 
+    private void Update()
+    {
+        if ( timeShot <= 0 )
+        {
+            if ( Input.GetMouseButton( 0 ) && itemGameObject.active )
+            {
+                timeShot = startTime;
+               
+                photonView.RPC( "Shoot", RpcTarget.All );
+            }
+        }
+        else
+        {
+            timeShot -= Time.deltaTime;
+        }
+    }
+
     [PunRPC]
     void Shoot()
     {
         
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right*transform.localScale.x,distance );
-        if ( hitInfo )
+        if ( hitInfo  )
         {
             Debug.Log( hitInfo.transform.name );
-            if( photonView.IsMine )
+            
                  hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
             
         }

@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 2887015020877273999}
   - component: {fileID: 355788111944156588}
   - component: {fileID: 3920001199385331250}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: currentHp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 8918187019833919514}
   - component: {fileID: 236314373168986266}
   - component: {fileID: 5624602747103174528}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +885,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4934843300594342924}
   - component: {fileID: 4934843300594342925}
-  - component: {fileID: 4934843300594342927}
   - component: {fileID: 4934843300594342920}
   - component: {fileID: 4170087461372825264}
   - component: {fileID: 8841098261804287518}
@@ -970,32 +969,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4934843300594342927
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4934843300594342921}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.104405165, y: -0.09396458}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.5, y: 2.805}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.167048, y: 2.816646}
-  m_EdgeRadius: 0
 --- !u!50 &4934843300594342920
 Rigidbody2D:
   serializedVersion: 4
@@ -1394,7 +1367,7 @@ GameObject:
   - component: {fileID: 2757832828707834556}
   - component: {fileID: 3203697264232673700}
   - component: {fileID: 1361687673054922803}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: currentArmor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1476,7 +1449,7 @@ GameObject:
   - component: {fileID: 7520558496398680217}
   - component: {fileID: 5866859772952146481}
   - component: {fileID: 3617153205182573595}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1729,6 +1702,7 @@ MonoBehaviour:
   itemGameObject: {fileID: 4551685814377237185}
   distance: 1.46
   bulletSpawn: {fileID: 7544782119294729578}
+  startTime: 0.05
 --- !u!1 &6115651819675818243
 GameObject:
   m_ObjectHideFlags: 0
