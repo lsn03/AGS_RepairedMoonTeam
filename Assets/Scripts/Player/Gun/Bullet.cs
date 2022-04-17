@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
 
     public Rigidbody2D _rigidbody2D;
 
+    public GameObject hitEffect;
 
     private void Start()
     {
@@ -25,7 +26,8 @@ public class Bullet : MonoBehaviour
 
     void DestroyBullet()
     {
-        if (photonView.IsMine)
+        if ( photonView.IsMine )
+            Instantiate( hitEffect, transform.position, Quaternion.identity );
             PhotonNetwork.Destroy( gameObject );
     }
     //public void OnTriggerEnter2D( Collider2D collision )
@@ -49,6 +51,7 @@ public class Bullet : MonoBehaviour
             {
                 Debug.Log( "enemy damaged" );
                 Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+                   
                 DestroyBullet();
             }
             DestroyBullet();

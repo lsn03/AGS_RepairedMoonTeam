@@ -281,6 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: f706a5fe058a4504b9c03fdf84b67763, type: 2}
   itemGameObject: {fileID: 5801305908026508657}
+  hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}
   cam: {fileID: 0}
   bulletSpawn: {fileID: 4934843302535480352}
   lineRenderer: {fileID: 46508992883851265}
@@ -1106,6 +1107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: c950c7a32b0c2804c8e777bac343e50a, type: 2}
   itemGameObject: {fileID: 6445709003311185330}
+  hitEffect: {fileID: 0}
   offset: 0
   bullet: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
   bulletSpawn: {fileID: 4934843302535480352}
@@ -1700,6 +1702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: 8be275678a21dfe49a3d090e14c544b8, type: 2}
   itemGameObject: {fileID: 4551685814377237185}
+  hitEffect: {fileID: 0}
   distance: 1.46
   bulletSpawn: {fileID: 7544782119294729578}
   startTime: 0.05
@@ -1791,6 +1794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: c950c7a32b0c2804c8e777bac343e50a, type: 2}
   itemGameObject: {fileID: 6445709003311185330}
+  hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}
   offset: 0
   bullet: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
   bulletSpawn: {fileID: 8664038177059415158}
@@ -2399,6 +2403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: 8f34daa6de381d048bd1a9d0082e404f, type: 2}
   itemGameObject: {fileID: 6490779054495472246}
+  hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}
   bulletSpawn: {fileID: 5658249347862801306}
   lineRenderer: {fileID: 1050089526623157250}
   photonView: {fileID: 6198926032969503839}

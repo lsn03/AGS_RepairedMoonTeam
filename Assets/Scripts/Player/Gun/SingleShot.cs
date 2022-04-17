@@ -53,6 +53,7 @@ public class SingleShot : Gun
 
             if ( hitInfo )
             {
+                Instantiate( hitEffect, hitInfo.point, Quaternion.identity );
                 Debug.Log( hitInfo.transform.name );
                 hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
                 lineRenderer.SetPosition( 0, bulletSpawn.position );
