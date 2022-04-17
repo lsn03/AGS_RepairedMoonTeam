@@ -63,7 +63,7 @@ public class AutomaticShot : Gun
             }
             if ( lineRenderer != null )
                 lineRenderer.enabled = true;
-            yield return new WaitForSeconds( 0.01f );
+            yield return new WaitForSeconds( 0.02f );
             if ( lineRenderer != null )
                 lineRenderer.enabled = false;
 

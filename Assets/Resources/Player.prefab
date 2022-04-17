@@ -134,8 +134,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945162610194490269}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.38199997, y: 0, z: -1}
-  m_LocalScale: {x: 0.66, y: 0.15, z: 1}
+  m_LocalPosition: {x: 0.74, y: 0.33, z: 0}
+  m_LocalScale: {x: 0.32451, y: 0.32451, z: 0.32451}
   m_Children:
   - {fileID: 5658249347862801306}
   - {fileID: 1740341785365854535}
@@ -182,7 +182,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d40e4506ae0ddc54a88e3b4e2835de7c, type: 3}
   m_Color: {r: 0.1745283, g: 0.73939854, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 4934843302535480352}
   lineRenderer: {fileID: 46508992883851265}
   photonView: {fileID: 0}
+  startTime: 0.5
 --- !u!114 &6048998204250097508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,7 +702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3616199405712436048}
   m_Layer: 0
-  m_Name: RifleObject
+  m_Name: ChainsawObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1638,7 +1639,7 @@ GameObject:
   - component: {fileID: 5447914208386019206}
   - component: {fileID: 4791552007419361436}
   m_Layer: 0
-  m_Name: Rifle
+  m_Name: Chainsaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1677,6 +1678,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 7544782119294729578}
   lineRenderer: {fileID: 2226281522551634964}
   photonView: {fileID: 0}
+  startTime: 0
 --- !u!114 &6798161115832998276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1861,7 +1863,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6361361305792827826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.76, y: 0, z: 0}
+  m_LocalPosition: {x: -1.19, y: -0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2424670745039115213}
@@ -1939,8 +1941,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2424670745039115213}
   - component: {fileID: 7661343918391980739}
+  - component: {fileID: 205675248756661207}
   m_Layer: 0
-  m_Name: Rifle
+  m_Name: ChainsawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1954,8 +1957,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7099920240202006509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.477, y: 0.015, z: 0}
-  m_LocalScale: {x: 0.9466, y: 0.6491, z: 1}
+  m_LocalPosition: {x: 1.42, y: 0.26, z: 0}
+  m_LocalScale: {x: 0.51368254, y: 0.35224098, z: 0.5426606}
   m_Children:
   - {fileID: 7544782119294729578}
   - {fileID: 3049791122495106181}
@@ -2002,7 +2005,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fce4a372b9a5c4f4a9fb40f857907244, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2013,6 +2016,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &205675248756661207
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7099920240202006509}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.87192404, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5, y: 1.82}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.256152, y: 1.82}
+  m_EdgeRadius: 0
 --- !u!1 &7203570908701913025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,7 +2066,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7203570908701913025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.56, y: 0, z: 0}
+  m_LocalPosition: {x: 6.56, y: 0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3744776803120030514}
