@@ -1643,7 +1643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1591843204379043615
 Transform:
   m_ObjectHideFlags: 0
@@ -2402,7 +2402,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 5658249347862801306}
   lineRenderer: {fileID: 1050089526623157250}
   photonView: {fileID: 6198926032969503839}
-  startTime: 0.15
+  startTime: 0.05
 --- !u!114 &8338819687091289225
 MonoBehaviour:
   m_ObjectHideFlags: 0

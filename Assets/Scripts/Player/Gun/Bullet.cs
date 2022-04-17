@@ -28,17 +28,34 @@ public class Bullet : MonoBehaviour
         if (photonView.IsMine)
             PhotonNetwork.Destroy( gameObject );
     }
-    public void OnTriggerEnter2D( Collider2D collision )
+    //public void OnTriggerEnter2D( Collider2D collision )
+    //{
+    //    Debug.Log( "SelfDamage" );
+    //    PlayerController  Player = collision.GetComponent<PlayerController>();
+    //    BlockToDestroy blackToDestroy = collision.GetComponent<BlockToDestroy>();
+    //    if ( Player != null )
+    //    {
+    //        Debug.Log( "enemy damaged" );
+    //        Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+    //        DestroyBullet();
+    //    }
+
+    //}
+    private void OnCollisionEnter2D( Collision2D collision )
     {
-        //Debug.Log( "SelfDamage" );
-        PlayerController  Player = collision.GetComponent<PlayerController>();
-        //BlockToDestroy blackToDestroy = collision.GetComponent<BlockToDestroy>();
-        if ( Player != null )
         {
-            Debug.Log( "enemy damaged" );
-            Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+            PlayerController Player = collision.collider.GetComponent<PlayerController>();
+            if ( Player != null && !photonView.IsMine )
+            {
+                Debug.Log( "enemy damaged" );
+                Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+                DestroyBullet();
+            }
             DestroyBullet();
         }
-        
     }
+
 }
+
+
+
