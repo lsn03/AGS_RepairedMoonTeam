@@ -25,7 +25,7 @@ public class MeleeWeapon : Gun
         if ( hitInfo )
         {
             Debug.Log( hitInfo.transform.name );
-            if( !photonView.IsMine )
+            if( photonView.IsMine )
                  hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
             
         }

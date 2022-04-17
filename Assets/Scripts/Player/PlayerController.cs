@@ -38,12 +38,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     PlayerManager playerManager;
 
-
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
     public void Start()
     {
         GroundCheckRadius = GroundCheck.GetComponent<CircleCollider2D>().radius;
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        photonView = GetComponent<PhotonView>();
+        
         playerManager = PhotonView.Find((int) photonView.InstantiationData[0]).GetComponent<PlayerManager>();
 
         TextName.text = photonView.Owner.NickName;
@@ -157,14 +160,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
         
     }
 
-    //public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hashtable changedProps )
-    //{
-    //    if(!photonView.IsMine && targetPlayer == photonView.Owner )
-    //    {
-            
-    //        EquipIem( ( int )changedProps["itemIndex"] );
-    //    }
-    //}
+    public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hashtable changedProps )
+    {
+        if ( !photonView.IsMine && targetPlayer == photonView.Owner )
+        {
+
+            EquipIem( ( int )changedProps["itemIndex"] );
+        }
+    }
 
     void SwitchGunByButton()
     {
