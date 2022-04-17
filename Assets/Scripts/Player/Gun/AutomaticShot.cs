@@ -22,7 +22,9 @@ public class AutomaticShot : Gun
         player = GetComponent<PlayerController>();
        
     }
-    
+   [SerializeField,Range(0f,0.5f)]public  float spread;
+    float x;
+    float y;
     private void Update()
     {
         if ( timeShot <= 0 )
@@ -30,6 +32,8 @@ public class AutomaticShot : Gun
             if ( Input.GetMouseButton( 0 ) && itemGameObject.active )
             {
                 timeShot = startTime;
+                 x = Random.Range(-spread,spread);
+                 y = Random.Range(-spread,spread);
                 photonView.RPC( "ShootAuto", RpcTarget.All );
             }
         }
@@ -38,6 +42,7 @@ public class AutomaticShot : Gun
             timeShot -= Time.deltaTime;
         }
     }
+    
 
     [PunRPC]
     IEnumerator ShootAuto()
@@ -47,7 +52,7 @@ public class AutomaticShot : Gun
 
 
 
-            RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right );
+            RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right + new Vector3(x,y,0));
 
             if ( hitInfo )
             {

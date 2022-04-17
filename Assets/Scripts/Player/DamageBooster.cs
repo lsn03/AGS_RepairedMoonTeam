@@ -2,29 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LittleHpBoost : Boost
+public class DamageBooster : Boost
 {
     [SerializeField] public float reloadTime;
 
-    public override void Use()
-    {
-        //Debug.Log( "Take little heart" );
-    }
-    
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         lostTime = reloadTime;
         collider = gameObject.GetComponent<BoxCollider2D>();
     }
-
-    private void Update()
+    public override void Use()
     {
-        Activation( reloadTime );
         
     }
-
-
+    // Update is called once per frame
+    void Update()
+    {
+        Activation( reloadTime );
+    }
 
     private void OnTriggerEnter2D( Collider2D collision )
     {
@@ -32,14 +28,11 @@ public class LittleHpBoost : Boost
         if ( health != null )
         {
             Debug.Log( "OntriggerEnter" );
-            health.gameObject.GetComponent<IAddHp>()?.AddHp( ( ( BoostInfo )itemInfo ).addHp );
+            health.gameObject.GetComponent<IDamageBooster>()?.SetPointDamageBooster( ( ( BoostInfo )itemInfo ).DamageBooster );
             itemGameObject.SetActive( false );
 
             collider.enabled = false;
         }
 
     }
-
-        
-    
 }

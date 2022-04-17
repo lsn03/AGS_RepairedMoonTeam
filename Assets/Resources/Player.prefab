@@ -134,7 +134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945162610194490269}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.74, y: 0.33, z: 0}
+  m_LocalPosition: {x: 0.41, y: 0.25, z: -0.24}
   m_LocalScale: {x: 0.32451, y: 0.32451, z: 0.32451}
   m_Children:
   - {fileID: 5658249347862801306}
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   facingRight: 1
   items:
   - {fileID: 3035367864704832407}
-  - {fileID: 465736548116338632}
+  - {fileID: 2208685381078832013}
   - {fileID: 300546203911405135}
   - {fileID: 7856053121773009101}
   ui: {fileID: 7635451918184725585}
@@ -1634,17 +1634,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591843204379043615}
-  - component: {fileID: 465736548116338632}
   - component: {fileID: 6798161115832998276}
   - component: {fileID: 5447914208386019206}
   - component: {fileID: 4791552007419361436}
+  - component: {fileID: 2208685381078832013}
   m_Layer: 0
   m_Name: Chainsaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1591843204379043615
 Transform:
   m_ObjectHideFlags: 0
@@ -1653,32 +1653,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5981751967166421427}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3616199405712436048}
   m_Father: {fileID: 1917092967434898827}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &465736548116338632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5981751967166421427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f65e51c24257ad49bac1e70f1f66163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemInfo: {fileID: 11400000, guid: c7889b9636ba8c94abf2c35f54bb9acb, type: 2}
-  itemGameObject: {fileID: 4551685814377237185}
-  cam: {fileID: 0}
-  bulletSpawn: {fileID: 7544782119294729578}
-  lineRenderer: {fileID: 2226281522551634964}
-  photonView: {fileID: 0}
-  startTime: 0
 --- !u!114 &6798161115832998276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1730,8 +1711,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &2208685381078832013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5981751967166421427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58406acb0e81094dab69a7ed2e2bfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemInfo: {fileID: 11400000, guid: 8be275678a21dfe49a3d090e14c544b8, type: 2}
+  itemGameObject: {fileID: 4551685814377237185}
+  distance: 1.46
+  bulletSpawn: {fileID: 7544782119294729578}
 --- !u!1 &6115651819675818243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,7 +1860,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6361361305792827826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.19, y: -0.19, z: 0}
+  m_LocalPosition: {x: 0.04, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2424670745039115213}
@@ -1957,7 +1954,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7099920240202006509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.42, y: 0.26, z: 0}
+  m_LocalPosition: {x: 0.79, y: -0.02, z: 0}
   m_LocalScale: {x: 0.51368254, y: 0.35224098, z: 0.5426606}
   m_Children:
   - {fileID: 7544782119294729578}
@@ -2023,7 +2020,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7099920240202006509}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -2032,7 +2029,7 @@ BoxCollider2D:
   m_Offset: {x: 0.87192404, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.21766134, y: 0.35680205}
     oldSize: {x: 5, y: 1.82}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -2432,6 +2429,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 1050089526623157250}
   photonView: {fileID: 6198926032969503839}
   startTime: 0.05
+  spread: 0.156
 --- !u!114 &8338819687091289225
 MonoBehaviour:
   m_ObjectHideFlags: 0

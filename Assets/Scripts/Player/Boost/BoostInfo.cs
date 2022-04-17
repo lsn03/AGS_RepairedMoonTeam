@@ -9,4 +9,5 @@ public class BoostInfo : ItemInfo
     public float addHpPowerfull;
     public float addArmor;
     public float addArmorPowerfull;
+    public float DamageBooster;
 }

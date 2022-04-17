@@ -48,6 +48,7 @@ public class SingleShot : Gun
     {
         if ( timeShoot <= 0 )
         {
+            //Physics2D.queriesStartInColliders = false;
             RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right );
 
             if ( hitInfo )

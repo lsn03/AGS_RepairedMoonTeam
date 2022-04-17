@@ -5,8 +5,6 @@ using UnityEngine;
 public class LittleArmorBoost : Boost
 {
     [SerializeField] float reloadTime;
-    private float lostTime;
-    private BoxCollider2D collider;
     public override void Use()
     {
         
@@ -20,19 +18,7 @@ public class LittleArmorBoost : Boost
     
     void Update()
     {
-        if ( !itemGameObject.active )
-        {
-            if ( lostTime > 0 )
-            {
-                lostTime -= Time.deltaTime;
-            }
-            else
-            {
-                lostTime = reloadTime;
-                itemGameObject.SetActive( true );
-                collider.enabled = true;
-            }
-        }
+        Activation( reloadTime );
     }
 
     private void OnTriggerEnter2D( Collider2D collision )

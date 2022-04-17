@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
-public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmor
+public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmor,IDamageBooster
 {
     const float maxHP = 100f;
     float currentHP ;
@@ -19,6 +19,8 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
     PlayerManager playerManager;
     PhotonView photonView;
+
+    float damageBooster = 1f;
     private void Awake()
     {
         currentHP = maxHP;
@@ -41,6 +43,21 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         if ( !photonView.IsMine ) return;
         
         cntPlayer =  PhotonNetwork.CurrentRoom.PlayerCount;
+    }
+
+    public void SetPointDamageBooster(float point )
+    {
+        photonView.RPC( "RPC_SetPointDamageBooster", RpcTarget.All, point ); 
+    }
+
+    [PunRPC]
+    void RPC_SetPointDamageBooster(float point )
+    {
+        if ( !photonView.IsMine )
+        {
+            return;
+        }
+        damageBooster = point;
     }
     public void AddArmor( float _littleArmor )
     {
@@ -99,6 +116,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             return;
         }
         damage /= cntPlayer;
+        damage *= damageBooster;
         if ( currentArmor > 0 )
         {
             delta = currentArmor - damage;
