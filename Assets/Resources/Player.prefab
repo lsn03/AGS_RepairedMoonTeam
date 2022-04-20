@@ -530,10 +530,10 @@ RectTransform:
   m_Father: {fileID: 5091782658577975700}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000038146973, y: 4}
-  m_SizeDelta: {x: 536.46246, y: 66.8932}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5622134633269802843
 CanvasRenderer:
@@ -1093,6 +1093,7 @@ MonoBehaviour:
   ui: {fileID: 7635451918184725585}
   currentHpText: {fileID: 3920001199385331250}
   currentArmorText: {fileID: 1361687673054922803}
+  damageBooster: 1
 --- !u!114 &7321993464922053602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1799,7 +1800,7 @@ MonoBehaviour:
   bullet: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
   bulletSpawn: {fileID: 8664038177059415158}
   Gun: {fileID: 6445709003311185330}
-  startTime: 7
+  startTime: 10
 --- !u!114 &461119245667338862
 MonoBehaviour:
   m_ObjectHideFlags: 0

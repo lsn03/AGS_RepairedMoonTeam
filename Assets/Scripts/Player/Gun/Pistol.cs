@@ -10,7 +10,7 @@ public class Pistol : Gun
     public Transform bulletSpawn;
     public GameObject Gun;
     public float startTime;
-    private float timeShot;
+    private float timeShoot;
 
     private PhotonView photonView;
 
@@ -21,6 +21,7 @@ public class Pistol : Gun
     {
         photonView = GetComponent<PhotonView>();
         player = GetComponent<PlayerController>();
+        
         
     }
 
@@ -36,9 +37,27 @@ public class Pistol : Gun
 
 
     //}
+
+    private void Update()
+    {
+        if ( timeShoot <= 0 )
+        {
+            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active )
+            {
+                Shoot();
+                timeShoot = startTime;
+
+            }
+        }
+        else
+        {
+            timeShoot -= Time.deltaTime;
+        }
+    }
+
     public override void Use()
     {
-        Shoot();
+        
     }
     public void Shoot()
     {

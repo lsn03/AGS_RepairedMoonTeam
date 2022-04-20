@@ -20,7 +20,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     PlayerManager playerManager;
     PhotonView photonView;
 
-    float damageBooster = 1f;
+    public float damageBooster = 1f;
     private void Awake()
     {
         currentHP = maxHP;
@@ -58,6 +58,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             return;
         }
         damageBooster = point;
+        Debug.Log(damageBooster);
     }
     public void AddArmor( float _littleArmor )
     {
@@ -116,7 +117,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             return;
         }
         damage /= cntPlayer;
-        damage *= damageBooster;
+        
         if ( currentArmor > 0 )
         {
             delta = currentArmor - damage;
