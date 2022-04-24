@@ -110,17 +110,17 @@ public class PlayerController : MonoBehaviourPunCallbacks
  
 
 
-    //public void Flip()
-    //{
-    //    if ( movement < 0f && facingRight )
-    //    {
-    //        Spin();
-    //    }
-    //    else if ( movement > 0f && !facingRight )
-    //    {
-    //        Spin();
-    //    }
-    //}
+    public void Flip()
+    {
+        if ( movement < 0f && facingRight )
+        {
+            Spin();
+        }
+        else if ( movement > 0f && !facingRight )
+        {
+            Spin();
+        }
+    }
 
     public void Spin()
 

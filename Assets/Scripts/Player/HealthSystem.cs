@@ -7,7 +7,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 {
     const float maxHP = 100f;
     float currentHP ;
-    const float maxArmor = 100f;
+    const float maxArmor = 50f;
     float currentArmor = 0f;
 
     [SerializeField] Image healthBarImage;
@@ -20,7 +20,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     PlayerManager playerManager;
     PhotonView photonView;
 
-    public float damageBooster = 1f;
+    float damageBooster = 1f;
     private void Awake()
     {
         currentHP = maxHP;
@@ -58,7 +58,6 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             return;
         }
         damageBooster = point;
-        Debug.Log(damageBooster);
     }
     public void AddArmor( float _littleArmor )
     {
@@ -117,7 +116,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             return;
         }
         damage /= cntPlayer;
-        
+        damage *= damageBooster;
         if ( currentArmor > 0 )
         {
             delta = currentArmor - damage;

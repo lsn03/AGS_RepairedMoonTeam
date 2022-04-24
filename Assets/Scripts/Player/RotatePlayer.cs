@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatePlayer : MonoBehaviour
+public class RotatePlayer : MonoBehaviourPunCallbacks
 {
 
     private PhotonView photonView;
-    Camera camera;
+    [SerializeField] GameObject UIBar;
+    [SerializeField] GameObject NickName;
     Vector3 pos;
     void Start()
     {
@@ -27,10 +28,14 @@ public class RotatePlayer : MonoBehaviour
         if ( Input.mousePosition.x < pos.x )
         {
             transform.localRotation = Quaternion.Euler( 0f, 180f, 0f );
+            UIBar.transform.localRotation = Quaternion.Euler( 0f, 180f, 0f );
+            NickName.transform.localRotation = Quaternion.Euler( 0f, 180f, 0f );
         }
         if ( Input.mousePosition.x > pos.x )
         {
             transform.localRotation = Quaternion.Euler( 0f, 0f, 0f );
+            UIBar.transform.localRotation = Quaternion.Euler( 0f, 0f, 0f );
+            NickName.transform.localRotation = Quaternion.Euler( 0f, 0f, 0f );
         }
     }
 }

@@ -15,5 +15,6 @@ MonoBehaviour:
   itemName: AddArmor
   addHp: 0
   addHpPowerfull: 0
-  addArmor: 15
+  addArmor: 50
   addArmorPowerfull: 0
+  DamageBooster: 0
