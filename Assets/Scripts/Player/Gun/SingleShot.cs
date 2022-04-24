@@ -28,7 +28,7 @@ public class SingleShot : Gun
 
     private void Update()
     {
-        
+        if ( !photonView.IsMine ) return;
 
         if ( timeShoot <= 0 )
         {
@@ -36,7 +36,6 @@ public class SingleShot : Gun
             {
                 photonView.RPC( "Shoot", RpcTarget.All );
                 timeShoot = startTime;
-                
             }
         }
         else
@@ -48,8 +47,7 @@ public class SingleShot : Gun
     [PunRPC]
     IEnumerator Shoot()
     {
-        if ( timeShoot <= 0 )
-        {
+        
             //Physics2D.queriesStartInColliders = false;
             RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right );
 
@@ -63,19 +61,19 @@ public class SingleShot : Gun
                 }
                 lineRenderer.SetPosition( 0, bulletSpawn.position );
                 lineRenderer.SetPosition( 1, hitInfo.point );
-                
             }
             else
             {
                 lineRenderer.SetPosition( 0, bulletSpawn.position );
                 lineRenderer.SetPosition( 1, bulletSpawn.position + bulletSpawn.right * 50 );
             }
+
             timeShoot = startTime;
             if ( lineRenderer != null )
                 lineRenderer.enabled = true;
             yield return new WaitForSeconds( 0.02f );
             if ( lineRenderer != null )
                 lineRenderer.enabled = false;
-        }
+        
     }
 }

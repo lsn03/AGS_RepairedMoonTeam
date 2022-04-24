@@ -27,6 +27,7 @@ public class AutomaticShot : Gun
     float y;
     private void Update()
     {
+        if ( !photonView.IsMine ) return;
         if ( timeShot <= 0 )
         {
             if ( Input.GetMouseButton( 0 ) && itemGameObject.active )
@@ -42,35 +43,39 @@ public class AutomaticShot : Gun
             timeShot -= Time.deltaTime;
         }
     }
-    
+
 
     [PunRPC]
     IEnumerator ShootAuto()
     {
 
-        
 
-            RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right + new Vector3(x,y,0));
 
-            if ( hitInfo )
-            {
+        RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right + new Vector3(x,y,0));
+
+        if ( hitInfo )
+        {
             Instantiate( hitEffect, hitInfo.point, Quaternion.identity );
             Debug.Log( hitInfo.transform.name );
+            if ( photonView.IsMine )
+            {
                 hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+            }
                 lineRenderer.SetPosition( 0, bulletSpawn.position );
                 lineRenderer.SetPosition( 1, hitInfo.point );
-            }
-            else
-            {
-                lineRenderer.SetPosition( 0, bulletSpawn.position );
-                lineRenderer.SetPosition( 1, bulletSpawn.position + bulletSpawn.right * 50 );
-            }
-            if ( lineRenderer != null )
-                lineRenderer.enabled = true;
-            yield return new WaitForSeconds( 0.02f );
-            if ( lineRenderer != null )
-                lineRenderer.enabled = false;
+            
+        }
+        else
+        {
+            lineRenderer.SetPosition( 0, bulletSpawn.position );
+            lineRenderer.SetPosition( 1, bulletSpawn.position + bulletSpawn.right * 50 );
+        }
+        if ( lineRenderer != null )
+            lineRenderer.enabled = true;
+        yield return new WaitForSeconds( 0.02f );
+        if ( lineRenderer != null )
+            lineRenderer.enabled = false;
 
-        
+
     }
 }

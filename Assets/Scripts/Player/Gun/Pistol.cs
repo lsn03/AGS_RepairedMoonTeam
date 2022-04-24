@@ -40,6 +40,7 @@ public class Pistol : Gun
 
     private void Update()
     {
+        if ( !photonView.IsMine ) return;
         if ( timeShoot <= 0 )
         {
             if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active )
