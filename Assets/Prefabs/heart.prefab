@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1560840403705086584}
   - component: {fileID: 1560840403705086591}
   - component: {fileID: 1560840403705086590}
+  - component: {fileID: 2564426695456894294}
   m_Layer: 2
-  m_Name: Heart
+  m_Name: heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: c9ba02c654720f9449764a544986f493, type: 2}
   itemGameObject: {fileID: 1560840403716401854}
-  reloadTime: 10
+  reloadTime: 12
 --- !u!61 &1560840403705086590
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -74,6 +75,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.860078}
   m_EdgeRadius: 0
+--- !u!114 &2564426695456894294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560840403705086585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1560840403716401854
 GameObject:
   m_ObjectHideFlags: 0

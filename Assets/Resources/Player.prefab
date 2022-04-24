@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1772057220706103438}
   - component: {fileID: 8546649383016319987}
   - component: {fileID: 78627966724598519}
+  - component: {fileID: 736109405775145971}
   m_Layer: 0
-  m_Name: grenade
+  m_Name: grenadeImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,12 +102,28 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 0
+  observableSearch: 2
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 736109405775145971}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &736109405775145971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263349708914982145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &945162610194490269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,8 +1142,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04741886, y: 0.059508972}
-  m_Size: {x: 1.1576381, y: 2.860793}
+  m_Offset: {x: -0.04741886, y: -0.035152987}
+  m_Size: {x: 1.1576381, y: 2.5601022}
   m_Direction: 0
 --- !u!114 &245622603523102212
 MonoBehaviour:
@@ -1155,7 +1172,7 @@ GameObject:
   - component: {fileID: 5216742974616127125}
   - component: {fileID: 1797384789188861861}
   m_Layer: 0
-  m_Name: Pistol
+  m_Name: PistolImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1615,7 +1632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5379831503950534628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.86, y: 0, z: 0}
+  m_LocalPosition: {x: 4.49, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1772057220706103438}
@@ -1786,7 +1803,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6115651819675818243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.88, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2418527636356772808}
@@ -1969,6 +1986,8 @@ GameObject:
   - component: {fileID: 2424670745039115213}
   - component: {fileID: 7661343918391980739}
   - component: {fileID: 205675248756661207}
+  - component: {fileID: 3556741219228577161}
+  - component: {fileID: 2168013656291207844}
   m_Layer: 0
   m_Name: ChainsawImage
   m_TagString: Untagged
@@ -2069,6 +2088,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.256152, y: 1.82}
   m_EdgeRadius: 0
+--- !u!114 &3556741219228577161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7099920240202006509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 2168013656291207844}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &2168013656291207844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7099920240202006509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
 --- !u!1 &7203570908701913025
 GameObject:
   m_ObjectHideFlags: 0

@@ -70,7 +70,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         {
             return;
         }
-        _littleArmor /= cntPlayer;
+        //_littleArmor /= cntPlayer;
         
         currentArmor = System.Math.Min( (currentArmor + _littleArmor), maxArmor );
        
@@ -94,7 +94,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     [PunRPC]
     void RPC_AddHp( float hp )
     {
-        hp /= cntPlayer;
+        //hp /= cntPlayer;
         if ( !photonView.IsMine )
         {
             return;
@@ -115,7 +115,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         {
             return;
         }
-        damage /= cntPlayer;
+        //damage /= cntPlayer;
         damage *= damageBooster;
         if ( currentArmor > 0 )
         {

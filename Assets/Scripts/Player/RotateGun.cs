@@ -24,7 +24,7 @@ public class RotateGun : MonoBehaviour
         Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
 
         Vector3 LocalScale = Gun.transform.localScale;
-        Debug.Log( Gun.transform.rotation );
+        //Debug.Log( Gun.transform.rotation );
         if ( Gun.transform.rotation.x == -180 )
         {
 

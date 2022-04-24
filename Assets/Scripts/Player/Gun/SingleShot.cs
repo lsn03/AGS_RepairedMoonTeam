@@ -28,6 +28,8 @@ public class SingleShot : Gun
 
     private void Update()
     {
+        
+
         if ( timeShoot <= 0 )
         {
             if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active )
@@ -55,9 +57,13 @@ public class SingleShot : Gun
             {
                 Instantiate( hitEffect, hitInfo.point, Quaternion.identity );
                 Debug.Log( hitInfo.transform.name );
-                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+                if ( photonView.IsMine )
+                {
+                    hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+                }
                 lineRenderer.SetPosition( 0, bulletSpawn.position );
                 lineRenderer.SetPosition( 1, hitInfo.point );
+                
             }
             else
             {

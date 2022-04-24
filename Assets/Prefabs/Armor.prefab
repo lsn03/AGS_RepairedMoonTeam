@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5580693298390544465}
   - component: {fileID: 7686946766921594804}
   - component: {fileID: 2230813165201541849}
+  - component: {fileID: 5891055703712471247}
   m_Layer: 2
   m_Name: Armor
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: b58891ccd55d56044b8847185668b904, type: 2}
   itemGameObject: {fileID: 7924907531135796307}
-  reloadTime: 5
+  reloadTime: 30
 --- !u!61 &2230813165201541849
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -74,6 +75,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.006053, y: 1.0605295}
   m_EdgeRadius: 0
+--- !u!114 &5891055703712471247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3147627398083956435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5471988397951231237
 GameObject:
   m_ObjectHideFlags: 0

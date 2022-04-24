@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class LittleHpBoost : Boost
 {
     [SerializeField] public float reloadTime;
-
+    PhotonView photonView;
     public override void Use()
     {
         //Debug.Log( "Take little heart" );
@@ -16,6 +17,7 @@ public class LittleHpBoost : Boost
     {
         lostTime = reloadTime;
         collider = gameObject.GetComponent<BoxCollider2D>();
+        photonView = GetComponent<PhotonView>();
     }
 
     private void Update()
@@ -31,10 +33,12 @@ public class LittleHpBoost : Boost
         HealthSystem health =  collision.GetComponent<HealthSystem>();
         if ( health != null )
         {
-            Debug.Log( "OntriggerEnter" );
-            health.gameObject.GetComponent<IAddHp>()?.AddHp( ( ( BoostInfo )itemInfo ).addHp );
+            if ( photonView.IsMine )
+            {
+                Debug.Log( "OntriggerEnter" );
+                health.gameObject.GetComponent<IAddHp>()?.AddHp( ( ( BoostInfo )itemInfo ).addHp );
+            }
             itemGameObject.SetActive( false );
-
             collider.enabled = false;
         }
 
