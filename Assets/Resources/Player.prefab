@@ -1868,7 +1868,7 @@ MonoBehaviour:
   bullet: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
   bulletSpawn: {fileID: 8664038177059415158}
   Gun: {fileID: 6445709003311185330}
-  startTime: 7
+  startTime: 0.8
 --- !u!114 &461119245667338862
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,9 +25,11 @@ public class Bullet : MonoBehaviour
 
     void DestroyBullet()
     {
-        if (photonView.IsMine)
+        if ( photonView.IsMine )
+        {
             Instantiate( hitEffect, transform.position, Quaternion.identity );
             PhotonNetwork.Destroy( gameObject );
+        }
     }
     //public void OnTriggerEnter2D( Collider2D collision )
     //{
@@ -46,10 +48,11 @@ public class Bullet : MonoBehaviour
     {
         {
             PlayerController Player = collision.collider.GetComponent<PlayerController>();
-            if ( Player != null && !photonView.IsMine )
+            if ( Player != null  )
             {
                 Debug.Log( "enemy damaged" );
-                Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+                if( photonView.IsMine )
+                    Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
                 DestroyBullet();
             }
             DestroyBullet();
