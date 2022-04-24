@@ -8,6 +8,7 @@ public class RotateGun : MonoBehaviour
     public GameObject Gun;
     public float offset;
     private PhotonView photonView;
+    public GameObject player;
     void Start()
     {
         photonView = GetComponent<PhotonView>();
@@ -21,5 +22,28 @@ public class RotateGun : MonoBehaviour
         float rotateZ = Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
 
         Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
+        
+        Vector3 LocalScale = Gun.transform.localScale;
+        Debug.Log( Gun.transform.rotation );
+        if ( Gun.transform.rotation.x == -180 )
+        {
+
+            LocalScale.y = -Gun.transform.localScale.y;
+        }
+        else
+        {
+            LocalScale.y = Gun.transform.localScale.y;
+        }
+        Gun.transform.localScale = LocalScale;
+        //if(rotateZ>90 || rotateZ < -90 )
+        //{
+        //    
+        //}
+        //else
+        //{
+        //    
+        //}
+        //
+
     }
 }
