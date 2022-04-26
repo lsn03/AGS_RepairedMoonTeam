@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AutomaticShot : Gun
@@ -11,6 +12,11 @@ public class AutomaticShot : Gun
     public PhotonView photonView;
     public float startTime;
     private float timeShot;
+
+    public int bulletsLeft;
+    public float reloadTime;
+    const int maxBullets = 200;
+    public TextMeshProUGUI text;
     public override void Use()
     {
        
@@ -30,7 +36,7 @@ public class AutomaticShot : Gun
         if ( !photonView.IsMine ) return;
         if ( timeShot <= 0 )
         {
-            if ( Input.GetMouseButton( 0 ) && itemGameObject.active )
+            if ( Input.GetMouseButton( 0 ) && itemGameObject.active && bulletsLeft>0 )
             {
                 timeShot = startTime;
                  x = Random.Range(-spread,spread);
@@ -42,6 +48,15 @@ public class AutomaticShot : Gun
         {
             timeShot -= Time.deltaTime;
         }
+        if ( itemGameObject.active )
+        {
+            text.gameObject.SetActive( true );
+            text.SetText( bulletsLeft + " / " + maxBullets );
+        }
+        else
+        {
+            text.gameObject.SetActive( false );
+        }
     }
 
 
@@ -52,7 +67,7 @@ public class AutomaticShot : Gun
 
 
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right + new Vector3(x,y,0));
-
+        bulletsLeft--;
         if ( hitInfo )
         {
             Instantiate( hitEffect, hitInfo.point, Quaternion.identity );
@@ -75,7 +90,9 @@ public class AutomaticShot : Gun
         yield return new WaitForSeconds( 0.02f );
         if ( lineRenderer != null )
             lineRenderer.enabled = false;
-
-
+    }
+    public void AddBullet( int addBullet )
+    {
+        bulletsLeft = System.Math.Min( bulletsLeft + addBullet, maxBullets );
     }
 }

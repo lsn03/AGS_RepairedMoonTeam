@@ -17,8 +17,7 @@ public class SingleShot : Gun
     public int bulletsLeft;
     public float reloadTime;
     const int maxBullets = 200;
-    int currentCountOfBullets;
-    bool reloading;
+
 
     public TextMeshProUGUI text;
 
@@ -57,7 +56,16 @@ public class SingleShot : Gun
         {
             timeBeforeShoots -= Time.deltaTime;
         }
-        text.SetText( bulletsLeft + " / " + maxBullets );
+        if ( itemGameObject.active )
+        {
+            text.gameObject.SetActive( true );
+            text.SetText( bulletsLeft + " / " + maxBullets );
+        }
+            
+        else
+        {
+            text.gameObject.SetActive( false );
+        }
     }
 
     //void Reload()
