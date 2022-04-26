@@ -11,6 +11,8 @@ public class RotateGun : MonoBehaviour
     float localscale_y;
     float localscalePrev;
     float localscaleNext;
+
+
     void Start()
     {
         photonView = GetComponent<PhotonView>();

@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339851302829998988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.97, y: 0, z: 0}
+  m_LocalPosition: {x: 0.99, y: 0, z: 0}
   m_LocalScale: {x: 0.51368254, y: 0.35224098, z: 0.5426606}
   m_Children:
   - {fileID: 1046221047675584779}
@@ -1321,8 +1321,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04741886, y: -0.42479512}
-  m_Size: {x: 1.1576381, y: 2.5364873}
+  m_Offset: {x: -0.071148, y: -0.42479512}
+  m_Size: {x: 0.9488209, y: 2.5364873}
   m_Direction: 0
 --- !u!114 &7302656434929887845
 MonoBehaviour:
@@ -1887,7 +1887,7 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: 8be275678a21dfe49a3d090e14c544b8, type: 2}
   itemGameObject: {fileID: 6420524496546543264}
   hitEffect: {fileID: 0}
-  distance: 1.46
+  distance: 1.04
   bulletSpawn: {fileID: 1046221047675584779}
   startTime: 0.05
 --- !u!1 &3941493954564978960
@@ -1975,13 +1975,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4501496560810995155}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: 0.05, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.052858833, w: 0.99860203}
+  m_LocalPosition: {x: 1.16, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5158510606393601964}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.06}
 --- !u!1 &4558589583823733203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,7 +2775,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 2471503078422853697}
   lineRenderer: {fileID: 7391995285688188000}
   photonView: {fileID: 0}
-  timeBetweenShoots: 0
+  timeBetweenShoots: 1
   waitForSeconds: 0.5
 --- !u!114 &3873875180203277061
 MonoBehaviour:

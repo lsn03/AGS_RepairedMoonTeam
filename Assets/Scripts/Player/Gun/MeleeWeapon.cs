@@ -21,6 +21,7 @@ public class MeleeWeapon : Gun
 
     private void Update()
     {
+        if ( !photonView.IsMine ) return;
         if ( timeShot <= 0 )
         {
             if ( Input.GetMouseButton( 0 ) && itemGameObject.active )
@@ -41,12 +42,9 @@ public class MeleeWeapon : Gun
     {
         
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right*transform.localScale.x,distance );
-        if ( hitInfo  )
+        if ( hitInfo )
         {
-            Debug.Log( hitInfo.transform.name );
-            
-                 hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
-            
+                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );   
         }
     }
     private void OnDrawGizmos()
