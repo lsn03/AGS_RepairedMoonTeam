@@ -16,8 +16,9 @@ public class SingleShot : Gun
     float timeBeforeShoots;
     public int magazineSize;
     int bulletsLeft, bulletsShot;
-    float reloadTime;
+    public float reloadTime;
     const int maxBullets = 200;
+    int currentCountOfBullets;
     bool reloading;
 
     public TextMeshProUGUI text;
@@ -30,7 +31,7 @@ public class SingleShot : Gun
     private void Awake()
     {
         bulletsLeft = magazineSize;
-
+        currentCountOfBullets = magazineSize * 2;
     }
     void Start()
     {
@@ -58,18 +59,31 @@ public class SingleShot : Gun
         {
             timeBeforeShoots -= Time.deltaTime;
         }
-        text.SetText( bulletsLeft + " / " + magazineSize );
+        text.SetText( bulletsLeft + " / " + currentCountOfBullets );
     }
 
     void Reload()
     {
+        
         reloading = true;
         Invoke( "ReloadFinished", reloadTime );
     }
 
     void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
+        
+        if ( currentCountOfBullets < magazineSize )
+        {
+            bulletsLeft = currentCountOfBullets;
+            currentCountOfBullets = 0;
+        }
+        else
+        {
+
+            
+            currentCountOfBullets =currentCountOfBullets - magazineSize+bulletsLeft;
+            bulletsLeft = magazineSize;
+        }
         reloading = false;
     }
 

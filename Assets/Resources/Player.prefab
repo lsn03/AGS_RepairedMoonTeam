@@ -2911,7 +2911,8 @@ MonoBehaviour:
   lineRenderer: {fileID: 7391995285688188000}
   photonView: {fileID: 5533541060204245314}
   timeBetweenShoots: 1
-  magazineSize: 30
+  magazineSize: 5
+  reloadTime: 0.5
   text: {fileID: 6858601804102799036}
   waitForSeconds: 0.5
 --- !u!114 &3873875180203277061
