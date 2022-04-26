@@ -29,6 +29,7 @@ public class Bullet : MonoBehaviour
         {
             Instantiate( hitEffect, transform.position, Quaternion.identity );
             PhotonNetwork.Destroy( gameObject );
+            
         }
     }
     //public void OnTriggerEnter2D( Collider2D collision )

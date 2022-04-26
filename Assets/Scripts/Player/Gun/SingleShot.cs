@@ -13,7 +13,7 @@ public class SingleShot : Gun
     public PhotonView photonView;
     public float startTime;
     float timeShoot;
-
+    public float destroyTime;
     public override void Use()
     {
         
@@ -21,11 +21,18 @@ public class SingleShot : Gun
 
     void Start()
     {
+        Invoke( "DestroyBullet", destroyTime );
 
         photonView = GetComponent<PhotonView>();
 
     }
-
+    void DestroyParticle()
+    {
+        if ( photonView.IsMine )
+        {
+            PhotonNetwork.Destroy( hitEffect );
+        }
+    }
     private void Update()
     {
         if ( !photonView.IsMine ) return;
