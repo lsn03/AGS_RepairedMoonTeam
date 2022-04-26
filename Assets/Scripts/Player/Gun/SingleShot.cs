@@ -14,8 +14,7 @@ public class SingleShot : Gun
     public PhotonView photonView;
     public float timeBetweenShoots;
     float timeBeforeShoots;
-    public int magazineSize;
-    int bulletsLeft, bulletsShot;
+    public int bulletsLeft;
     public float reloadTime;
     const int maxBullets = 200;
     int currentCountOfBullets;
@@ -30,8 +29,7 @@ public class SingleShot : Gun
     }
     private void Awake()
     {
-        bulletsLeft = magazineSize;
-        currentCountOfBullets = magazineSize * 2;
+
     }
     void Start()
     {
@@ -47,9 +45,9 @@ public class SingleShot : Gun
 
         if ( timeBeforeShoots <= 0 )
         {
-            if ( Input.GetKeyDown( KeyCode.R ) && bulletsLeft < magazineSize && !reloading ) Reload();
+            //if ( Input.GetKeyDown( KeyCode.R ) && bulletsLeft < magazineSize && !reloading ) Reload();
 
-            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active &&!reloading && bulletsLeft>0)
+            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active && bulletsLeft>0)
             {
                 photonView.RPC( "Shoot", RpcTarget.All );
                 timeBeforeShoots = timeBetweenShoots;
@@ -59,33 +57,31 @@ public class SingleShot : Gun
         {
             timeBeforeShoots -= Time.deltaTime;
         }
-        text.SetText( bulletsLeft + " / " + currentCountOfBullets );
+        text.SetText( bulletsLeft + " / " + maxBullets );
     }
 
-    void Reload()
-    {
+    //void Reload()
+    //{
         
-        reloading = true;
-        Invoke( "ReloadFinished", reloadTime );
-    }
+    //    reloading = true;
+    //    Invoke( "ReloadFinished", reloadTime );
+    //}
 
-    void ReloadFinished()
-    {
+    //void ReloadFinished()
+    //{
         
-        if ( currentCountOfBullets < magazineSize )
-        {
-            bulletsLeft = currentCountOfBullets;
-            currentCountOfBullets = 0;
-        }
-        else
-        {
-
-            
-            currentCountOfBullets =currentCountOfBullets - magazineSize+bulletsLeft;
-            bulletsLeft = magazineSize;
-        }
-        reloading = false;
-    }
+    //    if ( currentCountOfBullets < magazineSize )
+    //    {
+    //        bulletsLeft = currentCountOfBullets;
+    //        currentCountOfBullets = 0;
+    //    }
+    //    else
+    //    {
+    //        currentCountOfBullets = currentCountOfBullets - magazineSize+bulletsLeft;
+    //        bulletsLeft = magazineSize;
+    //    }
+    //    reloading = false;
+    //}
 
     [PunRPC]
     IEnumerator Shoot()
@@ -119,4 +115,13 @@ public class SingleShot : Gun
             lineRenderer.enabled = false;
 
     }
+
+
+    public void AddBullet(int addBullet)
+    {
+        bulletsLeft = System.Math.Min( bulletsLeft + addBullet, maxBullets );
+    }
+
+
+
 }
