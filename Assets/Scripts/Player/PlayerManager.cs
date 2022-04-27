@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 {
     PhotonView photonView;
     GameObject controller;
-
+    [SerializeField] AudioSource sound;
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -31,6 +31,7 @@ public class PlayerManager : MonoBehaviour
     public void Die()
     {
         PhotonNetwork.Destroy( controller );
-        CreateController();
+        sound.Play();
+        Invoke ( "CreateController",1f );
     }
 }
