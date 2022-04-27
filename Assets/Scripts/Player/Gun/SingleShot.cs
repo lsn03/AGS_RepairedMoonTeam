@@ -44,21 +44,22 @@ public class SingleShot : Gun
 
             if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active && bulletsLeft > 0 )
             {
-                
-                photonView.RPC( "Shoot", RpcTarget.All );
                 timeBeforeShoots = timeBetweenShoots;
+                shootingSound.Play();
+                photonView.RPC( "Shoot", RpcTarget.All );
+                
             }
         }
         else
         {
             timeBeforeShoots -= Time.deltaTime;
         }
+
         if ( itemGameObject.active )
         {
             text.gameObject.SetActive( true );
             text.SetText( bulletsLeft + " / " + maxBullets );
         }
-
         else
         {
             text.gameObject.SetActive( false );
@@ -94,7 +95,7 @@ public class SingleShot : Gun
 
         //Physics2D.queriesStartInColliders = false;
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right );
-        shootingSound.Play();
+        
         bulletsLeft--;
         if ( hitInfo )
         {
