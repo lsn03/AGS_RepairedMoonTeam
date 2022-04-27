@@ -692,6 +692,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1380191120924891255, guid: cfbc6b74269240e4bb5741b0a8ba20eb, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2673160083571727584, guid: cfbc6b74269240e4bb5741b0a8ba20eb, type: 3}
       propertyPath: m_Name
       value: BoostManager
@@ -739,6 +743,10 @@ PrefabInstance:
     - target: {fileID: 2673160083571727585, guid: cfbc6b74269240e4bb5741b0a8ba20eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001494545779802243, guid: cfbc6b74269240e4bb5741b0a8ba20eb, type: 3}
+      propertyPath: sceneViewId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfbc6b74269240e4bb5741b0a8ba20eb, type: 3}

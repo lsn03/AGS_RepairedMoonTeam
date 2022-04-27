@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 1326334261232451931}
   - component: {fileID: 1326334261232451930}
   - component: {fileID: 1326334261232451933}
-  - component: {fileID: 1550505121835001848}
+  - component: {fileID: -6074068291799006837}
   m_Layer: 0
   m_Name: Hit_PS
   m_TagString: Untagged
@@ -4913,7 +4913,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1550505121835001848
+--- !u!114 &-6074068291799006837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4922,7 +4922,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1326334261232451932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec07ddf057dee8745b84f4bd69280328, type: 3}
+  m_Script: {fileID: 11500000, guid: 5314aeb6c5340a743aa0d934961906ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 2
+  destroyTime: 3

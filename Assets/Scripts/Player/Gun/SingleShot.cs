@@ -26,6 +26,7 @@ public class SingleShot : Gun
     }
     void Start()
     {
+       
 
 
         photonView = GetComponent<PhotonView>();
@@ -109,6 +110,7 @@ public class SingleShot : Gun
             lineRenderer.SetPosition( 1, bulletSpawn.position + bulletSpawn.right * 50 );
         }
 
+ 
         timeBeforeShoots = timeBetweenShoots;
         if ( lineRenderer != null )
             lineRenderer.enabled = true;
