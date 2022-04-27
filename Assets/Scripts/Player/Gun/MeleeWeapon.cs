@@ -42,6 +42,7 @@ public class MeleeWeapon : Gun
     {
         
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right*transform.localScale.x,distance );
+        SoundManager.PlaySound( "Chainsaw_attack" );
         if ( hitInfo )
         {
                 hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );   
