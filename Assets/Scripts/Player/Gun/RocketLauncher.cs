@@ -16,6 +16,7 @@ public class RocketLauncher : Gun
     public TextMeshProUGUI text;
 
     PlayerController player;
+    [SerializeField] AudioSource sound;
 
     // Start is called before the first frame update
     void Start()
@@ -75,8 +76,9 @@ public class RocketLauncher : Gun
     public void Shoot()
     {
         bulletsLeft--;
+        sound.Play();
         PhotonNetwork.Instantiate( bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation );
-        // timeShot = startTime;
+        
 
     }
 

@@ -14,6 +14,7 @@ public class SingleShot : Gun
     public PhotonView photonView;
 
     public TextMeshProUGUI text;
+    [SerializeField] AudioSource shootingSound;
 
     [Range(0,0.5f),SerializeField] float waitForSeconds;
     public override void Use()
@@ -26,9 +27,9 @@ public class SingleShot : Gun
     }
     void Start()
     {
-       
 
 
+        shootingSound = GetComponent<AudioSource>();
         photonView = GetComponent<PhotonView>();
 
     }
@@ -43,6 +44,7 @@ public class SingleShot : Gun
 
             if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active && bulletsLeft > 0 )
             {
+                
                 photonView.RPC( "Shoot", RpcTarget.All );
                 timeBeforeShoots = timeBetweenShoots;
             }
@@ -92,6 +94,7 @@ public class SingleShot : Gun
 
         //Physics2D.queriesStartInColliders = false;
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right );
+        shootingSound.Play();
         bulletsLeft--;
         if ( hitInfo )
         {

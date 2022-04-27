@@ -12,6 +12,9 @@ public class AutomaticShot : Gun
     public PhotonView photonView;
 
     public TextMeshProUGUI text;
+
+     AudioSource shootingSound;
+
     public override void Use()
     {
        
@@ -20,9 +23,11 @@ public class AutomaticShot : Gun
     void Start()
     {
         photonView = GetComponent<PhotonView>();
-    
-       
+        shootingSound = GetComponent<AudioSource>();
+
+
     }
+    bool readyToSound = false;
    [SerializeField,Range(0f,0.5f)]public  float spread;
     float x;
     float y;
@@ -36,8 +41,13 @@ public class AutomaticShot : Gun
                 timeBeforeShoots = timeBetweenShoots;
                  x = Random.Range(-spread,spread);
                  y = Random.Range(-spread,spread);
+                
+                
+                    shootingSound.Play();
+                
                 photonView.RPC( "ShootAuto", RpcTarget.All );
             }
+            
         }
         else
         {

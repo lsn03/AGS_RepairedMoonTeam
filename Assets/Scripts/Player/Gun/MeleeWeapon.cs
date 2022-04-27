@@ -8,8 +8,11 @@ public class MeleeWeapon : Gun
     public float distance = 2f;
     public Transform bulletSpawn;
     PhotonView photonView;
+
     public float startTime;
-    private float timeShot;
+    private float lostTime;
+
+    [SerializeField] AudioSource shootingSound;
     public override void Use()
     {
         Shoot();
@@ -18,23 +21,34 @@ public class MeleeWeapon : Gun
     {
         photonView = GetComponent<PhotonView>();
     }
+    bool ready;
 
     private void Update()
     {
         if ( !photonView.IsMine ) return;
-        if ( timeShot <= 0 )
+        if ( !itemGameObject.active ) { shootingSound.Stop(); }
+        if ( timeBeforeShoots <= 0 )
         {
-            if ( Input.GetMouseButton( 0 ) && itemGameObject.active )
+            if ( itemGameObject.active )
             {
-                timeShot = startTime;
-               
-                photonView.RPC( "Shoot", RpcTarget.All );
+                if ( Input.GetMouseButton( 0 ))
+                {
+                    
+                    timeBeforeShoots = timeBetweenShoots;
+
+                    photonView.RPC( "Shoot", RpcTarget.All );
+                }
+
+                
             }
+
         }
         else
         {
-            timeShot -= Time.deltaTime;
+            timeBeforeShoots -= Time.deltaTime;
         }
+
+
     }
 
     [PunRPC]
@@ -42,11 +56,19 @@ public class MeleeWeapon : Gun
     {
         
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right*transform.localScale.x,distance );
-        SoundManager.PlaySound( "Chainsaw_attack" );
+        
         if ( hitInfo )
         {
                 hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );   
         }
+    }
+    void PlaySound()
+    {
+        shootingSound.Play();
+    }
+    void StopPlaySound()
+    {
+        shootingSound.Stop();
     }
     private void OnDrawGizmos()
     {

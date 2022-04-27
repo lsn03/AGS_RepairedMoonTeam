@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     private PhotonView photonView;
 
     public Rigidbody2D _rigidbody2D;
-
+    
 
     private void Start()
     {
