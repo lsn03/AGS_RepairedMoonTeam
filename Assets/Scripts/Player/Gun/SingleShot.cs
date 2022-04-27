@@ -11,9 +11,10 @@ public class SingleShot : Gun
 
     public LineRenderer lineRenderer;
     public PhotonView photonView;
-    public float startTime;
-    float timeShoot;
-    public float destroyTime;
+    public float timeBetweenShoots;
+    float timeBeforeShoots;
+
+    [Range(0,0.5f),SerializeField] float waitForSeconds;
     public override void Use()
     {
         
@@ -21,33 +22,27 @@ public class SingleShot : Gun
 
     void Start()
     {
-        Invoke( "DestroyBullet", destroyTime );
+       
 
         photonView = GetComponent<PhotonView>();
 
     }
-    void DestroyParticle()
-    {
-        if ( photonView.IsMine )
-        {
-            PhotonNetwork.Destroy( hitEffect );
-        }
-    }
+
     private void Update()
     {
         if ( !photonView.IsMine ) return;
 
-        if ( timeShoot <= 0 )
+        if ( timeBeforeShoots <= 0 )
         {
             if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active )
             {
                 photonView.RPC( "Shoot", RpcTarget.All );
-                timeShoot = startTime;
+                timeBeforeShoots = timeBetweenShoots;
             }
         }
         else
         {
-            timeShoot -= Time.deltaTime;
+            timeBeforeShoots -= Time.deltaTime;
         }
     }
 
@@ -75,10 +70,10 @@ public class SingleShot : Gun
                 lineRenderer.SetPosition( 1, bulletSpawn.position + bulletSpawn.right * 50 );
             }
 
-            timeShoot = startTime;
+            timeBeforeShoots = timeBetweenShoots;
             if ( lineRenderer != null )
                 lineRenderer.enabled = true;
-            yield return new WaitForSeconds( 0.02f );
+            yield return new WaitForSeconds( waitForSeconds );
             if ( lineRenderer != null )
                 lineRenderer.enabled = false;
         

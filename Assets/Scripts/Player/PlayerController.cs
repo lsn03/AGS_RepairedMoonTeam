@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
     PlayerManager playerManager;
+    Animator _animator;
 
     private void Awake()
     {
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         _rigidbody2D = GetComponent<Rigidbody2D>();
         
         playerManager = PhotonView.Find((int) photonView.InstantiationData[0]).GetComponent<PlayerManager>();
-
+        _animator = GetComponent<Animator>();
         TextName.text = photonView.Owner.NickName;
         if ( photonView.Owner.IsLocal )
         {
@@ -86,6 +87,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         movement = Input.GetAxisRaw( "Horizontal" );
         _rigidbody2D.velocity = new Vector2( movement * speed, _rigidbody2D.velocity.y );
+
+        if ( _animator )
+        {
+            _animator.SetBool( "isRun", Mathf.Abs( movement ) >= 0.01f );
+        }
+        
     }
 
     void JumpUp()
