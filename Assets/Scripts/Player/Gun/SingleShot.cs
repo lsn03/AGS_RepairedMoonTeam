@@ -12,19 +12,13 @@ public class SingleShot : Gun
 
     public LineRenderer lineRenderer;
     public PhotonView photonView;
-    public float timeBetweenShoots;
-    float timeBeforeShoots;
-    public int bulletsLeft;
-    public float reloadTime;
-    const int maxBullets = 200;
-
 
     public TextMeshProUGUI text;
 
     [Range(0,0.5f),SerializeField] float waitForSeconds;
     public override void Use()
     {
-        
+
     }
     private void Awake()
     {
@@ -32,7 +26,7 @@ public class SingleShot : Gun
     }
     void Start()
     {
-       
+
 
         photonView = GetComponent<PhotonView>();
 
@@ -46,7 +40,7 @@ public class SingleShot : Gun
         {
             //if ( Input.GetKeyDown( KeyCode.R ) && bulletsLeft < magazineSize && !reloading ) Reload();
 
-            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active && bulletsLeft>0)
+            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active && bulletsLeft > 0 )
             {
                 photonView.RPC( "Shoot", RpcTarget.All );
                 timeBeforeShoots = timeBetweenShoots;
@@ -61,7 +55,7 @@ public class SingleShot : Gun
             text.gameObject.SetActive( true );
             text.SetText( bulletsLeft + " / " + maxBullets );
         }
-            
+
         else
         {
             text.gameObject.SetActive( false );
@@ -70,14 +64,14 @@ public class SingleShot : Gun
 
     //void Reload()
     //{
-        
+
     //    reloading = true;
     //    Invoke( "ReloadFinished", reloadTime );
     //}
 
     //void ReloadFinished()
     //{
-        
+
     //    if ( currentCountOfBullets < magazineSize )
     //    {
     //        bulletsLeft = currentCountOfBullets;
@@ -125,9 +119,9 @@ public class SingleShot : Gun
     }
 
 
-    public void AddBullet(int addBullet)
+    public void AddBullet( int addBullet )
     {
-        bulletsLeft = System.Math.Min( bulletsLeft + addBullet, maxBullets );
+        SetAddBullet( addBullet );
     }
 
 

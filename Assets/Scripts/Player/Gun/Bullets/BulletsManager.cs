@@ -7,7 +7,7 @@ public abstract class BulletsManager : Item
     public abstract override void Use();
     protected float lostTime;
     protected BoxCollider2D collider;
-
+    public int bulletToAdd;
     protected void Activation( float reloadTime )
     {
         if ( !itemGameObject.active )

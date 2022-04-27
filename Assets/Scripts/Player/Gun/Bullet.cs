@@ -57,6 +57,10 @@ public class Bullet : MonoBehaviour
                     Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
                     DestroyBullet();
                 }
+                else
+                {
+                    DestroyBullet();
+                }
 
             }
             else

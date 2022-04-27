@@ -28,8 +28,8 @@ public class AutomaticRifleBullet : BulletsManager
         {
 
             Debug.Log( "getLazerBullets" );
-            player.gameObject.GetComponentInChildren<AutomaticShot>().AddBullet( 50 );
-            //player.gameObject.GetComponent<IAddHp>()?.AddHp( ( ( BoostInfo )itemInfo ).addHp );
+            player.gameObject.GetComponentInChildren<AutomaticShot>().AddBullet( bulletToAdd );
+           
 
             itemGameObject.SetActive( false );
             collider.enabled = false;

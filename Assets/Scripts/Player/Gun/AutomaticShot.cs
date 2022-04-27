@@ -10,12 +10,7 @@ public class AutomaticShot : Gun
 
     public LineRenderer lineRenderer;
     public PhotonView photonView;
-    public float startTime;
-    private float timeShot;
 
-    public int bulletsLeft;
-    public float reloadTime;
-    const int maxBullets = 200;
     public TextMeshProUGUI text;
     public override void Use()
     {
@@ -34,11 +29,11 @@ public class AutomaticShot : Gun
     private void Update()
     {
         if ( !photonView.IsMine ) return;
-        if ( timeShot <= 0 )
+        if ( timeBeforeShoots <= 0 )
         {
             if ( Input.GetMouseButton( 0 ) && itemGameObject.active && bulletsLeft>0 )
             {
-                timeShot = startTime;
+                timeBeforeShoots = timeBetweenShoots;
                  x = Random.Range(-spread,spread);
                  y = Random.Range(-spread,spread);
                 photonView.RPC( "ShootAuto", RpcTarget.All );
@@ -46,7 +41,7 @@ public class AutomaticShot : Gun
         }
         else
         {
-            timeShot -= Time.deltaTime;
+            timeBeforeShoots -= Time.deltaTime;
         }
         if ( itemGameObject.active )
         {
@@ -93,6 +88,6 @@ public class AutomaticShot : Gun
     }
     public void AddBullet( int addBullet )
     {
-        bulletsLeft = System.Math.Min( bulletsLeft + addBullet, maxBullets );
+        SetAddBullet( addBullet );
     }
 }
