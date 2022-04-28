@@ -21,10 +21,12 @@ public class PlayerManager : MonoBehaviour
         {
             CreateController();
         }
+        DeathMenuManager.Instance.CloseDeathMenu();
     }
     void CreateController()
     {
         Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
+        DeathMenuManager.Instance.CloseDeathMenu();
         controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation,0,new object[] {photonView.ViewID } );
     }
     // Update is called once per frame
@@ -32,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     {
         PhotonNetwork.Destroy( controller );
         sound.Play();
+        DeathMenuManager.Instance.OpenDeathMenu();
         Invoke ( "CreateController",1f );
     }
 }
