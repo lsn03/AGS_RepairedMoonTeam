@@ -173,7 +173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 4934843300594342924, guid: c0b27934a923b8f43a75c12a4a0a6cfe, type: 3}
   speed: 5
-  posZ: 10
 --- !u!1 &7449997873228944117
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +242,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1331998055292189158}
-  deathPannel: {fileID: 1076328350221888598}
 --- !u!82 &1331998055292189158
 AudioSource:
   m_ObjectHideFlags: 0
