@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     private PhotonView photonView;
 
     public Rigidbody2D _rigidbody2D;
-
+    
 
     private void Start()
     {
@@ -52,13 +52,27 @@ public class Bullet : MonoBehaviour
             if ( Player != null  )
             {
                 Debug.Log( "enemy damaged" );
-                if( photonView.IsMine )
+                if ( photonView.IsMine )
+                {
                     Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+                    DestroyBullet();
+                }
+                else
+                {
+                    DestroyBullet();
+                }
+
+            }
+            else
+            {
                 DestroyBullet();
             }
-            DestroyBullet();
+            
         }
     }
+    // лидерборды
+    // патроны
+    // ракетница
 
 }
 

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Granade
   m_EditorClassIdentifier: 
   itemName: Granade
-  damage: 20
+  damage: 75

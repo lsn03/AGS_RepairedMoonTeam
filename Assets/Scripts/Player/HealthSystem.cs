@@ -17,6 +17,10 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     [SerializeField] Text currentHpText;
     [SerializeField] Text currentArmorText;
 
+    [SerializeField] AudioSource armorSound;
+    [SerializeField] AudioSource hpSound;
+    [SerializeField] AudioSource deathSound;
+
     PlayerManager playerManager;
     PhotonView photonView;
 
@@ -37,12 +41,12 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         currentHpText.text = currentHP.ToString();
         currentArmorText.text = currentArmor.ToString();
     }
-    int cntPlayer;
+    
     private void Update()
     {
         if ( !photonView.IsMine ) return;
         
-        cntPlayer =  PhotonNetwork.CurrentRoom.PlayerCount;
+        
     }
 
     public void SetPointDamageBooster(float point )
@@ -71,7 +75,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
             return;
         }
         //_littleArmor /= cntPlayer;
-        
+        armorSound.Play();
         currentArmor = System.Math.Min( (currentArmor + _littleArmor), maxArmor );
        
         currentArmorText.text = currentArmor.ToString();
@@ -99,6 +103,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         {
             return;
         }
+        hpSound.Play();
         currentHP = System.Math.Min( (currentHP + hp), maxHP );
         currentHpText.text = currentHP.ToString();
         healthBarImage.fillAmount = currentHP / maxHP;
@@ -149,7 +154,13 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     }
     public void Die()
     {
-
+        deathSound.Play();
         playerManager.Die();
+    }
+
+
+    public void PlayMusic()
+    {
+ 
     }
 }

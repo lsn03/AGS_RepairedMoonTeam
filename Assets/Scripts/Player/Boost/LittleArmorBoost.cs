@@ -33,6 +33,7 @@ public class LittleArmorBoost : Boost
             {
                 Debug.Log( "OntriggerEnter" );
                 health.gameObject.GetComponent<IAddArmor>()?.AddArmor( ( ( BoostInfo )itemInfo ).addArmor );
+                
             }
             
             

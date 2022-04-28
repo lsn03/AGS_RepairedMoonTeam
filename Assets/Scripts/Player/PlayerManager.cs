@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 {
     PhotonView photonView;
     GameObject controller;
-
+    [SerializeField] AudioSource sound;
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -21,16 +21,20 @@ public class PlayerManager : MonoBehaviour
         {
             CreateController();
         }
+        DeathMenuManager.Instance.CloseDeathMenu();
     }
     void CreateController()
     {
         Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
+        DeathMenuManager.Instance.CloseDeathMenu();
         controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation,0,new object[] {photonView.ViewID } );
     }
     // Update is called once per frame
     public void Die()
     {
         PhotonNetwork.Destroy( controller );
-        CreateController();
+        sound.Play();
+        DeathMenuManager.Instance.OpenDeathMenu();
+        Invoke ( "CreateController",1f );
     }
 }

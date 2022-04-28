@@ -1,20 +1,22 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Pistol : Gun
+public class RocketLauncher : Gun
 {
     public float offset;
     public GameObject bullet;
     public Transform bulletSpawn;
     public GameObject Gun;
-    public float startTime;
-    private float timeShoot;
 
     private PhotonView photonView;
 
+    public TextMeshProUGUI text;
+
     PlayerController player;
+    [SerializeField] AudioSource sound;
 
     // Start is called before the first frame update
     void Start()
@@ -41,18 +43,29 @@ public class Pistol : Gun
     private void Update()
     {
         if ( !photonView.IsMine ) return;
-        if ( timeShoot <= 0 )
+        if ( timeBeforeShoots <= 0 )
         {
-            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active )
+            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active && bulletsLeft > 0 )
             {
                 Shoot();
-                timeShoot = startTime;
+                timeBeforeShoots = timeBetweenShoots;
 
             }
         }
         else
         {
-            timeShoot -= Time.deltaTime;
+            timeBeforeShoots -= Time.deltaTime;
+        }
+
+        if ( itemGameObject.active )
+        {
+            text.gameObject.SetActive( true );
+            text.SetText( bulletsLeft + " / " + maxBullets );
+        }
+
+        else
+        {
+            text.gameObject.SetActive( false );
         }
     }
 
@@ -62,14 +75,15 @@ public class Pistol : Gun
     }
     public void Shoot()
     {
+        bulletsLeft--;
+        sound.Play();
+        PhotonNetwork.Instantiate( bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation );
+        
 
-        {
-            //if ( Input.GetMouseButton( 0 ) )
-            {
-                PhotonNetwork.Instantiate( bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation );
-                // timeShot = startTime;
-            }
-        }
+    }
 
+    public void AddBullet(int addBullet )
+    {
+        SetAddBullet( addBullet );
     }
 }

@@ -37,10 +37,12 @@ public class RotateGun : MonoBehaviour
         {
 
             LocalScale.y = localscalePrev ;
+            Gun.transform.position = new Vector3( Gun.transform.position.x, Gun.transform.position.y, -1f );
         }
         else
         {
             LocalScale.y = localscaleNext;
+            Gun.transform.position = new Vector3( Gun.transform.position.x, Gun.transform.position.y, -5f );
         }
         Gun.transform.localScale = LocalScale;
     }

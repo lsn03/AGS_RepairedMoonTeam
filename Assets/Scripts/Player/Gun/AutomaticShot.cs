@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AutomaticShot : Gun
@@ -9,8 +10,11 @@ public class AutomaticShot : Gun
 
     public LineRenderer lineRenderer;
     public PhotonView photonView;
-    public float startTime;
-    private float timeShot;
+
+    public TextMeshProUGUI text;
+
+     AudioSource shootingSound;
+
     public override void Use()
     {
        
@@ -19,28 +23,44 @@ public class AutomaticShot : Gun
     void Start()
     {
         photonView = GetComponent<PhotonView>();
-    
-       
+        shootingSound = GetComponent<AudioSource>();
+
+
     }
+    bool readyToSound = false;
    [SerializeField,Range(0f,0.5f)]public  float spread;
     float x;
     float y;
     private void Update()
     {
         if ( !photonView.IsMine ) return;
-        if ( timeShot <= 0 )
+        if ( timeBeforeShoots <= 0 )
         {
-            if ( Input.GetMouseButton( 0 ) && itemGameObject.active )
+            if ( Input.GetMouseButton( 0 ) && itemGameObject.active && bulletsLeft>0 )
             {
-                timeShot = startTime;
+                timeBeforeShoots = timeBetweenShoots;
                  x = Random.Range(-spread,spread);
                  y = Random.Range(-spread,spread);
+                
+                
+                    shootingSound.Play();
+                
                 photonView.RPC( "ShootAuto", RpcTarget.All );
             }
+            
         }
         else
         {
-            timeShot -= Time.deltaTime;
+            timeBeforeShoots -= Time.deltaTime;
+        }
+        if ( itemGameObject.active )
+        {
+            text.gameObject.SetActive( true );
+            text.SetText( bulletsLeft + " / " + maxBullets );
+        }
+        else
+        {
+            text.gameObject.SetActive( false );
         }
     }
 
@@ -52,7 +72,7 @@ public class AutomaticShot : Gun
 
 
         RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right + new Vector3(x,y,0));
-
+        bulletsLeft--;
         if ( hitInfo )
         {
             Instantiate( hitEffect, hitInfo.point, Quaternion.identity );
@@ -75,7 +95,9 @@ public class AutomaticShot : Gun
         yield return new WaitForSeconds( 0.02f );
         if ( lineRenderer != null )
             lineRenderer.enabled = false;
-
-
+    }
+    public void AddBullet( int addBullet )
+    {
+        SetAddBullet( addBullet );
     }
 }
