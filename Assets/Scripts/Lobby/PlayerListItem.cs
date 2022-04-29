@@ -12,7 +12,8 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
     public void SetUp( Player _player)
     {
         player = _player;
-        text.text = _player.NickName;
+        string[] nick = _player.NickName.Split('\t');
+        text.text = nick[0];
     }
     public override void OnPlayerLeftRoom( Player otherPlayer )
     {

@@ -27,6 +27,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject startGameButton;
     [SerializeField] GameObject leaveGameButton;
 
+    [SerializeField] GameObject player;
+    private ColorPlayer colorPlayer;
+    private float[] colors = {0,0,0};
+
     [SerializeField] private Text userNameText;
     [SerializeField] private InputField UserNameinputField;
     private void Awake()
@@ -37,7 +41,26 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log( "Connecting to Master" );
         PhotonNetwork.ConnectUsingSettings();
+        colorPlayer = player.GetComponent<ColorPlayer>();
+        Color startColor = colorPlayer.GetColor();
+        colors[0] = startColor.r;
+        colors[1] = startColor.g;
+        colors[2] = startColor.b;
+        
+    }
+    public void ChangePlayerColor(int rgbIndex,float colorFloat )
+    {
+        colors[rgbIndex] = colorFloat;
+        colorPlayer.SetColor( new Color( colors[0], colors[1], colors[2] ) );
+    }
 
+    private void SaveColor()
+    {
+        PlayerPrefs.SetString( "color_r", colors[0].ToString() );
+        PlayerPrefs.SetString( "color_g", colors[1].ToString() );
+        PlayerPrefs.SetString( "color_b", colors[2].ToString() );
+        PhotonNetwork.NickName = PlayerPrefs.GetString( "name" ) + "\t"+ PlayerPrefs.GetString( "color_r" ) +"\t" + PlayerPrefs.GetString( "color_g" ) +"\t" + PlayerPrefs.GetString( "color_b" );
+        
     }
 
     public override void OnConnectedToMaster()
@@ -58,6 +81,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
         SaveName();
+        SaveColor();
         if ( string.IsNullOrEmpty( roomNameInputField.text ) )
         {
             PhotonNetwork.CreateRoom( "Room "+UnityEngine.Random.Range(0,9999) );
@@ -130,6 +154,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void JoinRoom(RoomInfo info )
     {
         SaveName();
+        SaveColor();
         PhotonNetwork.JoinRoom( info.Name );
         MenuManager.Instance.OpenMenu( "loading" );
 

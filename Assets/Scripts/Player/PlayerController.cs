@@ -5,6 +5,7 @@ using Photon.Pun;
 using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Realtime;
+using System.Text;
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
@@ -34,10 +35,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     [SerializeField] GameObject ui;
 
-
+    [SerializeField] GameObject Custom;
 
     PlayerManager playerManager;
     Animator _animator;
+
+    string [] arrayNick;
 
     private void Awake()
     {
@@ -50,7 +53,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
         
         playerManager = PhotonView.Find((int) photonView.InstantiationData[0]).GetComponent<PlayerManager>();
         _animator = GetComponent<Animator>();
-        TextName.text = photonView.Owner.NickName;
+        
+        var text = photonView.Owner.NickName;
+        arrayNick = text.Split('\t');
+        TextName.text = arrayNick[0];
+        Custom.GetComponent<SpriteRenderer>().color = new Color( float.Parse( arrayNick[1]), float.Parse( arrayNick[2] ), float.Parse( arrayNick[3] ) );
+
+
         if ( photonView.Owner.IsLocal )
         {
             Camera.main.GetComponent<CameraWatchToPlayer>().player = gameObject.transform;
@@ -60,7 +69,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
         EquipIem( 0 );
         
     }
-
+    string GetNickName(string nickname)
+    {
+        return nickname;
+    }
 
     void Update()
     {
@@ -112,34 +124,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
     void CheckingGround()
     {
         isGrounded = Physics2D.OverlapCircle( GroundCheck.position, GroundCheckRadius, Ground );
-    }
-
- 
-
-
-    public void Flip()
-    {
-        if ( movement < 0f && facingRight )
-        {
-            Spin();
-        }
-        else if ( movement > 0f && !facingRight )
-        {
-            Spin();
-        }
-    }
-
-    public void Spin()
-
-    {
-        facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-
-        transform.Rotate( 0f, 180f, 0f );
-        Gun.transform.position = new Vector3( Gun.transform.position.x, Gun.transform.position.y, Gun.transform.position.z * -1 );
-        TextName.GetComponent<RectTransform>().transform.localScale = theScale;
-        ui.GetComponent<RectTransform>().transform.Rotate( 0f, 180f, 0f );
     }
 
     void EquipIem( int _index )
