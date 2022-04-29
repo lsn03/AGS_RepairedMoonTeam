@@ -29,4 +29,8 @@ public class PauseMenuManager : MonoBehaviour
     {
         pausePannel.SetActive(false);
     }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

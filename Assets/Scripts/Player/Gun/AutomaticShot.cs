@@ -42,7 +42,7 @@ public class AutomaticShot : Gun
                  x = Random.Range(-spread,spread);
                  y = Random.Range(-spread,spread);
                 
-                
+                if(!shootingSound.isPlaying)
                     shootingSound.Play();
                 
                 photonView.RPC( "ShootAuto", RpcTarget.All );

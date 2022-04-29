@@ -159,8 +159,4 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     }
 
 
-    public void PlayMusic()
-    {
- 
-    }
 }

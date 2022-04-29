@@ -25,11 +25,18 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject roomListItemPrefab;
     [SerializeField] GameObject PlayerListItemPrefab;
     [SerializeField] GameObject startGameButton;
-    [SerializeField] GameObject leaveGameButton;
 
     [SerializeField] GameObject player;
+    [SerializeField] GameObject redSlider;
+    [SerializeField] GameObject greenSlider;
+    [SerializeField] GameObject blueSlider;
     private ColorPlayer colorPlayer;
     private float[] colors = {0,0,0};
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 
     [SerializeField] private Text userNameText;
     [SerializeField] private InputField UserNameinputField;
@@ -41,13 +48,23 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log( "Connecting to Master" );
         PhotonNetwork.ConnectUsingSettings();
+        UseColorSetting();
+    }
+
+    void UseColorSetting()
+    {
         colorPlayer = player.GetComponent<ColorPlayer>();
         Color startColor = colorPlayer.GetColor();
         colors[0] = startColor.r;
         colors[1] = startColor.g;
         colors[2] = startColor.b;
-        
+        redSlider.GetComponent<Slider>().value = float.Parse( PlayerPrefs.GetString( "color_r" ) );
+        greenSlider.GetComponent<Slider>().value = float.Parse( PlayerPrefs.GetString( "color_g" ) );
+        blueSlider.GetComponent<Slider>().value = float.Parse( PlayerPrefs.GetString( "color_b" ) );
+        colorPlayer.SetColor( new Color( float.Parse( PlayerPrefs.GetString( "color_r" ) ), float.Parse( PlayerPrefs.GetString( "color_g" ) ), float.Parse( PlayerPrefs.GetString( "color_b" ) ) ) );
+
     }
+
     public void ChangePlayerColor(int rgbIndex,float colorFloat )
     {
         colors[rgbIndex] = colorFloat;
@@ -56,6 +73,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     private void SaveColor()
     {
+
+
         PlayerPrefs.SetString( "color_r", colors[0].ToString() );
         PlayerPrefs.SetString( "color_g", colors[1].ToString() );
         PlayerPrefs.SetString( "color_b", colors[2].ToString() );
@@ -168,6 +187,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
+        MenuManager.Instance.OpenMenu( "loading" );
         PhotonNetwork.LoadLevel( 1 );
     }
 

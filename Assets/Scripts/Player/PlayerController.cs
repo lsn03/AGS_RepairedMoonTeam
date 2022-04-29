@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     PlayerManager playerManager;
     Animator _animator;
 
+    [SerializeField] AudioSource runSound;
+
     string [] arrayNick;
 
     private void Awake()
@@ -58,7 +60,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         arrayNick = text.Split('\t');
         TextName.text = arrayNick[0];
         Custom.GetComponent<SpriteRenderer>().color = new Color( float.Parse( arrayNick[1]), float.Parse( arrayNick[2] ), float.Parse( arrayNick[3] ) );
-
+        
 
         if ( photonView.Owner.IsLocal )
         {
@@ -99,6 +101,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         movement = Input.GetAxisRaw( "Horizontal" );
         _rigidbody2D.velocity = new Vector2( movement * speed, _rigidbody2D.velocity.y );
+        if(!runSound.isPlaying && Mathf.Abs( movement ) >= 0.01f  )
+        {
+            runSound.Play();
+        }
 
         if ( _animator )
         {
@@ -112,6 +118,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if ( isGrounded && ( Input.GetKey( KeyCode.Space ) || Input.GetKey( KeyCode.W ) ) )
         {
             _rigidbody2D.velocity = new Vector2( _rigidbody2D.velocity.x, jumpForce );
+           
         }
     }
     void JumpDown()
@@ -119,6 +126,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if ( ( Input.GetKey( KeyCode.S ) ) )
         {
             _rigidbody2D.velocity = new Vector2( _rigidbody2D.velocity.x, -jumpForce );
+            
         }
     }
     void CheckingGround()
