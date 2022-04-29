@@ -55,16 +55,29 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         colorPlayer = player.GetComponent<ColorPlayer>();
         Color startColor = colorPlayer.GetColor();
-        colors[0] = startColor.r;
-        colors[1] = startColor.g;
-        colors[2] = startColor.b;
+       
+        colors[0] = float.TryParse( PlayerPrefs.GetString( "color_r" ), out startColor.r )? float.Parse( PlayerPrefs.GetString( "color_r" )): 1;
+        colors[1] = float.TryParse( PlayerPrefs.GetString( "color_g" ), out startColor.g ) ? float.Parse( PlayerPrefs.GetString( "color_g" ) ) : 1;
+        colors[2] = float.TryParse( PlayerPrefs.GetString( "color_b" ), out startColor.b ) ? float.Parse( PlayerPrefs.GetString( "color_b" ) ) : 1;
+        //colors[1] = float.Parse( PlayerPrefs.GetString( "color_g" ) );
+        //colors[2] = float.Parse( PlayerPrefs.GetString( "color_b" ) );
+        SaveColor();
+
+
+
+        Debug.Log( colors[0]+" "+ colors[1] +" "+ colors[2] );
+
         redSlider.GetComponent<Slider>().value = float.Parse( PlayerPrefs.GetString( "color_r" ) );
         greenSlider.GetComponent<Slider>().value = float.Parse( PlayerPrefs.GetString( "color_g" ) );
         blueSlider.GetComponent<Slider>().value = float.Parse( PlayerPrefs.GetString( "color_b" ) );
+
         colorPlayer.SetColor( new Color( float.Parse( PlayerPrefs.GetString( "color_r" ) ), float.Parse( PlayerPrefs.GetString( "color_g" ) ), float.Parse( PlayerPrefs.GetString( "color_b" ) ) ) );
 
     }
-
+    //private void Update()
+    //{
+    //    Debug.Log( colors[0]+"\t"+ colors[1]+"\t" + colors[2] );
+    //}
     public void ChangePlayerColor(int rgbIndex,float colorFloat )
     {
         colors[rgbIndex] = colorFloat;
@@ -78,6 +91,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         PlayerPrefs.SetString( "color_r", colors[0].ToString() );
         PlayerPrefs.SetString( "color_g", colors[1].ToString() );
         PlayerPrefs.SetString( "color_b", colors[2].ToString() );
+
         PhotonNetwork.NickName = PlayerPrefs.GetString( "name" ) + "\t"+ PlayerPrefs.GetString( "color_r" ) +"\t" + PlayerPrefs.GetString( "color_g" ) +"\t" + PlayerPrefs.GetString( "color_b" );
         
     }
@@ -115,7 +129,15 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     private void SaveName()
     {
-        PlayerPrefs.SetString( "name", userNameText.text );
+        if( string.IsNullOrEmpty( userNameText.text ) )
+        {
+            PlayerPrefs.SetString( "name", "Player"+ UnityEngine.Random.Range( 0, 9999 ) );
+        }
+        else
+        {
+            PlayerPrefs.SetString( "name", userNameText.text );
+        }
+        
         PhotonNetwork.NickName = PlayerPrefs.GetString( "name" );
     }
     public override void OnJoinedRoom()

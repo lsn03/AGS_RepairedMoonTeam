@@ -4415,9 +4415,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8608171732007257562}
     m_Modifications:
+    - target: {fileID: 934710168815437723, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 934710169635892568, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
       propertyPath: m_Name
       value: RocketLauncher (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 934710169635892568, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 934710169635892569, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
       propertyPath: m_RootOrder
@@ -4466,6 +4474,10 @@ PrefabInstance:
     - target: {fileID: 934710169635892572, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
       propertyPath: sceneViewId
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 934710169851356883, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
@@ -6943,10 +6955,90 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1776475047195735269, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475047427698840, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475047427698840, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475047427698840, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475047427698840, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475047427698840, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475047427698840, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1776475047427698841, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1675003315}
+    - target: {fileID: 1776475048005221432, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475048005221432, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475048005221432, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475048005221432, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475048005221432, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776475048005221432, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448045183474799732, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_Name
+      value: ExitToWindowButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852615855606408539, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852615855606408539, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852615855606408539, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852615855606408539, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852615855606408539, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852615855606408539, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 522a36460631ecd4e9d493d4b6543af8, type: 3}
 --- !u!4 &8481992392793032345
@@ -7068,7 +7160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8608171732007257562}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RocketLauncherObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7100,7 +7192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8608171732335472544}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LazerBulletsObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7133,7 +7225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8608171732885118434}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GunManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7167,7 +7259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8608171733378147713}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AutomaticRifleObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7181,9 +7273,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8608171732007257562}
     m_Modifications:
+    - target: {fileID: 934710168815437723, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 934710169635892568, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
       propertyPath: m_Name
       value: RocketLauncher
+      objectReference: {fileID: 0}
+    - target: {fileID: 934710169635892568, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 934710169635892569, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
       propertyPath: m_RootOrder
@@ -7232,6 +7332,10 @@ PrefabInstance:
     - target: {fileID: 934710169635892572, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
       propertyPath: sceneViewId
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 934710169851356883, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f1e24f106397bb479007169bbfc18e5, type: 3}
