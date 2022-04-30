@@ -15,9 +15,12 @@ public class MeleeWeapon : Gun
     {
         Shoot();
     }
+    string[] name;
+
     void Start()
     {
         photonView = GetComponent<PhotonView>();
+         name = photonView.Owner.NickName.Split('\t');
     }
 
     private void Update()
@@ -51,7 +54,7 @@ public class MeleeWeapon : Gun
             timeBeforeShoots -= Time.deltaTime;
         }
     }
-
+    
     [PunRPC]
     void Shoot()
     {
@@ -59,7 +62,7 @@ public class MeleeWeapon : Gun
 
         if ( hitInfo )
         {
-                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );   
+                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage, name[0] );   
         }
     }
 

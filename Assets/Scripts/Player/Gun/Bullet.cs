@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
                 Debug.Log( "enemy damaged" );
                 if ( photonView.IsMine )
                 {
-                    Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
+                    Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage , photonView.Owner.NickName.Split( '\t' )[0] );
                     DestroyBullet();
                 }
                 else

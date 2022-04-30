@@ -88,11 +88,11 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         Debug.Log( "Addhp added external hp" );
         photonView.RPC( "RPC_AddHp", RpcTarget.All, hp );
     }
-    public void TakeDamage( float damage )
+    public void TakeDamage( float damage,string autor )
     {
         Debug.Log( "took damage" + damage );
 
-        photonView.RPC( "RPC_TakeDamage", RpcTarget.All, damage );
+        photonView.RPC( "RPC_TakeDamage", RpcTarget.All, damage ,autor);
     }
 
     [PunRPC]
@@ -114,10 +114,16 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
 
     [PunRPC]
-    void RPC_TakeDamage( float damage )
+    void RPC_TakeDamage( float damage,string autor )
     {
         if ( !photonView.IsMine )
         {
+            return;
+        }
+        if (autor == photonView.Owner.NickName.Split( '\t' )[0] )
+        {
+            
+            Debug.Log( "selfdamage: + id " + photonView.Owner.UserId );
             return;
         }
         //damage /= cntPlayer;
