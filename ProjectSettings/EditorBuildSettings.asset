@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/factory_m1.unity
     guid: 6162bf3cad539014ebec46a41eecaad4
+  - enabled: 1
+    path: Assets/Scenes/Reloaded.unity
+    guid: d1cdedf55841d5041a95d177d9f253a6
   m_configObjects: {}

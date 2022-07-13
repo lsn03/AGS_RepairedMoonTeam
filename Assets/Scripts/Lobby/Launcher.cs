@@ -12,6 +12,13 @@ using System.IO;
 using System;
 #endif
 
+[System.Serializable]
+public class MapData
+{
+    public string name;
+    public int scene;
+}
+
 public class Launcher : MonoBehaviourPunCallbacks
 {
 
@@ -25,6 +32,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject roomListItemPrefab;
     [SerializeField] GameObject PlayerListItemPrefab;
     [SerializeField] GameObject startGameButton;
+    [SerializeField] GameObject chooseMapButton;
 
     [SerializeField] GameObject player;
     [SerializeField] GameObject redSlider;
@@ -40,10 +48,16 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     [SerializeField] private Text userNameText;
     [SerializeField] private InputField UserNameinputField;
+    [SerializeField] private int currentNumberMap;
+    [SerializeField] private string currentNameMap;
     private void Awake()
     {
         Instance = this;
     }
+
+    public MapData[] map;
+
+
     void Start()
     {
         Debug.Log( "Connecting to Master" );
@@ -74,10 +88,13 @@ public class Launcher : MonoBehaviourPunCallbacks
         colorPlayer.SetColor( new Color( float.Parse( PlayerPrefs.GetString( "color_r" ) ), float.Parse( PlayerPrefs.GetString( "color_g" ) ), float.Parse( PlayerPrefs.GetString( "color_b" ) ) ) );
 
     }
-    //private void Update()
-    //{
-    //    Debug.Log( colors[0]+"\t"+ colors[1]+"\t" + colors[2] );
-    //}
+    private void Update()
+    {
+        var rand = UnityEngine.Random.Range( 1, map.Length+1 );
+
+        Debug.Log( $"random == {rand}" );
+
+    }
     public void ChangePlayerColor(int rgbIndex,float colorFloat )
     {
         colors[rgbIndex] = colorFloat;
@@ -155,12 +172,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( players[i] );
         }
-        startGameButton.SetActive( PhotonNetwork.IsMasterClient );
+        chooseMapButton.SetActive( PhotonNetwork.IsMasterClient );
     }
 
     public override void OnMasterClientSwitched( Player newMasterClient )
     {
-        startGameButton.SetActive( PhotonNetwork.IsMasterClient );
+        chooseMapButton.SetActive( PhotonNetwork.IsMasterClient );
     }
 
     public override void OnCreateRoomFailed( short returnCode, string message )
@@ -201,16 +218,42 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
     }
+    public void LeaveSelector()
+    {
+        MenuManager.Instance.OpenMenu( "room" );
+    }
     public override void OnPlayerEnteredRoom( Player newPlayer )
     {
         Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp(newPlayer );
 
     }
+    public void SetMap( int number, string name)
+    {
+        this.currentNameMap = name;
+        this.currentNumberMap = number;
+    }
+    
+    public void ChangeMap()
+    {
+        MenuManager.Instance.OpenMenu( "mapSelector" );
+    }
 
     public void StartGame()
     {
         MenuManager.Instance.OpenMenu( "loading" );
-        PhotonNetwork.LoadLevel( 1 );
+
+        if (currentNumberMap == 0 )
+        {
+           // PhotonNetwork.LoadLevel( 2 );
+
+
+            PhotonNetwork.LoadLevel( UnityEngine.Random.Range( 1, map.Length ) );
+        }
+        else
+        {
+            PhotonNetwork.LoadLevel( currentNumberMap );
+        }
+        
     }
 
 }

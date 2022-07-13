@@ -32,7 +32,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void OnSceneLoaded(Scene scene,LoadSceneMode loadSceneMode)
     {
-        if ( scene.buildIndex == 1 )
+        if ( scene.buildIndex != 0 )
         {
             PhotonNetwork.Instantiate( "PlayerManager", Vector3.zero, Quaternion.identity );
             Destroy( gameObject );
