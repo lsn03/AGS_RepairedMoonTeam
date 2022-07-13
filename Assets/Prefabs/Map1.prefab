@@ -259,12 +259,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2509242956153446972}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: SelectMap, Assembly-CSharp
+        m_MethodName: SelectButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -282,8 +282,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1883af6aea97a254d98994c03e2a4dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 0}
-  number: {fileID: 0}
+  name: {fileID: 2509242957950542055}
+  number: {fileID: 2509242956152526709}
+  image: {fileID: 2509242957619281811}
 --- !u!1 &2509242956409811408
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +322,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -547, y: -10.9}
-  m_SizeDelta: {x: 339.1, y: 174.1}
+  m_SizeDelta: {x: 340, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2509242956409811410
 MonoBehaviour:
@@ -582,7 +583,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 329.27, y: 176.57}
+  m_SizeDelta: {x: 330, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2509242957619281810
 CanvasRenderer:
