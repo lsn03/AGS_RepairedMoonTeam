@@ -11,10 +11,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     //[SerializeField] private GameObject player;
 
     //[SerializeField] public Transform Spawn;
-    
+    [SerializeField]PauseMenuManager menu;
     public void Leave()
     {
+        menu.ResumeButtonClick();
+        Time.timeScale = 1;
         PhotonNetwork.LeaveRoom();
+
     }
     public override void OnLeftRoom()
     {

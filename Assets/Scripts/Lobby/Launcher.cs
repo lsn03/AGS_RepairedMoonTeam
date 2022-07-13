@@ -90,9 +90,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        var rand = UnityEngine.Random.Range( 1, map.Length+1 );
-
-        Debug.Log( $"random == {rand}" );
+        //var rand = UnityEngine.Random.Range( 1, map.Length+1 );
+//
+       // Debug.Log( $"random == {rand}" );
 
     }
     public void ChangePlayerColor(int rgbIndex,float colorFloat )
