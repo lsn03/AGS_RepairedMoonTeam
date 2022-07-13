@@ -247,7 +247,7 @@ public class Launcher : MonoBehaviourPunCallbacks
            // PhotonNetwork.LoadLevel( 2 );
 
 
-            PhotonNetwork.LoadLevel( UnityEngine.Random.Range( 1, map.Length ) );
+           PhotonNetwork.LoadLevel( UnityEngine.Random.Range( 1, map.Length ) );
         }
         else
         {
