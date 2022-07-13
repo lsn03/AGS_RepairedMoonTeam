@@ -173,11 +173,13 @@ public class Launcher : MonoBehaviourPunCallbacks
             Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( players[i] );
         }
         chooseMapButton.SetActive( PhotonNetwork.IsMasterClient );
+        startGameButton.SetActive( PhotonNetwork.IsMasterClient );
     }
 
     public override void OnMasterClientSwitched( Player newMasterClient )
     {
         chooseMapButton.SetActive( PhotonNetwork.IsMasterClient );
+        startGameButton.SetActive( PhotonNetwork.IsMasterClient );
     }
 
     public override void OnCreateRoomFailed( short returnCode, string message )
