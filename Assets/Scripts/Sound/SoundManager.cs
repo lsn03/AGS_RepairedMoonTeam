@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
     {
         //Debug.Log( index +" " + gamesound[index].clip.name );
        // audioMixerMusic.SetFloat( "volume", PlayerPrefs.GetFloat( "musicVolume" ) );
-        Debug.Log("music volume "+ PlayerPrefs.GetFloat( "musicVolume" ) );
+       // Debug.Log("music volume "+ PlayerPrefs.GetFloat( "musicVolume" ) );
         CheckOnPlay();
 
         

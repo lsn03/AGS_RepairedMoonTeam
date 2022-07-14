@@ -15,7 +15,10 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
     public Slider musicSlider;
     public Slider effectSlider;
     public Slider shootSlider;
-    private const string MUSIC_VOLUME = "musicVolume",EFFECT_VOLUME = "effectVolume",SHOOT_VOLUME = "shootVolume";
+    private const string 
+        MUSIC_VOLUME = "musicVolume",
+        EFFECT_VOLUME = "effectVolume",
+        SHOOT_VOLUME = "shootVolume";
 
     private void Awake()
     {
@@ -36,31 +39,43 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
             pausePannel.SetActive(false);
         }
 
-        musicSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat( MUSIC_VOLUME );
-        effectSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat( EFFECT_VOLUME );
-        shootSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat( SHOOT_VOLUME );
+        //musicSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat( MUSIC_VOLUME );
+        //effectSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat( EFFECT_VOLUME );
+        //shootSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat( SHOOT_VOLUME );
 
-        audioMixerMusic.SetFloat( MUSIC_VOLUME, PlayerPrefs.GetFloat( MUSIC_VOLUME ) );
-        audioMixerEffect.SetFloat( EFFECT_VOLUME, PlayerPrefs.GetFloat( EFFECT_VOLUME ) );
-        audioMixerShoot.SetFloat( SHOOT_VOLUME, PlayerPrefs.GetFloat( SHOOT_VOLUME ) );
+        //audioMixerMusic.SetFloat( MUSIC_VOLUME, PlayerPrefs.GetFloat( MUSIC_VOLUME ) );
+        //audioMixerEffect.SetFloat( EFFECT_VOLUME, PlayerPrefs.GetFloat( EFFECT_VOLUME ) );
+        //audioMixerShoot.SetFloat( SHOOT_VOLUME, PlayerPrefs.GetFloat( SHOOT_VOLUME ) );
     }
-
+    private bool isOpenMainMenu = false,isOpenSettingMenu;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)&&!pausePannel.active)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pausePannel.SetActive(true);
-            gameObjectWithButtons.SetActive( true );
+            isOpenMainMenu = !isOpenMainMenu;
         }
-        if ( pausePannel.active || settingPanel.active )
+        
+        if(isOpenMainMenu || isOpenSettingMenu )
         {
-            Time.timeScale = 0;
+            Time.timeScale = 0; 
+        }
+
+        if ( isOpenMainMenu && !isOpenSettingMenu )
+        {
+            pausePannel.SetActive( true );
+            gameObjectWithButtons.SetActive( true );
+        }else if(!isOpenSettingMenu)
+        
+        {
+            ResumeButtonClick();
         }
     }
     public void OpenSettings()
     {
         gameObjectWithButtons.SetActive( false );
         settingPanel.SetActive( true );
+        isOpenSettingMenu = true;
+
     }
     public void ResumeButtonClick()
     {
@@ -68,6 +83,7 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
         settingPanel.SetActive( false );
         gameObjectWithButtons.SetActive( true );
         Time.timeScale = 1;
+        isOpenSettingMenu = isOpenMainMenu = false;
     }
 
     
@@ -78,7 +94,7 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
 
     public void SetVolumeInMusic(float volume)
     {
-        Debug.Log( $"{volume} music and value in slider {musicSlider.GetComponent<Slider>().value} " );
+        //Debug.Log( $"{volume} music and value in slider {musicSlider.GetComponent<Slider>().value} " );
         audioMixerMusic.SetFloat( MUSIC_VOLUME, volume );
         PlayerPrefs.SetFloat( MUSIC_VOLUME, volume );
     }

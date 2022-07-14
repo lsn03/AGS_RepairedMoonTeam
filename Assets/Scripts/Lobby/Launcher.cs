@@ -79,7 +79,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
 
-        Debug.Log( colors[0]+" "+ colors[1] +" "+ colors[2] );
+       // Debug.Log( colors[0]+" "+ colors[1] +" "+ colors[2] );
 
         redSlider.GetComponent<Slider>().value = float.Parse( PlayerPrefs.GetString( "color_r" ) );
         greenSlider.GetComponent<Slider>().value = float.Parse( PlayerPrefs.GetString( "color_g" ) );
@@ -88,13 +88,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         colorPlayer.SetColor( new Color( float.Parse( PlayerPrefs.GetString( "color_r" ) ), float.Parse( PlayerPrefs.GetString( "color_g" ) ), float.Parse( PlayerPrefs.GetString( "color_b" ) ) ) );
 
     }
-    private void Update()
-    {
-        //var rand = UnityEngine.Random.Range( 1, map.Length+1 );
-//
-       // Debug.Log( $"random == {rand}" );
 
-    }
     public void ChangePlayerColor(int rgbIndex,float colorFloat )
     {
         colors[rgbIndex] = colorFloat;
