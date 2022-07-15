@@ -1319,6 +1319,7 @@ Transform:
   - {fileID: 8476180424056163445}
   - {fileID: 2348972981703849461}
   - {fileID: 2146126609998332771}
+  - {fileID: 198847526390967260}
   m_Father: {fileID: 2890441619222039727}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2001,7 +2002,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2471503080347017325}
-  - {fileID: 198847526390967260}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4264,6 +4264,7 @@ GameObject:
   - component: {fileID: 2334566040961660818}
   - component: {fileID: 3088692870861596151}
   - component: {fileID: 472535270985302433}
+  - component: {fileID: 7934419205551095599}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -4279,11 +4280,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8955799426149564501}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.46894574, y: 0.5095525, z: -12.067133}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.48853114, y: 0.16609293, z: -18.148518}
+  m_LocalScale: {x: 1.2820513, y: 1.2820513, z: 1.4625278}
   m_Children: []
-  m_Father: {fileID: 2890441619222039727}
-  m_RootOrder: 1
+  m_Father: {fileID: 2471503080347017325}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2334566040961660818
 MonoBehaviour:
@@ -4493,6 +4494,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7934419205551095599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8955799426149564501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &9132290773758607373
 GameObject:
   m_ObjectHideFlags: 0

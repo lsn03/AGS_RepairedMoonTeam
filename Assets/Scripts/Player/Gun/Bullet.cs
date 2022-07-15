@@ -13,7 +13,9 @@ public class Bullet : MonoBehaviour
     private PhotonView photonView;
 
     public Rigidbody2D _rigidbody2D;
-    
+
+    [Range( 0.1f, 5f ),SerializeField] float splashRange;
+
 
     private void Start()
     {
@@ -32,42 +34,39 @@ public class Bullet : MonoBehaviour
             
         }
     }
-    //public void OnTriggerEnter2D( Collider2D collision )
-    //{
-    //    Debug.Log( "SelfDamage" );
-    //    PlayerController  Player = collision.GetComponent<PlayerController>();
-    //    BlockToDestroy blackToDestroy = collision.GetComponent<BlockToDestroy>();
-    //    if ( Player != null )
-    //    {
-    //        Debug.Log( "enemy damaged" );
-    //        Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage );
-    //        DestroyBullet();
-    //    }
-
-    //}
     private void OnCollisionEnter2D( Collision2D collision )
     {
         {
-            PlayerController Player = collision.collider.GetComponent<PlayerController>();
-            if ( Player != null  )
+            var hitColliders = Physics2D.OverlapCircleAll(transform.position,splashRange);
+
+            foreach(var _hitCollider in hitColliders )
             {
-                Debug.Log( "enemy damaged" );
-                if ( photonView.IsMine )
+                PlayerController Player = _hitCollider.GetComponent<PlayerController>();
+                if ( Player != null )
                 {
-                    Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage , photonView.Owner.NickName.Split( '\t' )[0] );
-                    DestroyBullet();
+                    Debug.Log( "enemy damaged" );
+                    if ( photonView.IsMine )
+                    {
+                        var closestPoint = _hitCollider.ClosestPoint(transform.position);
+                        var distance = Vector3.Distance(closestPoint,transform.position);
+                        var damagePercent = Mathf.InverseLerp(0,splashRange,distance);
+                        Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage* damagePercent, photonView.Owner.NickName.Split( '\t' )[0] );
+                        //DestroyBullet();
+                    }
+                    else
+                    {
+                       // DestroyBullet();
+                    }
+
                 }
                 else
                 {
-                    DestroyBullet();
+                   // DestroyBullet();
                 }
+            }
 
-            }
-            else
-            {
-                DestroyBullet();
-            }
-            
+            DestroyBullet();
+
         }
     }
     // лидерборды
