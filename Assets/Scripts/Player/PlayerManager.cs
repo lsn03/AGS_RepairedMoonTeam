@@ -14,13 +14,14 @@ public class PlayerManager : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
     }
-
+    GameObject leaderBoard;
     void Start()
     {
         if ( photonView.IsMine )
         {
             CreateController();
         }
+       // leaderBoard = GetComponent<CountLeaderBoard>();
         DeathMenuManager.Instance.CloseDeathMenu();
     }
     void CreateController()
@@ -30,11 +31,15 @@ public class PlayerManager : MonoBehaviour
         controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation,0,new object[] {photonView.ViewID } );
     }
     // Update is called once per frame
-    public void Die()
+    public void Die(string killer)
     {
         PhotonNetwork.Destroy( controller );
         sound.Play();
         DeathMenuManager.Instance.OpenDeathMenu();
         Invoke ( "CreateController",1f );
+        //leaderBoard.AddKill( killer );
     }
+
+
+
 }

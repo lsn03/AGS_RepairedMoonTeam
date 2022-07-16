@@ -9,16 +9,17 @@ public class LeaderBoardManager : MonoBehaviourPunCallbacks
     private bool isOpenLeaderboard = false;
 
     Player[] players = PhotonNetwork.PlayerList;
-    [SerializeField] Transform PlayerListContent;
+    [SerializeField] Transform playerListContent;
+    [SerializeField] GameObject playerLeaderBoardListItemPrefab;
+    [SerializeField] GameObject panel;
 
-    void Start()
+    void Awake()
     {
-        if ( gameObject.active )
-        {
-            CloseLeaderboard();
-        }
+        
+            panel.SetActive( false );
+        SetUpPlayer();
     }
-    
+
 
     void Update()
     {
@@ -26,21 +27,37 @@ public class LeaderBoardManager : MonoBehaviourPunCallbacks
         {
             isOpenLeaderboard = !isOpenLeaderboard;
         }
-        if ( isOpenLeaderboard )
+
+        OpenLeaderboard();
+
+        CloseLeaderboard();
+        
+    }
+
+    public override void OnPlayerEnteredRoom( Player newPlayer )
+    {
+        Instantiate( playerLeaderBoardListItemPrefab, playerListContent ).GetComponent<PlayerLeaderboardListItem>().SetUp( newPlayer );
+    }
+
+    public void SetUpPlayer()
+    {
+        for (int i = 0;i< players.Length;i++ )
         {
-            OpenLeaderboard();
-        }
-        else
-        {
-            CloseLeaderboard();
+             Instantiate( playerLeaderBoardListItemPrefab, playerListContent ).GetComponent<PlayerLeaderboardListItem>().SetUp(players[i]);
+          
         }
     }
+
+   
+
     private void OpenLeaderboard()
     {
-        gameObject.SetActive( true );
+        if ( isOpenLeaderboard )
+            panel.SetActive( true );
     }
     private void CloseLeaderboard()
     {
-        gameObject.SetActive( false );
+        if ( !isOpenLeaderboard )
+            panel.SetActive( false );
     }
 }

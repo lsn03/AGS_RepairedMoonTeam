@@ -8,7 +8,7 @@ using Photon.Realtime;
 
 public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
 {
-    [SerializeField] TMP_Text number { get; set; }
+    [SerializeField] TMP_Text number;
     [SerializeField] TMP_Text nickname;
     [SerializeField] TMP_Text scores;
     [SerializeField] TMP_Text countOfKills;
@@ -18,12 +18,32 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
     {
         player = _player;
         string[] nick = _player.NickName.Split('\t');
-        number.text = "0";
+        this.number.text = ""; //number.ToString();
         nickname.text = nick[0];
         scores.text = "0";
         countOfKills.text = "0";
         countOfDeaths.text = "0";
     }
+    public void ChangeCountOfKill( int countOfKills )
+    {
+        int cnt = int.Parse( this.countOfKills.text);
+         cnt+= countOfKills;
+        this.countOfKills.text = cnt.ToString();
+        ChangeScore();
+    }
+    public void ChangeCountOfDeath( int countOfDeaths )
+    {
+        int cnt = int.Parse( this.countOfDeaths.text);
+        cnt += countOfDeaths;
+        this.countOfDeaths.text = cnt.ToString();
+        ChangeScore();
+    }
+
+    private void ChangeScore()
+    {
+        scores.text = (int.Parse( countOfKills.text ) * 10 - int.Parse( countOfDeaths.text ) * 2).ToString();
+    }
+
     public override void OnPlayerLeftRoom( Player otherPlayer )
     {
         if ( player == otherPlayer )
@@ -35,4 +55,9 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
     {
         Destroy( gameObject );
     }
+    public string GetNickName()
+    {
+        return nickname.text;
+    }
+
 }

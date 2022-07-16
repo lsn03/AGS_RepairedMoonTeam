@@ -23,6 +23,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
     PlayerManager playerManager;
     PhotonView photonView;
+    
 
     float damageBooster = 1f;
     private void Awake()
@@ -40,6 +41,8 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         }
         currentHpText.text = currentHP.ToString();
         currentArmorText.text = currentArmor.ToString();
+        //leaderBoard = GetComponent<CountLeaderBoard>();
+
     }
     
     private void Update()
@@ -154,22 +157,16 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         healthBarImage.fillAmount = currentHP / maxHP;
         if ( currentHP <= 0 )
         {
-            Die();
+            Die(autor);
         }
         Debug.Log( "Took damage " + damage );
     }
-    public void Die()
+    public void Die(string killer)
     {
         deathSound.Play();
-        playerManager.Die();
+        //leaderBoard.AddKill( killer );
+        playerManager.Die(killer);
     }
 
-    private void OnTriggerEnter2D( Collider2D collision )
-    {
-
-        if ( collision.tag == "spikes" && photonView.IsMine )
-        {
-            Die(); 
-        }
-    }
+   
 }
