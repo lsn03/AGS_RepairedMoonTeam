@@ -15,13 +15,19 @@ public class PlayerManager : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
     GameObject leaderBoard;
+    CountLeaderBoard board;
     void Start()
     {
         if ( photonView.IsMine )
         {
             CreateController();
         }
-       // leaderBoard = GetComponent<CountLeaderBoard>();
+        // leaderBoard = GetComponent<CountLeaderBoard>();
+        leaderBoard = GameObject.FindGameObjectWithTag( "leaderboard" );
+        if ( leaderBoard )
+        {
+            board = leaderBoard.GetComponent<CountLeaderBoard>();
+        }
         DeathMenuManager.Instance.CloseDeathMenu();
     }
     void CreateController()
@@ -37,7 +43,7 @@ public class PlayerManager : MonoBehaviour
         sound.Play();
         DeathMenuManager.Instance.OpenDeathMenu();
         Invoke ( "CreateController",1f );
-        //leaderBoard.AddKill( killer );
+        board.AddKill( killer );
     }
 
 

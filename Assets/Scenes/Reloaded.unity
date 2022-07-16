@@ -11105,6 +11105,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CountLeaderBoard
       objectReference: {fileID: 0}
+    - target: {fileID: 6105541768380951209, guid: 69d7fbb557ba3fa4a8e31152a434167d, type: 3}
+      propertyPath: m_TagString
+      value: leaderboard
+      objectReference: {fileID: 0}
     - target: {fileID: 6105541768380951215, guid: 69d7fbb557ba3fa4a8e31152a434167d, type: 3}
       propertyPath: playerListContent
       value: 
