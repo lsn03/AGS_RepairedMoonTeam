@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HealthBar
   - LazerRifle
+  - spikes
   layers:
   - Default
   - TransparentFX
@@ -18,10 +19,10 @@ TagManager:
   - 
   - 
   - 
+  - PlayerLayer
   - 
   - 
-  - 
-  - 
+  - hook
   - 
   - 
   - 
