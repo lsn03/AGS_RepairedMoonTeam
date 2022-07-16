@@ -165,7 +165,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     {
         deathSound.Play();
         //leaderBoard.AddKill( killer );
-        playerManager.Die(killer);
+        playerManager.Die(killer, photonView.Owner.NickName.Split( '\t' )[0] );
     }
 
    

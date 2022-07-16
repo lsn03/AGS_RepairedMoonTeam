@@ -37,13 +37,14 @@ public class PlayerManager : MonoBehaviour
         controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation,0,new object[] {photonView.ViewID } );
     }
     // Update is called once per frame
-    public void Die(string killer)
+    public void Die(string killer,string dead)
     {
         PhotonNetwork.Destroy( controller );
         sound.Play();
         DeathMenuManager.Instance.OpenDeathMenu();
         Invoke ( "CreateController",1f );
         board.AddKill( killer );
+        board.AddDeath( dead );
     }
 
 

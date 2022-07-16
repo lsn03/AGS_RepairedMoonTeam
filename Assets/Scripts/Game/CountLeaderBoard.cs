@@ -8,7 +8,7 @@ public class CountLeaderBoard : MonoBehaviourPunCallbacks
 
     [SerializeField] Transform playerListContent;
     Player player;
-    private string killer;
+    private string killer,dead;
     public void AddKill( string killer )
     {
         foreach( Transform child in playerListContent )
@@ -23,13 +23,18 @@ public class CountLeaderBoard : MonoBehaviourPunCallbacks
             }
         }
     }
-    //public void AddDeath(string dead )
-    //{
-    //    for ( int i = 0; i < playerListContent.Length; i++ )
-    //    {
-    //        playerListContent[i].GetComponent<PlayerLeaderboardListItem>().GetNickName();
+    public void AddDeath( string dead )
+    {
+        foreach ( Transform child in playerListContent )
+        {
+            var player =  child.GetComponent<PlayerLeaderboardListItem>();
+            this.dead = player.GetNickName();
+            if ( this.dead == dead )
+            {
+                player.ChangeCountOfDeath( 1 );
+                Debug.Log( "ADDDDDD" );
+            }
+        }
+    }
 
-    //    }
-    //}
-    
 }
