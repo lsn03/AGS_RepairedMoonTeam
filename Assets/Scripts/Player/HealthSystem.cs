@@ -117,7 +117,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
 
     [PunRPC]
-    void RPC_TakeDamage( float damage,string autor )
+    void RPC_TakeDamage( float damage,string autor ,PhotonMessageInfo info)
     {
         if ( !photonView.IsMine )
         {
@@ -157,16 +157,24 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         healthBarImage.fillAmount = currentHP / maxHP;
         if ( currentHP <= 0 )
         {
-            Die(autor);
+            Die();
+            PlayerManager.Find( info.Sender ).GetKill();
         }
         Debug.Log( "Took damage " + damage );
     }
-    public void Die(string killer)
+    public void Die()
     {
         deathSound.Play();
         //leaderBoard.AddKill( killer );
-        playerManager.Die(killer, photonView.Owner.NickName.Split( '\t' )[0] );
+        playerManager.Die();
     }
 
-   
+    private void OnTriggerEnter2D( Collider2D collision )
+    {
+        if(collision.gameObject.tag == "spikes" )
+        {
+            Die();
+        }
+    }
+
 }

@@ -46,6 +46,7 @@ MonoBehaviour:
   - Shoot
   - ShootAuto
   - RPC_SetPointDamageBooster
+  - RPC_GetKill
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using Photon.Realtime;
+using System.Linq;
+using Hastable = ExitGames.Client.Photon.Hashtable;
 
 
 public class PlayerManager : MonoBehaviour
@@ -10,24 +13,21 @@ public class PlayerManager : MonoBehaviour
     PhotonView photonView;
     GameObject controller;
     [SerializeField] AudioSource sound;
+
+    int kills,deaths;
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
     }
-    GameObject leaderBoard;
-    CountLeaderBoard board;
+    
     void Start()
     {
         if ( photonView.IsMine )
         {
             CreateController();
         }
-        // leaderBoard = GetComponent<CountLeaderBoard>();
-        leaderBoard = GameObject.FindGameObjectWithTag( "leaderboard" );
-        if ( leaderBoard )
-        {
-            board = leaderBoard.GetComponent<CountLeaderBoard>();
-        }
+        
+        
         DeathMenuManager.Instance.CloseDeathMenu();
     }
     void CreateController()
@@ -37,16 +37,40 @@ public class PlayerManager : MonoBehaviour
         controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation,0,new object[] {photonView.ViewID } );
     }
     // Update is called once per frame
-    public void Die(string killer,string dead)
+    public void Die()
     {
         PhotonNetwork.Destroy( controller );
         sound.Play();
         DeathMenuManager.Instance.OpenDeathMenu();
         Invoke ( "CreateController",1f );
-        board.AddKill( killer );
-        board.AddDeath( dead );
+
+        if ( !photonView.IsMine ) return;
+        deaths++;
+
+        Hastable hash = new Hastable();
+        hash.Add( "deaths", deaths );
+        PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
+
+    }
+    public void GetKill()
+    {
+        photonView.RPC( nameof( RPC_GetKill ), RpcTarget.All );
     }
 
+    [PunRPC]
+    void RPC_GetKill()
+    {
+        if ( !photonView.IsMine ) return;
+        kills++;
 
+        Hastable hash = new Hastable();
+        hash.Add( "kills", kills );
+        PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
+    }
+
+    public static PlayerManager Find(Player player )
+    {
+        return FindObjectsOfType<PlayerManager>().SingleOrDefault( x => x.photonView.Owner == player );
+    }
 
 }

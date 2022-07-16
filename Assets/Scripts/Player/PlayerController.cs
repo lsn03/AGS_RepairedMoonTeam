@@ -71,10 +71,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         EquipIem( 0 );
         
     }
-    string GetNickName(string nickname)
-    {
-        return nickname;
-    }
+
 
     void Update()
     {
@@ -161,7 +158,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hashtable changedProps )
     {
-        if ( !photonView.IsMine && targetPlayer == photonView.Owner )
+        if (changedProps.ContainsKey("itemIndex")&& !photonView.IsMine && targetPlayer == photonView.Owner )
         {
 
             EquipIem( ( int )changedProps["itemIndex"] );
