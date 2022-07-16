@@ -5391,7 +5391,7 @@ MonoBehaviour:
   roomListItemPrefab: {fileID: 6310656033567340685, guid: ae93c2621c0d51d45bd62634689bae86, type: 3}
   PlayerListItemPrefab: {fileID: 6062410712991549083, guid: 65304968b91f51a499d8ba08e6b431b4, type: 3}
   startGameButton: {fileID: 1066398439}
-  chooseMapButton: {fileID: 0}
+  chooseMapButton: {fileID: 1412526444}
   player: {fileID: 1816497152}
   redSlider: {fileID: 702319320}
   greenSlider: {fileID: 774949066}
