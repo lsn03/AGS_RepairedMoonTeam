@@ -2496,7 +2496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2509242957619281808, guid: 07c563444f36c1245bb374c6498fc411, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -552.5
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 2509242957619281808, guid: 07c563444f36c1245bb374c6498fc411, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5401,10 +5401,18 @@ MonoBehaviour:
   currentNumberMap: 0
   currentNameMap: 
   map:
+  - name: Factory
+    scene: 1
   - name: Turbina
+    scene: 2
+  - name: Wastelands
+    scene: 3
+  - name: Bolota
+    scene: 4
+  - name: Reloaded
     scene: 5
-  - name: Turbina
-    scene: 5
+  - name: Example
+    scene: 6
 --- !u!1 &1189962002
 GameObject:
   m_ObjectHideFlags: 0
@@ -6979,7 +6987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2509242957619281808, guid: 07c563444f36c1245bb374c6498fc411, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -552.5
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 2509242957619281808, guid: 07c563444f36c1245bb374c6498fc411, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9220,7 +9228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2509242957619281808, guid: 07c563444f36c1245bb374c6498fc411, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -552.5
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 2509242957619281808, guid: 07c563444f36c1245bb374c6498fc411, type: 3}
       propertyPath: m_AnchoredPosition.y
