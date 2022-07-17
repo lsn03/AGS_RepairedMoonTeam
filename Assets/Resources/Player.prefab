@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5504410282191982820}
   - component: {fileID: 8707085482121412725}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 7271672576584279990}
   - component: {fileID: 6299562165001097704}
   - component: {fileID: 8657831419090081477}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ChainsawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -290,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2933739943614797819}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -321,7 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2146126609998332771}
   - component: {fileID: 1932560044047957630}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Custom_for
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 2235288058761807269}
   - component: {fileID: 8979071167986005941}
   - component: {fileID: 4225939918066103099}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UIBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 2155244045158282719}
   - component: {fileID: 4584512187780457532}
   - component: {fileID: 2661971748801999727}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ArmorBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 2560226223435456811}
   - component: {fileID: 7424623439124064160}
   - component: {fileID: 6844877931368193963}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ArmorBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 3168621696792819476}
   - component: {fileID: 7391995285688188000}
   - component: {fileID: 5323543269801076280}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -698,7 +698,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 68518b5f38fa79d4a92d5f26e618eb5b, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -808,7 +808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8983131801822245354}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ItemHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 4163364292843712632}
   - component: {fileID: 3474418539088832574}
   - component: {fileID: 3160203002544244183}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AutomaticRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1051,7 +1051,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2471503078422853697}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -1083,7 +1083,7 @@ GameObject:
   - component: {fileID: 2471503080069360362}
   - component: {fileID: 2471503080069360363}
   - component: {fileID: 8319849710814678159}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -1158,7 +1158,7 @@ GameObject:
   - component: {fileID: 2471503080117798757}
   - component: {fileID: 3338582646366681844}
   - component: {fileID: 9133591224353072068}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SniperRifleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1200,7 +1200,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1287,6 +1287,8 @@ GameObject:
   - component: {fileID: 5321593363828213428}
   - component: {fileID: 2471503080347017327}
   - component: {fileID: 4072157996765907315}
+  - component: {fileID: 3601841711091348183}
+  - component: {fileID: 6201650178064436109}
   - component: {fileID: 2634556234468093414}
   - component: {fileID: 7302656434929887845}
   - component: {fileID: 6653325463025177823}
@@ -1296,7 +1298,7 @@ GameObject:
   - component: {fileID: 3938013606912404601}
   - component: {fileID: 1196365527550798284}
   - component: {fileID: 3520254820172496249}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlayerSprite
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1342,7 +1344,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1386,10 +1388,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.91
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.82
   m_Material: {fileID: 6200000, guid: ec1d32047cf78b746ba2ee0f9bb532a5, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1503,6 +1505,42 @@ MonoBehaviour:
   armorSound: {fileID: 6476173225947989587}
   hpSound: {fileID: 3938013606912404601}
   deathSound: {fileID: 1196365527550798284}
+--- !u!232 &3601841711091348183
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471503080347017320}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0.5, y: 0.5}
+  m_ConnectedAnchor: {x: 0.5, y: 0.5}
+  m_AutoConfigureDistance: 0
+  m_Distance: 1
+  m_MaxDistanceOnly: 0
+--- !u!114 &6201650178064436109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471503080347017320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9542fff294a022e49b53ebf2d06ccadd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 15
+  mask:
+    serializedVersion: 2
+    m_Bits: 16384
+  offset: 0
 --- !u!70 &2634556234468093414
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2019,7 +2057,7 @@ GameObject:
   - component: {fileID: 6053447638687731834}
   - component: {fileID: 6599872941023625216}
   - component: {fileID: 333478961547177989}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: NickNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2155,7 +2193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2165184632402139159}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -2187,7 +2225,7 @@ GameObject:
   - component: {fileID: 7739604373554407920}
   - component: {fileID: 5735934701212846334}
   - component: {fileID: 6858601804102799036}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletsLeftSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2321,7 +2359,7 @@ GameObject:
   - component: {fileID: 5938236717016081509}
   - component: {fileID: 4439858192606069803}
   - component: {fileID: 6354557532669077076}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: currentArmor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2403,7 +2441,7 @@ GameObject:
   - component: {fileID: 7069347449575391790}
   - component: {fileID: 6941919082742773263}
   - component: {fileID: 7856533070429117997}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RocketLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2614,7 +2652,7 @@ GameObject:
   - component: {fileID: 8689216661292003308}
   - component: {fileID: 1615140420020786654}
   - component: {fileID: 5552761945638419915}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Chainsaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2913,7 +2951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8002653679385298050}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SniperRifleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2944,7 +2982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1906431613768049291}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AutoomaticRifleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2975,7 +3013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1046221047675584779}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -3005,7 +3043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5161346384115847081}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RocketLauncherObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3038,7 +3076,7 @@ GameObject:
   - component: {fileID: 5629539114280888302}
   - component: {fileID: 7115859235250338253}
   - component: {fileID: 5788879725922204243}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: currentHp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3117,7 +3155,7 @@ GameObject:
   - component: {fileID: 935827858533989820}
   - component: {fileID: 680863497819154202}
   - component: {fileID: 1858909174486522451}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletsLeftRocketLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3253,7 +3291,7 @@ GameObject:
   - component: {fileID: 2158170879325451387}
   - component: {fileID: 7311331801836029179}
   - component: {fileID: 2899761012989174753}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3371,7 +3409,7 @@ GameObject:
   - component: {fileID: 8265477200307518764}
   - component: {fileID: 10882356413082370}
   - component: {fileID: 2535181542916841450}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3448,7 +3486,7 @@ GameObject:
   - component: {fileID: 8640248604042127539}
   - component: {fileID: 6723453429165815520}
   - component: {fileID: 5201938866108513555}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletsLeftAuto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3580,7 +3618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6061789099735226161}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ChainsawObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3613,7 +3651,7 @@ GameObject:
   - component: {fileID: 9085572997350835494}
   - component: {fileID: 7539648093889839203}
   - component: {fileID: 3026150027227474582}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3763,7 +3801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3748075219274220099}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletsLeftObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3804,7 +3842,7 @@ GameObject:
   - component: {fileID: 1201145492181202834}
   - component: {fileID: 7433130277599024790}
   - component: {fileID: 7784384786335225746}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RocketLauncherImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3845,7 +3883,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3928,7 +3966,7 @@ GameObject:
   - component: {fileID: 7925204652863045960}
   - component: {fileID: 42902249223535049}
   - component: {fileID: 323686425283809984}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AutomaticRifleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3970,7 +4008,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4055,7 +4093,7 @@ GameObject:
   - component: {fileID: 5155708508079591125}
   - component: {fileID: 5533541060204245314}
   - component: {fileID: 792258939804699753}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SniperRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4527,7 +4565,7 @@ GameObject:
   - component: {fileID: 6826861833506513055}
   - component: {fileID: 3657862897323134913}
   - component: {fileID: 215740504336083856}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HealthBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

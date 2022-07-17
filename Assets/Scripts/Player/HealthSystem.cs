@@ -23,7 +23,6 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
     PlayerManager playerManager;
     PhotonView photonView;
-    
 
     float damageBooster = 1f;
     private void Awake()
@@ -41,8 +40,6 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         }
         currentHpText.text = currentHP.ToString();
         currentArmorText.text = currentArmor.ToString();
-        //leaderBoard = GetComponent<CountLeaderBoard>();
-
     }
     
     private void Update()
@@ -95,6 +92,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     {
         Debug.Log( "took damage" + damage );
 
+       
         photonView.RPC( "RPC_TakeDamage", photonView.Owner, damage ,autor);
     }
 
@@ -117,6 +115,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
 
     [PunRPC]
+    
     void RPC_TakeDamage( float damage,string autor ,PhotonMessageInfo info)
     {
         if ( !photonView.IsMine ) return;
@@ -152,7 +151,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         healthBarImage.fillAmount = currentHP / maxHP;
         if ( currentHP <= 0 )
         {
-            Debug.Log( $"\t\tsender is: \t{info.Sender}" );
+			Debug.Log( $"\t\tsender is: \t{info.Sender}" );
             PlayerManager.Find( info.Sender ).GetKill();
             Die();
             
@@ -162,13 +161,17 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     public void Die()
     {
         deathSound.Play();
-        
         playerManager.Die();
     }
-
-    private void OnTriggerEnter2D( Collider2D collision )
+    public void DieByObjects()
     {
-        if(collision.gameObject.tag == "spikes" )
+        deathSound.Play();
+       
+    }
+private void OnTriggerEnter2D( Collider2D collision )
+    {
+
+        if ( collision.tag == "spikes" && photonView.IsMine )
         {
             Die();
         }

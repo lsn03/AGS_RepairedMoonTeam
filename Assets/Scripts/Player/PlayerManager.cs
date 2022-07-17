@@ -54,6 +54,17 @@ public class PlayerManager : MonoBehaviour
         
 
     }
+    public void DieByObject()
+    {
+        deaths++;
+        Hastable hash = new Hastable();
+        hash.Add( "deaths", deaths );
+        PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
+        PhotonNetwork.Destroy( controller );
+        sound.Play();
+        DeathMenuManager.Instance.OpenDeathMenu();
+        Invoke( "CreateController", 1f );
+    }
     public void GetKill()
     {
         photonView.RPC( nameof( RPC_GetKill ), photonView.Owner );
