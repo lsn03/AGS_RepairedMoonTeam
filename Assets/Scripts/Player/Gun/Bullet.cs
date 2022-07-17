@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,17 +46,19 @@ public class Bullet : MonoBehaviour
                 if ( Player != null )
                 {
                     Debug.Log( "enemy damaged" );
-                    if ( photonView.IsMine )
+                    try
                     {
-                        var closestPoint = _hitCollider.ClosestPoint(transform.position);
-                        var distance = Vector3.Distance(closestPoint,transform.position);
-                        var damagePercent = Mathf.InverseLerp(0,splashRange,distance);
-                        Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage* damagePercent, photonView.Owner.NickName.Split( '\t' )[0] );
-                        //DestroyBullet();
-                    }
-                    else
+                        if ( photonView.IsMine )
+                        {
+                            var closestPoint = _hitCollider.ClosestPoint(transform.position);
+                            var distance = Vector3.Distance(closestPoint,transform.position);
+                            var damagePercent = Mathf.InverseLerp(0,splashRange,distance);
+                            Player.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage * damagePercent, photonView.Owner.NickName.Split( '\t' )[0] );
+                            //DestroyBullet();
+                        }
+                    }catch(Exception ex )
                     {
-                       // DestroyBullet();
+                        return;
                     }
 
                 }
