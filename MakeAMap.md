@@ -5,7 +5,7 @@
 Все необходимое лежит в папке Prefabs/MapMaker
 1. Создаем новую сцену
 2. Убираем дефолтную Main Camera из иерархии
-3. Заходим в MapMaker, перетаскиваем камеру
+3. Заходим в MapMaker, перетаскиваем камеру, распаковываем префаб Unpack Completely
 4. Перетаскиваем в иерархию наш фон(Assets/Sprites/Backgrounds), устанавливаем размеры, меняем Order in Layer на -1
 5. Создаем 2д объект tilemap Rectangular
 6. На созданный Grid заходим во внутрь и на Tilemap меняем layer с Default на Ground
@@ -21,15 +21,16 @@
 2. Аналогично JumpPad Manager
 3. Спавн Игроков через SpawnManager
   3.1 Необходимо дублировать SpawnPoint. Белая оболчка нужна для вида и тестирования, во время запуска она пропадает
+  3.2 распаковываем префаб Unpack Completely
 4. Переходим на уровень выше в папку GunManager
   4.1 Аналогично перетаскиваем GunManager
   4.2 Объекты для дублирования - Lazer,AutomaticRifle, RocketLauncher
 
 Завершающие штрихи
-1. В папке MapMaker перетаскиваем в иерархию MenuAndDeathCanvas
+1. В папке MapMaker перетаскиваем в иерархию MenuAndDeathCanvas, распаковываем префаб Unpack Completely
 2. Меняем в Canvas поле Redner Camera с None на нашу камеру, которая в иерархии(перетаскиванием)
-3. Если нет в иерархии EventSystem, то необъодимо его добавить. Он располагается в UI в самом низу
-
+3. Если нет в иерархии EventSystem, то необходимо его добавить. Он располагается в UI в самом низу
+4. Из той же папки перемещаем ScoreBoardCanvas и распаковываем префаб Unpack Completely
 Добавление карты для выбора и в билд.
 
 1. Открываем сцену Lobby
