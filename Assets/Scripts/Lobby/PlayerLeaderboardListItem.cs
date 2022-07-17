@@ -38,6 +38,12 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
     {
         if ( player == otherPlayer )
         {
+            //Hastable hash = new Hastable();
+            //hash.Add( "deaths", 0 );
+            //hash.Add( "kills", 0 );
+            //PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
+
+
             Destroy( gameObject );
         }
     }

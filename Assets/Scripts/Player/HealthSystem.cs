@@ -95,7 +95,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     {
         Debug.Log( "took damage" + damage );
 
-        photonView.RPC( "RPC_TakeDamage", RpcTarget.All, damage ,autor);
+        photonView.RPC( "RPC_TakeDamage", photonView.Owner, damage ,autor);
     }
 
     [PunRPC]
@@ -119,14 +119,9 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     [PunRPC]
     void RPC_TakeDamage( float damage,string autor ,PhotonMessageInfo info)
     {
-        if ( !photonView.IsMine )
-        {
-            return;
-        }
+        if ( !photonView.IsMine ) return;
         if (autor == photonView.Owner.NickName.Split( '\t' )[0] )
         {
-            
-            Debug.Log( "selfdamage: + id " + photonView.Owner.UserId );
             return;
         }
         //damage /= cntPlayer;
@@ -157,15 +152,17 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         healthBarImage.fillAmount = currentHP / maxHP;
         if ( currentHP <= 0 )
         {
-            Die();
+            Debug.Log( $"\t\tsender is: \t{info.Sender}" );
             PlayerManager.Find( info.Sender ).GetKill();
+            Die();
+            
         }
         Debug.Log( "Took damage " + damage );
     }
     public void Die()
     {
         deathSound.Play();
-        //leaderBoard.AddKill( killer );
+        
         playerManager.Die();
     }
 

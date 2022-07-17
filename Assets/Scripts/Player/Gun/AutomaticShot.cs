@@ -53,6 +53,7 @@ public class AutomaticShot : Gun
         {
             timeBeforeShoots -= Time.deltaTime;
         }
+
         if ( itemGameObject.active )
         {
             text.gameObject.SetActive( true );

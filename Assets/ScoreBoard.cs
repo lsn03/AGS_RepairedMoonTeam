@@ -21,4 +21,9 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
         PlayerLeaderboardListItem item = Instantiate(scoreboardItemPrefab,container).GetComponent<PlayerLeaderboardListItem>();
         item.SetUp( player );
     }
+
+    public override void OnPlayerEnteredRoom( Player newPlayer )
+    {
+        AddScoreboardItem( newPlayer );
+    }
 }

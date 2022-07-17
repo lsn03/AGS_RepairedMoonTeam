@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Chainsaw
   m_EditorClassIdentifier: 
   itemName: Chainsaw
-  damage: 75
+  damage: 25

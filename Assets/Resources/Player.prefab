@@ -2705,7 +2705,7 @@ MonoBehaviour:
   itemGameObject: {fileID: 6420524496546543264}
   hitEffect: {fileID: 0}
   maxBullets: 0
-  timeBetweenShoots: 0.025
+  timeBetweenShoots: 0.32
   bulletsLeft: 0
   bulletsToPickUpFirstTime: 0
   distance: 1.04

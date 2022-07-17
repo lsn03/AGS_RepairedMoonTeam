@@ -13,7 +13,7 @@ public class MeleeWeapon : Gun
     [SerializeField] AudioSource idleSound;
     public override void Use()
     {
-        Shoot();
+       // Shoot();
     }
     string[] name;
 

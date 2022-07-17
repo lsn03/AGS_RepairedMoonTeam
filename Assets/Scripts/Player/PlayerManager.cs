@@ -39,30 +39,33 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     public void Die()
     {
+        //if ( !photonView.IsMine ) return;
+        deaths++;
+        Debug.Log( "Мертвый считается :\t " + PhotonNetwork.LocalPlayer.NickName );
+        Hastable hash = new Hastable();
+        hash.Add( "deaths", deaths );
+        PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
+
         PhotonNetwork.Destroy( controller );
         sound.Play();
         DeathMenuManager.Instance.OpenDeathMenu();
         Invoke ( "CreateController",1f );
 
-        if ( !photonView.IsMine ) return;
-        deaths++;
-
-        Hastable hash = new Hastable();
-        hash.Add( "deaths", deaths );
-        PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
+        
 
     }
     public void GetKill()
     {
-        photonView.RPC( nameof( RPC_GetKill ), RpcTarget.All );
+        photonView.RPC( nameof( RPC_GetKill ), photonView.Owner );
     }
 
     [PunRPC]
     void RPC_GetKill()
     {
-        if ( !photonView.IsMine ) return;
+        
+       // if ( !photonView.IsMine ) return;
         kills++;
-
+        Debug.Log( "Килл засчитан: \t" + PhotonNetwork.LocalPlayer.NickName );
         Hastable hash = new Hastable();
         hash.Add( "kills", kills );
         PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
