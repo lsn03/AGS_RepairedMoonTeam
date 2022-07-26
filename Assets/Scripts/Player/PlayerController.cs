@@ -97,7 +97,42 @@ public class PlayerController : MonoBehaviourPunCallbacks
     void Run()
     {
         movement = Input.GetAxisRaw( "Horizontal" );
-        _rigidbody2D.velocity = new Vector2( movement * speed, _rigidbody2D.velocity.y );
+
+        
+        int side;
+        if (_rigidbody2D.velocity.x >= 0)
+            side = 1;
+        else
+            side = -1;
+
+        if (movement == 0)
+        {
+            if (isGrounded && _rigidbody2D.velocity.x != 0)
+            {
+                
+
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x - speed * Time.deltaTime * side, _rigidbody2D.velocity.y);
+
+                if ((side == 1 && _rigidbody2D.velocity.x < 0)
+                    || (side == -1 && _rigidbody2D.velocity.x > 0))
+                    _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
+
+            }
+        }
+        else
+        {
+            float _VelocityX;
+            if (movement > 0)
+                _VelocityX = Mathf.Min(movement * speed, _rigidbody2D.velocity.x + movement * speed * Time.deltaTime * 7.5f);
+            else
+                _VelocityX = Mathf.Max(movement * speed, _rigidbody2D.velocity.x + movement * speed * Time.deltaTime * 7.5f);
+
+            Debug.Log(_VelocityX);
+
+
+            _rigidbody2D.velocity = new Vector2(_VelocityX, _rigidbody2D.velocity.y);
+        }
+        
         if(!runSound.isPlaying && Mathf.Abs( movement ) >= 0.01f  )
         {
             runSound.Play();
