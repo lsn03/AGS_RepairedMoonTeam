@@ -13928,6 +13928,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3349573276546175966, guid: b21ac492e5fa47948a7ece4a87852e09, type: 3}
       propertyPath: jumpPadForce.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349573276546175966, guid: b21ac492e5fa47948a7ece4a87852e09, type: 3}
+      propertyPath: jumpPadForce.y
       value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -14221,6 +14225,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3349573276546175966, guid: b21ac492e5fa47948a7ece4a87852e09, type: 3}
       propertyPath: jumpPadForce.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349573276546175966, guid: b21ac492e5fa47948a7ece4a87852e09, type: 3}
+      propertyPath: jumpPadForce.y
       value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []

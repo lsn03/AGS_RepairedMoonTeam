@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     [SerializeField] public bool isGrounded;
     [SerializeField] public Transform GroundCheck;
-    public float GroundCheckRadius;
+    //public float GroundCheckRadius;
     public LayerMask Ground;
 
     [SerializeField] private Text TextName;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
     public void Start()
     {
-        GroundCheckRadius = GroundCheck.GetComponent<CircleCollider2D>().radius;
+        //GroundCheckRadius = GroundCheck.GetComponent<CircleCollider2D>().radius;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         
         playerManager = PhotonView.Find((int) photonView.InstantiationData[0]).GetComponent<PlayerManager>();
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
                 
 
-                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x - speed * Time.deltaTime * side, _rigidbody2D.velocity.y);
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x - speed * Time.deltaTime * side * 3, _rigidbody2D.velocity.y);
 
                 if ((side == 1 && _rigidbody2D.velocity.x < 0)
                     || (side == -1 && _rigidbody2D.velocity.x > 0))
@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void JumpUp()
     {
-        if ( isGrounded && ( Input.GetKey( KeyCode.Space ) || Input.GetKey( KeyCode.W ) ) )
+        if ( isGrounded && ( Input.GetKey( KeyCode.Space ) || Input.GetKey( KeyCode.W ) ) && _rigidbody2D.velocity.y < jumpForce)
         {
             _rigidbody2D.velocity = new Vector2( _rigidbody2D.velocity.x, jumpForce );
            
@@ -163,7 +163,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
     void CheckingGround()
     {
-        isGrounded = Physics2D.OverlapCircle( GroundCheck.position, GroundCheckRadius, Ground );
+        ContactFilter2D _ContactFilter = new ContactFilter2D();
+        _ContactFilter.SetLayerMask(Ground);
+        List<Collider2D> results = new List<Collider2D>();
+        isGrounded = Physics2D.OverlapCollider(GroundCheck.GetComponent<EdgeCollider2D>(), _ContactFilter,  results) > 0;
+        //isGrounded = Physics2D.OverlapCircle( GroundCheck.position, GroundCheckRadius, Ground );
     }
 
     void EquipIem( int _index )
