@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CapchureFlag.unity
     guid: f0bf02a60bb8de24a9b87a2dc9190f99
+  - enabled: 1
+    path: Assets/Scenes/Caves.unity
+    guid: 3ef7a1122a6bd444583568968ba4159e
+  - enabled: 1
+    path: Assets/Scenes/Testmap.unity
+    guid: 9bac4c1d0a18b0c478a1650811b246be
   m_configObjects: {}

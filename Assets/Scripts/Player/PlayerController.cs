@@ -208,5 +208,22 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("lift"))
+        {
+            this.transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("lift"))
+        {
+            this.transform.parent = null;
+        }
+    }
+
 }
 
