@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     public void Die()
     {
-        //if ( !photonView.IsMine ) return;
+        if ( !photonView.IsMine ) return;
         deaths++;
         Debug.Log( "Мертвый считается :\t " + PhotonNetwork.LocalPlayer.NickName );
         Hastable hash = new Hastable();
@@ -74,7 +74,7 @@ public class PlayerManager : MonoBehaviour
     void RPC_GetKill()
     {
         
-       // if ( !photonView.IsMine ) return;
+        if ( !photonView.IsMine ) return;
         kills++;
         Debug.Log( "Килл засчитан: \t" + PhotonNetwork.LocalPlayer.NickName );
         Hastable hash = new Hastable();

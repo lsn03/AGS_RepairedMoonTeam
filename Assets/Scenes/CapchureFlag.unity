@@ -7409,7 +7409,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.8312567, g: 0.88691187, b: 0.9433962, a: 1}
+  m_Color: {r: 0.6294055, g: 0.6899007, b: 0.754717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8420,6 +8420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c4883ad01df8b45865779ff1d670b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 0}
 --- !u!114 &985566217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10099,7 +10100,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.9875457, g: 1, b: 0.71132076, a: 1}
+  m_Color: {r: 0.7088644, g: 0.7169812, b: 0.51676756, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10240,7 +10241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamesound: []
-  volumeMusic: 0.5
+  audioMixerMusic: {fileID: 0}
 --- !u!82 &2026008165
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11051,6 +11052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c4883ad01df8b45865779ff1d670b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 0}
 --- !u!1 &2828851072386747485
 GameObject:
   m_ObjectHideFlags: 0

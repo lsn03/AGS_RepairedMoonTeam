@@ -1314,6 +1314,7 @@ GameObject:
   - component: {fileID: 3938013606912404601}
   - component: {fileID: 1196365527550798284}
   - component: {fileID: 3520254820172496249}
+  - component: {fileID: 4358933212259199978}
   m_Layer: 11
   m_Name: PlayerSprite
   m_TagString: Player
@@ -2030,6 +2031,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4358933212259199978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471503080347017320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -1.1520345, y: -1.7539916, z: -2.8511238e-10}
+  - {x: 1.0880741, y: -1.7539916, z: -2.8511238e-10}
+  - {x: 0.22482644, y: 0.79990846, z: -2.8511238e-10}
+  - {x: -0.26646164, y: 0.8371175, z: -2.8511238e-10}
+  m_ShapePathHash: 1873972708
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 50402
 --- !u!1 &2890441619222039724
 GameObject:
   m_ObjectHideFlags: 0
