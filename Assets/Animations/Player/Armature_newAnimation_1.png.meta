@@ -153,6 +153,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1168,6 +1169,50 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Armature_newAnimation_1_32: 2216148304286805235
+      Armature_newAnimation_1_11: 3411960872924527961
+      Armature_newAnimation_1_36: -8369166990461925647
+      Armature_newAnimation_1_22: -7149150424790665733
+      Armature_newAnimation_1_26: 8095279210431783442
+      Armature_newAnimation_1_0: -3645938484871327609
+      Armature_newAnimation_1_9: -6429082777387835192
+      Armature_newAnimation_1_35: -92066949408636557
+      Armature_newAnimation_1_10: -1608512681733902160
+      Armature_newAnimation_1_19: -7570807544256147362
+      Armature_newAnimation_1_42: -7618017233871354201
+      Armature_newAnimation_1_37: -3345153607917045512
+      Armature_newAnimation_1_2: -1079818782962539179
+      Armature_newAnimation_1_3: 6212758412143434096
+      Armature_newAnimation_1_15: -1827988951006649908
+      Armature_newAnimation_1_5: -3857268519935212262
+      Armature_newAnimation_1_40: 4020942979457306760
+      Armature_newAnimation_1_27: 6299914398099109274
+      Armature_newAnimation_1_20: 1225123253157804006
+      Armature_newAnimation_1_28: -5192464673054119956
+      Armature_newAnimation_1_14: 1923548386712314237
+      Armature_newAnimation_1_6: -7883465132338463739
+      Armature_newAnimation_1_24: -3793977610295543170
+      Armature_newAnimation_1_1: -8819980423265284586
+      Armature_newAnimation_1_33: 8216011415132580173
+      Armature_newAnimation_1_23: 3047133358092561857
+      Armature_newAnimation_1_7: -6390758245294145880
+      Armature_newAnimation_1_4: 9118748428149177200
+      Armature_newAnimation_1_12: 4772266546993040048
+      Armature_newAnimation_1_25: 5906840004677460764
+      Armature_newAnimation_1_41: -7195242491670186076
+      Armature_newAnimation_1_13: -6107193395896367997
+      Armature_newAnimation_1_34: -4411563354866393424
+      Armature_newAnimation_1_17: 3239703507190006464
+      Armature_newAnimation_1_18: -908442390601004400
+      Armature_newAnimation_1_39: 3999871155263211767
+      Armature_newAnimation_1_8: 3311313965290772837
+      Armature_newAnimation_1_16: 699774721957805845
+      Armature_newAnimation_1_21: -4090091996340313052
+      Armature_newAnimation_1_30: 5103156581210056729
+      Armature_newAnimation_1_38: -5027626497597321553
+      Armature_newAnimation_1_29: 6192898858824639304
+      Armature_newAnimation_1_31: 7132822736577894052
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

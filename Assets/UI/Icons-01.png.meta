@@ -120,6 +120,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -892,6 +893,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Icons-01_11: -1574927380248667629
+      Icons-01_21: 7608729755054598673
+      Icons-01_3: -2861519097887423860
+      Icons-01_28: -1082356239834691128
+      Icons-01_26: -3708978798885753738
+      Icons-01_30: -3262380217188676906
+      Icons-01_36: 6274502301238125842
+      Icons-01_42: -1593110161991009510
+      Icons-01_25: -6911872609930804049
+      Icons-01_0: 3199721268567093524
+      Icons-01_44: 4103985990564059658
+      Icons-01_9: -8868593644164675323
+      Icons-01_32: -3405231588636328268
+      Icons-01_19: -241596206302090280
+      Icons-01_10: -7654980035177703483
+      Icons-01_35: 4718369008889680342
+      Icons-01_33: 6155927464361502606
+      Icons-01_40: 5069068082445363741
+      Icons-01_1: 8999061743526412332
+      Icons-01_13: 4535685582183636856
+      Icons-01_5: 7276058022467025084
+      Icons-01_24: -7665839576660106697
+      Icons-01_4: -404286885584570256
+      Icons-01_23: -8254216233107790570
+      Icons-01_18: -2959189886802259882
+      Icons-01_34: 8175143831892758284
+      Icons-01_41: 8413526599283096083
+      Icons-01_2: -1168069914903498146
+      Icons-01_27: -6966493632919367357
+      Icons-01_7: 8613294179020000750
+      Icons-01_17: -8790353885237327173
+      Icons-01_12: 7254359178501445545
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
