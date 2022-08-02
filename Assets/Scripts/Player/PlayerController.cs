@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             else
                 _VelocityX = Mathf.Max(movement * speed, _rigidbody2D.velocity.x + movement * speed * Time.deltaTime * 7.5f);
 
-            Debug.Log(_VelocityX);
+           // Debug.Log(_VelocityX);
 
 
             _rigidbody2D.velocity = new Vector2(_VelocityX, _rigidbody2D.velocity.y);

@@ -35,4 +35,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testmap.unity
     guid: 9bac4c1d0a18b0c478a1650811b246be
+  - enabled: 1
+    path: Assets/Scenes/Sands.unity
+    guid: c2b27ba029733a34a847b34b81f8c96d
+  - enabled: 1
+    path: Assets/Scenes/Promzone.unity
+    guid: 9191c3e3cdc0e4e4f9fdffb00f879047
+  - enabled: 1
+    path: Assets/Scenes/flyingslime.unity
+    guid: 3012935398c75014eb740341310ec608
   m_configObjects: {}
