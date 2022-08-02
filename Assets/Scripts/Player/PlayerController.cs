@@ -10,15 +10,15 @@ using System.Text;
 public class PlayerController : MonoBehaviourPunCallbacks
 {
     [Range(0, 10f), SerializeField] float jumpForce;
-    [Range(0, 10f), SerializeField] float speed;
+    [Range(0, 20f), SerializeField] float speed;
     private float movement;
 
-    float maxRunSpeed;
-    float maxFallSpeed;
+    [Range(0, 10f), SerializeField] float maxRunSpeed;
+    [Range(0, 25f), SerializeField] float maxFallSpeed;
 
     [SerializeField] public bool isGrounded;
     [SerializeField] public Transform GroundCheck;
-    //public float GroundCheckRadius;
+    
     public LayerMask Ground;
 
     [SerializeField] private Text TextName;
@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
     public void Start()
     {
-        //GroundCheckRadius = GroundCheck.GetComponent<CircleCollider2D>().radius;
         _rigidbody2D = GetComponent<Rigidbody2D>();
 
         playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
@@ -64,18 +63,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
         TextName.text = arrayNick[0];
         Custom.GetComponent<SpriteRenderer>().color = new Color(float.Parse(arrayNick[1]), float.Parse(arrayNick[2]), float.Parse(arrayNick[3]));
 
-
         if (photonView.Owner.IsLocal)
         {
             Camera.main.GetComponent<CameraWatchToPlayer>().player = gameObject.transform;
         }
 
-
         EquipItem(0);
-
-        maxRunSpeed = 5.5f;
-        maxFallSpeed = 10f;
-
     }
 
 
@@ -86,8 +79,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         JumpUp();
         JumpDown();
         CheckingGround();
-        //Flip();
-
+        
         SwitchGunByButton();
         SwitchGunByScrollWheel();
 
@@ -115,27 +107,21 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (movement == 0)
         {
             if (isGrounded && _rigidbody2D.velocity.x != 0)
-            {
-
-
+            {               
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x - speed * Time.deltaTime * side * 3, _rigidbody2D.velocity.y);
 
                 if ((side == 1 && _rigidbody2D.velocity.x < 0)
                     || (side == -1 && _rigidbody2D.velocity.x > 0))
                     _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
-
             }
         }
         else
         {
             float _VelocityX;
             if (movement > 0)
-                _VelocityX = Mathf.Min(movement * speed, _rigidbody2D.velocity.x + movement * speed * Time.deltaTime * 7.5f);
+                _VelocityX = Mathf.Min(maxRunSpeed, _rigidbody2D.velocity.x + movement * speed * Time.deltaTime * 7.5f);
             else
-                _VelocityX = Mathf.Max(movement * speed, _rigidbody2D.velocity.x + movement * speed * Time.deltaTime * 7.5f);
-
-           // Debug.Log(_VelocityX);
-
+                _VelocityX = Mathf.Max(-maxRunSpeed, _rigidbody2D.velocity.x + movement * speed * Time.deltaTime * 7.5f);
 
             _rigidbody2D.velocity = new Vector2(_VelocityX, _rigidbody2D.velocity.y);
         }
@@ -155,10 +141,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     void JumpUp()
     {
         if (isGrounded && ( Input.GetKey( KeyCode.Space ) || Input.GetKey( KeyCode.W ) ) && _rigidbody2D.velocity.y < jumpForce)
-
         {
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
-
         }
     }
     void JumpDown()
@@ -176,13 +160,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
     void CheckingGround()
     {
-
         ContactFilter2D _ContactFilter = new ContactFilter2D();
         _ContactFilter.SetLayerMask(Ground);
         List<Collider2D> results = new List<Collider2D>();
         isGrounded = Physics2D.OverlapCollider(GroundCheck.GetComponent<EdgeCollider2D>(), _ContactFilter,  results) > 0;
-        //isGrounded = Physics2D.OverlapCircle( GroundCheck.position, GroundCheckRadius, Ground );
-
     }
 
     void EquipItem(int _index)
@@ -207,14 +188,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
             hash.Add("itemIndex", itemIndex);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
-
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
         if (changedProps.ContainsKey("itemIndex") && !photonView.IsMine && targetPlayer == photonView.Owner)
         {
-
             EquipItem((int)changedProps["itemIndex"]);
         }
     }
