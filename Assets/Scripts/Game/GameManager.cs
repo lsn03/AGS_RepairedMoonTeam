@@ -11,10 +11,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     //[SerializeField] private GameObject player;
 
     //[SerializeField] public Transform Spawn;
-    [SerializeField]PauseMenuManager menu;
+    [SerializeField] PauseMenuManager menu;
+    [SerializeField] GameObject button;
+    bool isEnd = false;
+    private void Start()
+    {
+        
+    }
     public void Leave()
     {
-        menu.ResumeButtonClick();
+        menu?.ResumeButtonClick();
         Time.timeScale = 1;
         PhotonNetwork.LeaveRoom();
 
@@ -25,5 +31,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene( "Lobby" );
         //MenuManager.Instance.OpenMenu( "title" );
 
+    }
+    public void IsEndGame()
+    {
+        isEnd = true;
+        button.gameObject.SetActive( true );
+       // Debug.Log( "IsENDGAME" );
     }
 }
