@@ -8,7 +8,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public static RoomManager Instance;
     private void Awake()
     {
-        if ( Instance )
+        if ( Instance!=null )
         {
             Destroy( gameObject );
             return;

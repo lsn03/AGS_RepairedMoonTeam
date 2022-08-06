@@ -9,7 +9,7 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
     [SerializeField] Transform container;
     [SerializeField] GameObject scoreboardItemPrefab;
     [SerializeField] CanvasGroup canvasGroup;
-
+    [SerializeField] bool isEnd = false;
     Dictionary<Player,PlayerLeaderboardListItem> scroreBoardItems = new Dictionary<Player, PlayerLeaderboardListItem>();
 
     private void Start()
@@ -43,6 +43,8 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
+        if ( isEnd ) return;
+
         if ( Input.GetKeyDown( KeyCode.Tab ) )
         {
             canvasGroup.alpha = 1;
@@ -51,5 +53,11 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
         {
             canvasGroup.alpha = 0;
         }
+        
+    }
+    public void IsEndGame()
+    {
+        isEnd = true;
+        //Debug.Log( "IsENDGAME" );
     }
 }

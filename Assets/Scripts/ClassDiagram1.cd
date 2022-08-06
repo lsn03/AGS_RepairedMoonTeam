@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SingleShot" Collapsed="true">
+    <Position X="3.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAhAAAACAABAAAAAAAAEAICAAEAAAIAAAAAAAAEEA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\SingleShot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bullet" Collapsed="true">
+    <Position X="12.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACAAAAIACAAAAAAAAAAAAAAEAAAAQAAAQAhBAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\Bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gun" Collapsed="true">
+    <Position X="6.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACAAAAAAAgAAAAAAAAIEAAAAEAAABAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\Gun.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GunIno" Collapsed="true">
+    <Position X="0.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\GunIno.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item" Collapsed="true">
+    <Position X="6.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemInfo" Collapsed="true">
+    <Position X="0.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\ItemInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MeleeWeapon" Collapsed="true">
+    <Position X="10" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASEAAAAACEABAAAAAAAAEAACEAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\MeleeWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RocketLauncher" Collapsed="true">
+    <Position X="5.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AESAgAAAACAABAAAAAAAAEAAAAAEAAAJABAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\RocketLauncher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomaticShot" Collapsed="true">
+    <Position X="7.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAgAAAACAAAAAgAAAAAEAICAAEAAAIAADgAAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\AutomaticShot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="IDamage" Collapsed="true">
+    <Position X="12.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Gun\IDamage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
