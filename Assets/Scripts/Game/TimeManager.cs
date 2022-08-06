@@ -41,13 +41,23 @@ public class TimeManager : MonoBehaviourPunCallbacks
     }
     private void Start()
     {
-        //gameManager = GetComponent<GameManager>();
+        if ( !master && PhotonNetwork.PlayerList.Length == 1 ) 
+        {
+            // Debug.Log( PhotonNetwork.CurrentRoom.CustomProperties );
+            currentTimer = ( float )PhotonNetwork.CurrentRoom.CustomProperties["time"];
+        }
     }
     public override void OnPlayerEnteredRoom( Player newPlayer )
     {
+        if(PhotonNetwork.LocalPlayer == newPlayer )
+        {
+            
+            
+        }
+       
 
-        currentTimer = ( float )PhotonNetwork.CurrentRoom.CustomProperties["time"];
-        Debug.Log( $"OnPlayerEneteredRoom {currentTimer}" );
+        //Debug.Log( $"OnPlayerEneteredRoom {currentTimer}" );
+        //Debug.Log( PhotonNetwork.CurrentRoom.CustomProperties );
     }
     public override void OnRoomPropertiesUpdate( Hastable propertiesThatChanged )
     {
