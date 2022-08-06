@@ -24,40 +24,62 @@ public class TimeManager : MonoBehaviourPunCallbacks
     {
         if ( PhotonNetwork.IsMasterClient )
         {
-            currentTimer = maxTimeInMinutes*60+maxTimeInSec;
+            currentTimer = maxTimeInMinutes * 60 + maxTimeInSec;
             //Hashtable ht  = new Hashtable() { { "Time", currentTimer } };
             Hastable ht = new Hastable();
 
             ht.Add( "time", currentTimer );
             PhotonNetwork.CurrentRoom.SetCustomProperties( ht );
             master = true;
-
+            SetCurrentTime( currentTimer );
         }
-        else
+        else if ( PhotonNetwork.PlayerList.Length > 1 ) 
         {
-            //currentTimer = ( float )PhotonNetwork.CurrentRoom.CustomProperties["time"];
+            Debug.Log( "elseInAwake" );
+            SetCurrentTime( currentTimer );
+
         }
         //Debug.Log( PhotonNetwork.CurrentRoom );
     }
     private void Start()
     {
-        if ( !master && PhotonNetwork.PlayerList.Length == 1 ) 
+        if ( !master ) 
         {
-            // Debug.Log( PhotonNetwork.CurrentRoom.CustomProperties );
-            currentTimer = ( float )PhotonNetwork.CurrentRoom.CustomProperties["time"];
+
+            //SetCurrentTime( currentTimer );
+        }
+        else
+        {
+            Debug.Log( "elseInStart" );
         }
     }
     public override void OnPlayerEnteredRoom( Player newPlayer )
     {
-        if(PhotonNetwork.LocalPlayer == newPlayer )
+        if ( PhotonNetwork.IsMasterClient )
         {
-            
-            
+            SetCurrentTime( currentTimer );
         }
        
+    }
+    private void SetCurrentTime(float _currTimer) {
+        Debug.Log( RpcTarget.All );
+        photonView.RPC( "RPC_SetTimeForAllPlayer", RpcTarget.All, _currTimer );
+    }
+   
+    [PunRPC]
+    public void RPC_SetTimeForAllPlayer(float _currTimer, PhotonMessageInfo info )
+    {
+        if ( !PhotonNetwork.IsMasterClient )
+        {
+            //Debug.Log( PhotonNetwork.LocalPlayer );
+            Debug.Log( $"sender is {info.Sender}" );
+            currentTimer = _currTimer;
+            Debug.Log( currentTimer );
+        }
+        else
+        {
 
-        //Debug.Log( $"OnPlayerEneteredRoom {currentTimer}" );
-        //Debug.Log( PhotonNetwork.CurrentRoom.CustomProperties );
+        }
     }
     public override void OnRoomPropertiesUpdate( Hastable propertiesThatChanged )
     {
@@ -67,28 +89,45 @@ public class TimeManager : MonoBehaviourPunCallbacks
             currentTimer = (float)abk;
         }
     }
+    bool flag = false;
     // Update is called once per frame
     void FixedUpdate()
     {
-        currentTimer -= Time.fixedDeltaTime;
-        Hastable ht = new Hastable();
-        if ( PhotonNetwork.IsConnected == false )
-             ht = PhotonNetwork.CurrentRoom.CustomProperties;
-        ht.Remove( "time" );
-        ht.Add( "time", currentTimer );
-
-        if ( PhotonNetwork.IsConnected == false )
-            PhotonNetwork.CurrentRoom.SetCustomProperties( ht );
-
-
-        string min = ((int) (currentTimer / 60)).ToString("00");
-        time.text = $"{min}:{( currentTimer % 60 ).ToString( "00" )}";
-        //Debug.Log( min +"\t"+currentTimer );
-        if ( currentTimer <= 0 )
+        if(!master  && currentTimer<=0)
         {
-            EndGame();
+        //    SetCurrentTime( currentTimer );
+        //    flag = true;
+            Debug.Log("time in !master\t"+ currentTimer );
             
         }
+        else
+        {
+            Debug.Log("time in else update\t"+ currentTimer );
+            currentTimer -= Time.fixedDeltaTime;
+            
+            Hastable ht = new Hastable();
+            
+            if ( PhotonNetwork.IsConnected == false )
+                ht = PhotonNetwork.CurrentRoom.CustomProperties;
+
+            ht.Remove( "time" );
+            ht.Add( "time", currentTimer );
+
+            if ( PhotonNetwork.IsConnected == false )
+                PhotonNetwork.CurrentRoom.SetCustomProperties( ht );
+
+
+            string min = ((int) (currentTimer / 60)).ToString("00");
+            time.text = $"{min}:{( currentTimer % 60 ).ToString( "00" )}";
+            //Debug.Log( min +"\t"+currentTimer );
+            if ( currentTimer <= 0 )
+            {
+                EndGame();
+
+            }
+        }
+
+        
     }
     void UpdateTimer()
     {
