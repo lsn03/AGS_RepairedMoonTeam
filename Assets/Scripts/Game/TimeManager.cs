@@ -16,9 +16,10 @@ public class TimeManager : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text time;
     [SerializeField] CanvasGroup endGameCanvas;
     float currentTimer;
-    [SerializeField] ScoreBoard scoreBoard;
+    [SerializeField] ScoreBoard endGameScoreBoard;
     [SerializeField] GameManager gameManager;
-   // GameManager gameManager;
+    [SerializeField] ScoreBoard scoreBoard;
+    // GameManager gameManager;
     bool master = false;
     void Awake()
     {
@@ -90,6 +91,7 @@ public class TimeManager : MonoBehaviourPunCallbacks
         }
     }
     bool flag = false;
+    bool isEnd = false;
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -98,7 +100,10 @@ public class TimeManager : MonoBehaviourPunCallbacks
         //    SetCurrentTime( currentTimer );
         //    flag = true;
             Debug.Log("time in !master\t"+ currentTimer );
-            
+            if ( isEnd )
+            {
+                endGameCanvas.alpha = 1;
+            }
         }
         else
         {
@@ -122,6 +127,7 @@ public class TimeManager : MonoBehaviourPunCallbacks
             //Debug.Log( min +"\t"+currentTimer );
             if ( currentTimer <= 0 )
             {
+                isEnd = true;
                 EndGame();
 
             }
@@ -144,6 +150,7 @@ public class TimeManager : MonoBehaviourPunCallbacks
         }
         time.gameObject.SetActive( false );
         endGameCanvas.alpha = 1;
+        endGameScoreBoard.IsEndGame();
         scoreBoard.IsEndGame();
         gameManager.IsEndGame();
         PhotonNetwork.AutomaticallySyncScene = false;
