@@ -69,7 +69,7 @@
 11. Выбираем EndGameCanvas, выбираем LeaveButton (1).
 12. В событие On Click у нас None(Object), перетаскиваем туда MenuAndDeathCanvas
 13. Выбираем No Function, в выпадающем списке выбираем GameManager, там выбираем Leave()
-14. 
+14. На объекте TimeManager устанавливаем длительность матча для каждой карты(задаем минуты и секунды)
 Добавление карты в Build
 
 1. открываем папку Scenes
