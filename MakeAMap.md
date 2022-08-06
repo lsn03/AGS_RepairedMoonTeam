@@ -35,8 +35,24 @@
 1. В папке MapMaker перетаскиваем в иерархию MenuAndDeathCanvas, распаковываем префаб Unpack Completely
 2. Меняем в Canvas поле Redner Camera с None на нашу камеру, которая в иерархии(перетаскиванием)
 3. Если нет в иерархии EventSystem, то необходимо его добавить. Он располагается в UI в самом низу
-4. Из той же папки перемещаем ScoreBoardCanvas и распаковываем префаб Unpack Completely
-5.  Меняем в Canvas поле Redner Camera с None на нашу камеру, которая в иерархии(перетаскиванием)
+5. Из той же папки перемещаем ScoreBoardCanvas и распаковываем префаб Unpack Completely
+6. Меняем в Canvas поле Redner Camera с None на нашу камеру, которая в иерархии(перетаскиванием)
+
+Добавление таймера для карты
+1. Необходимо перейти в папку MapMaker/time
+2. Перетаскиваем CanvasTime и EndGameCanvas  и распаковываем на сцене
+3. Выбираем CanvasTime, нажимаем на него, выбираем TimeManager.
+4. У нас EndGameCanvas,EndGameScoreBoard,GameManager,ScoreBoard пустые.
+5. В поле EndGameCanvas перетаскиваем ScoreBoard из иерархии EndGameCanvas/ScoreBoard
+6. В поле EndGameScoreBoard повторяем пункт 5.
+7. В поле GameManager перетаскиваем MenuAndDeathCanvas.
+8. В поле ScoreBoard перетаскиваем ScoreBoardCanvas/ScoreBoard
+9. Раскрываем ScoreBoardCanvas, видим Scoreboard. 
+10. Выбираем EndGameCanvas(он должен быть распакован)
+11. Меняем в Canvas поле Redner Camera с None на нашу камеру, которая в иерархии(перетаскиванием)
+12. Открываем MenuAndDeathCanvas и перетаскиваем в поле Button кнопку, которая находится в EndGameCanvas под названием LeaveButton (1)
+13. Открывает EndGameCanvas/ScoreBoard и ставим флажок Is End Game Canvas
+
 Добавление карты для выбора и в билд.
 
 1. Открываем сцену Lobby
@@ -49,7 +65,11 @@
 8. В инспекторе листаем вниз до скрипта Launcher. В поле Map через "+" добавляем карту
 9. Имя может быть произвольное, но лучше копировать с сцены для удобства.
 10. в поле Scene вписываем номер сцены и делаем оставляем активными только LoadingMenu,Background,ExitGameButton.
-
+![image](https://user-images.githubusercontent.com/85879960/183249323-c514dc70-1ef8-4a47-8070-bae3cfecb40e.png)
+11. Выбираем EndGameCanvas, выбираем LeaveButton (1).
+12. В событие On Click у нас None(Object), перетаскиваем туда MenuAndDeathCanvas
+13. Выбираем No Function, в выпадающем списке выбираем GameManager, там выбираем Leave()
+14. 
 Добавление карты в Build
 
 1. открываем папку Scenes
