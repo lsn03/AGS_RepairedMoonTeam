@@ -11,8 +11,8 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] bool isEnd = false;
     [SerializeField] bool isEndGameCanvas = false;
-    Dictionary<Player,PlayerLeaderboardListItem> scroreBoardItems = new Dictionary<Player, PlayerLeaderboardListItem>();
-
+    Dictionary<Player,PlayerLeaderboardListItem> scoreBoardItems = new Dictionary<Player, PlayerLeaderboardListItem>();
+    
     private void Start()
     {
         foreach ( Player player in PhotonNetwork.PlayerList )
@@ -25,7 +25,7 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
     {
         PlayerLeaderboardListItem item = Instantiate(scoreboardItemPrefab,container).GetComponent<PlayerLeaderboardListItem>();
         item.SetUp( player );
-        scroreBoardItems[player] = item;
+        scoreBoardItems[player] = item;
     }
     public override void OnPlayerLeftRoom( Player otherPlayer )
     {
@@ -35,8 +35,43 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
     void RemoveScoreboardItem(Player player )
     {
        // scroreBoardItems[player].SetToDefault(player);
-        Destroy( scroreBoardItems[player].gameObject );
-        scroreBoardItems.Remove( player );
+        Destroy( scoreBoardItems[player].gameObject );
+        scoreBoardItems.Remove( player );
+    }
+    public void BubbleSort( Player[] player)
+    {
+        int i = 0;
+        bool t = true;
+        while ( t )
+        {
+            t = false;
+            for (int j = 0; j< player.Length - i - 1;j++ )
+            {
+                //scoreBoardItems[player[j]].ChangeNumber( j + 1 );
+
+                float score_1 = scoreBoardItems[player[j]].GetScore();
+                float score_2 = scoreBoardItems[player[j+1]].GetScore();
+
+                var temp = scoreBoardItems[player[j]];
+                if (score_1 <= score_2){
+                   
+                    scoreBoardItems[player[j]] = scoreBoardItems[player[j + 1]];
+                    scoreBoardItems[player[j + 1]] = temp;
+
+                    scoreBoardItems[player[j]].ChangeNumber( j+1 );
+                    scoreBoardItems[player[j+1]].ChangeNumber( j + 2 );
+
+                    int index1 = scoreBoardItems[player[j ]].transform.GetSiblingIndex();
+                    int index2 = scoreBoardItems[player[j+1 ]].transform.GetSiblingIndex();
+
+                    scoreBoardItems[player[j]].transform.SetSiblingIndex(index2);
+                    scoreBoardItems[player[j+1]].transform.SetSiblingIndex( index1 );
+                   
+                    t = true;
+                }    
+            }
+            i = i + 1;
+        }
     }
     public override void OnPlayerEnteredRoom( Player newPlayer )
     {
@@ -54,6 +89,17 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
             else if ( Input.GetKeyUp( KeyCode.Tab ) )
             {
                 canvasGroup.alpha = 0;
+            }
+
+            foreach ( var player in PhotonNetwork.PlayerList )
+            {
+                //Debug.Log( $"ScoreVBoardUpdate\t {scoreBoardItems[player].isChanged}" );
+                if ( scoreBoardItems[player].isChanged )
+                {
+                    scoreBoardItems[player].isChanged = false;
+                    BubbleSort( PhotonNetwork.PlayerList );
+                    
+                }
             }
         }
        

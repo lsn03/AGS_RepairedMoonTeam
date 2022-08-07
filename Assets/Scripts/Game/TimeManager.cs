@@ -99,7 +99,7 @@ public class TimeManager : MonoBehaviourPunCallbacks
         {
         //    SetCurrentTime( currentTimer );
         //    flag = true;
-            Debug.Log("time in !master\t"+ currentTimer );
+            //Debug.Log("time in !master\t"+ currentTimer );
             if ( isEnd )
             {
                 endGameCanvas.alpha = 1;
@@ -107,7 +107,7 @@ public class TimeManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.Log("time in else update\t"+ currentTimer );
+            //Debug.Log("time in else update\t"+ currentTimer );
             currentTimer -= Time.fixedDeltaTime;
             
             Hastable ht = new Hastable();
