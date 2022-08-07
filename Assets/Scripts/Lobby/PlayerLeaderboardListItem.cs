@@ -24,9 +24,11 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
         countOfKills.text = "0";
         countOfDeaths.text = "0";
         nickname.text = nick[0];
-
+        number.text = PhotonNetwork.PlayerList.Length.ToString();
         UpdateStats();
+        isChanged = false;
     }
+ 
     public float GetScore()
     {
         return float.Parse( scores.text );
@@ -35,7 +37,9 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
     public void ChangeNumber( int number )
     {
         this.number.text = number.ToString();
+        Debug.Log( "NumberChanged\t"+ number);
     }
+    public bool isChanged { get; set; }
     private void ChangeScore()
     {
         int death =  int.Parse( countOfDeaths.text );
@@ -53,6 +57,8 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
         {
             scores.text = ( System.Math.Round( (float)kills / death ,2)).ToString();
         }
+        isChanged = true;
+
     }
    
     public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hastable changedProps )
@@ -77,5 +83,8 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
         }
         ChangeScore();
     }
-
+    private void Update()
+    {
+       // Debug.Log( $"isChanged in leaderboardListItem Update {isChanged}" );
+    }
 }

@@ -7318,7 +7318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf49e85515ed1924290ee8592f9e6cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTimeInMinutes: 0
+  maxTimeInMinutes: 4
   maxTimeInSec: 35
   time: {fileID: 540097686}
   endGameCanvas: {fileID: 4405896965329380575}
