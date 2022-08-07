@@ -27,15 +27,32 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
 
         UpdateStats();
     }
-    public int GetScore()
+    public float GetScore()
     {
-        return int.Parse( scores.text );
+        return float.Parse( scores.text );
     }
-   
 
+    public void ChangeNumber( int number )
+    {
+        this.number.text = number.ToString();
+    }
     private void ChangeScore()
     {
-        scores.text = (int.Parse( countOfKills.text ) * 10 - int.Parse( countOfDeaths.text ) * 2).ToString();
+        int death =  int.Parse( countOfDeaths.text );
+        int kills = int.Parse( countOfKills.text);
+        if ( death == 0 && kills == 0 )
+            scores.text = 0.ToString();
+        else if ( kills > 0 && death == 0 )
+        {
+            scores.text = kills.ToString();
+        } else if ( kills == 0 && death > 0 )
+        {
+            scores.text = "0";
+        }
+        else if(kills>0 && death>0)
+        {
+            scores.text = ( System.Math.Round( (float)kills / death ,2)).ToString();
+        }
     }
    
     public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hastable changedProps )
@@ -60,17 +77,5 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
         }
         ChangeScore();
     }
-    //public override void OnPlayerLeftRoom( Player otherPlayer )
-    //{
-    //    if ( player == otherPlayer )
-    //    {
-    //        Hastable hash = new Hastable();
-    //        hash.Add( "deaths", 0 );
-    //        hash.Add( "kills", 0 );
-    //        PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
-            
 
-    //        Destroy( gameObject );
-    //    }
-    //}
 }

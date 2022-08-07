@@ -38,6 +38,34 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
         Destroy( scroreBoardItems[player].gameObject );
         scroreBoardItems.Remove( player );
     }
+    public void BubbleSort( Dictionary<Player, PlayerLeaderboardListItem> dictionaryScoreBoard,Player[] player)
+    {
+        int i = 0;
+        bool t = true;
+        while ( t )
+        {
+            t = false;
+            for (int j = 0; j< dictionaryScoreBoard.Count - i - 2;j++ )
+            {
+                float score_1 = dictionaryScoreBoard[player[j]].GetScore();
+                float score_2 = dictionaryScoreBoard[player[j+1]].GetScore();
+                
+               
+                var temp = dictionaryScoreBoard[player[j]];
+                if (score_1 > score_2){
+                    dictionaryScoreBoard[player[j]] = dictionaryScoreBoard[player[j + 1]];
+                    dictionaryScoreBoard[player[j + 1]] = temp;
+                    dictionaryScoreBoard[player[j]].ChangeNumber( j+1 );
+                    t = true;
+                }
+                    
+            }
+
+            
+            i = i + 1;
+        }
+       
+    }
     public override void OnPlayerEnteredRoom( Player newPlayer )
     {
         AddScoreboardItem( newPlayer );
