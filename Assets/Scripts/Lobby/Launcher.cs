@@ -38,6 +38,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject redSlider;
     [SerializeField] GameObject greenSlider;
     [SerializeField] GameObject blueSlider;
+
+    [SerializeField] GameObject deathMatchObject;
+    [SerializeField] GameObject teamDeathMatchObject;
+    [SerializeField] GameObject captureTheFlagObject;
+
     private ColorPlayer colorPlayer;
     private float[] colors = {0,0,0};
 
@@ -217,6 +222,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void LeaveSelector()
     {
         MenuManager.Instance.OpenMenu( "room" );
+        deathMatchObject.SetActive( false );
+        teamDeathMatchObject.SetActive( false );
+        captureTheFlagObject.SetActive( false );
     }
     public override void OnPlayerEnteredRoom( Player newPlayer )
     {
@@ -231,6 +239,27 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void ChooseGameMode()
     {
         MenuManager.Instance.OpenMenu( "gameModeSelector" );
+    }
+    public void ChooseDeathMatchMode()
+    {
+        MenuManager.Instance.OpenMenu( "mapSelector" );
+        deathMatchObject.SetActive( true );
+        teamDeathMatchObject.SetActive( false );
+        captureTheFlagObject.SetActive( false );
+    }
+    public void ChooseTeamDeathMatchMode()
+    {
+        MenuManager.Instance.OpenMenu( "mapSelector" );
+        deathMatchObject.SetActive( false );
+        teamDeathMatchObject.SetActive( true );
+        captureTheFlagObject.SetActive( false );
+    }
+    public void ChooseCaptureTheFlagMode()
+    {
+        MenuManager.Instance.OpenMenu( "mapSelector" );
+        deathMatchObject.SetActive( false );
+        teamDeathMatchObject.SetActive( false );
+        captureTheFlagObject.SetActive( true );
     }
     public void ChangeMap()
     {
