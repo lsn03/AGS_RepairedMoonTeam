@@ -228,7 +228,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         this.currentNameMap = name;
         this.currentNumberMap = number;
     }
-    
+    public void ChooseGameMode()
+    {
+        MenuManager.Instance.OpenMenu( "gameModeSelector" );
+    }
     public void ChangeMap()
     {
         MenuManager.Instance.OpenMenu( "mapSelector" );
