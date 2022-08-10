@@ -48,9 +48,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject deathMatch;
     [SerializeField] GameObject blueTeam;
 
+
+    [SerializeField] Transform redTeamPlayerListContent;
+    [SerializeField] Transform blueTeamPlayerListContent;
     private ColorPlayer colorPlayer;
     private float[] colors = {0,0,0};
-
+    Player character;
     public void ExitGame()
     {
         Application.Quit();
@@ -67,12 +70,14 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public MapData[] map;
 
-
+    PhotonView photonView;
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
         Debug.Log( "Connecting to Master" );
         PhotonNetwork.ConnectUsingSettings();
         UseColorSetting();
+       // Debug.Log( photonView.Owner);
     }
 
     void UseColorSetting()
@@ -204,7 +209,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log( ht );
         object obj;
         ht.TryGetValue( "gamemode", out obj );
+        
         Debug.Log( obj );
+
         if ((string) obj == "deathMatch" )
         {
             redTeam.SetActive( false );
@@ -338,13 +345,106 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         
     }
-    public void SetGameMode()
-    {
-        photonView.RPC( nameof( RPC_SetGameMode ), RpcTarget.All );
-    }
-    [PunRPC]
-    public void RPC_SetGameMode()
+    public void ChooseRedTeam()
     {
 
+        Player currentPlayer;
+        foreach ( Transform child in PlayerListContent )
+        {
+            
+            currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
+            if ( currentPlayer == PhotonNetwork.LocalPlayer ) 
+            {
+
+                Destroy( child.gameObject );
+                Instantiate( PlayerListItemPrefab, redTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
+                //UpdateForAllPlayer( redTeamPlayerListContent, blueTeamPlayerListContent, PlayerListContent );
+                return;
+            }
+        }
+        foreach ( Transform child in blueTeamPlayerListContent )
+        {
+
+            currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
+            if ( currentPlayer == PhotonNetwork.LocalPlayer )
+            {
+                //UpdateForAllPlayer( redTeamPlayerListContent, blueTeamPlayerListContent, PlayerListContent );
+                Destroy( child.gameObject );
+                Instantiate( PlayerListItemPrefab, redTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
+                break;
+            }
+        }
+    }
+    public void ChooseBlueTeam()
+    {
+        Player currentPlayer;
+        foreach ( Transform child in PlayerListContent )
+        {
+            currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
+            if ( PhotonNetwork.LocalPlayer == currentPlayer ) 
+            {
+                Destroy( child.gameObject );
+                GameObject go = Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent );
+                go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
+                go.GetComponent<PlayerListItem>().SetTeam( "blue" );
+                UpdateForAllPlayer( currentPlayer );
+                return;
+            }
+        }
+        foreach ( Transform child in redTeamPlayerListContent )
+        {
+
+            currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
+            if ( currentPlayer == PhotonNetwork.LocalPlayer )
+            {
+
+                Destroy( child.gameObject );
+                GameObject go = Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent ); 
+                go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
+                go.GetComponent<PlayerListItem>().SetTeam( "blue" );
+                //UpdateForAllPlayer( redTeamPlayerListContent, blueTeamPlayerListContent, PlayerListContent );
+                break;
+            }
+        }
+    }
+
+    public void UpdateForAllPlayer( Player _player )
+    {
+        photonView.RPC( "RPC_UpdateForAllPlayer",RpcTarget.All, _player );
+    }
+    [PunRPC]
+    private void RPC_UpdateForAllPlayer( Player _player )
+    {
+        object team;
+        Player currentPlayer;
+        foreach (Transform child in PlayerListContent )
+        {
+            currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
+            if(currentPlayer == _player )
+            {
+                Hastable ht = new Hastable();
+                ht = currentPlayer.CustomProperties;
+
+                ht.TryGetValue( "team", out team );
+                Destroy( child.gameObject );
+                if ( ( string )team == "blue" )
+                {
+                    
+                    
+                   Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
+                    
+                }
+                else if ( ( string )team == "red" )
+                {
+                    
+                    
+                        Instantiate( PlayerListItemPrefab, redTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
+                    
+                }
+
+                return;
+            }
+            
+        }
     }
 }

@@ -5361,7 +5361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &866624732
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7303,6 +7303,7 @@ GameObject:
   - component: {fileID: 1173776154}
   - component: {fileID: 1173776159}
   - component: {fileID: 1173776158}
+  - component: {fileID: 1173776160}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -7454,6 +7455,8 @@ MonoBehaviour:
   redTeam: {fileID: 866624731}
   deathMatch: {fileID: 1599403136}
   blueTeam: {fileID: 1888982284}
+  redTeamPlayerListContent: {fileID: 1218231051}
+  blueTeamPlayerListContent: {fileID: 553327862}
   userNameText: {fileID: 599688802}
   UserNameinputField: {fileID: 2005101824}
   currentNumberMap: 0
@@ -7471,6 +7474,28 @@ MonoBehaviour:
     scene: 5
   - name: Bolota
     scene: 6
+--- !u!114 &1173776160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173776153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 501
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!224 &1186239803 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2509242956409811411, guid: 07c563444f36c1245bb374c6498fc411, type: 3}
@@ -9476,7 +9501,7 @@ GameObject:
   - component: {fileID: 1368738771}
   - component: {fileID: 1368738770}
   m_Layer: 5
-  m_Name: LeaveButton (2)
+  m_Name: ChooseBlueTeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9549,7 +9574,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1173776159}
         m_TargetAssemblyTypeName: Launcher, Assembly-CSharp
-        m_MethodName: LeaveRoom
+        m_MethodName: ChooseBlueTeam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13785,7 +13810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1888982285
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14304,7 +14329,7 @@ GameObject:
   - component: {fileID: 1933779507}
   - component: {fileID: 1933779506}
   m_Layer: 5
-  m_Name: LeaveButton (1)
+  m_Name: ChooseRedTeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14377,7 +14402,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1173776159}
         m_TargetAssemblyTypeName: Launcher, Assembly-CSharp
-        m_MethodName: LeaveRoom
+        m_MethodName: ChooseRedTeam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

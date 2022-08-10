@@ -49,6 +49,7 @@ MonoBehaviour:
   - RPC_GetKill
   - RPC_SetTimeForAllPlayer
   - RPC_SetGameMode
+  - RPC_UpdateForAllPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
