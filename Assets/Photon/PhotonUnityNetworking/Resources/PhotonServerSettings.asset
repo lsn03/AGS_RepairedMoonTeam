@@ -48,6 +48,7 @@ MonoBehaviour:
   - RPC_SetPointDamageBooster
   - RPC_GetKill
   - RPC_SetTimeForAllPlayer
+  - RPC_SetGameMode
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

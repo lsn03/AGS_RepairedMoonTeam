@@ -5,6 +5,7 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using UnityEngine.UI;
+using Hastable = ExitGames.Client.Photon.Hashtable;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -43,6 +44,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject teamDeathMatchObject;
     [SerializeField] GameObject captureTheFlagObject;
 
+    [SerializeField] GameObject redTeam;
+    [SerializeField] GameObject deathMatch;
+    [SerializeField] GameObject blueTeam;
+
     private ColorPlayer colorPlayer;
     private float[] colors = {0,0,0};
 
@@ -50,7 +55,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Application.Quit();
     }
-
+    private string gameMode = "";
     [SerializeField] private Text userNameText;
     [SerializeField] private InputField UserNameinputField;
     [SerializeField] private int currentNumberMap;
@@ -131,17 +136,40 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         SaveName();
         SaveColor();
+        RoomOptions roomOptions = new RoomOptions(){MaxPlayers = 8 };
         if ( string.IsNullOrEmpty( roomNameInputField.text ) )
         {
-            PhotonNetwork.CreateRoom( "Room "+UnityEngine.Random.Range(0,9999) );
+           
+            PhotonNetwork.CreateRoom( "Room "+ PhotonNetwork.NickName.Split("\t")[0], roomOptions );
+
             MenuManager.Instance.OpenMenu( "loading" );
         }
         else
         {
-            PhotonNetwork.CreateRoom( roomNameInputField.text );
+            PhotonNetwork.CreateRoom( roomNameInputField.text,roomOptions );
+            
             MenuManager.Instance.OpenMenu( "loading" );
         }
+        
+    }
+    public override void OnCreatedRoom()
+    {
+        Hastable ht = new Hastable();
+        ht.Add( "gamemode", gameMode );
+        PhotonNetwork.CurrentRoom.SetCustomProperties( ht );
 
+        if ( gameMode == "deathMatch" )
+        {
+            redTeam.SetActive( false );
+            deathMatch.SetActive( true );
+            blueTeam.SetActive( false );
+        }
+        else if ( gameMode == "teamDeathMatch" || gameMode == "captureTheFlag" )
+        {
+            redTeam.SetActive( true );
+            deathMatch.SetActive( true );
+            blueTeam.SetActive( true );
+        }
     }
     private void SaveName()
     {
@@ -170,6 +198,25 @@ public class Launcher : MonoBehaviourPunCallbacks
         for ( int i = 0; i < players.Length; i++ )
         {
             Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( players[i] );
+        }
+
+        Hastable ht = PhotonNetwork.CurrentRoom.CustomProperties;
+        Debug.Log( ht );
+        object obj;
+        ht.TryGetValue( "gamemode", out obj );
+        Debug.Log( obj );
+        if ((string) obj == "deathMatch" )
+        {
+            redTeam.SetActive( false );
+            deathMatch.SetActive( true );
+            blueTeam.SetActive( false );
+        }
+        else if ( ( string )obj == "teamDeathMatch" || ( string )obj == "captureTheFlag" )
+        {
+            Debug.Log( "inIF" );
+            redTeam.SetActive( true );
+            deathMatch.SetActive( true );
+            blueTeam.SetActive( true );
         }
         chooseMapButton.SetActive( PhotonNetwork.IsMasterClient );
         startGameButton.SetActive( PhotonNetwork.IsMasterClient );
@@ -236,34 +283,26 @@ public class Launcher : MonoBehaviourPunCallbacks
         this.currentNameMap = name;
         this.currentNumberMap = number;
     }
-    public void ChooseGameMode()
-    {
-        MenuManager.Instance.OpenMenu( "gameModeSelector" );
-    }
-    public void ChooseDeathMatchMode()
-    {
-        MenuManager.Instance.OpenMenu( "mapSelector" );
-        deathMatchObject.SetActive( true );
-        teamDeathMatchObject.SetActive( false );
-        captureTheFlagObject.SetActive( false );
-    }
-    public void ChooseTeamDeathMatchMode()
-    {
-        MenuManager.Instance.OpenMenu( "mapSelector" );
-        deathMatchObject.SetActive( false );
-        teamDeathMatchObject.SetActive( true );
-        captureTheFlagObject.SetActive( false );
-    }
-    public void ChooseCaptureTheFlagMode()
-    {
-        MenuManager.Instance.OpenMenu( "mapSelector" );
-        deathMatchObject.SetActive( false );
-        teamDeathMatchObject.SetActive( false );
-        captureTheFlagObject.SetActive( true );
-    }
+
     public void ChangeMap()
     {
         MenuManager.Instance.OpenMenu( "mapSelector" );
+        if(gameMode == "deathMatch" )
+        {
+            deathMatchObject.SetActive( true );
+            teamDeathMatchObject.SetActive( false );
+            captureTheFlagObject.SetActive( false );
+        }else if ( gameMode == "teamDeathMatch" )
+        {
+            deathMatchObject.SetActive( false );
+            teamDeathMatchObject.SetActive( true );
+            captureTheFlagObject.SetActive( false );
+        }else if(gameMode == "captureTheFlag" )
+        {
+            deathMatchObject.SetActive( false );
+            teamDeathMatchObject.SetActive( false );
+            captureTheFlagObject.SetActive( true );
+        }
     }
 
     public void StartGame()
@@ -284,4 +323,28 @@ public class Launcher : MonoBehaviourPunCallbacks
         
     }
 
+    public void ChooseGameMode(int value )
+    {
+        if(value == 0 )
+        {
+            gameMode = "deathMatch";
+        }else if(value == 1 )
+        {
+            gameMode = "teamDeathMatch";
+        }
+        else if(value == 2 )
+        {
+            gameMode = "captureTheFlag";
+        }
+        
+    }
+    public void SetGameMode()
+    {
+        photonView.RPC( nameof( RPC_SetGameMode ), RpcTarget.All );
+    }
+    [PunRPC]
+    public void RPC_SetGameMode()
+    {
+
+    }
 }
