@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5504410282191982820}
   - component: {fileID: 8707085482121412725}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 7271672576584279990}
   - component: {fileID: 6299562165001097704}
   - component: {fileID: 8657831419090081477}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: ChainsawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2933739943614797819}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: bulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -326,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2146126609998332771}
   - component: {fileID: 1932560044047957630}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Custom_for
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 2235288058761807269}
   - component: {fileID: 8979071167986005941}
   - component: {fileID: 4225939918066103099}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: UIBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 2155244045158282719}
   - component: {fileID: 4584512187780457532}
   - component: {fileID: 2661971748801999727}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: ArmorBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 2560226223435456811}
   - component: {fileID: 7424623439124064160}
   - component: {fileID: 6844877931368193963}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: ArmorBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -668,7 +668,7 @@ GameObject:
   - component: {fileID: 3168621696792819476}
   - component: {fileID: 7391995285688188000}
   - component: {fileID: 5323543269801076280}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8983131801822245354}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: ItemHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -860,7 +860,7 @@ GameObject:
   - component: {fileID: 4163364292843712632}
   - component: {fileID: 3474418539088832574}
   - component: {fileID: 3160203002544244183}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: AutomaticRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1065,7 +1065,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2471503078422853697}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: bulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -1098,7 +1098,7 @@ GameObject:
   - component: {fileID: 2471503080069360362}
   - component: {fileID: 2471503080069360363}
   - component: {fileID: 8319849710814678159}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -1174,7 +1174,7 @@ GameObject:
   - component: {fileID: 2471503080117798757}
   - component: {fileID: 3338582646366681844}
   - component: {fileID: 9133591224353072068}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: SniperRifleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1317,7 +1317,7 @@ GameObject:
   - component: {fileID: 1196365527550798284}
   - component: {fileID: 3520254820172496249}
   - component: {fileID: 4358933212259199978}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: PlayerSprite
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2060,7 +2060,7 @@ MonoBehaviour:
   - {x: -0.26646164, y: 0.8371175, z: -2.8511238e-10}
   m_ShapePathHash: 1873972708
   m_Mesh: {fileID: 0}
-  m_InstanceId: 50402
+  m_InstanceId: 73142
 --- !u!1 &2890441619222039724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2070,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890441619222039727}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2107,7 +2107,7 @@ GameObject:
   - component: {fileID: 6053447638687731834}
   - component: {fileID: 6599872941023625216}
   - component: {fileID: 333478961547177989}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: NickNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2244,7 +2244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2165184632402139159}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: bulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -2277,7 +2277,7 @@ GameObject:
   - component: {fileID: 7739604373554407920}
   - component: {fileID: 5735934701212846334}
   - component: {fileID: 6858601804102799036}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: BulletsLeftSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2412,7 +2412,7 @@ GameObject:
   - component: {fileID: 5938236717016081509}
   - component: {fileID: 4439858192606069803}
   - component: {fileID: 6354557532669077076}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: currentArmor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2495,7 +2495,7 @@ GameObject:
   - component: {fileID: 7069347449575391790}
   - component: {fileID: 6941919082742773263}
   - component: {fileID: 7856533070429117997}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: RocketLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2707,7 +2707,7 @@ GameObject:
   - component: {fileID: 8689216661292003308}
   - component: {fileID: 1615140420020786654}
   - component: {fileID: 5552761945638419915}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Chainsaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3007,7 +3007,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8002653679385298050}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: SniperRifleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3039,7 +3039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1906431613768049291}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: AutoomaticRifleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3071,7 +3071,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1046221047675584779}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: bulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -3102,7 +3102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5161346384115847081}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: RocketLauncherObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3136,7 +3136,7 @@ GameObject:
   - component: {fileID: 5629539114280888302}
   - component: {fileID: 7115859235250338253}
   - component: {fileID: 5788879725922204243}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: currentHp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3216,7 +3216,7 @@ GameObject:
   - component: {fileID: 935827858533989820}
   - component: {fileID: 680863497819154202}
   - component: {fileID: 1858909174486522451}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: BulletsLeftRocketLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3353,7 +3353,7 @@ GameObject:
   - component: {fileID: 2158170879325451387}
   - component: {fileID: 7311331801836029179}
   - component: {fileID: 2899761012989174753}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3472,7 +3472,7 @@ GameObject:
   - component: {fileID: 8265477200307518764}
   - component: {fileID: 10882356413082370}
   - component: {fileID: 2535181542916841450}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3550,7 +3550,7 @@ GameObject:
   - component: {fileID: 8640248604042127539}
   - component: {fileID: 6723453429165815520}
   - component: {fileID: 5201938866108513555}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: BulletsLeftAuto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3683,7 +3683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6061789099735226161}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: ChainsawObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3717,7 +3717,7 @@ GameObject:
   - component: {fileID: 9085572997350835494}
   - component: {fileID: 7539648093889839203}
   - component: {fileID: 3026150027227474582}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3869,7 +3869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3748075219274220099}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: BulletsLeftObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3911,7 +3911,7 @@ GameObject:
   - component: {fileID: 1201145492181202834}
   - component: {fileID: 7433130277599024790}
   - component: {fileID: 7784384786335225746}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: RocketLauncherImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4037,7 +4037,7 @@ GameObject:
   - component: {fileID: 7925204652863045960}
   - component: {fileID: 42902249223535049}
   - component: {fileID: 323686425283809984}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: AutomaticRifleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4166,7 +4166,7 @@ GameObject:
   - component: {fileID: 5155708508079591125}
   - component: {fileID: 5533541060204245314}
   - component: {fileID: 792258939804699753}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: SniperRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4377,7 +4377,7 @@ GameObject:
   - component: {fileID: 3088692870861596151}
   - component: {fileID: 472535270985302433}
   - component: {fileID: 7934419205551095599}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4640,7 +4640,7 @@ GameObject:
   - component: {fileID: 6826861833506513055}
   - component: {fileID: 3657862897323134913}
   - component: {fileID: 215740504336083856}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: HealthBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
