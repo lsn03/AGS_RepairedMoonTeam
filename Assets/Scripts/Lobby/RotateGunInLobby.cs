@@ -10,29 +10,29 @@ public class RotateGunInLobby : MonoBehaviour
     int popl = 1;
     private void Start()
     {
-        var index =Random.Range( 0, gunItems.Length );
-        gunItems[index].SetActive( true );
-        for (int i = 0;i < gunItems.Length;i++ )
+        var index = Random.Range(0, gunItems.Length);
+        gunItems[index].SetActive(true);
+        for (int i = 0; i < gunItems.Length; i++)
         {
-            if ( i != index )
+            if (i != index)
             {
-                gunItems[i].SetActive( false );
+                gunItems[i].SetActive(false);
             }
         }
     }
     private void Update()
     {
 
-        if ( startPos > maxPos )
+        if (startPos > maxPos)
         {
-            
+
             startPos -= Time.deltaTime;
         }
-        if ( startPos < minPos )
+        if (startPos < minPos)
         {
             startPos += Time.deltaTime;
         }
-        transform.Rotate(0f,0f,startPos);
+        transform.Rotate(0f, 0f, startPos);
     }
 
 }

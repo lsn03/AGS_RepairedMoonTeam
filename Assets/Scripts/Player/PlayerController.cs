@@ -10,7 +10,8 @@ using System.Text;
 public class PlayerController : MonoBehaviourPunCallbacks
 {
     [Range(0, 10f), SerializeField] float jumpForce;
-    [Range(0, 20f), SerializeField] float speed;
+    [Range(0, 150f), SerializeField] float runSpeed;
+    [Range(0, 20f), SerializeField] float fallSpeed;
     private float movement;
 
     [Range(0, 10f), SerializeField] float maxRunSpeed;
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     [SerializeField] public bool isGrounded;
     [SerializeField] public Transform GroundCheck;
-    
+
     public LayerMask Ground;
 
     [SerializeField] private Text TextName;
@@ -79,7 +80,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         JumpUp();
         JumpDown();
         CheckingGround();
-        
+
         SwitchGunByButton();
         SwitchGunByScrollWheel();
 
@@ -107,8 +108,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (movement == 0)
         {
             if (isGrounded && _rigidbody2D.velocity.x != 0)
-            {               
-                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x - speed * Time.deltaTime * side * 3, _rigidbody2D.velocity.y);
+            {
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x - runSpeed * Time.deltaTime * side * maxRunSpeed / 1.5f, _rigidbody2D.velocity.y);
 
                 if ((side == 1 && _rigidbody2D.velocity.x < 0)
                     || (side == -1 && _rigidbody2D.velocity.x > 0))
@@ -119,9 +120,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             float _VelocityX;
             if (movement > 0)
-                _VelocityX = Mathf.Min(maxRunSpeed, _rigidbody2D.velocity.x + movement * speed * Time.deltaTime * 7.5f);
+                _VelocityX = Mathf.Min(maxRunSpeed, _rigidbody2D.velocity.x + movement * runSpeed * Time.deltaTime);
             else
-                _VelocityX = Mathf.Max(-maxRunSpeed, _rigidbody2D.velocity.x + movement * speed * Time.deltaTime * 7.5f);
+                _VelocityX = Mathf.Max(-maxRunSpeed, _rigidbody2D.velocity.x + movement * runSpeed * Time.deltaTime);
 
             _rigidbody2D.velocity = new Vector2(_VelocityX, _rigidbody2D.velocity.y);
         }
@@ -140,7 +141,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void JumpUp()
     {
-        if (isGrounded && ( Input.GetKey( KeyCode.Space ) || Input.GetKey( KeyCode.W ) ) && _rigidbody2D.velocity.y < jumpForce)
+        if (isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && _rigidbody2D.velocity.y < jumpForce)
         {
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
         }
@@ -151,7 +152,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             if (_rigidbody2D.velocity.y > -maxFallSpeed)
             {
-                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y - speed * Time.deltaTime * 2);
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y - fallSpeed * Time.deltaTime);
                 if (_rigidbody2D.velocity.y < -maxFallSpeed)
                     _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -maxFallSpeed);
             }
@@ -163,7 +164,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         ContactFilter2D _ContactFilter = new ContactFilter2D();
         _ContactFilter.SetLayerMask(Ground);
         List<Collider2D> results = new List<Collider2D>();
-        isGrounded = Physics2D.OverlapCollider(GroundCheck.GetComponent<EdgeCollider2D>(), _ContactFilter,  results) > 0;
+        isGrounded = Physics2D.OverlapCollider(GroundCheck.GetComponent<EdgeCollider2D>(), _ContactFilter, results) > 0;
     }
 
     void EquipItem(int _index)

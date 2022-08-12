@@ -13,13 +13,15 @@ public class AutomaticShot : Gun
 
     public TextMeshProUGUI text;
 
-     AudioSource shootingSound;
-
+    AudioSource shootingSound;
+    [SerializeField, Range(0f, 0.5f)] public float spread;
+    float x;
+    float y;
     public override void Use()
     {
-       
+
     }
-    
+
     void Start()
     {
         photonView = GetComponent<PhotonView>();
@@ -28,40 +30,38 @@ public class AutomaticShot : Gun
 
     }
     bool readyToSound = false;
-   [SerializeField,Range(0f,0.5f)]public  float spread;
-    float x;
-    float y;
+
     private void Update()
     {
-        if ( !photonView.IsMine ) return;
-        if ( timeBeforeShoots <= 0 )
+        if (!photonView.IsMine) return;
+        if (timeBeforeShoots <= 0)
         {
-            if ( Input.GetMouseButton( 0 ) && itemGameObject.active && bulletsLeft>0 )
+            if (Input.GetMouseButton(0) && itemGameObject.active && bulletsLeft > 0)
             {
                 timeBeforeShoots = timeBetweenShoots;
-                 x = Random.Range(-spread,spread);
-                 y = Random.Range(-spread,spread);
-                
-                if(!shootingSound.isPlaying)
+                x = Random.Range(-spread, spread);
+                y = Random.Range(-spread, spread);
+
+                if (!shootingSound.isPlaying)
                     shootingSound.Play();
-                
-                photonView.RPC( "ShootAuto", RpcTarget.All );
+
+                photonView.RPC("ShootAuto", RpcTarget.All);
             }
-            
+
         }
         else
         {
             timeBeforeShoots -= Time.deltaTime;
         }
 
-        if ( itemGameObject.active )
+        if (itemGameObject.active)
         {
-            text.gameObject.SetActive( true );
-            text.SetText( bulletsLeft + " / " + maxBullets );
+            text.gameObject.SetActive(true);
+            text.SetText(bulletsLeft + " / " + maxBullets);
         }
         else
         {
-            text.gameObject.SetActive( false );
+            text.gameObject.SetActive(false);
         }
     }
 
@@ -72,33 +72,33 @@ public class AutomaticShot : Gun
 
 
 
-        RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right + new Vector3(x,y,0));
+        RaycastHit2D hitInfo = Physics2D.Raycast(bulletSpawn.position, bulletSpawn.right + new Vector3(x, y, 0));
         bulletsLeft--;
-        if ( hitInfo )
+        if (hitInfo)
         {
-            Instantiate( hitEffect, hitInfo.point, Quaternion.identity );
-            Debug.Log( hitInfo.transform.name );
-            if ( photonView.IsMine )
+            Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
+            Debug.Log(hitInfo.transform.name);
+            if (photonView.IsMine)
             {
-                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage, photonView.Owner.NickName.Split( '\t' )[0] );
+                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
             }
-            lineRenderer.SetPosition( 0, bulletSpawn.position );
-            lineRenderer.SetPosition( 1, hitInfo.point );
+            lineRenderer.SetPosition(0, bulletSpawn.position);
+            lineRenderer.SetPosition(1, hitInfo.point);
 
         }
         else
         {
-            lineRenderer.SetPosition( 0, bulletSpawn.position );
-            lineRenderer.SetPosition( 1, bulletSpawn.position + bulletSpawn.right * 50 );
+            lineRenderer.SetPosition(0, bulletSpawn.position);
+            lineRenderer.SetPosition(1, bulletSpawn.position + bulletSpawn.right * 50);
         }
-        if ( lineRenderer != null )
+        if (lineRenderer != null)
             lineRenderer.enabled = true;
-        yield return new WaitForSeconds( 0.02f );
-        if ( lineRenderer != null )
+        yield return new WaitForSeconds(0.02f);
+        if (lineRenderer != null)
             lineRenderer.enabled = false;
     }
-    public void AddBullet( int addBullet )
+    public void AddBullet(int addBullet)
     {
-        SetAddBullet( addBullet );
+        SetAddBullet(addBullet);
     }
 }

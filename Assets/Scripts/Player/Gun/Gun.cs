@@ -14,13 +14,13 @@ public abstract class Gun : Item
     public int bulletsToPickUpFirstTime;
     protected void SetAddBullet(int addBullet)
     {
-        if ( bulletsLeft == 0 )
+        if (bulletsLeft == 0)
         {
             bulletsLeft = bulletsToPickUpFirstTime;
         }
-        else if ( bulletsLeft > 0 )
+        else if (bulletsLeft > 0)
         {
-            bulletsLeft = System.Math.Min( bulletsLeft + addBullet, maxBullets );
+            bulletsLeft = System.Math.Min(bulletsLeft + addBullet, maxBullets);
         }
     }
 

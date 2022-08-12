@@ -7,7 +7,7 @@ public class RocketLauncherBullets : BulletsManager
 {
     [SerializeField] public float reloadTime;
     PhotonView photonView;
-    
+
     public override void Use()
     {
 
@@ -21,19 +21,19 @@ public class RocketLauncherBullets : BulletsManager
     }
     private void Update()
     {
-        Activation( reloadTime );
+        Activation(reloadTime);
     }
-    private void OnTriggerEnter2D( Collider2D collision )
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController player =  collision.GetComponent<PlayerController>();
-        if ( player != null )
+        PlayerController player = collision.GetComponent<PlayerController>();
+        if (player != null)
         {
 
-            Debug.Log( "getLazerBullets" );
-            player.gameObject.GetComponentInChildren<RocketLauncher>().AddBullet( bulletToAdd );
+            Debug.Log("getLazerBullets");
+            player.gameObject.GetComponentInChildren<RocketLauncher>().AddBullet(bulletToAdd);
             //player.gameObject.GetComponent<IAddHp>()?.AddHp( ( ( BoostInfo )itemInfo ).addHp );
 
-            itemGameObject.SetActive( false );
+            itemGameObject.SetActive(false);
             collider.enabled = false;
         }
 

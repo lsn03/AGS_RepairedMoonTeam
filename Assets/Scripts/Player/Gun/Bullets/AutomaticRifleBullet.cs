@@ -7,11 +7,11 @@ public class AutomaticRifleBullet : BulletsManager
     [SerializeField] public float reloadTime;
     public override void Use()
     {
-        
+
     }
     private void Update()
     {
-        Activation( reloadTime );
+        Activation(reloadTime);
 
     }
     // Start is called before the first frame update
@@ -21,17 +21,17 @@ public class AutomaticRifleBullet : BulletsManager
         collider = gameObject.GetComponent<BoxCollider2D>();
     }
 
-    private void OnTriggerEnter2D( Collider2D collision )
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController player =  collision.GetComponent<PlayerController>();
-        if ( player != null )
+        PlayerController player = collision.GetComponent<PlayerController>();
+        if (player != null)
         {
 
-            Debug.Log( "getLazerBullets" );
-            player.gameObject.GetComponentInChildren<AutomaticShot>().AddBullet( bulletToAdd );
-           
+            Debug.Log("getLazerBullets");
+            player.gameObject.GetComponentInChildren<AutomaticShot>().AddBullet(bulletToAdd);
 
-            itemGameObject.SetActive( false );
+
+            itemGameObject.SetActive(false);
             collider.enabled = false;
         }
 

@@ -16,7 +16,7 @@ public class SingleShot : Gun
     public TextMeshProUGUI text;
     [SerializeField] AudioSource shootingSound;
 
-    [Range(0,0.5f),SerializeField] float waitForSeconds;
+    [Range(0, 0.5f), SerializeField] float waitForSeconds;
     public override void Use()
     {
 
@@ -36,18 +36,18 @@ public class SingleShot : Gun
 
     private void Update()
     {
-        if ( !photonView.IsMine ) return;
+        if (!photonView.IsMine) return;
 
-        if ( timeBeforeShoots <= 0 )
+        if (timeBeforeShoots <= 0)
         {
             //if ( Input.GetKeyDown( KeyCode.R ) && bulletsLeft < magazineSize && !reloading ) Reload();
 
-            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active && bulletsLeft > 0 )
+            if (Input.GetMouseButtonDown(0) && itemGameObject.active && bulletsLeft > 0)
             {
                 timeBeforeShoots = timeBetweenShoots;
                 shootingSound.Play();
-                photonView.RPC( "Shoot", RpcTarget.All );
-                
+                photonView.RPC("Shoot", RpcTarget.All);
+
             }
         }
         else
@@ -55,14 +55,14 @@ public class SingleShot : Gun
             timeBeforeShoots -= Time.deltaTime;
         }
 
-        if ( itemGameObject.active )
+        if (itemGameObject.active)
         {
-            text.gameObject.SetActive( true );
-            text.SetText( bulletsLeft + " / " + maxBullets );
+            text.gameObject.SetActive(true);
+            text.SetText(bulletsLeft + " / " + maxBullets);
         }
         else
         {
-            text.gameObject.SetActive( false );
+            text.gameObject.SetActive(false);
         }
     }
 
@@ -94,40 +94,40 @@ public class SingleShot : Gun
     {
 
         //Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hitInfo = Physics2D.Raycast( bulletSpawn.position, bulletSpawn.right );
-        
+        RaycastHit2D hitInfo = Physics2D.Raycast(bulletSpawn.position, bulletSpawn.right);
+
         bulletsLeft--;
-        if ( hitInfo )
+        if (hitInfo)
         {
-            Instantiate( hitEffect, hitInfo.point, Quaternion.identity );
-            Debug.Log( hitInfo.transform.name );
-            if ( photonView.IsMine )
+            Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
+            Debug.Log(hitInfo.transform.name);
+            if (photonView.IsMine)
             {
-                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunIno )itemInfo ).damage, photonView.Owner.NickName.Split( '\t' )[0] );
+                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
             }
-            lineRenderer.SetPosition( 0, bulletSpawn.position );
-            lineRenderer.SetPosition( 1, hitInfo.point );
+            lineRenderer.SetPosition(0, bulletSpawn.position);
+            lineRenderer.SetPosition(1, hitInfo.point);
         }
         else
         {
-            lineRenderer.SetPosition( 0, bulletSpawn.position );
-            lineRenderer.SetPosition( 1, bulletSpawn.position + bulletSpawn.right * 50 );
+            lineRenderer.SetPosition(0, bulletSpawn.position);
+            lineRenderer.SetPosition(1, bulletSpawn.position + bulletSpawn.right * 50);
         }
 
- 
+
         timeBeforeShoots = timeBetweenShoots;
-        if ( lineRenderer != null )
+        if (lineRenderer != null)
             lineRenderer.enabled = true;
-        yield return new WaitForSeconds( waitForSeconds );
-        if ( lineRenderer != null )
+        yield return new WaitForSeconds(waitForSeconds);
+        if (lineRenderer != null)
             lineRenderer.enabled = false;
 
     }
 
 
-    public void AddBullet( int addBullet )
+    public void AddBullet(int addBullet)
     {
-        SetAddBullet( addBullet );
+        SetAddBullet(addBullet);
     }
 
 
