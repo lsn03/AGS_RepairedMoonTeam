@@ -2056,7 +2056,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 51.376648, y: -663.39996}
+  m_AnchoredPosition: {x: 51.37671, y: -663.39996}
   m_SizeDelta: {x: 570.58, y: 246.8}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &472135975
@@ -7457,6 +7457,8 @@ MonoBehaviour:
   blueTeam: {fileID: 1888982284}
   redTeamPlayerListContent: {fileID: 1218231051}
   blueTeamPlayerListContent: {fileID: 553327862}
+  blueButton: {fileID: 1368738768}
+  redButton: {fileID: 1933779504}
   userNameText: {fileID: 599688802}
   UserNameinputField: {fileID: 2005101824}
   currentNumberMap: 0
