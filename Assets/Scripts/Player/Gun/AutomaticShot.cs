@@ -26,11 +26,8 @@ public class AutomaticShot : Gun
     {
         photonView = GetComponent<PhotonView>();
         shootingSound = GetComponent<AudioSource>();
-
-
     }
-    bool readyToSound = false;
-
+    
     private void Update()
     {
         if (!photonView.IsMine) return;
@@ -47,7 +44,6 @@ public class AutomaticShot : Gun
 
                 photonView.RPC("ShootAuto", RpcTarget.All);
             }
-
         }
         else
         {
@@ -59,19 +55,12 @@ public class AutomaticShot : Gun
             text.gameObject.SetActive(true);
             text.SetText(bulletsLeft + " / " + maxBullets);
         }
-        else
-        {
-            text.gameObject.SetActive(false);
-        }
     }
 
 
     [PunRPC]
     IEnumerator ShootAuto()
     {
-
-
-
         RaycastHit2D hitInfo = Physics2D.Raycast(bulletSpawn.position, bulletSpawn.right + new Vector3(x, y, 0));
         bulletsLeft--;
         if (hitInfo)

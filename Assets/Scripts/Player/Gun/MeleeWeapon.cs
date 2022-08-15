@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MeleeWeapon : Gun
@@ -8,6 +9,8 @@ public class MeleeWeapon : Gun
     public float distance = 2f;
     public Transform bulletSpawn;
     PhotonView photonView;
+
+    public TextMeshProUGUI text;
 
     [SerializeField] AudioSource shootingSound;
     [SerializeField] AudioSource idleSound;
@@ -52,6 +55,11 @@ public class MeleeWeapon : Gun
         else
         {
             timeBeforeShoots -= Time.deltaTime;
+        }
+
+        if (itemGameObject.active)
+        {
+            text.gameObject.SetActive(false);
         }
     }
 

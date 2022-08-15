@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BulletPlasma : MonoBehaviour
 {
     public ItemInfo itemInfo;
     public float speed;
@@ -23,7 +23,6 @@ public class Bullet : MonoBehaviour
         Invoke("DestroyBullet", destroyTime);
         photonView = GetComponent<PhotonView>();
         _rigidbody2D.velocity = transform.right * speed;
-
     }
 
     void DestroyBullet()
@@ -53,8 +52,7 @@ public class Bullet : MonoBehaviour
                             var closestPoint = _hitCollider.ClosestPoint(transform.position);
                             var distance = Vector3.Distance(closestPoint, transform.position);
                             var damagePercent = Mathf.InverseLerp(0, splashRange, distance);
-                            Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0]);
-                            //DestroyBullet();
+                            Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
                         }
                     }
                     catch (Exception ex)
@@ -63,14 +61,8 @@ public class Bullet : MonoBehaviour
                     }
 
                 }
-                else
-                {
-                    // DestroyBullet();
-                }
             }
-
             DestroyBullet();
-
         }
     }
     // лидерборды

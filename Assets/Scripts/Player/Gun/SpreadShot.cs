@@ -55,21 +55,18 @@ public class SpreadShot : Gun
             timeBeforeShoots -= Time.deltaTime;
         }
 
+
         if (itemGameObject.active)
         {
             text.gameObject.SetActive(true);
             text.SetText(bulletsLeft + " / " + maxBullets);
-        }
-        else
-        {
-            text.gameObject.SetActive(false);
+
         }
     }
 
     [PunRPC]
     IEnumerator Shoot()
     {
-
         bulletsLeft--;
 
         for (int i = 0; i < bulletAmount; i++)
@@ -109,7 +106,6 @@ public class SpreadShot : Gun
         }
 
         timeBeforeShoots = timeBetweenShoots;
-        
     }
 
 
@@ -117,7 +113,4 @@ public class SpreadShot : Gun
     {
         SetAddBullet(addBullet);
     }
-
-
-
 }

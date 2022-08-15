@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class RocketLauncher : Gun
+public class PlasmaRifle : Gun
 {
     public float offset;
     public GameObject bullet;
@@ -30,7 +30,7 @@ public class RocketLauncher : Gun
         if (!photonView.IsMine) return;
         if (timeBeforeShoots <= 0)
         {
-            if (Input.GetMouseButtonDown(0) && itemGameObject.active && bulletsLeft > 0)
+            if (Input.GetMouseButton(0) && itemGameObject.active && bulletsLeft > 0)
             {
                 Shoot();
                 timeBeforeShoots = timeBetweenShoots;

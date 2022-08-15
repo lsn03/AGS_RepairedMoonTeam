@@ -12,7 +12,6 @@ public class AutomaticRifleBullet : BulletsManager
     private void Update()
     {
         Activation(reloadTime);
-
     }
     // Start is called before the first frame update
     void Start()

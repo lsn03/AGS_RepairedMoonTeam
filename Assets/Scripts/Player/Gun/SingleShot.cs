@@ -6,7 +6,6 @@ using TMPro;
 
 public class SingleShot : Gun
 {
-
     [SerializeField] Camera cam;
     public Transform bulletSpawn;
 
@@ -27,8 +26,6 @@ public class SingleShot : Gun
     }
     void Start()
     {
-
-
         shootingSound = GetComponent<AudioSource>();
         photonView = GetComponent<PhotonView>();
 
@@ -60,10 +57,10 @@ public class SingleShot : Gun
             text.gameObject.SetActive(true);
             text.SetText(bulletsLeft + " / " + maxBullets);
         }
-        else
+        /*else
         {
             text.gameObject.SetActive(false);
-        }
+        }*/
     }
 
     //void Reload()

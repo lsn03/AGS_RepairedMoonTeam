@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     int previousItemIndex = -1;
 
+    [Range(0, 2.5f), SerializeField] float wheelWeaponChangeTime;
+    public float wheelWeaponChangeTimer;
+
+
     [SerializeField] GameObject ui;
 
     [SerializeField] GameObject Custom;
@@ -70,6 +74,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
 
         EquipItem(0);
+        wheelWeaponChangeTimer = 0;
     }
 
 
@@ -84,6 +89,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
         SwitchGunByButton();
         SwitchGunByScrollWheel();
 
+        if (wheelWeaponChangeTimer > 0)
+            wheelWeaponChangeTimer -= Time.deltaTime;
+
         if (Input.GetMouseButtonDown(0))
         {
             items[itemIndex].Use();
@@ -91,13 +99,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if (_rigidbody2D.velocity.y < -maxFallSpeed)
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -maxFallSpeed);
-
     }
 
     void Run()
     {
         movement = Input.GetAxisRaw("Horizontal");
-
 
         int side;
         if (_rigidbody2D.velocity.x >= 0)
@@ -136,7 +142,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             _animator.SetBool("isRun", Mathf.Abs(movement) >= 0.01f);
         }
-
     }
 
     void JumpUp()
@@ -167,12 +172,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
         isGrounded = Physics2D.OverlapCollider(GroundCheck.GetComponent<EdgeCollider2D>(), _ContactFilter, results) > 0;
     }
 
-    void EquipItem(int _index)
+    bool EquipItem(int _index)
     {
-        if (_index == previousItemIndex)
-        {
-            return;
-        }
+        if (_index == previousItemIndex) return false;
+        if (items[_index].GetComponent<Gun>().bulletsLeft == 0) return false;
 
         itemIndex = _index;
         items[itemIndex].itemGameObject.SetActive(true);
@@ -189,6 +192,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
             hash.Add("itemIndex", itemIndex);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
+
+        return true;
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -213,32 +218,56 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
     void SwitchGunByScrollWheel()
     {
+        if (wheelWeaponChangeTimer > 0) return;
+
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
         {
+            int newItemIndex;
             if (itemIndex >= items.Length - 1)
             {
-                EquipItem(0);
-
+                newItemIndex = 0;
             }
             else
             {
-                EquipItem(itemIndex + 1);
-
+                newItemIndex = itemIndex + 1;
             }
-
+            while (!EquipItem(newItemIndex))
+            {
+                if (newItemIndex >= items.Length - 1)
+                {
+                    newItemIndex = 0;
+                }
+                else
+                {
+                    newItemIndex++;
+                }
+            }                           
         }
         else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
         {
+            int newItemIndex; 
             if (itemIndex <= 0)
             {
-                EquipItem(items.Length - 1);
+                newItemIndex = items.Length - 1;
             }
             else
             {
-                EquipItem(itemIndex - 1);
+                newItemIndex = itemIndex - 1;
             }
-
+            while (!EquipItem(newItemIndex))
+            {
+                if (newItemIndex <= 0)
+                {
+                    newItemIndex = items.Length - 1;
+                }
+                else
+                {
+                    newItemIndex--;
+                }
+            } 
         }
+
+        wheelWeaponChangeTimer = wheelWeaponChangeTime;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -3620782714138338211}
   - component: {fileID: 4284814715079890045}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletPlasma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,11 +129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: c950c7a32b0c2804c8e777bac343e50a, type: 2}
-  speed: 15.55
+  speed: 50
   destroyTime: 7.27
   hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}
   _rigidbody2D: {fileID: -3620782714138338211}
-  splashRange: 1.96
+  splashRange: 2
 --- !u!114 &-5111014517800070371
 MonoBehaviour:
   m_ObjectHideFlags: 0
