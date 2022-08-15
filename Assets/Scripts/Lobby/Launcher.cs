@@ -60,7 +60,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Application.Quit();
     }
-    private string gameMode = "";
+    private string gameMode = "deathMatch";
     [SerializeField] private Text userNameText;
     [SerializeField] private InputField UserNameinputField;
     [SerializeField] private int currentNumberMap;
