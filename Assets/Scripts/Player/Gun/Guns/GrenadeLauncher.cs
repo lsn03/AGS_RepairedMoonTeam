@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class RocketLauncher : Gun
+public class GrenadeLauncher : Gun
 {
     public float offset;
     public GameObject bullet;
@@ -14,6 +14,8 @@ public class RocketLauncher : Gun
     private PhotonView photonView;
 
     public TextMeshProUGUI text;
+
+    [SerializeField, Range(0.2f, 1f)] public float shotDelay;
 
     PlayerController player;
     [SerializeField] AudioSource sound;
@@ -32,7 +34,7 @@ public class RocketLauncher : Gun
         {
             if (Input.GetMouseButtonDown(0) && itemGameObject.active && bulletsLeft > 0)
             {
-                Shoot();
+                StartCoroutine(Shoot());
                 timeBeforeShoots = timeBetweenShoots;
             }
         }
@@ -52,10 +54,15 @@ public class RocketLauncher : Gun
     {
 
     }
-    public void Shoot()
+    IEnumerator Shoot()
     {
         bulletsLeft--;
         sound.Play();
+
+        PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        yield return new WaitForSeconds(shotDelay);
+        PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        yield return new WaitForSeconds(shotDelay);
         PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
     }
 

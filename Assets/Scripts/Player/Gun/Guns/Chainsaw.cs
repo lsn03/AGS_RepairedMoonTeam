@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class MeleeWeapon : Gun
+public class Chainsaw : Gun
 {
     public float distance = 2f;
     public Transform bulletSpawn;

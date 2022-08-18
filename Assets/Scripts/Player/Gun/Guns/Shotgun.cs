@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
-public class SpreadShot : Gun
+public class Shotgun : Gun
 {
 
     [SerializeField] Camera cam;
@@ -54,7 +54,6 @@ public class SpreadShot : Gun
         {
             timeBeforeShoots -= Time.deltaTime;
         }
-
 
         if (itemGameObject.active)
         {
@@ -107,7 +106,6 @@ public class SpreadShot : Gun
 
         timeBeforeShoots = timeBetweenShoots;
     }
-
 
     public void AddBullet(int addBullet)
     {

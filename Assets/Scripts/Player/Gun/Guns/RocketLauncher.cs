@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GrenadeLauncher : Gun
+public class RocketLauncher : Gun
 {
     public float offset;
     public GameObject bullet;
@@ -15,12 +15,9 @@ public class GrenadeLauncher : Gun
 
     public TextMeshProUGUI text;
 
-    [SerializeField, Range(0f, 15f)] public float bulletOffset;
-
     PlayerController player;
     [SerializeField] AudioSource sound;
 
-    // Start is called before the first frame update
     void Start()
     {
         photonView = GetComponent<PhotonView>();
@@ -34,7 +31,6 @@ public class GrenadeLauncher : Gun
         {
             if (Input.GetMouseButtonDown(0) && itemGameObject.active && bulletsLeft > 0)
             {
-
                 Shoot();
                 timeBeforeShoots = timeBetweenShoots;
             }
@@ -59,10 +55,7 @@ public class GrenadeLauncher : Gun
     {
         bulletsLeft--;
         sound.Play();
-
-        PhotonNetwork.Instantiate(bullet.name, new Vector3(bulletSpawn.position.x, bulletSpawn.position.y + bulletOffset), bulletSpawn.transform.rotation);
         PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
-        PhotonNetwork.Instantiate(bullet.name, new Vector3(bulletSpawn.position.x, bulletSpawn.position.y - bulletOffset), bulletSpawn.transform.rotation);
     }
 
     public void AddBullet(int addBullet)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class AutomaticShot : Gun
+public class LaserGun : Gun
 {
     public Transform bulletSpawn;
 
@@ -14,9 +14,6 @@ public class AutomaticShot : Gun
     public TextMeshProUGUI text;
 
     AudioSource shootingSound;
-    [SerializeField, Range(0f, 0.5f)] public float spread;
-    float x;
-    float y;
     public override void Use()
     {
 
@@ -36,9 +33,7 @@ public class AutomaticShot : Gun
             if (Input.GetMouseButton(0) && itemGameObject.active && bulletsLeft > 0)
             {
                 timeBeforeShoots = timeBetweenShoots;
-                x = Random.Range(-spread, spread);
-                y = Random.Range(-spread, spread);
-
+                
                 if (!shootingSound.isPlaying)
                     shootingSound.Play();
 
@@ -54,6 +49,11 @@ public class AutomaticShot : Gun
         {
             text.gameObject.SetActive(true);
             text.SetText(bulletsLeft + " / " + maxBullets);
+            if (!Input.GetMouseButton(0))
+            {
+                if (lineRenderer != null)
+                lineRenderer.enabled = false;
+            }
         }
     }
 
@@ -61,7 +61,7 @@ public class AutomaticShot : Gun
     [PunRPC]
     IEnumerator ShootAuto()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(bulletSpawn.position, bulletSpawn.right + new Vector3(x, y, 0));
+        RaycastHit2D hitInfo = Physics2D.Raycast(bulletSpawn.position, bulletSpawn.right);
         bulletsLeft--;
         if (hitInfo)
         {
@@ -73,7 +73,6 @@ public class AutomaticShot : Gun
             }
             lineRenderer.SetPosition(0, bulletSpawn.position);
             lineRenderer.SetPosition(1, hitInfo.point);
-
         }
         else
         {
@@ -82,9 +81,7 @@ public class AutomaticShot : Gun
         }
         if (lineRenderer != null)
             lineRenderer.enabled = true;
-        yield return new WaitForSeconds(0.02f);
-        if (lineRenderer != null)
-            lineRenderer.enabled = false;
+        yield return new WaitForSeconds(0);        
     }
     public void AddBullet(int addBullet)
     {

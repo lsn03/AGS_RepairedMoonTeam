@@ -1,50 +1,48 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Photon.Pun;
 using TMPro;
+using UnityEngine;
 
-public class SingleShot : Gun
+public class MachineGun : Gun
 {
-    [SerializeField] Camera cam;
     public Transform bulletSpawn;
 
     public LineRenderer lineRenderer;
     public PhotonView photonView;
 
     public TextMeshProUGUI text;
-    [SerializeField] AudioSource shootingSound;
 
-    [Range(0, 0.5f), SerializeField] float waitForSeconds;
+    AudioSource shootingSound;
+    [SerializeField, Range(0f, 0.5f)] public float spread;
+    float x;
+    float y;
     public override void Use()
     {
 
     }
-    private void Awake()
-    {
 
-    }
     void Start()
     {
-        shootingSound = GetComponent<AudioSource>();
         photonView = GetComponent<PhotonView>();
-
+        shootingSound = GetComponent<AudioSource>();
     }
-
+    
     private void Update()
     {
         if (!photonView.IsMine) return;
-
         if (timeBeforeShoots <= 0)
         {
-            //if ( Input.GetKeyDown( KeyCode.R ) && bulletsLeft < magazineSize && !reloading ) Reload();
-
-            if (Input.GetMouseButtonDown(0) && itemGameObject.active && bulletsLeft > 0)
+            if (Input.GetMouseButton(0) && itemGameObject.active && bulletsLeft > 0)
             {
                 timeBeforeShoots = timeBetweenShoots;
-                shootingSound.Play();
-                photonView.RPC("Shoot", RpcTarget.All);
+                x = Random.Range(-spread, spread);
+                y = Random.Range(-spread, spread);
 
+                if (!shootingSound.isPlaying)
+                    shootingSound.Play();
+
+                photonView.RPC("ShootAuto", RpcTarget.All);
             }
         }
         else
@@ -57,42 +55,13 @@ public class SingleShot : Gun
             text.gameObject.SetActive(true);
             text.SetText(bulletsLeft + " / " + maxBullets);
         }
-        /*else
-        {
-            text.gameObject.SetActive(false);
-        }*/
     }
 
-    //void Reload()
-    //{
-
-    //    reloading = true;
-    //    Invoke( "ReloadFinished", reloadTime );
-    //}
-
-    //void ReloadFinished()
-    //{
-
-    //    if ( currentCountOfBullets < magazineSize )
-    //    {
-    //        bulletsLeft = currentCountOfBullets;
-    //        currentCountOfBullets = 0;
-    //    }
-    //    else
-    //    {
-    //        currentCountOfBullets = currentCountOfBullets - magazineSize+bulletsLeft;
-    //        bulletsLeft = magazineSize;
-    //    }
-    //    reloading = false;
-    //}
 
     [PunRPC]
-    IEnumerator Shoot()
+    IEnumerator ShootAuto()
     {
-
-        //Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hitInfo = Physics2D.Raycast(bulletSpawn.position, bulletSpawn.right);
-
+        RaycastHit2D hitInfo = Physics2D.Raycast(bulletSpawn.position, bulletSpawn.right + new Vector3(x, y, 0));
         bulletsLeft--;
         if (hitInfo)
         {
@@ -104,29 +73,21 @@ public class SingleShot : Gun
             }
             lineRenderer.SetPosition(0, bulletSpawn.position);
             lineRenderer.SetPosition(1, hitInfo.point);
+
         }
         else
         {
             lineRenderer.SetPosition(0, bulletSpawn.position);
             lineRenderer.SetPosition(1, bulletSpawn.position + bulletSpawn.right * 50);
         }
-
-
-        timeBeforeShoots = timeBetweenShoots;
         if (lineRenderer != null)
             lineRenderer.enabled = true;
-        yield return new WaitForSeconds(waitForSeconds);
+        yield return new WaitForSeconds(0.02f);
         if (lineRenderer != null)
             lineRenderer.enabled = false;
-
     }
-
-
     public void AddBullet(int addBullet)
     {
         SetAddBullet(addBullet);
     }
-
-
-
 }

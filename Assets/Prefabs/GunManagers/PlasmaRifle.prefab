@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 934710168815437720}
   m_Layer: 0
-  m_Name: RocketLauncherObject
+  m_Name: PlasmaRifleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 934710169635892575}
   - component: {fileID: 1405409344142985227}
   m_Layer: 0
-  m_Name: RocketLauncher
+  m_Name: PlasmaRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,9 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f28944c5fdeff4aaf97ad500e37df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInfo: {fileID: 11400000, guid: c950c7a32b0c2804c8e777bac343e50a, type: 2}
+  itemInfo: {fileID: 11400000, guid: 7e1ecef6f51889244b72f1761d812d27, type: 2}
   itemGameObject: {fileID: 934710168815437723}
-  bulletToAdd: 1
+  bulletToAdd: 10
   reloadTime: 5
 --- !u!1 &934710169851356883
 GameObject:
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 934710169851356880}
   - component: {fileID: 934710169851356881}
   m_Layer: 0
-  m_Name: RocketLauncherImage
+  m_Name: PlasmaRifleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

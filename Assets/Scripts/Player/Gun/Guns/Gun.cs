@@ -12,7 +12,7 @@ public abstract class Gun : Item
     protected float timeBeforeShoots;
     public int bulletsLeft;
     public int bulletsToPickUpFirstTime;
-    protected void SetAddBullet(int addBullet)
+    public void SetAddBullet(int addBullet)
     {
         if (bulletsLeft == 0)
         {

@@ -129,9 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: dbd720dbfc613d544a7fa34de9e4579e, type: 2}
-  speed: 10
-  fallSpeed: 15
-  destroyTime: 7.27
+  speed: 15
+  fallSpeed: 20
+  destroyTime: 7.5
   hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}
   _rigidbody2D: {fileID: -3620782714138338211}
   splashRange: 0
