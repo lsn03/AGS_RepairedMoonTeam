@@ -201,7 +201,19 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             Destroy( child.gameObject );
         }
-
+        redButton.SetActive( true );
+        blueButton.SetActive( true );
+        if ( PhotonNetwork.LocalPlayer.IsLocal )
+        {
+            foreach ( Transform child in redTeamPlayerListContent )
+            {
+                Destroy( child.gameObject );
+            }
+            foreach ( Transform child in blueTeamPlayerListContent )
+            {
+                Destroy( child.gameObject );
+            }
+        }
         for ( int i = 0; i < players.Length; i++ )
         {
             Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( players[i] );
@@ -246,6 +258,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
+        currentTeam = "";
+        gameMode = "deathMatch";
         MenuManager.Instance.OpenMenu( "loading" );
     }
     public override void OnLeftRoom()
@@ -285,7 +299,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom( Player newPlayer )
     {
         Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( newPlayer );
-
+        SetGameMode( gameMode );
     }
     public void SetMap( int number, string name )
     {
@@ -334,6 +348,17 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     }
 
+    public void SetGameMode(string _gamemode)
+    {
+        
+        photonView.RPC( nameof(RPC_SetGameMode), RpcTarget.All, _gamemode );
+    }
+    [PunRPC]
+    public void RPC_SetGameMode(string _gamemode )
+    {
+        Debug.Log( "rpc_setGameMode" + "\t" + _gamemode );
+        gameMode = _gamemode;
+    }
     public void ChooseGameMode( int value )
     {
         if ( value == 0 )
@@ -355,8 +380,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log( currentTeam );
         Player currentPlayer;
-        if ( currentTeam == "" )
-        {
+        if(currentTeam=="")
             foreach ( Transform child in PlayerListContent )
             {
 
@@ -365,6 +389,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                 {
 
                     Destroy( child.gameObject );
+                    Debug.Log( "ChooseRed" );
                     GameObject go =  Instantiate( PlayerListItemPrefab, redTeamPlayerListContent );
                     go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
                     go.GetComponent<PlayerListItem>().SetTeam( "red" );
@@ -376,7 +401,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                     break;
                 }
             }
-        }
+        
         //else if ( currentTeam == "blue" )
         //{
         //    foreach ( Transform child in blueTeamPlayerListContent )
@@ -404,8 +429,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void ChooseBlueTeam()
     {
         Player currentPlayer;
-        if(currentTeam == "" )
-        {
+        if ( currentTeam == "" )
             foreach ( Transform child in PlayerListContent )
             {
                 currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
@@ -415,6 +439,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                     GameObject go = Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent );
                     go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
                     go.GetComponent<PlayerListItem>().SetTeam( "blue" );
+                   
                     UpdateForAllPlayer( currentPlayer );
                     currentTeam = "blue";
                     redButton.SetActive( false );
@@ -422,7 +447,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                     break;
                 }
             }
-        }
+        
         //else if(currentTeam == "red" )
         //{
         //    foreach ( Transform child in redTeamPlayerListContent )
@@ -453,32 +478,58 @@ public class Launcher : MonoBehaviourPunCallbacks
     [PunRPC]
     private void RPC_UpdateForAllPlayer( Player _player )
     {
+        Debug.Log("rpc_UPDATE\t"+ PhotonNetwork.LocalPlayer );
+        //if ( photonView.IsMine ) return;
         object team;
         Player currentPlayer;
         foreach ( Transform child in PlayerListContent )
         {
             currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
+            Debug.Log( "GetPlayer\t" + currentPlayer );
             if ( currentPlayer == _player ) 
             {
+                Debug.Log( "inside If" );
                 Hastable ht = new Hastable();
                 ht = currentPlayer.CustomProperties;
 
                 ht.TryGetValue( "team", out team );
                 Destroy( child.gameObject );
+                Debug.Log("getvalue\t"+team);
                 if ( ( string )team == "blue" )
                 {
-                    
-                    Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
+                    if(!CheckOnEsxist( blueTeamPlayerListContent, currentPlayer ))
+                        Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
                 }
                 else if ( ( string )team == "red" )
                 {
-                    
-                    Instantiate( PlayerListItemPrefab, redTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
+                   if( !CheckOnEsxist( redTeamPlayerListContent,currentPlayer ) )
+                    {
+                        Instantiate( PlayerListItemPrefab, redTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
+
+                        Debug.Log( "rpcUpdateRed" );
+
+                    }
+
+
                 }
                
                 return;
             }
 
         }
+
+    }
+    public bool CheckOnEsxist(Transform team,Player _player)
+    {
+        foreach( Transform child in team )
+        {
+            PlayerListItem item =child.GetComponent<PlayerListItem>();
+            Player currPlayer = item.GetPlayer();
+            if(_player == currPlayer )
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
