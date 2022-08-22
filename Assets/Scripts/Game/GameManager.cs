@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     bool isEnd = false;
     private void Start()
     {
-        
+
     }
     public void Leave()
     {
@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     public override void OnLeftRoom()
     {
-        RoomManager.Destroy( this.gameObject );
-        SceneManager.LoadScene( "Lobby" );
+        RoomManager.Destroy(this.gameObject);
+        SceneManager.LoadScene("Lobby");
         //MenuManager.Instance.OpenMenu( "title" );
 
     }

@@ -8,12 +8,12 @@ public class hitEffectController : MonoBehaviour
     public float destroyTime;
     private void Start()
     {
-        Invoke( "DestroyHitEffect", destroyTime );
+        Invoke("DestroyHitEffect", destroyTime);
     }
-    
+
     void DestroyHitEffect()
     {
-        Destroy( gameObject );
+        Destroy(gameObject);
     }
-    
+
 }
