@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         _rigidbody2D = GetComponent<Rigidbody2D>();
         
         playerManager = PhotonView.Find((int) photonView.InstantiationData[0]).GetComponent<PlayerManager>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         
         var text = photonView.Owner.NickName;
         arrayNick = text.Split('\t');
