@@ -114,14 +114,11 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     private void SaveColor()
     {
-
-
         PlayerPrefs.SetString( "color_r", colors[0].ToString() );
         PlayerPrefs.SetString( "color_g", colors[1].ToString() );
         PlayerPrefs.SetString( "color_b", colors[2].ToString() );
 
         PhotonNetwork.NickName = PlayerPrefs.GetString( "name" ) + "\t" + PlayerPrefs.GetString( "color_r" ) + "\t" + PlayerPrefs.GetString( "color_g" ) + "\t" + PlayerPrefs.GetString( "color_b" );
-
     }
 
     public override void OnConnectedToMaster()
@@ -144,11 +141,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         SaveName();
         SaveColor();
-        RoomOptions roomOptions = new RoomOptions(){MaxPlayers = 8 };
+        RoomOptions roomOptions = new RoomOptions(){MaxPlayers = 10 };
         if ( string.IsNullOrEmpty( roomNameInputField.text ) )
         {
 
-            PhotonNetwork.CreateRoom( "Room " + PhotonNetwork.NickName.Split( "\t" )[0], roomOptions );
+            PhotonNetwork.CreateRoom( "Room " + UnityEngine.Random.Range(1000,9999), roomOptions );
 
             MenuManager.Instance.OpenMenu( "loading" );
         }
@@ -238,7 +235,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                     Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( player );
                 }
             }
-            Debug.Log( $"{nameof(RPC_SetPlayerListInTeams)} team\t{team}" );
+           
         }
     }
     public void SetPlayerListInTeams()
@@ -294,13 +291,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         ClearListContent();
 
-
-        Debug.Log( "OnJoinedRoom" );
         for ( int i = 0; i < players.Length; i++ )
         {
-                Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( players[i] );
-           
-                
+            Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( players[i] );
         }
 
         SetupGameModeInRoom();
@@ -428,7 +421,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPC_SetGameMode(string _gamemode )
     {
-        Debug.Log( "rpc_setGameMode" + "\t" + _gamemode );
+       // Debug.Log( "rpc_setGameMode" + "\t" + _gamemode );
         gameMode = _gamemode;
     }
     public void ChooseGameMode( int value )
@@ -450,7 +443,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     string currentTeam = "";
     public void ChooseRedTeam()
     {
-        Debug.Log( currentTeam );
+       // Debug.Log( currentTeam );
         Player currentPlayer;
         if ( currentTeam == "" )
         {
@@ -462,7 +455,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                 {
 
                     Destroy( child.gameObject );
-                    Debug.Log( "ChooseRed" );
+                   // Debug.Log( "ChooseRed" );
                     GameObject go =  Instantiate( PlayerListItemPrefab, redTeamPlayerListContent );
                     go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
                     go.GetComponent<PlayerListItem>().SetTeam( "red" );
@@ -510,63 +503,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         
     }
 
-    public void UpdateForAllPlayer( Player _player )
-    {
-        photonView.RPC( "RPC_UpdateForAllPlayer", RpcTarget.All, _player );
-    }
-    [PunRPC]
-    private void RPC_UpdateForAllPlayer( Player _player )
-    {
-       
-        object team;
-        Player currentPlayer;
-        foreach ( Transform child in PlayerListContent )
-        {
-            currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
-          
-            if ( currentPlayer == _player ) 
-            {
-              
-                Hastable ht = new Hastable();
-                ht = currentPlayer.CustomProperties;
-
-                ht.TryGetValue( "team", out team );
-                Destroy( child.gameObject );
-               
-                if ( ( string )team == "blue" )
-                {
-                    if(!CheckOnEsxist( blueTeamPlayerListContent, currentPlayer ) )
-                    {
-                        Debug.Log( "rpc_blueTeam" );
-                        Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
-                    }
-                        
-                }
-                else if ( ( string )team == "red" )
-                {
-                   if( !CheckOnEsxist( redTeamPlayerListContent,currentPlayer ) )
-                    {
-                        Instantiate( PlayerListItemPrefab, redTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
-
-                        Debug.Log( "rpcUpdateRed" );
-
-                    }
-
-
-                }
-               
-                return;
-            }
-
-        }
-
-    }
-    private void Update()
-    {
-       // PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue( "team", out object obj );
-
-       // Debug.Log( "obj is \t "+obj+"\t"+ string.IsNullOrEmpty((string)obj)  );
-    }
+   
+   
 
     public bool CheckOnEsxist(Transform team,Player _player)
     {
