@@ -137,6 +137,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log( "Joined to lobby" );
         UserNameinputField.text = PlayerPrefs.GetString( "name" );
         PhotonNetwork.NickName = userNameText.text;
+        
     }
 
     public void CreateRoom()
@@ -164,7 +165,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         Hastable ht = new Hastable();
         ht.Add( "gamemode", gameMode );
         PhotonNetwork.CurrentRoom.SetCustomProperties( ht );
-
         if ( gameMode == "deathMatch" )
         {
             redTeam.SetActive( false );
@@ -191,40 +191,100 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         PhotonNetwork.NickName = PlayerPrefs.GetString( "name" );
     }
+
+    public override void OnPlayerEnteredRoom( Player newPlayer )
+    {
+        // необходиомо когда к человеку в комнате присоединяется другой игрок
+        Debug.Log( "OnPlayerEneteredRoom+\t" + newPlayer );
+        if ( !CheckOnEsxist( PlayerListContent, newPlayer ) )
+        {
+            Debug.Log( "OnPlayer______Setup +\t" + newPlayer );
+            Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( newPlayer );
+
+        }
+        SetGameMode( gameMode );
+        //if ( PhotonNetwork.LocalPlayer.IsLocal )
+        //{
+        //    foreach ( Transform child in redTeamPlayerListContent )
+        //    {
+        //        Destroy( child.gameObject );
+        //    }
+        //    foreach ( Transform child in blueTeamPlayerListContent )
+        //    {
+        //        Destroy( child.gameObject );
+        //    }
+        //}
+        SetPlayerListInTeams();
+    }
+    [PunRPC]
+    public void RPC_SetPlayerListInTeams()
+    {
+        Player[] players = PhotonNetwork.PlayerList;
+        foreach (Player player in players )
+        {
+            Debug.Log( player.CustomProperties );
+        }
+    }
+    public void SetPlayerListInTeams()
+    {
+        photonView.RPC( nameof( RPC_SetPlayerListInTeams ), RpcTarget.All );
+    }
+    private void ClearListContent()
+    {
+        foreach ( Transform child in PlayerListContent )
+        {
+            Destroy( child.gameObject );
+        }
+        foreach ( Transform child in redTeamPlayerListContent )
+        {
+            Destroy( child.gameObject );
+        }
+        foreach ( Transform child in blueTeamPlayerListContent )
+        {
+            Destroy( child.gameObject );
+        }
+    }
     public override void OnJoinedRoom()
     {
         MenuManager.Instance.OpenMenu( "room" );
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
         Player[] players = PhotonNetwork.PlayerList;
 
-        foreach ( Transform child in PlayerListContent )
-        {
-            Destroy( child.gameObject );
-        }
-        redButton.SetActive( true );
-        blueButton.SetActive( true );
-        if ( PhotonNetwork.LocalPlayer.IsLocal )
-        {
-            foreach ( Transform child in redTeamPlayerListContent )
-            {
-                Destroy( child.gameObject );
-            }
-            foreach ( Transform child in blueTeamPlayerListContent )
-            {
-                Destroy( child.gameObject );
-            }
-        }
+        ClearListContent();
+
+
+        Debug.Log( "OnJoinedRoom" );
         for ( int i = 0; i < players.Length; i++ )
         {
-            Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( players[i] );
+            //// Debug.Log( "OnJoinedRoom+\t" + players[i] );
+            //Hastable hasTable = players[i].CustomProperties;
+            //hasTable.TryGetValue( "team", out object objectTeam );
+            //if ( string.IsNullOrEmpty((string)objectTeam)   )
+            //{
+                Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( players[i] );
+            //}
+                
         }
 
+
+
+
+
+
+
+
+
+
+
+        redButton.SetActive( true );
+        blueButton.SetActive( true );
+        //SetPlayerListInTeams();
         Hastable ht = PhotonNetwork.CurrentRoom.CustomProperties;
-        Debug.Log( ht );
+       // Debug.Log( ht );
         object obj;
         ht.TryGetValue( "gamemode", out obj );
 
-        Debug.Log( obj );
+       // Debug.Log( obj );
 
         if ( ( string )obj == "deathMatch" )
         {
@@ -255,8 +315,26 @@ public class Launcher : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenu( "error" );
     }
 
+    private void DeleteFromList(Transform list, Player player )
+    {
+        foreach(Transform item in list )
+        {
+            
+            if (player == item.GetComponent<PlayerListItem>().GetPlayer() )
+            {
+                Debug.Log( "deleted\t" + player );
+                Destroy( item.gameObject );
+            }
+        }
+    }
+
     public void LeaveRoom()
     {
+        
+        PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue( "team", out object obj );
+        string team = (string)obj;
+
+        
         PhotonNetwork.LeaveRoom();
         currentTeam = "";
         
@@ -300,22 +378,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         teamDeathMatchObject.SetActive( false );
         captureTheFlagObject.SetActive( false );
     }
-    public override void OnPlayerEnteredRoom( Player newPlayer )
-    {
-        Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( newPlayer );
-        SetGameMode( gameMode );
-        if ( PhotonNetwork.LocalPlayer.IsLocal )
-        {
-            foreach ( Transform child in redTeamPlayerListContent )
-            {
-                Destroy( child.gameObject );
-            }
-            foreach ( Transform child in blueTeamPlayerListContent )
-            {
-                Destroy( child.gameObject );
-            }
-        }
-    }
+   
     public void SetMap( int number, string name )
     {
         this.currentNameMap = name;
@@ -395,7 +458,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log( currentTeam );
         Player currentPlayer;
-        if(currentTeam=="")
+        if ( currentTeam == "" )
+        {
             foreach ( Transform child in PlayerListContent )
             {
 
@@ -416,75 +480,38 @@ public class Launcher : MonoBehaviourPunCallbacks
                     break;
                 }
             }
-        
-        //else if ( currentTeam == "blue" )
-        //{
-        //    foreach ( Transform child in blueTeamPlayerListContent )
-        //    {
-
-        //        currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
-        //        if ( currentPlayer == PhotonNetwork.LocalPlayer )
-        //        {
-        //            //UpdateForAllPlayer( redTeamPlayerListContent, blueTeamPlayerListContent, PlayerListContent );
-        //            Destroy( child.gameObject );
-        //            //Instantiate( PlayerListItemPrefab, redTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
-        //            GameObject go =  Instantiate( PlayerListItemPrefab, redTeamPlayerListContent );
-        //            go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
-        //            go.GetComponent<PlayerListItem>().SetTeam( "red" );
-        //            UpdateForAllPlayer( currentPlayer );
-        //            currentTeam = "red";
-                    
-        //            break;
-        //        }
-        //    }
-        //}   
-        
+        }
+            
     }
     
     public void ChooseBlueTeam()
     {
         Player currentPlayer;
         if ( currentTeam == "" )
+        {
             foreach ( Transform child in PlayerListContent )
             {
                 currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
                 if ( PhotonNetwork.LocalPlayer == currentPlayer )
                 {
                     Destroy( child.gameObject );
-                    Debug.Log( nameof( ChooseBlueTeam )+ " choose" );
+                    // Debug.Log( nameof( ChooseBlueTeam )+ " choose" );
                     GameObject go = Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent );
                     go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
                     go.GetComponent<PlayerListItem>().SetTeam( "blue" );
-                   
+
                     UpdateForAllPlayer( currentPlayer );
                     currentTeam = "blue";
                     redButton.SetActive( false );
                     blueButton.SetActive( false );
-                    
+
                     break;
                 }
             }
+        }
+            
         
-        //else if(currentTeam == "red" )
-        //{
-        //    foreach ( Transform child in redTeamPlayerListContent )
-        //    {
-
-        //        currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
-        //        if ( currentPlayer == PhotonNetwork.LocalPlayer )
-        //        {
-
-        //            Destroy( child.gameObject );
-        //            GameObject go = Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent );
-        //            go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
-        //            go.GetComponent<PlayerListItem>().SetTeam( "blue" );
-        //            //UpdateForAllPlayer( redTeamPlayerListContent, blueTeamPlayerListContent, PlayerListContent );
-        //            UpdateForAllPlayer( currentPlayer );
-        //            currentTeam = "blue";
-        //            break;
-        //        }
-        //    }
-        //}
+       
         
     }
 
@@ -495,23 +522,22 @@ public class Launcher : MonoBehaviourPunCallbacks
     [PunRPC]
     private void RPC_UpdateForAllPlayer( Player _player )
     {
-        Debug.Log("rpc_UPDATE\t"+ PhotonNetwork.LocalPlayer );
-        //if ( photonView.IsMine ) return;
+       
         object team;
         Player currentPlayer;
         foreach ( Transform child in PlayerListContent )
         {
             currentPlayer = child.GetComponent<PlayerListItem>().GetPlayer();
-            Debug.Log( "GetPlayer\t" + currentPlayer );
+          
             if ( currentPlayer == _player ) 
             {
-                Debug.Log( "inside If" );
+              
                 Hastable ht = new Hastable();
                 ht = currentPlayer.CustomProperties;
 
                 ht.TryGetValue( "team", out team );
                 Destroy( child.gameObject );
-                Debug.Log("getvalue\t"+team);
+               
                 if ( ( string )team == "blue" )
                 {
                     if(!CheckOnEsxist( blueTeamPlayerListContent, currentPlayer ) )
@@ -542,7 +568,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        Debug.Log( PhotonNetwork.LocalPlayer.CustomProperties );
+       // PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue( "team", out object obj );
+
+       // Debug.Log( "obj is \t "+obj+"\t"+ string.IsNullOrEmpty((string)obj)  );
     }
 
     public bool CheckOnEsxist(Transform team,Player _player)
