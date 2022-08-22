@@ -194,35 +194,51 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom( Player newPlayer )
     {
-        // необходиомо когда к человеку в комнате присоединяется другой игрок
-        Debug.Log( "OnPlayerEneteredRoom+\t" + newPlayer );
-        if ( !CheckOnEsxist( PlayerListContent, newPlayer ) )
-        {
-            Debug.Log( "OnPlayer______Setup +\t" + newPlayer );
-            Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( newPlayer );
+        Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( newPlayer );
 
-        }
         SetGameMode( gameMode );
-        //if ( PhotonNetwork.LocalPlayer.IsLocal )
-        //{
-        //    foreach ( Transform child in redTeamPlayerListContent )
-        //    {
-        //        Destroy( child.gameObject );
-        //    }
-        //    foreach ( Transform child in blueTeamPlayerListContent )
-        //    {
-        //        Destroy( child.gameObject );
-        //    }
-        //}
+
         SetPlayerListInTeams();
     }
     [PunRPC]
     public void RPC_SetPlayerListInTeams()
     {
         Player[] players = PhotonNetwork.PlayerList;
-        foreach (Player player in players )
+        string team;
+        foreach ( Player player in players )
         {
-            Debug.Log( player.CustomProperties );
+            player.CustomProperties.TryGetValue( "team", out object obj );
+            team = ( string )obj;
+            if ( team == "red" )
+            {
+                if ( !CheckOnEsxist( redTeamPlayerListContent, player ) )
+                {
+                    foreach(Transform child in PlayerListContent )
+                    {
+                        if (player == child.GetComponent<PlayerListItem>().GetPlayer() )
+                        {
+                            Destroy( child.gameObject );
+                        }
+                    }
+
+                    Instantiate( PlayerListItemPrefab, redTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( player );
+                }
+            } else if ( team == "blue" )
+            {
+
+                if ( !CheckOnEsxist( blueTeamPlayerListContent, player ) )
+                {
+                    foreach ( Transform child in PlayerListContent )
+                    {
+                        if ( player == child.GetComponent<PlayerListItem>().GetPlayer() )
+                        {
+                            Destroy( child.gameObject );
+                        }
+                    }
+                    Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( player );
+                }
+            }
+            Debug.Log( $"{nameof(RPC_SetPlayerListInTeams)} team\t{team}" );
         }
     }
     public void SetPlayerListInTeams()
@@ -244,6 +260,32 @@ public class Launcher : MonoBehaviourPunCallbacks
             Destroy( child.gameObject );
         }
     }
+
+    private void SetupGameModeInRoom()
+    {
+        redButton.SetActive( true );
+        blueButton.SetActive( true );
+        Hastable ht = PhotonNetwork.CurrentRoom.CustomProperties;
+        
+        object obj;
+        ht.TryGetValue( "gamemode", out obj );
+
+        
+
+        if ( ( string )obj == "deathMatch" )
+        {
+            redTeam.SetActive( false );
+            deathMatch.SetActive( true );
+            blueTeam.SetActive( false );
+        }
+        else if ( ( string )obj == "teamDeathMatch" || ( string )obj == "captureTheFlag" )
+        {
+
+            redTeam.SetActive( true );
+            deathMatch.SetActive( true );
+            blueTeam.SetActive( true );
+        }
+    }
     public override void OnJoinedRoom()
     {
         MenuManager.Instance.OpenMenu( "room" );
@@ -256,49 +298,14 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log( "OnJoinedRoom" );
         for ( int i = 0; i < players.Length; i++ )
         {
-            //// Debug.Log( "OnJoinedRoom+\t" + players[i] );
-            //Hastable hasTable = players[i].CustomProperties;
-            //hasTable.TryGetValue( "team", out object objectTeam );
-            //if ( string.IsNullOrEmpty((string)objectTeam)   )
-            //{
                 Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( players[i] );
-            //}
+           
                 
         }
 
+        SetupGameModeInRoom();
+        SetPlayerListInTeams();
 
-
-
-
-
-
-
-
-
-
-        redButton.SetActive( true );
-        blueButton.SetActive( true );
-        //SetPlayerListInTeams();
-        Hastable ht = PhotonNetwork.CurrentRoom.CustomProperties;
-       // Debug.Log( ht );
-        object obj;
-        ht.TryGetValue( "gamemode", out obj );
-
-       // Debug.Log( obj );
-
-        if ( ( string )obj == "deathMatch" )
-        {
-            redTeam.SetActive( false );
-            deathMatch.SetActive( true );
-            blueTeam.SetActive( false );
-        }
-        else if ( ( string )obj == "teamDeathMatch" || ( string )obj == "captureTheFlag" )
-        {
-            Debug.Log( "inIF" );
-            redTeam.SetActive( true );
-            deathMatch.SetActive( true );
-            blueTeam.SetActive( true );
-        }
         chooseMapButton.SetActive( PhotonNetwork.IsMasterClient );
         startGameButton.SetActive( PhotonNetwork.IsMasterClient );
     }
@@ -313,19 +320,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         errorText.text = "Room Creation Falied: " + message;
         MenuManager.Instance.OpenMenu( "error" );
-    }
-
-    private void DeleteFromList(Transform list, Player player )
-    {
-        foreach(Transform item in list )
-        {
-            
-            if (player == item.GetComponent<PlayerListItem>().GetPlayer() )
-            {
-                Debug.Log( "deleted\t" + player );
-                Destroy( item.gameObject );
-            }
-        }
     }
 
     public void LeaveRoom()
@@ -473,7 +467,8 @@ public class Launcher : MonoBehaviourPunCallbacks
                     go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
                     go.GetComponent<PlayerListItem>().SetTeam( "red" );
                     ////UpdateForAllPlayer( redTeamPlayerListContent, blueTeamPlayerListContent, PlayerListContent );
-                    UpdateForAllPlayer( currentPlayer );
+                    //UpdateForAllPlayer( currentPlayer );
+                    SetPlayerListInTeams();
                     currentTeam = "red";
                     redButton.SetActive( false );
                     blueButton.SetActive( false );
@@ -499,8 +494,8 @@ public class Launcher : MonoBehaviourPunCallbacks
                     GameObject go = Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent );
                     go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
                     go.GetComponent<PlayerListItem>().SetTeam( "blue" );
-
-                    UpdateForAllPlayer( currentPlayer );
+                    SetPlayerListInTeams();
+                    //UpdateForAllPlayer( currentPlayer );
                     currentTeam = "blue";
                     redButton.SetActive( false );
                     blueButton.SetActive( false );
