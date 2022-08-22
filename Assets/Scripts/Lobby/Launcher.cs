@@ -259,12 +259,16 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveRoom();
         currentTeam = "";
-        gameMode = "deathMatch";
+        
+        //gameMode = "deathMatch";
         MenuManager.Instance.OpenMenu( "loading" );
     }
     public override void OnLeftRoom()
     {
         MenuManager.Instance.OpenMenu( "title" );
+        Hastable ht = new Hastable();
+        ht.Add( "team", null );
+        PhotonNetwork.LocalPlayer.SetCustomProperties( ht );
     }
 
     public override void OnRoomListUpdate( List<RoomInfo> roomList )
@@ -300,6 +304,17 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Instantiate( PlayerListItemPrefab, PlayerListContent ).GetComponent<PlayerListItem>().SetUp( newPlayer );
         SetGameMode( gameMode );
+        if ( PhotonNetwork.LocalPlayer.IsLocal )
+        {
+            foreach ( Transform child in redTeamPlayerListContent )
+            {
+                Destroy( child.gameObject );
+            }
+            foreach ( Transform child in blueTeamPlayerListContent )
+            {
+                Destroy( child.gameObject );
+            }
+        }
     }
     public void SetMap( int number, string name )
     {
@@ -436,6 +451,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                 if ( PhotonNetwork.LocalPlayer == currentPlayer )
                 {
                     Destroy( child.gameObject );
+                    Debug.Log( nameof( ChooseBlueTeam )+ " choose" );
                     GameObject go = Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent );
                     go.GetComponent<PlayerListItem>().SetUp( currentPlayer );
                     go.GetComponent<PlayerListItem>().SetTeam( "blue" );
@@ -444,6 +460,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                     currentTeam = "blue";
                     redButton.SetActive( false );
                     blueButton.SetActive( false );
+                    
                     break;
                 }
             }
@@ -497,8 +514,12 @@ public class Launcher : MonoBehaviourPunCallbacks
                 Debug.Log("getvalue\t"+team);
                 if ( ( string )team == "blue" )
                 {
-                    if(!CheckOnEsxist( blueTeamPlayerListContent, currentPlayer ))
+                    if(!CheckOnEsxist( blueTeamPlayerListContent, currentPlayer ) )
+                    {
+                        Debug.Log( "rpc_blueTeam" );
                         Instantiate( PlayerListItemPrefab, blueTeamPlayerListContent ).GetComponent<PlayerListItem>().SetUp( currentPlayer );
+                    }
+                        
                 }
                 else if ( ( string )team == "red" )
                 {
@@ -519,6 +540,11 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
 
     }
+    private void Update()
+    {
+        Debug.Log( PhotonNetwork.LocalPlayer.CustomProperties );
+    }
+
     public bool CheckOnEsxist(Transform team,Player _player)
     {
         foreach( Transform child in team )
@@ -533,3 +559,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         return false;
     }
 }
+/*
+ * сделать синхранизхацию для новоприбывших людей, чтобы всех не пихало в изначальный playerList
+ *
+ */
