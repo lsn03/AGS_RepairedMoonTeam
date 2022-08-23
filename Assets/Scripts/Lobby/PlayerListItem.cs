@@ -30,12 +30,12 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
         if(player == otherPlayer )
         {
             Destroy( gameObject );
-             PhotonNetwork.LocalPlayer.CustomProperties.Clear();
+            // PhotonNetwork.LocalPlayer.CustomProperties.Clear();
         }
     }
     public override void OnLeftRoom()
     {
         Destroy( gameObject );
-         PhotonNetwork.LocalPlayer.CustomProperties.Clear();
+        // PhotonNetwork.LocalPlayer.CustomProperties.Clear();
     }
 }
