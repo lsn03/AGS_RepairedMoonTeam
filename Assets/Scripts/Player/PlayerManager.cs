@@ -19,12 +19,16 @@ public class PlayerManager : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
     }
-    
+    string team = null;
     void Start()
     {
         if ( photonView.IsMine )
         {
+            PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue( "team", out object obj );
+            team = ( string )obj;
             CreateController();
+            
+            //Debug.Log( (string)team );
         }
         
         
@@ -32,9 +36,26 @@ public class PlayerManager : MonoBehaviour
     }
     void CreateController()
     {
-        Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
+        if (team == "blue" )
+        {
+            Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchBlueSpawnpoint();
+            controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+
+        }
+        else if (team == "red" )
+        {
+            Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchRedSpawnpoint();
+            controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+
+        }
+        else
+        {
+            Transform spawnpoint = SpawnManager.Instance.GetDeathMatchSpawnpoint();
+            controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+
+        }
+
         DeathMenuManager.Instance.CloseDeathMenu();
-        controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation,0,new object[] {photonView.ViewID } );
     }
     // Update is called once per frame
     public void Die()

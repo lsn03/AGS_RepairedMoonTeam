@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         RoomManager.Destroy( this.gameObject );
         SceneManager.LoadScene( "Lobby" );
+        PhotonNetwork.LocalPlayer.CustomProperties.Clear();
         //MenuManager.Instance.OpenMenu( "title" );
 
     }
