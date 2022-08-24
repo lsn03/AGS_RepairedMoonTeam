@@ -398,7 +398,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         MenuManager.Instance.OpenMenu( "loading" );
-
+        
         if ( currentNumberMap == 0 )
         {
             // PhotonNetwork.LoadLevel( 2 );

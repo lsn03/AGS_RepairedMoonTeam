@@ -20,12 +20,16 @@ public class PlayerManager : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
     string team = null;
+    string gameMode = null;
     void Start()
     {
         if ( photonView.IsMine )
         {
             PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue( "team", out object obj );
             team = ( string )obj;
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue( "gamemode", out object gameMode );
+            this.gameMode = ( string )gameMode;
+            Debug.Log( this.gameMode );
             CreateController();
             
             //Debug.Log( (string)team );
@@ -50,12 +54,47 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            Transform spawnpoint = SpawnManager.Instance.GetDeathMatchSpawnpoint();
-            controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+            if ( this.gameMode == "deathMatch" )
+            {
+                Transform spawnpoint = SpawnManager.Instance.GetDeathMatchSpawnpoint();
+                controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+
+            }
+            else
+            {
+
+                DeathMenuManager.Instance.OpenChooseTeamMenu();
+            }
 
         }
 
         DeathMenuManager.Instance.CloseDeathMenu();
+    }
+    private void Update()
+    {
+        if ( gameMode != "deathMatch" && team == null ) 
+        {
+            
+
+            team = DeathMenuManager.Instance.team;
+
+            if ( team == "blue" )
+            {
+                Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchBlueSpawnpoint();
+                controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+                DeathMenuManager.Instance.CloseChooseTeamMenu();
+                return;
+            }
+            else if ( team == "red" )
+            {
+                Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchRedSpawnpoint();
+                controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+                DeathMenuManager.Instance.CloseChooseTeamMenu();
+                return;
+            }
+
+
+        }
     }
     // Update is called once per frame
     public void Die()
