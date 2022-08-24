@@ -72,29 +72,33 @@ public class PlayerManager : MonoBehaviour
     }
     private void Update()
     {
-        if ( gameMode != "deathMatch" && team == null ) 
+        if ( photonView.IsMine )
         {
-            
-
-            team = DeathMenuManager.Instance.team;
-
-            if ( team == "blue" )
+            if ( gameMode != "deathMatch" && team == null )
             {
-                Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchBlueSpawnpoint();
-                controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
-                DeathMenuManager.Instance.CloseChooseTeamMenu();
-                return;
-            }
-            else if ( team == "red" )
-            {
-                Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchRedSpawnpoint();
-                controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
-                DeathMenuManager.Instance.CloseChooseTeamMenu();
-                return;
-            }
 
 
+                team = DeathMenuManager.Instance.team;
+
+                if ( team == "blue" )
+                {
+                    Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchBlueSpawnpoint();
+                    controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+                    DeathMenuManager.Instance.CloseChooseTeamMenu();
+                    return;
+                }
+                else if ( team == "red" )
+                {
+                    Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchRedSpawnpoint();
+                    controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+                    DeathMenuManager.Instance.CloseChooseTeamMenu();
+                    return;
+                }
+
+
+            }
         }
+            
     }
     // Update is called once per frame
     public void Die()
