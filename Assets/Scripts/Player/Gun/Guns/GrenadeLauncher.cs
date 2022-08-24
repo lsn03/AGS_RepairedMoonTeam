@@ -56,14 +56,17 @@ public class GrenadeLauncher : Gun
     }
     IEnumerator Shoot()
     {
-        bulletsLeft--;
+        
         sound.Play();
 
         PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        bulletsLeft--;
         yield return new WaitForSeconds(shotDelay);
         PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        bulletsLeft--;
         yield return new WaitForSeconds(shotDelay);
         PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        bulletsLeft--;
     }
 
     public void AddBullet(int addBullet)

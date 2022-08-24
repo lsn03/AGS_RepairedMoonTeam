@@ -24,8 +24,8 @@ TagManager:
   - 
   - 
   - hook
-  - 
-  - 
+  - Player
+  - Colliderdown
   - 
   - 
   - 
@@ -44,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 1
+    uniqueID: 1438182515
     locked: 0

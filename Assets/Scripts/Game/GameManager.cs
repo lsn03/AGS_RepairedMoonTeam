@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void IsEndGame()
     {
         isEnd = true;
-        button.gameObject.SetActive(true);
-        // Debug.Log( "IsENDGAME" );
+        button.gameObject.SetActive( true );
+       // Debug.Log( "IsENDGAME" );
     }
 }
