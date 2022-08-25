@@ -7,21 +7,25 @@ using Hastable = ExitGames.Client.Photon.Hashtable;
 public class ScoreBoard : MonoBehaviourPunCallbacks
 {
     [SerializeField] Transform container;
-    [SerializeField] GameObject scoreboardItemPrefab;
-    [SerializeField] CanvasGroup canvasGroup;
-    [SerializeField] bool isEnd = false;
-    [SerializeField] bool isEndGameCanvas = false;
-    Dictionary<Player,PlayerLeaderboardListItem> scoreBoardItems = new Dictionary<Player, PlayerLeaderboardListItem>();
+    [SerializeField] protected GameObject scoreboardItemPrefab;
+    [SerializeField] protected CanvasGroup canvasGroup;
+    [SerializeField] protected bool isEnd = false;
+    [SerializeField] protected bool isEndGameCanvas = false;
+    protected Dictionary<Player,PlayerLeaderboardListItem> scoreBoardItems = new Dictionary<Player, PlayerLeaderboardListItem>();
     
     private void Start()
+    {
+        
+        InitScoreBoard();
+    }
+    protected virtual void InitScoreBoard()
     {
         foreach ( Player player in PhotonNetwork.PlayerList )
         {
             AddScoreboardItem( player );
         }
     }
-
-    void AddScoreboardItem(Player player )
+    protected virtual void AddScoreboardItem(Player player )
     {
         PlayerLeaderboardListItem item = Instantiate(scoreboardItemPrefab,container).GetComponent<PlayerLeaderboardListItem>();
         item.SetUp( player );
@@ -32,13 +36,13 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
         
         RemoveScoreboardItem( otherPlayer );
     }
-    void RemoveScoreboardItem(Player player )
+    protected virtual void RemoveScoreboardItem(Player player )
     {
        // scroreBoardItems[player].SetToDefault(player);
         Destroy( scoreBoardItems[player].gameObject );
         scoreBoardItems.Remove( player );
     }
-    public void BubbleSort( Player[] player)
+    protected virtual void BubbleSort( Player[] player)
     {
         int i = 0;
         bool t = true;
@@ -80,6 +84,18 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
     private void Update()
     {
         if ( isEnd ) return;
+
+        OpenLeaderBoard();
+
+
+    }
+    public void IsEndGame()
+    {
+        isEnd = true;
+        //Debug.Log( "IsENDGAME" );
+    }
+    protected virtual void OpenLeaderBoard()
+    {
         if ( !isEndGameCanvas )
         {
             if ( Input.GetKeyDown( KeyCode.Tab ) )
@@ -98,16 +114,9 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
                 {
                     scoreBoardItems[player].isChanged = false;
                     BubbleSort( PhotonNetwork.PlayerList );
-                    
+
                 }
             }
         }
-       
-        
-    }
-    public void IsEndGame()
-    {
-        isEnd = true;
-        //Debug.Log( "IsENDGAME" );
     }
 }

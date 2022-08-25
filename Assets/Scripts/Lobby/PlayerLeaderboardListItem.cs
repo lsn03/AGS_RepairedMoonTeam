@@ -6,6 +6,7 @@ using Photon.Pun;
 using TMPro;
 using Hastable = ExitGames.Client.Photon.Hashtable;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
 {
@@ -14,7 +15,8 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text scores;
     [SerializeField] TMP_Text countOfKills;
     [SerializeField] TMP_Text countOfDeaths;
-
+    [SerializeField] Image colorImage;
+    public string team = null;
     Player player;
     public void SetUp( Player _player )
     {
@@ -25,6 +27,25 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
         countOfDeaths.text = "0";
         nickname.text = nick[0];
         number.text = PhotonNetwork.PlayerList.Length.ToString();
+        
+        Hastable ht = player.CustomProperties;
+        object obj;
+        ht.TryGetValue( "team", out obj );
+        team = ( string )obj;
+        if(team == "blue" )
+        {
+            colorImage.color = Color.blue;
+        }else if ( team == "red" )
+        {
+            colorImage.color = Color.red;
+        }
+        else
+        {
+            var temp = colorImage.color;
+            temp.a = 0f;
+            colorImage.color = temp;
+        }
+
         UpdateStats();
         isChanged = false;
     }
@@ -65,6 +86,7 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
     {
      if(targetPlayer == player )
         {
+
             if ( changedProps.ContainsKey( "kills" ) || changedProps.ContainsKey( "deaths" ) )
             {
                 UpdateStats();
