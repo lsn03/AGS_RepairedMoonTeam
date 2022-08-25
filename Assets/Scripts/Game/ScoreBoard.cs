@@ -36,11 +36,17 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
         
         RemoveScoreboardItem( otherPlayer );
     }
-    protected virtual void RemoveScoreboardItem(Player player )
+    protected virtual void RemoveScoreboardItem( Player player )
     {
-       // scroreBoardItems[player].SetToDefault(player);
-        Destroy( scoreBoardItems[player].gameObject );
-        scoreBoardItems.Remove( player );
+        // scroreBoardItems[player].SetToDefault(player);
+        try {
+
+            Destroy( scoreBoardItems[player].gameObject );
+            scoreBoardItems.Remove( player );
+        }catch(System.Exception ex )
+        {
+            Debug.Log( ex.Message );
+        }
     }
     protected virtual void BubbleSort( Player[] player)
     {

@@ -85,6 +85,9 @@ public class PlayerManager : MonoBehaviour
                     Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchBlueSpawnpoint();
                     controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
                     DeathMenuManager.Instance.CloseChooseTeamMenu();
+                    Hastable ht = new Hastable();
+                    ht.Add( "team", "blue" );
+                    PhotonNetwork.LocalPlayer.SetCustomProperties( ht );
                     return;
                 }
                 else if ( team == "red" )
@@ -92,6 +95,9 @@ public class PlayerManager : MonoBehaviour
                     Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchRedSpawnpoint();
                     controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
                     DeathMenuManager.Instance.CloseChooseTeamMenu();
+                    Hastable ht = new Hastable();
+                    ht.Add( "team", "red" );
+                    PhotonNetwork.LocalPlayer.SetCustomProperties( ht );
                     return;
                 }
 

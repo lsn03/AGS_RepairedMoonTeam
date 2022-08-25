@@ -16,7 +16,7 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text countOfKills;
     [SerializeField] TMP_Text countOfDeaths;
     [SerializeField] Image colorImage;
-    public string team = null;
+    public string team { get; private set; }
     Player player;
     public void SetUp( Player _player )
     {
@@ -49,7 +49,7 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
         UpdateStats();
         isChanged = false;
     }
- 
+   
     public float GetScore()
     {
         return float.Parse( scores.text );
