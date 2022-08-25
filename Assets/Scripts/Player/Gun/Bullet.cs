@@ -58,7 +58,7 @@ public class Bullet : MonoBehaviour
                         }
                     }catch(Exception ex )
                     {
-                        return;
+                        
                     }
 
                 }

@@ -83,7 +83,7 @@ public class TeamScoreBoard : ScoreBoard
     }
     public override void OnPlayerPropertiesUpdate( Player targetPlayer, Hastable changedProps )
     {
-        Debug.Log( nameof( OnPlayerPropertiesUpdate ) + "\t" + changedProps );
+       
         if ( changedProps.ContainsKey( "team" ) )
         {
             Debug.Log( "InIfOnPlayer..." );
@@ -140,10 +140,10 @@ public class TeamScoreBoard : ScoreBoard
                 {
                     if ( scoreBoardItems[player].isChanged )
                     {
-                        if ( scoreBoardItems[player].team == "red" )
+                        if ( scoreBoardItems[player].team == "blue" )
                         {
                             scoreBoardItems[player].isChanged = false;
-                            BubbleSort( PhotonNetwork.PlayerList );
+                            BubbleSort( bluePlayerList );
                         }
 
 
@@ -154,10 +154,31 @@ public class TeamScoreBoard : ScoreBoard
                     Debug.Log( ex.Message );
                 }
             }
+            foreach ( var player in redPlayer )
+            {
+                //Debug.Log( $"ScoreVBoardUpdate\t {scoreBoardItems[player].isChanged}" );
+                try
+                {
+                    if ( scoreBoardItems[player].isChanged )
+                    {
+                        if ( scoreBoardItems[player].team == "red" )
+                        {
+                            scoreBoardItems[player].isChanged = false;
+                            BubbleSort( redPlayerList );
+                        }
+
+
+                    }
+                }
+                catch ( Exception ex )
+                {
+                    Debug.Log( ex.Message );
+                }
+            }
         }
     }
-    
 
+   
 
 
     // red 9C3A3A
