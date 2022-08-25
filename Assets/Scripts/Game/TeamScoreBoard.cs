@@ -143,7 +143,9 @@ public class TeamScoreBoard : ScoreBoard
                         if ( scoreBoardItems[player].team == "blue" )
                         {
                             scoreBoardItems[player].isChanged = false;
+                            
                             BubbleSort( bluePlayerList );
+                            
                         }
 
 
@@ -164,7 +166,9 @@ public class TeamScoreBoard : ScoreBoard
                         if ( scoreBoardItems[player].team == "red" )
                         {
                             scoreBoardItems[player].isChanged = false;
+                            
                             BubbleSort( redPlayerList );
+                            NumerateList( redContainer );
                         }
 
 
@@ -175,9 +179,21 @@ public class TeamScoreBoard : ScoreBoard
                     Debug.Log( ex.Message );
                 }
             }
+            NumerateList( blueContainer );
+            NumerateList( redContainer );
         }
     }
 
+    private void NumerateList(Transform container)
+    {
+        int i = 0;
+       foreach ( Transform child in container )
+        {
+            i += 1;
+            PlayerLeaderboardListItem item = child.GetComponent<PlayerLeaderboardListItem>();
+            item.ChangeNumber(i);
+        }
+    }
    
 
 
