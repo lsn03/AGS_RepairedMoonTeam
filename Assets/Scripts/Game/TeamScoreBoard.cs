@@ -182,6 +182,13 @@ public class TeamScoreBoard : ScoreBoard
             NumerateList( blueContainer );
             NumerateList( redContainer );
         }
+        else
+        {
+            NumerateList( blueContainer );
+            NumerateList( redContainer );
+            BubbleSort( redPlayerList );
+            BubbleSort( bluePlayerList );
+        }
     }
 
     private void NumerateList(Transform container)

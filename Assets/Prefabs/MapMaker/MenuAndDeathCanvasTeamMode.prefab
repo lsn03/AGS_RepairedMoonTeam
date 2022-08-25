@@ -3003,7 +3003,7 @@ GameObject:
   - component: {fileID: 4832985260304327064}
   - component: {fileID: 4832985260304327071}
   m_Layer: 5
-  m_Name: MenuAndDeathCanvas
+  m_Name: MenuAndDeathCanvasTeamMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
