@@ -138,7 +138,7 @@ public class TeamScoreBoard : ScoreBoard
                 //Debug.Log( $"ScoreVBoardUpdate\t {scoreBoardItems[player].isChanged}" );
                 try
                 {
-                    if ( scoreBoardItems[player].isChanged )
+                   // if ( scoreBoardItems[player].isChanged )
                     {
                         if ( scoreBoardItems[player].team == "blue" )
                         {
@@ -159,7 +159,7 @@ public class TeamScoreBoard : ScoreBoard
                 //Debug.Log( $"ScoreVBoardUpdate\t {scoreBoardItems[player].isChanged}" );
                 try
                 {
-                    if ( scoreBoardItems[player].isChanged )
+                    //if ( scoreBoardItems[player].isChanged )
                     {
                         if ( scoreBoardItems[player].team == "red" )
                         {
