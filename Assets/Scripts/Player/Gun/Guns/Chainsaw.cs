@@ -12,14 +12,15 @@ public class Chainsaw : Gun
 
     public TextMeshProUGUI text;
 
+    string[] name;
+
     [SerializeField] AudioSource shootingSound;
     [SerializeField] AudioSource idleSound;
     public override void Use()
     {
         // Shoot();
     }
-    string[] name;
-
+    
     void Start()
     {
         photonView = GetComponent<PhotonView>();

@@ -13,6 +13,8 @@ public class BulletRocket : MonoBehaviour
     public GameObject hitEffect;
     private PhotonView photonView;
 
+    public float pushForce;
+
     public Rigidbody2D _rigidbody2D;
 
     [Range(0.1f, 5f), SerializeField] float splashRange;
@@ -44,15 +46,27 @@ public class BulletRocket : MonoBehaviour
                 PlayerController Player = _hitCollider.GetComponent<PlayerController>();
                 if (Player != null)
                 {
-                    Debug.Log("enemy damaged");
+                    //Debug.Log("enemy damaged");
                     try
                     {
                         if (photonView.IsMine)
                         {
+                            //Debug.Log("transformPosition" + transform.position);
                             var closestPoint = _hitCollider.ClosestPoint(transform.position);
-                            var distance = Vector3.Distance(closestPoint, transform.position);
-                            var damagePercent = Mathf.InverseLerp(0, splashRange, distance);
+                            //Debug.Log("closestPoint" + closestPoint);
+                            var distance = Vector2.Distance(closestPoint, transform.position);
+                            //Debug.Log("distance" + distance);
+                            var damagePercent = Mathf.InverseLerp(splashRange, 0, distance);
+                            //Debug.Log("damagePercent"+ damagePercent);
+
+                            Vector2 forseVector = transform.position;
+                            forseVector -= closestPoint;
+                            forseVector.Normalize();
+                            //Debug.Log("forseVector" + forseVector);
+
                             Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0]);
+                            Player.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
+                            //Debug.Log("final forse" + ((-1) * pushForce * damagePercent * forseVector));
                         }
                     }
                     catch (Exception ex)

@@ -83,8 +83,4 @@ public class LaserGun : Gun
             lineRenderer.enabled = true;
         yield return new WaitForSeconds(0);        
     }
-    public void AddBullet(int addBullet)
-    {
-        SetAddBullet(addBullet);
-    }
 }

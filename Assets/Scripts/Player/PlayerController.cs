@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     public LayerMask Ground;
 
+    public float teleportTimer;
+
     [SerializeField] private Text TextName;
 
     public GameObject Gun;
@@ -92,6 +94,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (wheelWeaponChangeTimer > 0)
             wheelWeaponChangeTimer -= Time.deltaTime;
 
+        if (teleportTimer > 0)
+            teleportTimer -= Time.deltaTime;
+
         if (Input.GetMouseButtonDown(0))
         {
             items[itemIndex].Use();
@@ -124,13 +129,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
         else
         {
-            float _VelocityX;
-            if (movement > 0)
-                _VelocityX = Mathf.Min(maxRunSpeed, _rigidbody2D.velocity.x + movement * runSpeed * Time.deltaTime);
-            else
-                _VelocityX = Mathf.Max(-maxRunSpeed, _rigidbody2D.velocity.x + movement * runSpeed * Time.deltaTime);
-
-            _rigidbody2D.velocity = new Vector2(_VelocityX, _rigidbody2D.velocity.y);
+            if (movement > 0 && _rigidbody2D.velocity.x < maxRunSpeed)
+                _rigidbody2D.velocity = new Vector2(Mathf.Min(maxRunSpeed, _rigidbody2D.velocity.x + movement * runSpeed * Time.deltaTime), _rigidbody2D.velocity.y);
+            else if (movement < 0 && _rigidbody2D.velocity.x > -maxRunSpeed)
+                _rigidbody2D.velocity = new Vector2(Mathf.Max(-maxRunSpeed, _rigidbody2D.velocity.x + movement * runSpeed * Time.deltaTime), _rigidbody2D.velocity.y);
         }
 
         if (!runSound.isPlaying && Mathf.Abs(movement) >= 0.01f)
@@ -175,7 +177,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     bool EquipItem(int _index)
     {
         if (_index == previousItemIndex) return false;
-        if (items[_index].GetComponent<Gun>().bulletsLeft == 0) return false;
+        if (items[_index].GetComponent<Gun>().bulletsLeft == 0 && _index != 0) return false;
 
         itemIndex = _index;
         items[itemIndex].itemGameObject.SetActive(true);

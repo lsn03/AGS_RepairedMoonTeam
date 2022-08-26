@@ -68,9 +68,4 @@ public class GrenadeLauncher : Gun
         PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
         bulletsLeft--;
     }
-
-    public void AddBullet(int addBullet)
-    {
-        SetAddBullet(addBullet);
-    }
 }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
-public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmor,IDamageBooster
+public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmor, IDamageBooster
 {
     const float maxHP = 100f;
-    float currentHP ;
+    float currentHP;
     const float maxArmor = 50f;
     float currentArmor = 0f;
 
@@ -33,102 +33,98 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
-        playerManager = PhotonView.Find( ( int )photonView.InstantiationData[0] ).GetComponent<PlayerManager>();
-        if ( !photonView.IsMine )
+        playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
+        if (!photonView.IsMine)
         {
-            Destroy( ui );
+            Destroy(ui);
         }
         currentHpText.text = currentHP.ToString();
         currentArmorText.text = currentArmor.ToString();
     }
-    
+
     private void Update()
     {
-        if ( !photonView.IsMine ) return;
-        
-        
+        if (!photonView.IsMine) return;
     }
 
-    public void SetPointDamageBooster(float point )
+    public void SetPointDamageBooster(float point)
     {
-        photonView.RPC( "RPC_SetPointDamageBooster", RpcTarget.All, point ); 
+        photonView.RPC("RPC_SetPointDamageBooster", RpcTarget.All, point);
     }
 
     [PunRPC]
-    void RPC_SetPointDamageBooster(float point )
+    void RPC_SetPointDamageBooster(float point)
     {
-        if ( !photonView.IsMine )
+        if (!photonView.IsMine)
         {
             return;
         }
         damageBooster = point;
     }
-    public void AddArmor( float _littleArmor )
+    public void AddArmor(float _littleArmor)
     {
-        photonView.RPC( "RPC_AddArmor", RpcTarget.All, _littleArmor );
+        photonView.RPC("RPC_AddArmor", RpcTarget.All, _littleArmor);
     }
     [PunRPC]
-    void RPC_AddArmor( float _littleArmor )
+    void RPC_AddArmor(float _littleArmor)
     {
-        if ( !photonView.IsMine )
+        if (!photonView.IsMine)
         {
             return;
         }
         //_littleArmor /= cntPlayer;
         armorSound.Play();
-        currentArmor = System.Math.Min( (currentArmor + _littleArmor), maxArmor );
-       
-        currentArmorText.text = currentArmor.ToString();
-        
-        armorBarImage.fillAmount = currentArmor / maxArmor;
-        Debug.Log( "Current Armor is: " + currentArmor );
-    }
-    public void AddHp( float hp )
-    {
-        Debug.Log( "Addhp added external hp" );
-        photonView.RPC( "RPC_AddHp", RpcTarget.All, hp );
-    }
-    public void TakeDamage( float damage,string autor )
-    {
-        Debug.Log( "took damage" + damage );
+        currentArmor = System.Math.Min((currentArmor + _littleArmor), maxArmor);
 
-       
-        photonView.RPC( "RPC_TakeDamage", photonView.Owner, damage ,autor);
+        currentArmorText.text = currentArmor.ToString();
+
+        armorBarImage.fillAmount = currentArmor / maxArmor;
+        Debug.Log("Current Armor is: " + currentArmor);
+    }
+    public void AddHp(float hp)
+    {
+        Debug.Log("Addhp added external hp");
+        photonView.RPC("RPC_AddHp", RpcTarget.All, hp);
+    }
+    public void TakeDamage(float damage, string autor)
+    {
+        Debug.Log("took damage" + damage);
+
+        photonView.RPC("RPC_TakeDamage", photonView.Owner, damage, autor);
     }
 
     [PunRPC]
-    void RPC_AddHp( float hp )
+    void RPC_AddHp(float hp)
     {
         //hp /= cntPlayer;
-        if ( !photonView.IsMine )
+        if (!photonView.IsMine)
         {
             return;
         }
         hpSound.Play();
-        currentHP = System.Math.Min( (currentHP + hp), maxHP );
+        currentHP = System.Math.Min((currentHP + hp), maxHP);
         currentHpText.text = currentHP.ToString();
         healthBarImage.fillAmount = currentHP / maxHP;
-        Debug.Log( "RPC added " + hp + "\n currentHp = " + currentHP );
+        Debug.Log("RPC added " + hp + "\n currentHp = " + currentHP);
     }
 
     private float delta;
 
-
     [PunRPC]
-    
-    void RPC_TakeDamage( float damage,string autor ,PhotonMessageInfo info)
+
+    void RPC_TakeDamage(float damage, string autor, PhotonMessageInfo info)
     {
-        if ( !photonView.IsMine ) return;
-        if (autor == photonView.Owner.NickName.Split( '\t' )[0] )
+        if (!photonView.IsMine) return;
+        if (autor == photonView.Owner.NickName.Split('\t')[0])
         {
             return;
         }
         //damage /= cntPlayer;
         damage *= damageBooster;
-        if ( currentArmor > 0 )
+        if (currentArmor > 0)
         {
             delta = currentArmor - damage;
-            if ( delta > 0 )
+            if (delta > 0)
             {
                 currentArmor = delta;
             }
@@ -149,14 +145,14 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
         armorBarImage.fillAmount = currentArmor / maxArmor;
         healthBarImage.fillAmount = currentHP / maxHP;
-        if ( currentHP <= 0 )
+        if (currentHP <= 0)
         {
-			Debug.Log( $"\t\tsender is: \t{info.Sender}" );
-            PlayerManager.Find( info.Sender ).GetKill();
+            Debug.Log($"\t\tsender is: \t{info.Sender}");
+            PlayerManager.Find(info.Sender).GetKill();
             Die();
-            
+
         }
-        Debug.Log( "Took damage " + damage );
+        Debug.Log("Took damage " + damage);
     }
     public void Die()
     {
@@ -166,15 +162,13 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     public void DieByObjects()
     {
         deathSound.Play();
-       
-    }
-private void OnTriggerEnter2D( Collider2D collision )
-    {
 
-        if ( collision.tag == "spikes" && photonView.IsMine )
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "spikes" && photonView.IsMine)
         {
             Die();
         }
     }
-
 }

@@ -20,6 +20,4 @@ public class DeathMenuManager : MonoBehaviour
     {
         deathPanel.SetActive( false );
     }
-
-
 }

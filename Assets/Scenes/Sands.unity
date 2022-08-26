@@ -18032,6 +18032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 5658562399658596248}
+  button: {fileID: 0}
 --- !u!222 &3238747943422629805
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19507,6 +19508,8 @@ MonoBehaviour:
   container: {fileID: 8042394446368596353}
   scoreboardItemPrefab: {fileID: 1551032829752357592, guid: a134b801b2f636c49a5a275d71e4c168, type: 3}
   canvasGroup: {fileID: 8192334897731325693}
+  isEnd: 0
+  isEndGameCanvas: 0
 --- !u!114 &8042394446368596415
 MonoBehaviour:
   m_ObjectHideFlags: 0

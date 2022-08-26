@@ -6,8 +6,6 @@ using TMPro;
 
 public class Shotgun : Gun
 {
-
-    [SerializeField] Camera cam;
     public Transform bulletSpawn;
 
     public LineRenderer[] lineRenderer;
@@ -89,7 +87,7 @@ public class Shotgun : Gun
             else
             {
                 lineRenderer[i].SetPosition(0, bulletSpawn.position);
-                lineRenderer[i].SetPosition(1, bulletSpawn.position + bulletSpawn.right * 50);
+                lineRenderer[i].SetPosition(1, bulletSpawn.position + (bulletSpawn.right + new Vector3(x, y, 0)) * 50);
             }
 
             if (lineRenderer != null)
@@ -105,10 +103,5 @@ public class Shotgun : Gun
         }
 
         timeBeforeShoots = timeBetweenShoots;
-    }
-
-    public void AddBullet(int addBullet)
-    {
-        SetAddBullet(addBullet);
     }
 }
