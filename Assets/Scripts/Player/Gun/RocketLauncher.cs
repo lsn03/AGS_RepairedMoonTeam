@@ -18,38 +18,21 @@ public class RocketLauncher : Gun
     PlayerController player;
     [SerializeField] AudioSource sound;
 
-    // Start is called before the first frame update
     void Start()
     {
         photonView = GetComponent<PhotonView>();
         player = GetComponent<PlayerController>();
-
-
     }
-
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    if ( !photonView.IsMine ) return;
-    //    Gun.SetActive( true );
-    //    Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position;
-    //    float rotateZ = Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
-
-    //    Gun.transform.rotation = Quaternion.Euler( 0f, 0f, rotateZ + offset );
-
-
-    //}
 
     private void Update()
     {
-        if ( !photonView.IsMine ) return;
-        if ( timeBeforeShoots <= 0 )
+        if (!photonView.IsMine) return;
+        if (timeBeforeShoots <= 0)
         {
-            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active && bulletsLeft > 0 )
+            if (Input.GetMouseButtonDown(0) && itemGameObject.active && bulletsLeft > 0)
             {
                 Shoot();
                 timeBeforeShoots = timeBetweenShoots;
-
             }
         }
         else
@@ -57,15 +40,10 @@ public class RocketLauncher : Gun
             timeBeforeShoots -= Time.deltaTime;
         }
 
-        if ( itemGameObject.active )
+        if (itemGameObject.active)
         {
-            text.gameObject.SetActive( true );
-            text.SetText( bulletsLeft + " / " + maxBullets );
-        }
-
-        else
-        {
-            text.gameObject.SetActive( false );
+            text.gameObject.SetActive(true);
+            text.SetText(bulletsLeft + " / " + maxBullets);
         }
     }
 
@@ -77,13 +55,11 @@ public class RocketLauncher : Gun
     {
         bulletsLeft--;
         sound.Play();
-        PhotonNetwork.Instantiate( bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation );
-        
-
+        PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
     }
 
-    public void AddBullet(int addBullet )
+    public void AddBullet(int addBullet)
     {
-        SetAddBullet( addBullet );
+        SetAddBullet(addBullet);
     }
 }
