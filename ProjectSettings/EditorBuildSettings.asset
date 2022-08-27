@@ -9,66 +9,66 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: 2315008d6f29419469aa4f6950743413
   - enabled: 1
-    path: Assets/Scenes/factory_m1.unity
+    path: Assets/Scenes/DeathMatch/factory_m1.unity
     guid: 6162bf3cad539014ebec46a41eecaad4
   - enabled: 1
-    path: Assets/Scenes/Reloaded.unity
+    path: Assets/Scenes/DeathMatch/Reloaded.unity
     guid: d1cdedf55841d5041a95d177d9f253a6
   - enabled: 1
-    path: Assets/Scenes/Example.unity
+    path: Assets/Scenes/DeathMatch/Example.unity
     guid: 73088c00239f107459389982d4bfc64f
   - enabled: 1
-    path: Assets/Scenes/Wastelands.unity
+    path: Assets/Scenes/DeathMatch/Wastelands.unity
     guid: 5e7ea4db67e36754e8fb56a8d1263c94
   - enabled: 1
-    path: Assets/Scenes/Turbina.unity
+    path: Assets/Scenes/DeathMatch/Turbina.unity
     guid: bd95fb094d4b6cf46a9cac9e0cd544b1
   - enabled: 1
-    path: Assets/Scenes/Bolota.unity
+    path: Assets/Scenes/DeathMatch/Bolota.unity
     guid: 3f4a85d1ba0b3fa47bdbbdf25f6f220d
   - enabled: 1
-    path: Assets/Scenes/CapchureFlag.unity
+    path: Assets/Scenes/CaptureTheFlag/CapchureFlag.unity
     guid: f0bf02a60bb8de24a9b87a2dc9190f99
   - enabled: 1
-    path: Assets/Scenes/Caves.unity
+    path: Assets/Scenes/DeathMatch/Caves.unity
     guid: 3ef7a1122a6bd444583568968ba4159e
   - enabled: 1
-    path: Assets/Scenes/Testmap.unity
+    path: Assets/Scenes/DeathMatch/Testmap.unity
     guid: 9bac4c1d0a18b0c478a1650811b246be
   - enabled: 1
-    path: Assets/Scenes/Sands.unity
+    path: Assets/Scenes/DeathMatch/Sands.unity
     guid: c2b27ba029733a34a847b34b81f8c96d
   - enabled: 1
-    path: Assets/Scenes/Promzone.unity
+    path: Assets/Scenes/DeathMatch/Promzone.unity
     guid: 9191c3e3cdc0e4e4f9fdffb00f879047
   - enabled: 1
-    path: Assets/Scenes/flyingslime.unity
+    path: Assets/Scenes/DeathMatch/flyingslime.unity
     guid: 3012935398c75014eb740341310ec608
   - enabled: 1
-    path: Assets/Scenes/Trasina.unity
+    path: Assets/Scenes/DeathMatch/Trasina.unity
     guid: b281d84bb64dcd047a82934ff6f5c97d
   - enabled: 1
-    path: Assets/Scenes/TDMcyberfavels.unity
+    path: Assets/Scenes/TeamDeathMatch/TDMcyberfavels.unity
     guid: fc65e42a5e172e34490c08a627b135d4
   - enabled: 1
-    path: Assets/Scenes/TDMMneboskreb.unity
+    path: Assets/Scenes/TeamDeathMatch/TDMMneboskreb.unity
     guid: 2b732a0126cb1ab4ca41cb6ed74b0478
   - enabled: 1
-    path: Assets/Scenes/TDMMgonka.unity
+    path: Assets/Scenes/TeamDeathMatch/TDMMgonka.unity
     guid: 41a02a71bfb51ce47b7074ee2d7b5d36
   - enabled: 1
-    path: Assets/Scenes/TDMGniland.unity
+    path: Assets/Scenes/TeamDeathMatch/TDMGniland.unity
     guid: 8118790795b377546b0ee85db9613a99
   - enabled: 1
-    path: Assets/Scenes/TDMRoofs.unity
+    path: Assets/Scenes/TeamDeathMatch/TDMRoofs.unity
     guid: 201cdba070a6a21418fa33304a7f99c8
   - enabled: 1
-    path: Assets/Scenes/TDMcannonpunch.unity
+    path: Assets/Scenes/TeamDeathMatch/TDMcannonpunch.unity
     guid: e36b46ea03ef1284f860858ff9ca65dc
   - enabled: 1
-    path: Assets/Scenes/TDMRocketlouncher.unity
+    path: Assets/Scenes/TeamDeathMatch/TDMRocketlouncher.unity
     guid: b554982ba9854c946a7b8863dedf019f
   - enabled: 1
-    path: Assets/Scenes/TDMtwoproblems.unity
+    path: Assets/Scenes/TeamDeathMatch/TDMtwoproblems.unity
     guid: de84ad8db5da6d7468dab2bef2e46c8b
   m_configObjects: {}
