@@ -8770,16 +8770,42 @@ MonoBehaviour:
   map:
   - name: Factory
     scene: 1
-  - name: Reloaded
-    scene: 2
-  - name: Example
-    scene: 3
   - name: Wastelands
-    scene: 4
+    scene: 2
   - name: Turbina
-    scene: 5
+    scene: 3
   - name: Bolota
+    scene: 4
+  - name: Caves
+    scene: 5
+  - name: TestMap
     scene: 6
+  - name: Sands
+    scene: 7
+  - name: Promzone
+    scene: 8
+  - name: Flyingslime
+    scene: 9
+  - name: Trasina
+    scene: 10
+  - name: TDMcyberfavel
+    scene: 11
+  - name: TDMneboskreb
+    scene: 12
+  - name: TDMGonka
+    scene: 13
+  - name: TDMGniland
+    scene: 14
+  - name: TDMRoofs
+    scene: 15
+  - name: TDMcannonpunch
+    scene: 16
+  - name: TDMRocketlouncher
+    scene: 17
+  - name: TDMtwoproblems
+    scene: 18
+  - name: CapchureFlag
+    scene: 19
 --- !u!114 &1173776160
 MonoBehaviour:
   m_ObjectHideFlags: 0
