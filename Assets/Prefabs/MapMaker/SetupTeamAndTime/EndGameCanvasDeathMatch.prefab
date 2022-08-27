@@ -350,6 +350,7 @@ MonoBehaviour:
   scoreboardItemPrefab: {fileID: 1551032829752357592, guid: a134b801b2f636c49a5a275d71e4c168, type: 3}
   canvasGroup: {fileID: 7006565336562050651}
   isEnd: 0
+  isEndGameCanvas: 1
 --- !u!225 &7006565336562050651
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -375,7 +376,7 @@ GameObject:
   - component: {fileID: 9156103921109873898}
   - component: {fileID: 9156103921109873897}
   m_Layer: 5
-  m_Name: EndGameCanvas
+  m_Name: EndGameCanvasDeathMatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
