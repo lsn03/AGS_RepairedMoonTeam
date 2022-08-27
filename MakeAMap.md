@@ -38,15 +38,32 @@
 5. Из той же папки перемещаем ScoreBoardCanvas и распаковываем префаб Unpack Completely
 6. Меняем в Canvas поле Redner Camera с None на нашу камеру, которая в иерархии(перетаскиванием)
 
-Добавление таймера для карты
-1. Необходимо перейти в папку MapMaker/time
-2. Перетаскиваем CanvasTime и EndGameCanvas  и распаковываем на сцене
-3. Выбираем CanvasTime, нажимаем на него, выбираем TimeManager.
-4. У нас EndGameCanvas,EndGameScoreBoard,GameManager,ScoreBoard пустые.
-5. В поле EndGameCanvas перетаскиваем ScoreBoard из иерархии EndGameCanvas/ScoreBoard
+DeathMatch. Установка от А до Я.
+1. MapMaker/SetupTeamAndTime
+2. перетаскиваем CanvasTime, MenuAndDeathCanvas, ScoreBoardCanvas, EndGameCanvasDeathMatch.
+3. Раскрываем CanvasTime, устанавливаем время.
+4. У нас пустые поля EndGameCanvas,EndGameScoreBoard,GameManager,ScoreBoard
+5. В поле EndGameCanvas перетаскиваем ScoreBoard из иерархии EndGameCanvasDeathMatch/ScoreBoard
 6. В поле EndGameScoreBoard повторяем пункт 5.
 7. В поле GameManager перетаскиваем MenuAndDeathCanvas.
 8. В поле ScoreBoard перетаскиваем ScoreBoardCanvas/ScoreBoard
+9. Открываем EndGameCanvasDeathMatch и в Render Camera устанавливаем нашу камеру на сцене
+10. Для ScoreBoardCanvas повторяем пункт 9
+11. Для MenuAndDeathCamvas повторяем пункт 9
+12. MenuAndDeathCanvas в скрипте GameManager имеет пустое поле Button. Эта кнопка находится в EndGameCanvasDeathMatch/Leave Button (1). Устанавливаем поле Button перетаскиванием.
+
+TeamDeathMatch. Установка от А до Я.
+Хорошим исходником является TDMcyberfavels
+1. MapMaker/SetupTeamAndTime
+2. Перетаскиваем CanvasTime, MenuAndDeathCanvas, TeamScoreBoardCanvas, EndGameCanvasTeam
+3. Установка аналогична пунктам 5,6,7,8,9,10,11,12.
+4. Наше внимание теперь переключено на SpawnManager, точнее на его дочерние объекты SpawnPoint.
+5. В зависимости от респавна (если синий респавн, то мы включаем режим blue, если красный - red, если у нас обычный DeathMatch, то оставляем поля Red и Blue пустыми.
+
+
+Командный режим. Лидерборд.
+1. MapMaker/TeamMode перетаскиваем EndGameCanvasDeathMatch,
+
 9. Раскрываем ScoreBoardCanvas, видим Scoreboard. 
 10. Выбираем EndGameCanvas(он должен быть распакован)
 11. Меняем в Canvas поле Redner Camera с None на нашу камеру, которая в иерархии(перетаскиванием)
