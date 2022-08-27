@@ -27,8 +27,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     public override void OnLeftRoom()
     {
-        RoomManager.Destroy(this.gameObject);
-        SceneManager.LoadScene("Lobby");
+        RoomManager.Destroy( this.gameObject );
+        SceneManager.LoadScene( "Lobby" );
+        PhotonNetwork.LocalPlayer.CustomProperties.Clear();
         //MenuManager.Instance.OpenMenu( "title" );
 
     }
