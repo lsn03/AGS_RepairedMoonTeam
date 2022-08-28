@@ -98,6 +98,8 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
     public void IsEndGame()
     {
         isEnd = true;
+        if(!isEndGameCanvas)
+            canvasGroup.alpha = 0;
         //Debug.Log( "IsENDGAME" );
     }
     protected virtual void OpenLeaderBoard()
