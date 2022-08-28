@@ -63,7 +63,7 @@ public class BulletGrenade : MonoBehaviour
                     }
                     catch (Exception ex)
                     {
-                        return;
+                        
                     }
 
                 }

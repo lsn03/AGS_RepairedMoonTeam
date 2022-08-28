@@ -71,7 +71,7 @@ public class BulletRocket : MonoBehaviour
                     }
                     catch (Exception ex)
                     {
-                        return;
+                       
                     }
 
                 }
