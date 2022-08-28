@@ -12,7 +12,7 @@ public abstract class Gun : Item
     protected float timeBeforeShoots;
     public int bulletsLeft;
     public int bulletsToPickUpFirstTime;
-    public void SetAddBullet(int addBullet)
+    public void AddBullet(int addBullet)
     {
         if (bulletsLeft == 0)
         {
@@ -20,8 +20,8 @@ public abstract class Gun : Item
         }
         else if (bulletsLeft > 0)
         {
-            bulletsLeft = System.Math.Min(bulletsLeft + addBullet, maxBullets);
+            if (bulletsLeft < maxBullets)
+                bulletsLeft = System.Math.Min(bulletsLeft + addBullet, maxBullets);
         }
     }
-
 }

@@ -58,9 +58,4 @@ public class PlasmaRifle : Gun
         sound.Play();
         PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
     }
-
-    public void AddBullet(int addBullet)
-    {
-        SetAddBullet(addBullet);
-    }
 }

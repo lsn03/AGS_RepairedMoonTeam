@@ -86,13 +86,4 @@ public class RailGun : Gun
             lineRenderer.enabled = false;
 
     }
-
-
-    public void AddBullet(int addBullet)
-    {
-        SetAddBullet(addBullet);
-    }
-
-
-
 }

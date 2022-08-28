@@ -78,16 +78,12 @@ public class MachineGun : Gun
         else
         {
             lineRenderer.SetPosition(0, bulletSpawn.position);
-            lineRenderer.SetPosition(1, bulletSpawn.position + bulletSpawn.right * 50);
+            lineRenderer.SetPosition(1, bulletSpawn.position + (bulletSpawn.right + new Vector3(x, y, 0)) * 50);
         }
         if (lineRenderer != null)
             lineRenderer.enabled = true;
         yield return new WaitForSeconds(0.02f);
         if (lineRenderer != null)
             lineRenderer.enabled = false;
-    }
-    public void AddBullet(int addBullet)
-    {
-        SetAddBullet(addBullet);
     }
 }
