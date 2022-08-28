@@ -10,7 +10,7 @@
 Все необходимое лежит в папке Prefabs/MapMaker
 1. Создаем новую сцену
 2. Убираем дефолтную Main Camera из иерархии
-3. Заходим в MapMaker, перетаскиваем камеру, распаковываем префаб Unpack Completely
+3. 
 4. Перетаскиваем в иерархию наш фон(Assets/Sprites/Backgrounds), устанавливаем размеры, меняем Order in Layer на -1
 5. Создаем 2д объект tilemap Rectangular
 6. На созданный Grid заходим во внутрь и на Tilemap меняем layer с Default на Ground
@@ -26,10 +26,15 @@
 2. Аналогично JumpPad Manager
 3. Спавн Игроков через SpawnManager
   3.1 Необходимо дублировать SpawnPoint. Белая оболчка нужна для вида и тестирования, во время запуска она пропадает
-  3.2 распаковываем префаб Unpack Completely
 4. Переходим на уровень выше в папку GunManager
   4.1 Аналогично перетаскиваем GunManager
   4.2 Объекты для дублирования - Lazer,AutomaticRifle, RocketLauncher
+
+Установка для режимов.
+1. MapMaker/SetupTeamAndTime.
+  1.1 Для  карты с режимом DeathMatch необходимо в иерархию добавить GO_DeathMatch
+  1.2 Для карты с режимом TeamDeathMatch - GO_TeamDeathMatch
+2. В нашем объекте заходим в CanvasTime/TimeManager и меняем время игры на нужное
 
 Завершающие штрихи
 1. В папке MapMaker перетаскиваем в иерархию MenuAndDeathCanvas, распаковываем префаб Unpack Completely
@@ -38,37 +43,7 @@
 5. Из той же папки перемещаем ScoreBoardCanvas и распаковываем префаб Unpack Completely
 6. Меняем в Canvas поле Redner Camera с None на нашу камеру, которая в иерархии(перетаскиванием)
 
-DeathMatch. Установка от А до Я.
-1. MapMaker/SetupTeamAndTime
-2. перетаскиваем CanvasTime, MenuAndDeathCanvas, ScoreBoardCanvas, EndGameCanvasDeathMatch.
-3. Раскрываем CanvasTime, устанавливаем время.
-4. У нас пустые поля EndGameCanvas,EndGameScoreBoard,GameManager,ScoreBoard
-5. В поле EndGameCanvas перетаскиваем ScoreBoard из иерархии EndGameCanvasDeathMatch/ScoreBoard
-6. В поле EndGameScoreBoard повторяем пункт 5.
-7. В поле GameManager перетаскиваем MenuAndDeathCanvas.
-8. В поле ScoreBoard перетаскиваем ScoreBoardCanvas/ScoreBoard
-9. Открываем EndGameCanvasDeathMatch и в Render Camera устанавливаем нашу камеру на сцене
-10. Для ScoreBoardCanvas повторяем пункт 9
-11. Для MenuAndDeathCamvas повторяем пункт 9
-12. MenuAndDeathCanvas в скрипте GameManager имеет пустое поле Button. Эта кнопка находится в EndGameCanvasDeathMatch/Leave Button (1). Устанавливаем поле Button перетаскиванием. Заходим в EndGameCanvasDeathMatch/Leave Button (1) и перетаскиваем в поле OnClick объект MenuAndDeathCamvas и в функциях выбираем GameManager и Leave()
 
-TeamDeathMatch. Установка от А до Я.
-Хорошим исходником является TDMcyberfavels
-1. MapMaker/SetupTeamAndTime
-2. Перетаскиваем CanvasTime, MenuAndDeathCanvas, TeamScoreBoardCanvas, EndGameCanvasTeam
-3. Установка аналогична пунктам 5,6,7,8,9,10,11,12.
-4. Наше внимание теперь переключено на SpawnManager, точнее на его дочерние объекты SpawnPoint.
-5. В зависимости от респавна (если синий респавн, то мы включаем режим blue, если красный - red, если у нас обычный DeathMatch, то оставляем поля Red и Blue пустыми.
-
-
-Командный режим. Лидерборд.
-1. MapMaker/TeamMode перетаскиваем EndGameCanvasDeathMatch,
-
-9. Раскрываем ScoreBoardCanvas, видим Scoreboard. 
-10. Выбираем EndGameCanvas(он должен быть распакован)
-11. Меняем в Canvas поле Redner Camera с None на нашу камеру, которая в иерархии(перетаскиванием)
-12. Открываем MenuAndDeathCanvas и перетаскиваем в поле Button кнопку, которая находится в EndGameCanvas под названием LeaveButton (1)
-13. Открывает EndGameCanvas/ScoreBoard и ставим флажок Is End Game Canvas
 
 Добавление карты для выбора и в билд.
 
