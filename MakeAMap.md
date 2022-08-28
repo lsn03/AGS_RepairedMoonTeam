@@ -50,7 +50,7 @@ DeathMatch. Установка от А до Я.
 9. Открываем EndGameCanvasDeathMatch и в Render Camera устанавливаем нашу камеру на сцене
 10. Для ScoreBoardCanvas повторяем пункт 9
 11. Для MenuAndDeathCamvas повторяем пункт 9
-12. MenuAndDeathCanvas в скрипте GameManager имеет пустое поле Button. Эта кнопка находится в EndGameCanvasDeathMatch/Leave Button (1). Устанавливаем поле Button перетаскиванием.
+12. MenuAndDeathCanvas в скрипте GameManager имеет пустое поле Button. Эта кнопка находится в EndGameCanvasDeathMatch/Leave Button (1). Устанавливаем поле Button перетаскиванием. Заходим в EndGameCanvasDeathMatch/Leave Button (1) и перетаскиваем в поле OnClick объект MenuAndDeathCamvas и в функциях выбираем GameManager и Leave()
 
 TeamDeathMatch. Установка от А до Я.
 Хорошим исходником является TDMcyberfavels
