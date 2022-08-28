@@ -122,11 +122,20 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
                 {
                     scoreBoardItems[player].isChanged = false;
                     BubbleSort( PhotonNetwork.PlayerList );
-
+                    NumerateList( container );
                 }
             }
         }
     }
-    
+    protected virtual void NumerateList( Transform container )
+    {
+        int i = 0;
+        foreach ( Transform child in container )
+        {
+            i += 1;
+            PlayerLeaderboardListItem item = child.GetComponent<PlayerLeaderboardListItem>();
+            item.ChangeNumber( i );
+        }
+    }
 
 }

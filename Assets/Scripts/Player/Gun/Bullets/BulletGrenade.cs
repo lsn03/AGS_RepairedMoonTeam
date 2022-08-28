@@ -48,13 +48,15 @@ public class BulletGrenade : MonoBehaviour
             foreach (var _hitCollider in hitColliders)
             {
                 PlayerController Player = _hitCollider.GetComponent<PlayerController>();
+                
                 if (Player != null)
                 {
-                    Debug.Log("enemy damaged");
+                    Debug.Log( "player!=null" + photonView.IsMine );
                     try
                     {
                         if (photonView.IsMine)
                         {
+                            Debug.Log( "enemy damaged" );
                             var closestPoint = _hitCollider.ClosestPoint(transform.position);
                             var distance = Vector3.Distance(closestPoint, transform.position);
                             var damagePercent = Mathf.InverseLerp(0, splashRange, distance);
@@ -63,7 +65,7 @@ public class BulletGrenade : MonoBehaviour
                     }
                     catch (Exception ex)
                     {
-                        
+                        Debug.Log( ex.Message );
                     }
 
                 }

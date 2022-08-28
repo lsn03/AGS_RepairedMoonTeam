@@ -58,7 +58,7 @@ public class PlayerLeaderboardListItem : MonoBehaviourPunCallbacks
     public void ChangeNumber( int number )
     {
         this.number.text = number.ToString();
-        Debug.Log( "NumberChanged\t"+ number);
+        //Debug.Log( "NumberChanged\t"+ number);
     }
     public bool isChanged { get; set; }
     private void ChangeScore()
