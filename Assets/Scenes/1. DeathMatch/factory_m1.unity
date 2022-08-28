@@ -390,6 +390,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 571077205247242004, guid: 87c80587803f9824d97d82b52c8107c9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.190002
+      objectReference: {fileID: 0}
     - target: {fileID: 8495595186705189672, guid: 87c80587803f9824d97d82b52c8107c9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -8239,6 +8243,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6636249761167200960, guid: 85186e2804ce4a2478d0c77457ed7e55, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1015160328}
+    - target: {fileID: 6636249761167200960, guid: 85186e2804ce4a2478d0c77457ed7e55, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Leave
+      objectReference: {fileID: 0}
+    - target: {fileID: 9156103920538913063, guid: 85186e2804ce4a2478d0c77457ed7e55, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.190002
+      objectReference: {fileID: 0}
     - target: {fileID: 9156103921109873896, guid: 85186e2804ce4a2478d0c77457ed7e55, type: 3}
       propertyPath: m_Name
       value: EndGameCanvasDeathMatch
