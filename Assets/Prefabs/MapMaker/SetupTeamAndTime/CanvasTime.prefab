@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTimeInMinutes: 0
-  maxTimeInSec: 35
+  maxTimeInSec: 5
   time: {fileID: 7864158605125906304}
   endGameCanvas: {fileID: 0}
   endGameScoreBoard: {fileID: 0}
