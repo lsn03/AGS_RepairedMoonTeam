@@ -26,10 +26,10 @@ public class RocketLauncher : Gun
 
     private void Update()
     {
-        if (!photonView.IsMine) return;
-        if (timeBeforeShoots <= 0)
+        if ( !photonView.IsMine ) return;
+        if ( timeBeforeShoots <= 0 )
         {
-            if (Input.GetMouseButtonDown(0) && itemGameObject.active && bulletsLeft > 0)
+            if ( Input.GetMouseButtonDown( 0 ) && itemGameObject.active && bulletsLeft > 0 )
             {
                 Shoot();
                 timeBeforeShoots = timeBetweenShoots;
@@ -40,10 +40,10 @@ public class RocketLauncher : Gun
             timeBeforeShoots -= Time.deltaTime;
         }
 
-        if (itemGameObject.active)
+        if ( itemGameObject.active )
         {
-            text.gameObject.SetActive(true);
-            text.SetText(bulletsLeft + " / " + maxBullets);
+            text.gameObject.SetActive( true );
+            text.SetText( bulletsLeft + " / " + maxBullets );
         }
     }
 
@@ -55,6 +55,6 @@ public class RocketLauncher : Gun
     {
         bulletsLeft--;
         sound.Play();
-        PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        PhotonNetwork.Instantiate( bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation );
     }
 }

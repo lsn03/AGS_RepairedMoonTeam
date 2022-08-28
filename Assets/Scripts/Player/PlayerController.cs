@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     [SerializeField] GameObject ui;
 
-    [SerializeField] GameObject Custom;
+    //[SerializeField] GameObject Custom;
 
     PlayerManager playerManager;
     Animator _animator;
@@ -56,19 +56,20 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        photonView = GetComponent<PhotonView>();
+        photonView = GetComponentInChildren<PhotonView>();
     }
     public void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
 
         playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
 
         var text = photonView.Owner.NickName;
         arrayNick = text.Split('\t');
         TextName.text = arrayNick[0];
-        Custom.GetComponent<SpriteRenderer>().color = new Color(float.Parse(arrayNick[1]), float.Parse(arrayNick[2]), float.Parse(arrayNick[3]));
+        //Custom.GetComponent<SpriteRenderer>().color = new Color(float.Parse(arrayNick[1]), float.Parse(arrayNick[2]), float.Parse(arrayNick[3]));
 
         if (photonView.Owner.IsLocal)
         {
@@ -104,6 +105,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if (_rigidbody2D.velocity.y < -maxFallSpeed)
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -maxFallSpeed);
+
+        if (isGrounded)
+            _animator.SetBool("isJump", false);
     }
 
     void Run()
@@ -151,7 +155,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) && _rigidbody2D.velocity.y < jumpForce)
         {
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
-        }
+            _animator.SetBool("isJump", true);
+        }       
     }
     void JumpDown()
     {
@@ -161,7 +166,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y - fallSpeed * Time.deltaTime);
                 if (_rigidbody2D.velocity.y < -maxFallSpeed)
-                    _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -maxFallSpeed);
+                    _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -maxFallSpeed);                
             }
 
         }

@@ -12,16 +12,16 @@ public abstract class Gun : Item
     protected float timeBeforeShoots;
     public int bulletsLeft;
     public int bulletsToPickUpFirstTime;
-    public void AddBullet(int addBullet)
+    public void AddBullet( int addBullet )
     {
-        if (bulletsLeft == 0)
+        if ( bulletsLeft == 0 )
         {
             bulletsLeft = bulletsToPickUpFirstTime;
         }
-        else if (bulletsLeft > 0)
+        else if ( bulletsLeft > 0 )
         {
-            if (bulletsLeft < maxBullets)
-                bulletsLeft = System.Math.Min(bulletsLeft + addBullet, maxBullets);
+            if ( bulletsLeft < maxBullets )
+                bulletsLeft = System.Math.Min( bulletsLeft + addBullet, maxBullets );
         }
     }
 }

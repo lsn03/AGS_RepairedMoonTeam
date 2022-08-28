@@ -51,6 +51,7 @@ MonoBehaviour:
   - RPC_SetGameMode
   - RPC_UpdateForAllPlayer
   - RPC_SetPlayerListInTeams
+  - RPC_SetTimeForAllPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
