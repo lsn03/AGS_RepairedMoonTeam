@@ -43,13 +43,15 @@ public class BulletGrenade : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         {
-            var hitColliders = Physics2D.OverlapCircleAll(transform.position, splashRange);
+           // var hitColliders = Physics2D.OverlapCircleAll(transform.position, splashRange);
 
-            foreach (var _hitCollider in hitColliders)
+            //foreach (var _hitCollider in hitColliders)
             {
-                PlayerController Player = _hitCollider.GetComponent<PlayerController>();
+                //PlayerController Player = _hitCollider.GetComponent<PlayerController>();
+                //DestroyingPlatform platform = _hitCollider.GetComponent<DestroyingPlatform>();
+                var obj = collision.collider.gameObject.GetComponent<IDamage>();
                 
-                if (Player != null)
+                if ( obj!=null ) 
                 {
                     Debug.Log( "player!=null" + photonView.IsMine );
                     try
@@ -57,11 +59,10 @@ public class BulletGrenade : MonoBehaviour
                         if (photonView.IsMine)
                         {
                             Debug.Log( "enemy damaged" );
-                            var closestPoint = _hitCollider.ClosestPoint(transform.position);
-                            var distance = Vector3.Distance(closestPoint, transform.position);
-                            var damagePercent = Mathf.InverseLerp(0, splashRange, distance);
-                            Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
-                        }
+                            
+                            
+                                obj.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+                           }
                     }
                     catch (Exception ex)
                     {
