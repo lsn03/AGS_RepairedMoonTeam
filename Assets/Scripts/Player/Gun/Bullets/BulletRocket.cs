@@ -35,12 +35,20 @@ public class BulletRocket : MonoBehaviour
 
     void DestroyBullet()
     {
-        if (photonView.IsMine)
+        try
         {
-            Instantiate(hitEffect, transform.position, Quaternion.identity);
-            PhotonNetwork.Destroy(gameObject);
+            if ( photonView.IsMine )
+            {
+                Instantiate( hitEffect, transform.position, Quaternion.identity );
+                PhotonNetwork.Destroy( gameObject );
 
+            }
         }
+        catch(Exception ex )
+        {
+            Debug.Log( ex.Message );
+        }
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

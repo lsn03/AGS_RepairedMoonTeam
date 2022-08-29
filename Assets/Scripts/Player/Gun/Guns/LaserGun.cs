@@ -81,6 +81,8 @@ public class LaserGun : Gun
         }
         if (lineRenderer != null)
             lineRenderer.enabled = true;
-        yield return new WaitForSeconds(0);        
+        yield return new WaitForSeconds(0.1f);
+        if ( lineRenderer != null )
+            lineRenderer.enabled = false;
     }
 }
