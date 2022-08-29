@@ -132,6 +132,7 @@ MonoBehaviour:
   speed: 50
   destroyTime: 7.27
   hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}
+  photonView: {fileID: -5111014517800070371}
   pushForce: 0
   _rigidbody2D: {fileID: -3620782714138338211}
   splashRange: 2

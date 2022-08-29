@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using Photon.Realtime;
+
 public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmor, IDamageBooster
 {
     const float maxHP = 100f;
@@ -149,21 +151,22 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         {
             Debug.Log($"\t\tsender is: \t{info.Sender}");
             PlayerManager.Find(info.Sender).GetKill();
-            Die();
+            Die( info.Sender );
 
         }
         Debug.Log("Took damage " + damage);
     }
-    public void Die()
+    public void Die( Player player  )
+    {
+        deathSound.Play();
+        playerManager.Die(player);
+    }
+    public void Die(  )
     {
         deathSound.Play();
         playerManager.Die();
     }
-    public void DieByObjects()
-    {
-        deathSound.Play();
 
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "spikes" && photonView.IsMine)

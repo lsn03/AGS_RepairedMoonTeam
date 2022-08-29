@@ -50,7 +50,7 @@ public class DestroyingPlatform : Boost, IDamage
     // Update is called once per frame
     void Update()
     {
-        Debug.Log( currentHp );
+       // Debug.Log( currentHp );
         Activation( reloadTime );
     }
 

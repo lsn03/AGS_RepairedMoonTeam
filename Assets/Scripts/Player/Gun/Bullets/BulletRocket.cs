@@ -11,7 +11,7 @@ public class BulletRocket : MonoBehaviour
     public float destroyTime;
 
     public GameObject hitEffect;
-    private PhotonView photonView;
+    [SerializeField] PhotonView photonView;
 
     public float pushForce;
 
@@ -19,11 +19,17 @@ public class BulletRocket : MonoBehaviour
 
     [Range(0.1f, 5f), SerializeField] float splashRange;
 
+    private void Update()
+    {
 
+        photonView = GetComponent<PhotonView>();
+
+
+    }
     private void Start()
     {
         Invoke("DestroyBullet", destroyTime);
-        photonView = GetComponent<PhotonView>();
+        
         _rigidbody2D.velocity = transform.right * speed;
     }
 
@@ -76,7 +82,7 @@ public class BulletRocket : MonoBehaviour
                     }
                     catch (Exception ex)
                     {
-                       
+                        Debug.Log( ex.Message );
                     }
 
                 }

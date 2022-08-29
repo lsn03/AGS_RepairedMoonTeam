@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class DeathMenuManager : MonoBehaviour
 {
     public GameObject deathPanel;
     public GameObject chooseTeam;
     public static DeathMenuManager Instance;
+    [SerializeField] TMP_Text text;
     public string team {  get; private set; }
     // Start is called before the first frame update
     private void Awake()
@@ -17,6 +18,11 @@ public class DeathMenuManager : MonoBehaviour
     public void OpenDeathMenu()
     {
         deathPanel.SetActive( true );
+    }
+    public void OpenDeathMenu(string playerNick = "default")
+    {
+        deathPanel.SetActive( true );
+        text.text = $"player <color=red><b><size=150%>{playerNick}</color></b></size> killed you";
     }
     public void CloseDeathMenu()
     {
