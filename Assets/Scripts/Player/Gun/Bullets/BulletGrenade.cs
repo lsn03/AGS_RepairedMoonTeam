@@ -48,8 +48,8 @@ public class BulletGrenade : MonoBehaviour
             foreach (var _hitCollider in hitColliders)
             {
                 PlayerController Player = _hitCollider.GetComponent<PlayerController>();
-                
-                if (Player != null)
+                DestroyingPlatform platform = _hitCollider.GetComponent<DestroyingPlatform>();
+                if ( Player != null || platform != null ) 
                 {
                     Debug.Log( "player!=null" + photonView.IsMine );
                     try
@@ -60,7 +60,10 @@ public class BulletGrenade : MonoBehaviour
                             var closestPoint = _hitCollider.ClosestPoint(transform.position);
                             var distance = Vector3.Distance(closestPoint, transform.position);
                             var damagePercent = Mathf.InverseLerp(0, splashRange, distance);
-                            Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+                            if(Player!=null)
+                                Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+                            if ( platform != null )
+                                platform.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunInfo )itemInfo ).damage, photonView.Owner.NickName.Split( '\t' )[0] );
                         }
                     }
                     catch (Exception ex)

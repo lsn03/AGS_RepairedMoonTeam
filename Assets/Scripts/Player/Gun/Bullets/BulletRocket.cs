@@ -44,7 +44,8 @@ public class BulletRocket : MonoBehaviour
             foreach (var _hitCollider in hitColliders)
             {
                 PlayerController Player = _hitCollider.GetComponent<PlayerController>();
-                if (Player != null)
+                DestroyingPlatform platform = _hitCollider.GetComponent<DestroyingPlatform>();
+                if (Player != null || platform!=null)
                 {
                     //Debug.Log("enemy damaged");
                     try
@@ -64,8 +65,12 @@ public class BulletRocket : MonoBehaviour
                             forseVector.Normalize();
                             //Debug.Log("forseVector" + forseVector);
 
-                            Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0]);
-                            Player.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
+                            Player?.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0]);
+                            Player?.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
+
+                            platform?.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunInfo )itemInfo ).damage, photonView.Owner.NickName.Split( '\t' )[0] );
+
+
                             //Debug.Log("final forse" + ((-1) * pushForce * damagePercent * forseVector));
                         }
                     }

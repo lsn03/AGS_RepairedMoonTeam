@@ -69,6 +69,7 @@ public class MachineGun : Gun
             Debug.Log(hitInfo.transform.name);
             if (photonView.IsMine)
             {
+                Debug.Log( "Popal" );
                 hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
             }
             lineRenderer.SetPosition(0, bulletSpawn.position);
