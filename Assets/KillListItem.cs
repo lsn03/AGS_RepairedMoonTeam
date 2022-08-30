@@ -19,9 +19,11 @@ public class KillListItem : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text killed;
 
     
-    [SerializeField] float timeBeforeDelete = 4f;
+    [SerializeField] float timeBeforeDelete;
     [SerializeField] GunData[] guns;
-   // public Sprite[] sprites;
+
+    [Range(0,10f),SerializeField] float koef;
+    // public Sprite[] sprites;
     //[SerializeField] public SpriteRenderer sprite;
 
     PhotonView photonView;
@@ -76,12 +78,23 @@ public class KillListItem : MonoBehaviourPunCallbacks
             }
         }
     }
-
+    private float alpha = 1f;
     private void FixedUpdate()
     {
-        if ( timeBeforeDelete > 0 )
+        if ( timeBeforeDelete > 0 || alpha>0)
         {
+            float delta = Time.fixedDeltaTime;
 
+            Debug.Log( $"alpha {alpha} timeBeforeDel{timeBeforeDelete} delta {delta}" );
+            timeBeforeDelete -= delta;
+            alpha -= (delta / timeBeforeDelete/koef);
+            image.color = new Color( image.color.r, image.color.g, image.color.b, alpha );
+            killer.alpha = alpha;
+            killed.alpha = alpha;
+        }
+        else
+        {
+            DestroyObject();
         }
     }
 
