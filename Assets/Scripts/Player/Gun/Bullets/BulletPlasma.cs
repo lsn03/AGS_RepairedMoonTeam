@@ -52,7 +52,7 @@ public class BulletPlasma : MonoBehaviour
                             var closestPoint = _hitCollider.ClosestPoint(transform.position);
                             var distance = Vector3.Distance(closestPoint, transform.position);
                             var damagePercent = Mathf.InverseLerp(0, splashRange, distance);
-                            Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+                            Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(BulletPlasma));
                         }
                     }
                     catch (Exception ex)

@@ -66,7 +66,7 @@ public class RailGun : Gun
             Debug.Log(hitInfo.transform.name);
             if (photonView.IsMine)
             {
-                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(RailGun));
             }
             lineRenderer.SetPosition(0, bulletSpawn.position);
             lineRenderer.SetPosition(1, hitInfo.point);

@@ -107,7 +107,7 @@ public class PlayerManager : MonoBehaviour
             
     }
     // Update is called once per frame
-    public void Die(Player player)
+    public void Die(Player player,string weapon = null)
     {
         if ( !photonView.IsMine ) return;
         deaths++;
@@ -118,11 +118,25 @@ public class PlayerManager : MonoBehaviour
 
         PhotonNetwork.Destroy( controller );
         sound.Play();
+
+       
+        SetUpPlayerOnKillFeed( player.NickName.Split( '\t' )[0], weapon, PhotonNetwork.LocalPlayer.NickName.Split( '\t' )[0] );
         DeathMenuManager.Instance.OpenDeathMenu(player.NickName.Split('\t')[0]);
         Invoke( "CreateController", 1f );
 
 
 
+    }
+    public void SetUpPlayerOnKillFeed( string killer, string nameOfGun, string killed )
+    {
+        //KillFeedManager.Instance.SetUpPlayer( killer,nameOfGun,killed );
+
+        Hastable ht = PhotonNetwork.CurrentRoom.CustomProperties;
+        string temp = killer+"\t"+nameOfGun+"\t"+killed;
+        object obj = temp;
+        ht.Remove( "killAnouncer" );
+        ht.Add( "killAnouncer", obj );
+        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
     }
     public void Die()
     {

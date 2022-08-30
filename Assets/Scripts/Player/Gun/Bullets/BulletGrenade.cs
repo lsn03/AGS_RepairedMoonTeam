@@ -61,7 +61,7 @@ public class BulletGrenade : MonoBehaviour
                             Debug.Log( "enemy damaged" );
                             
                             
-                                obj.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+                                obj.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(BulletGrenade));
                            }
                     }
                     catch (Exception ex)

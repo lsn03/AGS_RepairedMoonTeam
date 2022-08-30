@@ -9,7 +9,7 @@ public class DestroyingPlatform : Boost, IDamage
     [SerializeField] private float reloadTime;
     float maxHp = 100f,currentHp;
 
-    public void TakeDamage( float damage, string name )
+    public void TakeDamage( float damage, string name, string weapon = null)
     {
         Debug.Log( "took damage" + damage );
         photonView.RPC( nameof( RPC_TakeDamage ), RpcTarget.All, damage, name );

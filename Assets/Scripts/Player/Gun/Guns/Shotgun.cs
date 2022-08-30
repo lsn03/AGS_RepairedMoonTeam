@@ -79,7 +79,7 @@ public class Shotgun : Gun
                 Debug.Log(hitInfo.transform.name);
                 if (photonView.IsMine)
                 {
-                    hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+                    hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(Shotgun));
                 }
                 lineRenderer[i].SetPosition(0, bulletSpawn.position);
                 lineRenderer[i].SetPosition(1, hitInfo.point);
