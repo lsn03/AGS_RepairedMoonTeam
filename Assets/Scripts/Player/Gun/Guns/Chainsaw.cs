@@ -30,7 +30,11 @@ public class Chainsaw : Gun
     private void Update()
     {
         if (!photonView.IsMine) return;
-        if (!itemGameObject.active) { shootingSound.Stop(); idleSound.Stop(); }
+        if (!itemGameObject.active) 
+        { 
+            shootingSound.Stop(); 
+            idleSound.Stop(); 
+        }
         if (timeBeforeShoots <= 0)
         {
             if (itemGameObject.active)

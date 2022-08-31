@@ -27,10 +27,11 @@ public class BulletPlasma : MonoBehaviour
 
     void DestroyBullet()
     {
-        if (photonView.IsMine)
+        if ( photonView.IsMine )
         {
-            Instantiate(hitEffect, transform.position, Quaternion.identity);
-            PhotonNetwork.Destroy(gameObject);
+            hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
+            hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
+            PhotonNetwork.Destroy( gameObject );
 
         }
     }

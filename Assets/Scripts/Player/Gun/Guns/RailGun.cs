@@ -62,10 +62,19 @@ public class RailGun : Gun
         bulletsLeft--;
         if (hitInfo)
         {
-            Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
-            Debug.Log(hitInfo.transform.name);
-            if (photonView.IsMine)
+            hitEffectController hit = Instantiate(hitEffect, hitInfo.point, Quaternion.identity).GetComponent<hitEffectController>();
+
+            //Debug.Log(hitInfo.transform.name);
+            if ( photonView.IsMine )
             {
+                if ( hitInfo.collider.gameObject.GetComponent<IDamage>() != null )
+                {
+                    hit.ShowDamage( ( ( GunInfo )itemInfo ).damage,waitForSeconds );
+                }
+                else
+                {
+                    hit.ShowDamage();
+                }
                 hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(RailGun));
             }
             lineRenderer.SetPosition(0, bulletSpawn.position);

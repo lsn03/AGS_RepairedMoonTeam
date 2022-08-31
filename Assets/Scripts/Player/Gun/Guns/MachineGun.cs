@@ -69,10 +69,14 @@ public class MachineGun : Gun
             Debug.Log(hitInfo.transform.name);
             if (photonView.IsMine)
             {
-                Debug.Log( "Popal" );
-              //  if( hitInfo.collider.gameObject.GetComponent<IDamage>() != null )
+                //Debug.Log( "Popal" );
+                if( hitInfo.collider.gameObject.GetComponent<IDamage>() != null )
                 {
                     hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
+                }
+                else
+                {
+                    hit.ShowDamage( );
                 }
                 hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0], "MachineGun"  );
                 

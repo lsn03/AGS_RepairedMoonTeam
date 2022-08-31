@@ -39,7 +39,7 @@ public class BulletRocket : MonoBehaviour
         {
             if ( photonView.IsMine )
             {
-                Instantiate( hitEffect, transform.position, Quaternion.identity );
+                
                 PhotonNetwork.Destroy( gameObject );
 
             }
@@ -81,7 +81,8 @@ public class BulletRocket : MonoBehaviour
 
                             Player?.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0],nameof(BulletRocket));
                             Player?.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
-
+                            hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
+                            hit.ShowDamage( ( ( GunInfo )itemInfo ).damage * damagePercent );
                             platform?.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunInfo )itemInfo ).damage, photonView.Owner.NickName.Split( '\t' )[0],nameof(BulletRocket) );
 
 
