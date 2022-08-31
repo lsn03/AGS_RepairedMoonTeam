@@ -35,7 +35,7 @@ public class BulletGrenade : MonoBehaviour
     {
         if (photonView.IsMine)
         {
-            Instantiate(hitEffect, transform.position, Quaternion.identity);
+            
             PhotonNetwork.Destroy(gameObject);
 
         }
@@ -59,9 +59,10 @@ public class BulletGrenade : MonoBehaviour
                         if (photonView.IsMine)
                         {
                             Debug.Log( "enemy damaged" );
-                            
-                            
-                                obj.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+
+                            hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
+                            hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
+                            obj.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(GrenadeLauncher));
                            }
                     }
                     catch (Exception ex)

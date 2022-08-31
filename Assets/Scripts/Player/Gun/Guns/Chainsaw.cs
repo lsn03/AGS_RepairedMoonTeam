@@ -30,7 +30,11 @@ public class Chainsaw : Gun
     private void Update()
     {
         if (!photonView.IsMine) return;
-        if (!itemGameObject.active) { shootingSound.Stop(); idleSound.Stop(); }
+        if (!itemGameObject.active) 
+        { 
+            shootingSound.Stop(); 
+            idleSound.Stop(); 
+        }
         if (timeBeforeShoots <= 0)
         {
             if (itemGameObject.active)
@@ -71,7 +75,7 @@ public class Chainsaw : Gun
 
         if (hitInfo)
         {
-            hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, name[0]);
+            hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, name[0],nameof( Chainsaw ) );
         }
     }
 

@@ -107,6 +107,51 @@ public class PlayerManager : MonoBehaviour
             
     }
     // Update is called once per frame
+    public void Die(Player player,string weapon = null)
+    {
+
+
+
+        if ( !photonView.IsMine ) return;
+        deaths++;
+        Debug.Log( "Мертвый считается :\t " + PhotonNetwork.LocalPlayer.NickName );
+        Hastable hash = new Hastable();
+        hash.Add( "deaths", deaths );
+        PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
+
+        PhotonNetwork.Destroy( controller );
+        sound.Play();
+
+       
+        SetUpPlayerOnKillFeed( player.NickName.Split( '\t' )[0], weapon, PhotonNetwork.LocalPlayer.NickName.Split( '\t' )[0] );
+        DeathMenuManager.Instance.OpenDeathMenu(player.NickName.Split('\t')[0]);
+        Invoke( "CreateController", 1f );
+
+
+
+    }
+    public void SetUpPlayerOnKillFeed( string killer, string nameOfGun, string killed )
+    {
+        //KillFeedManager.Instance.SetUpPlayer( killer,nameOfGun,killed );
+
+        Hastable ht = PhotonNetwork.CurrentRoom.CustomProperties;
+        string temp = killer+"\t"+nameOfGun+"\t"+killed;
+        object obj = temp;
+        ht.Remove( "killAnouncer" );
+        ht.Add( "killAnouncer", obj );
+        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
+    }
+    public void SetUpPlayerOnKillFeed( string killed )
+    {
+        //KillFeedManager.Instance.SetUpPlayer( killer,nameOfGun,killed );
+
+        Hastable ht = PhotonNetwork.CurrentRoom.CustomProperties;
+        string temp = killed;
+        object obj = temp;
+        ht.Remove( "killAnouncer" );
+        ht.Add( "killAnouncer", obj );
+        PhotonNetwork.CurrentRoom.SetCustomProperties( ht );
+    }
     public void Die()
     {
         if ( !photonView.IsMine ) return;
@@ -118,30 +163,23 @@ public class PlayerManager : MonoBehaviour
 
         PhotonNetwork.Destroy( controller );
         sound.Play();
+
+        SetUpPlayerOnKillFeed( PhotonNetwork.LocalPlayer.NickName.Split( '\t' )[0] );
+        
         DeathMenuManager.Instance.OpenDeathMenu();
         Invoke ( "CreateController",1f );
 
         
 
     }
-    public void DieByObject()
+
+    public void GetKill(Player player)
     {
-        deaths++;
-        Hastable hash = new Hastable();
-        hash.Add( "deaths", deaths );
-        PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
-        PhotonNetwork.Destroy( controller );
-        sound.Play();
-        DeathMenuManager.Instance.OpenDeathMenu();
-        Invoke( "CreateController", 1f );
-    }
-    public void GetKill()
-    {
-        photonView.RPC( nameof( RPC_GetKill ), photonView.Owner );
+        photonView.RPC( nameof( RPC_GetKill ), photonView.Owner,player );
     }
 
     [PunRPC]
-    void RPC_GetKill()
+    void RPC_GetKill(Player killed)
     {
         
         if ( !photonView.IsMine ) return;
@@ -149,6 +187,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log( "Килл засчитан: \t" + PhotonNetwork.LocalPlayer.NickName );
         Hastable hash = new Hastable();
         hash.Add( "kills", kills );
+        WhoWasKilledManager.Instance.SetupKill( killed.NickName.Split( '\t' )[0] );
         PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
     }
 

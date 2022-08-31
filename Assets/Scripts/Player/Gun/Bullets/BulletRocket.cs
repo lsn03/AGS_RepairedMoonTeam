@@ -11,7 +11,7 @@ public class BulletRocket : MonoBehaviour
     public float destroyTime;
 
     public GameObject hitEffect;
-    private PhotonView photonView;
+    [SerializeField] PhotonView photonView;
 
     public float pushForce;
 
@@ -19,22 +19,36 @@ public class BulletRocket : MonoBehaviour
 
     [Range(0.1f, 5f), SerializeField] float splashRange;
 
+    private void Update()
+    {
 
+        photonView = GetComponent<PhotonView>();
+
+
+    }
     private void Start()
     {
         Invoke("DestroyBullet", destroyTime);
-        photonView = GetComponent<PhotonView>();
+        
         _rigidbody2D.velocity = transform.right * speed;
     }
 
     void DestroyBullet()
     {
-        if (photonView.IsMine)
+        try
         {
-            Instantiate(hitEffect, transform.position, Quaternion.identity);
-            PhotonNetwork.Destroy(gameObject);
+            if ( photonView.IsMine )
+            {
+                
+                PhotonNetwork.Destroy( gameObject );
 
+            }
         }
+        catch(Exception ex )
+        {
+            Debug.Log( ex.Message );
+        }
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -65,10 +79,11 @@ public class BulletRocket : MonoBehaviour
                             forseVector.Normalize();
                             //Debug.Log("forseVector" + forseVector);
 
-                            Player?.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0]);
+                            Player?.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0],nameof(RocketLauncher));
                             Player?.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
-
-                            platform?.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunInfo )itemInfo ).damage, photonView.Owner.NickName.Split( '\t' )[0] );
+                            hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
+                            hit.ShowDamage( ( ( GunInfo )itemInfo ).damage * damagePercent );
+                            platform?.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunInfo )itemInfo ).damage, photonView.Owner.NickName.Split( '\t' )[0],nameof(BulletRocket) );
 
 
                             //Debug.Log("final forse" + ((-1) * pushForce * damagePercent * forseVector));
@@ -76,7 +91,7 @@ public class BulletRocket : MonoBehaviour
                     }
                     catch (Exception ex)
                     {
-                       
+                        Debug.Log( ex.Message );
                     }
 
                 }

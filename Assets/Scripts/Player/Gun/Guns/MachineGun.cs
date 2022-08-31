@@ -65,12 +65,21 @@ public class MachineGun : Gun
         bulletsLeft--;
         if (hitInfo)
         {
-            Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
+            hitEffectController hit = Instantiate(hitEffect, hitInfo.point, Quaternion.identity).GetComponent<hitEffectController>();
             Debug.Log(hitInfo.transform.name);
             if (photonView.IsMine)
             {
-                Debug.Log( "Popal" );
-                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+                //Debug.Log( "Popal" );
+                if( hitInfo.collider.gameObject.GetComponent<IDamage>() != null )
+                {
+                    hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
+                }
+                else
+                {
+                    hit.ShowDamage( );
+                }
+                hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0], "MachineGun"  );
+                
             }
             lineRenderer.SetPosition(0, bulletSpawn.position);
             lineRenderer.SetPosition(1, hitInfo.point);

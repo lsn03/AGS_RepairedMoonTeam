@@ -75,11 +75,20 @@ public class Shotgun : Gun
 
             if (hitInfo)
             {
-                Instantiate(hitEffect, hitInfo.point, Quaternion.identity);
-                Debug.Log(hitInfo.transform.name);
-                if (photonView.IsMine)
+                hitEffectController hit = Instantiate(hitEffect, hitInfo.point, Quaternion.identity).GetComponent<hitEffectController>();
+
+                //Debug.Log(hitInfo.transform.name);
+                if ( photonView.IsMine )
                 {
-                    hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0]);
+                    if ( hitInfo.collider.gameObject.GetComponent<IDamage>() != null )
+                    {
+                        hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
+                    }
+                    else
+                    {
+                        hit.ShowDamage();
+                    }
+                    hitInfo.collider.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(Shotgun));
                 }
                 lineRenderer[i].SetPosition(0, bulletSpawn.position);
                 lineRenderer[i].SetPosition(1, hitInfo.point);
