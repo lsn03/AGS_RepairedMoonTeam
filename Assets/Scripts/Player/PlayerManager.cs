@@ -138,6 +138,17 @@ public class PlayerManager : MonoBehaviour
         ht.Add( "killAnouncer", obj );
         PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
     }
+    public void SetUpPlayerOnKillFeed( string killed )
+    {
+        //KillFeedManager.Instance.SetUpPlayer( killer,nameOfGun,killed );
+
+        Hastable ht = PhotonNetwork.CurrentRoom.CustomProperties;
+        string temp = killed;
+        object obj = temp;
+        ht.Remove( "killAnouncer" );
+        ht.Add( "killAnouncer", obj );
+        PhotonNetwork.CurrentRoom.SetCustomProperties( ht );
+    }
     public void Die()
     {
         if ( !photonView.IsMine ) return;
@@ -149,6 +160,9 @@ public class PlayerManager : MonoBehaviour
 
         PhotonNetwork.Destroy( controller );
         sound.Play();
+
+        SetUpPlayerOnKillFeed( PhotonNetwork.LocalPlayer.NickName.Split( '\t' )[0] );
+        
         DeathMenuManager.Instance.OpenDeathMenu();
         Invoke ( "CreateController",1f );
 

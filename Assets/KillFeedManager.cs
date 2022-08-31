@@ -25,12 +25,19 @@ public class KillFeedManager : MonoBehaviourPunCallbacks
             propertiesThatChanged.TryGetValue("killAnouncer",out object obj);
             string[] value = ((string)obj).Split('\t');
             propertiesThatChanged.Remove( "killAnouncer" );
+            if ( value.Length == 3 )
+            {
+                SetUpPlayer( value[0], value[1], value[2] );
+            }
+            else if(value.Length <3)
+            {
+                SetUpPlayer( value[0] );
+            }
             
-            SetUpPlayer(value[0],value[1],value[2]);
         }
     }
 
-    public void SetUpPlayer( string killer, string nameOfGun, string killed )
+    public void SetUpPlayer( string killed )
     {
         currentCount = container.childCount;
         if ( currentCount < maxCount )
@@ -39,7 +46,7 @@ public class KillFeedManager : MonoBehaviourPunCallbacks
 
 
             // KillListItem list = Instantiate(killListPrefab,container).GetComponent<KillListItem>();
-            list.Setup( killer, nameOfGun, killed );
+            list.Setup( killed );
             currentCount += 1; 
         }
         else
@@ -55,6 +62,38 @@ public class KillFeedManager : MonoBehaviourPunCallbacks
 
 
                 // KillListItem list = Instantiate(killListPrefab,container).GetComponent<KillListItem>();
+                list2.Setup(killed );
+                currentCount += 1;
+                break;
+            }
+        }
+    }
+
+    public void SetUpPlayer( string killer, string nameOfGun, string killed )
+    {
+        currentCount = container.childCount;
+        if ( currentCount < maxCount )
+        {
+            KillListItem list = Instantiate( killListPrefab, container).GetComponent<KillListItem>();
+
+
+            // KillListItem list = Instantiate(killListPrefab,container).GetComponent<KillListItem>();
+            list.Setup( killer, nameOfGun, killed );
+            currentCount += 1;
+        }
+        else
+        {
+
+            foreach ( Transform list in container )
+            {
+                KillListItem item = list.GetComponent<KillListItem>();
+                item.DestroyObject();
+
+                currentCount -= 1;
+                KillListItem list2 = Instantiate( killListPrefab, container).GetComponent<KillListItem>();
+
+
+                // KillListItem list = Instantiate(killListPrefab,container).GetComponent<KillListItem>();
                 list2.Setup( killer, nameOfGun, killed );
                 currentCount += 1;
                 break;
@@ -62,8 +101,6 @@ public class KillFeedManager : MonoBehaviourPunCallbacks
         }
     }
 
-    
-    
-    
-    
+
+
 }

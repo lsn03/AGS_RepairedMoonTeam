@@ -45,18 +45,18 @@ public class KillListItem : MonoBehaviourPunCallbacks
 
     public void Setup(string killer,string nameOfGun,string killed )
     {
-        RPC_Setup( killer, nameOfGun, killed );
-
-
-    }
-
-   
-    public void RPC_Setup( string killer, string nameOfGun, string killed )
-    {
         this.killer.text = killer;
         LoadImage( nameOfGun );
         this.killed.text = killed;
     }
+    public void Setup( string killed )
+    {
+        this.killer.text = "";
+        LoadImage( "suicide" );
+        this.killed.text = killed;
+    }
+
+
     public void DestroyObject()
     {
         try

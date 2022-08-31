@@ -18,12 +18,14 @@ public class DeathMenuManager : MonoBehaviour
     public void OpenDeathMenu()
     {
         deathPanel.SetActive( true );
+        text.text = $"<color=red><b><size=150%>suicide</color></b></size>";
     }
     public void OpenDeathMenu(string playerNick = "default")
     {
         deathPanel.SetActive( true );
         text.text = $"player <color=red><b><size=150%>{playerNick}</color></b></size> killed you";
     }
+
     public void CloseDeathMenu()
     {
         deathPanel.SetActive( false );
