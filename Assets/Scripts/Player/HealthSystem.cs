@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using Photon.Realtime;
+
 public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmor, IDamageBooster
 {
     const float maxHP = 100f;
@@ -86,11 +88,11 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         Debug.Log("Addhp added external hp");
         photonView.RPC("RPC_AddHp", RpcTarget.All, hp);
     }
-    public void TakeDamage(float damage, string autor)
+    public void TakeDamage( float damage, string name, string weapon  )
     {
         Debug.Log("took damage" + damage);
 
-        photonView.RPC("RPC_TakeDamage", photonView.Owner, damage, autor);
+        photonView.RPC("RPC_TakeDamage", photonView.Owner, damage, name ,weapon);
     }
 
     [PunRPC]
@@ -112,7 +114,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
     [PunRPC]
 
-    void RPC_TakeDamage(float damage, string autor, PhotonMessageInfo info)
+    void RPC_TakeDamage(float damage, string autor, string weapon, PhotonMessageInfo info )
     {
         if (!photonView.IsMine) return;
         if (autor == photonView.Owner.NickName.Split('\t')[0])
@@ -148,22 +150,23 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         if (currentHP <= 0)
         {
             Debug.Log($"\t\tsender is: \t{info.Sender}");
-            PlayerManager.Find(info.Sender).GetKill();
-            Die();
+            PlayerManager.Find(info.Sender).GetKill(PhotonNetwork.LocalPlayer);
+            Die( info.Sender, weapon );
 
         }
         Debug.Log("Took damage " + damage);
     }
-    public void Die()
+    public void Die( Player player, string weapon   )
+    {
+        deathSound.Play();
+        playerManager.Die(player,weapon);
+    }
+    public void Die(  )
     {
         deathSound.Play();
         playerManager.Die();
     }
-    public void DieByObjects()
-    {
-        deathSound.Play();
 
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "spikes" && photonView.IsMine)

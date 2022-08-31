@@ -410,7 +410,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &8979071167986005941
 MonoBehaviour:
@@ -2272,7 +2272,7 @@ MonoBehaviour:
   - {x: -0.26646164, y: 0.8371175, z: -2.8511238e-10}
   m_ShapePathHash: 1873972708
   m_Mesh: {fileID: 0}
-  m_InstanceId: 358400
+  m_InstanceId: 129112
 --- !u!1 &2890441619222039724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2366,7 +2366,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &3989022429621849680
 MonoBehaviour:

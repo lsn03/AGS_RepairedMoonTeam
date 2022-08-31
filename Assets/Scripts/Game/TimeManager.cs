@@ -85,10 +85,13 @@ public class TimeManager : MonoBehaviourPunCallbacks
     public override void OnRoomPropertiesUpdate( Hastable propertiesThatChanged )
     {
         object abk;
-        if ( propertiesThatChanged.TryGetValue( "time", out abk ) )
+        if( propertiesThatChanged.ContainsKey( "time" ) )
         {
-            currentTimer = (float)abk;
+            propertiesThatChanged.TryGetValue( "time", out abk );
+            if(currentTimer< ( float )abk && currentTimer==0 )
+                currentTimer = ( float )abk;
         }
+
     }
     bool flag = false;
     bool isEnd = false;
