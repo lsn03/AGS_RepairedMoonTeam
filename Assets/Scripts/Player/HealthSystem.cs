@@ -150,7 +150,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
         if (currentHP <= 0)
         {
             Debug.Log($"\t\tsender is: \t{info.Sender}");
-            PlayerManager.Find(info.Sender).GetKill();
+            PlayerManager.Find(info.Sender).GetKill(PhotonNetwork.LocalPlayer);
             Die( info.Sender, weapon );
 
         }

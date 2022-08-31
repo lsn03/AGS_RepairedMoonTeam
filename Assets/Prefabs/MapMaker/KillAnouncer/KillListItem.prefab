@@ -90,6 +90,16 @@ MonoBehaviour:
     image: {fileID: 8870675678323624669, guid: adfb6b464f1d6b540a017708db22f28e, type: 3}
   - name: MachineGun
     image: {fileID: 21300000, guid: 2694a551cefcd8443bd8c972829bda3a, type: 3}
+  - name: Shotgun
+    image: {fileID: 21300000, guid: 77bdd421df222b448b2b327e2e7e9ca3, type: 3}
+  - name: GrenadeLauncher
+    image: {fileID: 21300000, guid: 77bdd421df222b448b2b327e2e7e9ca3, type: 3}
+  - name: RocketLauncher
+    image: {fileID: 21300000, guid: 77bdd421df222b448b2b327e2e7e9ca3, type: 3}
+  - name: LaserGun
+    image: {fileID: 21300000, guid: 77bdd421df222b448b2b327e2e7e9ca3, type: 3}
+  - name: PlasmaRifle
+    image: {fileID: 21300000, guid: 77bdd421df222b448b2b327e2e7e9ca3, type: 3}
   - name: RailGun
     image: {fileID: -6198370309422930330, guid: defd4d0a530c82440a161fc260857c0e, type: 3}
   - name: suicide

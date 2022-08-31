@@ -79,7 +79,7 @@ public class BulletRocket : MonoBehaviour
                             forseVector.Normalize();
                             //Debug.Log("forseVector" + forseVector);
 
-                            Player?.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0],nameof(BulletRocket));
+                            Player?.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0],nameof(RocketLauncher));
                             Player?.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
                             hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
                             hit.ShowDamage( ( ( GunInfo )itemInfo ).damage * damagePercent );

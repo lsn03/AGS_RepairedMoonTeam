@@ -109,6 +109,9 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     public void Die(Player player,string weapon = null)
     {
+
+
+
         if ( !photonView.IsMine ) return;
         deaths++;
         Debug.Log( "Мертвый считается :\t " + PhotonNetwork.LocalPlayer.NickName );
@@ -170,13 +173,13 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public void GetKill()
+    public void GetKill(Player player)
     {
-        photonView.RPC( nameof( RPC_GetKill ), photonView.Owner );
+        photonView.RPC( nameof( RPC_GetKill ), photonView.Owner,player );
     }
 
     [PunRPC]
-    void RPC_GetKill()
+    void RPC_GetKill(Player killed)
     {
         
         if ( !photonView.IsMine ) return;
@@ -184,6 +187,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log( "Килл засчитан: \t" + PhotonNetwork.LocalPlayer.NickName );
         Hastable hash = new Hastable();
         hash.Add( "kills", kills );
+        WhoWasKilledManager.Instance.SetupKill( killed.NickName.Split( '\t' )[0] );
         PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
     }
 

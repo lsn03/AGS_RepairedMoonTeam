@@ -62,7 +62,7 @@ public class BulletGrenade : MonoBehaviour
 
                             hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
                             hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
-                            obj.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(BulletGrenade));
+                            obj.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(GrenadeLauncher));
                            }
                     }
                     catch (Exception ex)
