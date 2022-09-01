@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,7 +11,7 @@ public class GrenadeLauncher : Gun
     public GameObject bullet;
     public Transform bulletSpawn;
     public GameObject Gun;
-
+    public float speed;
     private PhotonView photonView;
 
     public TextMeshProUGUI text;
@@ -59,13 +60,21 @@ public class GrenadeLauncher : Gun
         
         sound.Play();
 
-        PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        photonView.RPC( nameof( RPC_Shoot ), RpcTarget.All, gameObject.transform.right * speed, PhotonNetwork.LocalPlayer );
         bulletsLeft--;
         yield return new WaitForSeconds(shotDelay);
-        PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        photonView.RPC( nameof( RPC_Shoot ), RpcTarget.All, gameObject.transform.right * speed, PhotonNetwork.LocalPlayer );
         bulletsLeft--;
         yield return new WaitForSeconds(shotDelay);
-        PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        photonView.RPC( nameof( RPC_Shoot ), RpcTarget.All, gameObject.transform.right * speed, PhotonNetwork.LocalPlayer );
         bulletsLeft--;
+    }
+    [PunRPC]
+    public void RPC_Shoot( Vector3 vel, Player sender )
+    {
+        GameObject bul = Instantiate( bullet, bulletSpawn.position, bulletSpawn.transform.rotation );
+        Rigidbody2D _rigidbody2D = bul.GetComponent<Rigidbody2D>();
+        _rigidbody2D.velocity = vel;
+        bul.GetComponent<BulletGrenade>().SetSender( sender.NickName.Split( '\t' )[0] );
     }
 }

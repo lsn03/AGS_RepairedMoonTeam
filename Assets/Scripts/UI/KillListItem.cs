@@ -85,7 +85,7 @@ public class KillListItem : MonoBehaviourPunCallbacks
         {
             float delta = Time.fixedDeltaTime;
 
-            Debug.Log( $"alpha {alpha} timeBeforeDel{timeBeforeDelete} delta {delta}" );
+            //Debug.Log( $"alpha {alpha} timeBeforeDel{timeBeforeDelete} delta {delta}" );
             timeBeforeDelete -= delta;
             alpha -= (delta / timeBeforeDelete/koef);
             image.color = new Color( image.color.r, image.color.g, image.color.b, alpha );

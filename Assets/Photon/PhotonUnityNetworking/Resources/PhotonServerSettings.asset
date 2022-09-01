@@ -54,6 +54,7 @@ MonoBehaviour:
   - RPC_SetTimeForAllPlayer
   - RPC_SetUpPlayer
   - RPC_Setup
+  - RPC_Shoot
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
