@@ -117,7 +117,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     void RPC_TakeDamage(float damage, string autor, string weapon, PhotonMessageInfo info )
     {
         if (!photonView.IsMine) return;
-        if (autor == photonView.Owner.NickName.Split('\t')[0])
+        if (autor == photonView.Owner.NickName.Split('\t')[0] || info.Sender == PhotonNetwork.LocalPlayer)
         {
             return;
         }
@@ -144,7 +144,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
         currentArmorText.text = currentArmor.ToString();
         currentHpText.text = currentHP.ToString();
-
+        Debug.Log( $"sender is: \t{info.Sender}, currentHp = {currentHP}" );
         armorBarImage.fillAmount = currentArmor / maxArmor;
         healthBarImage.fillAmount = currentHP / maxHP;
         if (currentHP <= 0)

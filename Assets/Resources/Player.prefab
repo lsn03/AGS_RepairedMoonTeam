@@ -2474,7 +2474,7 @@ MonoBehaviour:
   - {x: -0.26646164, y: 0.8371175, z: -2.8511238e-10}
   m_ShapePathHash: 1873972708
   m_Mesh: {fileID: 0}
-  m_InstanceId: 129112
+  m_InstanceId: 631200
 --- !u!1 &2890441619222039724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2952,9 +2952,10 @@ MonoBehaviour:
   bulletsLeft: 500
   bulletsToPickUpFirstTime: 100
   offset: 0
-  bullet: {fileID: 646345200201882337, guid: 060eecf8b5ccb374c85beca54746a51d, type: 3}
+  bulletPrefab: {fileID: 646345200201882337, guid: 060eecf8b5ccb374c85beca54746a51d, type: 3}
   bulletSpawn: {fileID: 3131435667265744385}
   Gun: {fileID: 5104495905856433873}
+  speed: 0
   text: {fileID: 6858601804102799036}
   sound: {fileID: 8493408128370495303}
 --- !u!114 &2453486358494131674
@@ -3166,6 +3167,7 @@ MonoBehaviour:
   bullet: {fileID: 646345200201882337, guid: f10cde3062402c84e820c10f17c9e40f, type: 3}
   bulletSpawn: {fileID: 2165184632402139159}
   Gun: {fileID: 4558589583823733203}
+  speed: 20
   text: {fileID: 6858601804102799036}
   sound: {fileID: 7856533070429117997}
 --- !u!114 &1196175814260418350
@@ -4129,6 +4131,7 @@ MonoBehaviour:
   bullet: {fileID: 646345200201882337, guid: dd332828bcb498d4885409a4702b8810, type: 3}
   bulletSpawn: {fileID: 8938932199686476150}
   Gun: {fileID: 1037828555613126247}
+  speed: 15
   text: {fileID: 6858601804102799036}
   shotDelay: 0.3
   sound: {fileID: 9209802750010866598}
