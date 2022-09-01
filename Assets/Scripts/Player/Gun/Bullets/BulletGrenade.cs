@@ -17,7 +17,11 @@ public class BulletGrenade : MonoBehaviour
     public Rigidbody2D _rigidbody2D;
 
     [Range(0.1f, 5f), SerializeField] float splashRange;
-
+    public void SetSender( string name )
+    {
+        this.name = name;
+    }
+    private string name;
 
     private void Start()
     {

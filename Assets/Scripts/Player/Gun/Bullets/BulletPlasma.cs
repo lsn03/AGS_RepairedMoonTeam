@@ -15,7 +15,7 @@ public class BulletPlasma : MonoBehaviour
 
     public Rigidbody2D _rigidbody2D;
 
-    [Range(0.1f, 5f), SerializeField] float splashRange;
+   
 
 
     private void Start()
@@ -29,8 +29,7 @@ public class BulletPlasma : MonoBehaviour
     {
         //if ( photonView.IsMine )
         {
-            hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
-            hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
+            
             Destroy( gameObject );
 
         }
@@ -42,34 +41,16 @@ public class BulletPlasma : MonoBehaviour
     private string name;
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        var obj = collision.collider.gameObject.GetComponent<IDamage>();
+        if ( obj != null )
         {
-            var hitColliders = Physics2D.OverlapCircleAll(transform.position, splashRange);
-
-            foreach (var _hitCollider in hitColliders)
-            {
-                PlayerController Player = _hitCollider.GetComponent<PlayerController>();
-                if (Player != null)
-                {
-                    Debug.Log("enemy damaged");
-                    try
-                    {
-                       // if (photonView.IsMine)
-                        {
-                            var closestPoint = _hitCollider.ClosestPoint(transform.position);
-                            var distance = Vector3.Distance(closestPoint, transform.position);
-                            var damagePercent = Mathf.InverseLerp(0, splashRange, distance);
-                            Player.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage, name,nameof(PlasmaRifle));
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        return;
-                    }
-
-                }
-            }
-            DestroyBullet();
+            hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
+            hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
+            obj.TakeDamage( ( ( GunInfo )itemInfo ).damage, name, nameof( PlasmaRifle ) );
         }
+        DestroyBullet();
+        
     }
     // лидерборды
     // патроны
