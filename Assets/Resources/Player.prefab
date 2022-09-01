@@ -2272,7 +2272,7 @@ MonoBehaviour:
   - {x: -0.26646164, y: 0.8371175, z: -2.8511238e-10}
   m_ShapePathHash: 1873972708
   m_Mesh: {fileID: 0}
-  m_InstanceId: 269584
+  m_InstanceId: 557870
 --- !u!1 &2890441619222039724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3928,6 +3928,7 @@ MonoBehaviour:
   bullet: {fileID: 646345200201882337, guid: dd332828bcb498d4885409a4702b8810, type: 3}
   bulletSpawn: {fileID: 8938932199686476150}
   Gun: {fileID: 1037828555613126247}
+  speed: 15
   text: {fileID: 6858601804102799036}
   shotDelay: 0.3
   sound: {fileID: 9209802750010866598}

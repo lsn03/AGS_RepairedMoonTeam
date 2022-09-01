@@ -12,7 +12,7 @@ public class BulletGrenade : MonoBehaviour
     public float destroyTime;
 
     public GameObject hitEffect;
-    private PhotonView photonView;
+   
 
     public Rigidbody2D _rigidbody2D;
 
@@ -26,7 +26,7 @@ public class BulletGrenade : MonoBehaviour
     private void Start()
     {
         Invoke("DestroyBullet", destroyTime);
-        photonView = GetComponent<PhotonView>();
+        
         _rigidbody2D.velocity = transform.right * speed;
     }
 
@@ -37,48 +37,24 @@ public class BulletGrenade : MonoBehaviour
 
     void DestroyBullet()
     {
-        if (photonView.IsMine)
-        {
-            
-            PhotonNetwork.Destroy(gameObject);
-
-        }
+        Destroy(gameObject);        
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D( Collision2D collision )
     {
+        var obj = collision.collider.gameObject.GetComponent<IDamage>();
+
+        if ( obj != null )
         {
-           // var hitColliders = Physics2D.OverlapCircleAll(transform.position, splashRange);
+            Debug.Log( "enemy damaged" );
 
-            //foreach (var _hitCollider in hitColliders)
-            {
-                //PlayerController Player = _hitCollider.GetComponent<PlayerController>();
-                //DestroyingPlatform platform = _hitCollider.GetComponent<DestroyingPlatform>();
-                var obj = collision.collider.gameObject.GetComponent<IDamage>();
-                
-                if ( obj!=null ) 
-                {
-                    Debug.Log( "player!=null" + photonView.IsMine );
-                    try
-                    {
-                        if (photonView.IsMine)
-                        {
-                            Debug.Log( "enemy damaged" );
-
-                            hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
-                            hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
-                            obj.TakeDamage(((GunInfo)itemInfo).damage, photonView.Owner.NickName.Split('\t')[0],nameof(GrenadeLauncher));
-                           }
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.Log( ex.Message );
-                    }
-
-                }
-            }
-            DestroyBullet();
+            hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
+            hit.ShowDamage( ( ( GunInfo )itemInfo ).damage );
+            obj.TakeDamage( ( ( GunInfo )itemInfo ).damage, name, nameof( GrenadeLauncher ) );
         }
+
+        DestroyBullet();
     }
+    
     // ����������
     // �������
     // ���������
