@@ -11,7 +11,7 @@ public class BulletRocket : MonoBehaviour
     public float destroyTime;
 
     public GameObject hitEffect;
-    [SerializeField] PhotonView photonView;
+   
 
     public float pushForce;
 
@@ -19,36 +19,23 @@ public class BulletRocket : MonoBehaviour
 
     [Range(0.1f, 5f), SerializeField] float splashRange;
 
-    private void Update()
-    {
 
-        photonView = GetComponent<PhotonView>();
-
-
-    }
     private void Start()
     {
         Invoke("DestroyBullet", destroyTime);
         
         _rigidbody2D.velocity = transform.right * speed;
     }
+    public void SetSender( string name )
+    {
+        this.name = name;
+    }
+    private string name;
+
 
     void DestroyBullet()
     {
-        try
-        {
-            if ( photonView.IsMine )
-            {
-                
-                PhotonNetwork.Destroy( gameObject );
-
-            }
-        }
-        catch(Exception ex )
-        {
-            Debug.Log( ex.Message );
-        }
-        
+       Destroy( gameObject );
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -57,42 +44,30 @@ public class BulletRocket : MonoBehaviour
 
             foreach (var _hitCollider in hitColliders)
             {
-                PlayerController Player = _hitCollider.GetComponent<PlayerController>();
-                DestroyingPlatform platform = _hitCollider.GetComponent<DestroyingPlatform>();
-                if (Player != null || platform!=null)
+                var obj = _hitCollider.GetComponent<IDamage>();
+
+               
+                if (obj!=null)
                 {
-                    //Debug.Log("enemy damaged");
-                    try
-                    {
-                        if (photonView.IsMine)
-                        {
-                            //Debug.Log("transformPosition" + transform.position);
-                            var closestPoint = _hitCollider.ClosestPoint(transform.position);
-                            //Debug.Log("closestPoint" + closestPoint);
-                            var distance = Vector2.Distance(closestPoint, transform.position);
-                            //Debug.Log("distance" + distance);
-                            var damagePercent = Mathf.InverseLerp(splashRange, 0, distance);
-                            //Debug.Log("damagePercent"+ damagePercent);
+                    var closestPoint = _hitCollider.ClosestPoint(transform.position);
+                      
+                    var distance = Vector2.Distance(closestPoint, transform.position);
+                      
+                    var damagePercent = Mathf.InverseLerp(splashRange, 0, distance);
 
-                            Vector2 forseVector = transform.position;
-                            forseVector -= closestPoint;
-                            forseVector.Normalize();
-                            //Debug.Log("forseVector" + forseVector);
-
-                            Player?.gameObject.GetComponent<IDamage>()?.TakeDamage(((GunInfo)itemInfo).damage * damagePercent, photonView.Owner.NickName.Split('\t')[0],nameof(RocketLauncher));
-                            Player?.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
-                            hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
-                            hit.ShowDamage( ( ( GunInfo )itemInfo ).damage * damagePercent );
-                            platform?.gameObject.GetComponent<IDamage>()?.TakeDamage( ( ( GunInfo )itemInfo ).damage, photonView.Owner.NickName.Split( '\t' )[0],nameof(BulletRocket) );
+                    Vector2 forseVector = transform.position;
+                    forseVector -= closestPoint;
+                    forseVector.Normalize();
 
 
-                            //Debug.Log("final forse" + ((-1) * pushForce * damagePercent * forseVector));
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.Log( ex.Message );
-                    }
+                    obj.TakeDamage(((GunInfo)itemInfo).damage * damagePercent,name,nameof(RocketLauncher));
+                    PlayerController player = _hitCollider.GetComponent<PlayerController>();
+                    if ( player != null ) 
+                        player.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
+                   
+
+                    hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
+                    hit.ShowDamage( ( ( GunInfo )itemInfo ).damage * damagePercent );
 
                 }
             }
