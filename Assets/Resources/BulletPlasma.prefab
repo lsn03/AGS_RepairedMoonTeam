@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 646345200201882348}
   - component: {fileID: 646345200201882339}
   - component: {fileID: 646345200201882338}
-  - component: {fileID: 6449345233069581533}
+  - component: {fileID: 8634149994977203171}
   - component: {fileID: -5111014517800070371}
   - component: {fileID: 9172039762690713551}
   - component: {fileID: -3620782714138338211}
@@ -116,7 +116,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.8847027, y: 1.2784154}
   m_EdgeRadius: 0
---- !u!114 &6449345233069581533
+--- !u!114 &8634149994977203171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,15 +125,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 646345200201882337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e91a7cd3415804c92903a149f082d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ea1fc4194ac55c4087fcb34582aecbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: c950c7a32b0c2804c8e777bac343e50a, type: 2}
   speed: 50
   destroyTime: 7.27
   hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}
-  photonView: {fileID: -5111014517800070371}
-  pushForce: 0
   _rigidbody2D: {fileID: -3620782714138338211}
   splashRange: 2
 --- !u!114 &-5111014517800070371

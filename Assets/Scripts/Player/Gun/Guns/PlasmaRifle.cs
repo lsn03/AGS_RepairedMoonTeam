@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,10 +8,10 @@ using UnityEngine;
 public class PlasmaRifle : Gun
 {
     public float offset;
-    public GameObject bullet;
+    public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public GameObject Gun;
-
+    public float speed;
     private PhotonView photonView;
 
     public TextMeshProUGUI text;
@@ -56,6 +57,14 @@ public class PlasmaRifle : Gun
     {
         bulletsLeft--;
         sound.Play();
-        PhotonNetwork.Instantiate(bullet.name, bulletSpawn.position, bulletSpawn.transform.rotation);
+        photonView.RPC( nameof( RPC_Shoot ), RpcTarget.All, gameObject.transform.right*speed, PhotonNetwork.LocalPlayer);
+    }
+    [PunRPC]
+    public void RPC_Shoot( Vector3 vel, Player sender )
+    {
+       GameObject bullet = Instantiate( bulletPrefab, bulletSpawn.position, bulletSpawn.transform.rotation );
+        Rigidbody2D _rigidbody2D = bullet.GetComponent<Rigidbody2D>();
+        _rigidbody2D.velocity =  vel;
+        bullet.GetComponent<BulletPlasma>().SetSender( sender.NickName.Split('\t')[0] );
     }
 }
