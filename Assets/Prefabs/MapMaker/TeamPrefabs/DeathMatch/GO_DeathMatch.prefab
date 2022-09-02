@@ -206,7 +206,7 @@ PrefabInstance:
     - target: {fileID: 1984350706482211663, guid: 47de614a1eaae7e43b41cf2bbc652aff, type: 3}
       propertyPath: gameManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8312726967021139886}
     - target: {fileID: 1984350706482211663, guid: 47de614a1eaae7e43b41cf2bbc652aff, type: 3}
       propertyPath: endGameCanvas
       value: 
@@ -332,6 +332,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2591831539979047671, guid: 9c754e8f946d9194ea146a0149017801, type: 3}
   m_PrefabInstance: {fileID: 5810967537231340893}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8312726967021139886 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2591831539979047667, guid: 9c754e8f946d9194ea146a0149017801, type: 3}
+  m_PrefabInstance: {fileID: 5810967537231340893}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c4883ad01df8b45865779ff1d670b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6027131807542818335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -448,7 +459,7 @@ PrefabInstance:
     - target: {fileID: 1753944597882605365, guid: 5c98bd9155ebeda4ab6da39ee77fb8e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8312726967021139886}
     - target: {fileID: 4278127930480453913, guid: 5c98bd9155ebeda4ab6da39ee77fb8e9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
