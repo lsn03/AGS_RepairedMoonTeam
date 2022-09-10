@@ -8,14 +8,19 @@ public class platformalift2 : MonoBehaviour
 	[SerializeField] private float speed;
 	[SerializeField] private float startingPosition;
 	[SerializeField] private float endPosition;
+	[SerializeField] int sign;
+    private void Start()
+    {
+		Destroy( gameObject, 25f );
+    }
 
-	private bool upMove = true;
+    private bool upMove = true;
 
 	private Vector3 pos;
 
 	void Update()
 	{
-		transform.position += transform.right * speed * Time.deltaTime;
+		transform.position += transform.right * speed * Time.deltaTime*(sign);
 		if (pos.x > endPosition && upMove)
 		{
 			upMove = false;
