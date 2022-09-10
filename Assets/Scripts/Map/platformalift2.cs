@@ -11,7 +11,7 @@ public class platformalift2 : MonoBehaviour
 	[SerializeField] int sign;
     private void Start()
     {
-		Destroy( gameObject, 25f );
+		Destroy( gameObject, 10f );
     }
 
     private bool upMove = true;
