@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
+using Hastable = ExitGames.Client.Photon.Hashtable;
+
 
 public class PauseMenuManager : MonoBehaviourPunCallbacks
 {
@@ -15,6 +18,7 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
     public Slider musicSlider;
     public Slider effectSlider;
     public Slider shootSlider;
+
     private const string 
         MUSIC_VOLUME = "musicVolume",
         EFFECT_VOLUME = "effectVolume",
@@ -38,14 +42,8 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
         {
             pausePannel.SetActive(false);
         }
-
-        //musicSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat( MUSIC_VOLUME );
-        //effectSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat( EFFECT_VOLUME );
-        //shootSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat( SHOOT_VOLUME );
-
-        //audioMixerMusic.SetFloat( MUSIC_VOLUME, PlayerPrefs.GetFloat( MUSIC_VOLUME ) );
-        //audioMixerEffect.SetFloat( EFFECT_VOLUME, PlayerPrefs.GetFloat( EFFECT_VOLUME ) );
-        //audioMixerShoot.SetFloat( SHOOT_VOLUME, PlayerPrefs.GetFloat( SHOOT_VOLUME ) );
+   
+        
     }
     private bool isOpenMainMenu = false,isOpenSettingMenu;
     void Update()
@@ -57,7 +55,8 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
         
         if(isOpenMainMenu || isOpenSettingMenu )
         {
-            Time.timeScale = 0; 
+            SetPause();
+            //Time.timeScale = 0; 
         }
 
         if ( isOpenMainMenu && !isOpenSettingMenu )
@@ -82,11 +81,30 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
         pausePannel.SetActive(false);
         settingPanel.SetActive( false );
         gameObjectWithButtons.SetActive( true );
-        Time.timeScale = 1;
+        RemovePause();
         isOpenSettingMenu = isOpenMainMenu = false;
     }
-
-    
+   
+    public void SetPause()
+    {
+        if ( PhotonNetwork.LocalPlayer.IsLocal )
+        {
+            Hastable ht = new Hastable();
+            ht.Add( "pause", true );
+            PhotonNetwork.LocalPlayer.SetCustomProperties( ht );
+        }
+    }
+    public void RemovePause()
+    {
+        if ( PhotonNetwork.LocalPlayer.IsLocal )
+        {
+            Hastable ht = PhotonNetwork.LocalPlayer.CustomProperties;
+            
+            ht.Remove( "pause");
+            ht.Add( "pause", false );
+            PhotonNetwork.LocalPlayer.SetCustomProperties( ht );
+        }
+    }
     public void ExitGame()
     {
         Application.Quit();

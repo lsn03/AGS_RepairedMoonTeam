@@ -2147,6 +2147,8 @@ MonoBehaviour:
   wheelWeaponChangeTimer: 0
   ui: {fileID: 1136609366146007088}
   runSound: {fileID: 3520254820172496249}
+  pause: 0
+  itemHolder: {fileID: 1968635274365260327}
 --- !u!114 &4072157996765907315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2643,7 +2645,7 @@ MonoBehaviour:
   - {x: -0.26646164, y: 0.8371175, z: -2.8511238e-10}
   m_ShapePathHash: 1873972708
   m_Mesh: {fileID: 0}
-  m_InstanceId: 117266
+  m_InstanceId: 115818
 --- !u!1 &2730310494527139221
 GameObject:
   m_ObjectHideFlags: 0

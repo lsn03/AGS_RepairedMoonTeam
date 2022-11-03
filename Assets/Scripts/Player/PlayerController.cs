@@ -53,7 +53,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     [SerializeField] AudioSource runSound;
 
     string[] arrayNick;
-
+    [SerializeField] bool pause = false;
+    [SerializeField] GameObject itemHolder;
     private void Awake()
     {
         photonView = GetComponentInChildren<PhotonView>();
@@ -84,6 +85,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
     void Update()
     {
         if (!photonView.IsMine) return;
+        if ( pause )
+        {
+            
+            return;
+        }
         Run();
         JumpUp();
         JumpDown();
@@ -208,6 +214,19 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (changedProps.ContainsKey("itemIndex") && !photonView.IsMine && targetPlayer == photonView.Owner)
         {
             EquipItem((int)changedProps["itemIndex"]);
+        }
+        if(changedProps.ContainsKey("pause") && targetPlayer == photonView.Owner )
+        {
+            changedProps.TryGetValue( "pause", out object p );
+            pause = ( bool )p;
+            if ( pause )
+            {
+                itemHolder.SetActive( false );
+            }
+            else 
+            {
+                itemHolder.SetActive( true );
+            }
         }
     }
 
