@@ -25,7 +25,7 @@ public class RotateGun : MonoBehaviour
     void Update()
     {
 
-        if ( !photonView.IsMine ) return;
+        //if ( !photonView.IsMine ) return;
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position;
         float rotateZ = Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
 
