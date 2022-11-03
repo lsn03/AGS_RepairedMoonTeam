@@ -43,7 +43,8 @@ public class BulletsManager : Item
         {
             Gun weapon = GetWeaponObject(player.gameObject);
 
-            weapon.AddBullet(bulletToAdd);
+            if(weapon != null)
+                weapon.AddBullet(bulletToAdd);
 
             itemGameObject.SetActive(false);
             collider.enabled = false;
