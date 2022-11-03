@@ -11,7 +11,7 @@ using Hastable = ExitGames.Client.Photon.Hashtable;
 public class PlayerManager : MonoBehaviour
 {
     PhotonView photonView;
-    GameObject controller;
+   [SerializeField] GameObject controller;
     [SerializeField] AudioSource sound;
 
     int kills,deaths;
