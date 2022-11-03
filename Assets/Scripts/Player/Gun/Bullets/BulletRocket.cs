@@ -52,22 +52,28 @@ public class BulletRocket : MonoBehaviour
                     var closestPoint = _hitCollider.ClosestPoint(transform.position);
                       
                     var distance = Vector2.Distance(closestPoint, transform.position);
-                      
-                    var damagePercent = Mathf.InverseLerp(splashRange, 0, distance);
 
+                    Debug.Log(distance);
+                    distance -= 0.7f;
+
+                    if (distance < 0) distance = 0;
+
+                    var damagePercent = Mathf.InverseLerp(splashRange - 0.7f, 0, distance);
+
+                    int finalDamage = Convert.ToInt32 ( Math.Ceiling ((( GunInfo ) itemInfo ).damage * damagePercent ));
                     Vector2 forseVector = transform.position;
                     forseVector -= closestPoint;
                     forseVector.Normalize();
 
 
-                    obj.TakeDamage(((GunInfo)itemInfo).damage * damagePercent,name,nameof(RocketLauncher));
+                    obj.TakeDamage(finalDamage, name,nameof(RocketLauncher));
                     PlayerController player = _hitCollider.GetComponent<PlayerController>();
                     if ( player != null ) 
                         player.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
                    
 
-                    hitEffectController hit =  Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
-                    hit.ShowDamage( ( ( GunInfo )itemInfo ).damage * damagePercent );
+                    hitEffectController hit =  Instantiate(hitEffect, _hitCollider.transform.position, Quaternion.identity).GetComponent<hitEffectController>();
+                    hit.ShowDamage(finalDamage);
 
                 }
             }

@@ -7,7 +7,7 @@ public class DestroyingPlatform : Boost, IDamage
 {
     PhotonView photonView;
     [SerializeField] private float reloadTime;
-    float maxHp = 100f,currentHp;
+    public float maxHp = 100f,currentHp;
 
     public void TakeDamage( float damage, string name, string weapon = null)
     {

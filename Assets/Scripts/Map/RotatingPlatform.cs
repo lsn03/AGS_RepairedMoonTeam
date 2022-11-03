@@ -2,27 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DvijPlat : MonoBehaviour
+public class RotatingPlatform : MonoBehaviour
 {
     [SerializeField]
-        Transform center;
+    Transform center;
 
-      [SerializeField]
-      float radius = 2f, angularSpeed = 2f;
+    [SerializeField]
+    float radius = 2f, angularSpeed = 2f;
 
-      float positionX, positionY, angle = 0f;
+    float positionX, positionY, angle = 0f;
 
-      void Update()  
-      {
+    void Update()
+    {
         positionX = center.position.x + Mathf.Cos(angle) * radius;
         positionY = center.position.y + Mathf.Sin(angle) * radius;
+
         transform.position = new Vector2(positionX, positionY);
-        angle = angle + Time.deltaTime * angularSpeed;
+
+        angle += Time.deltaTime * angularSpeed;
 
         if (angle >= 360f)
         {
-            angle = 0f;
+            angle -= 360f;
         }
-      }
-    
+    }
+
 }

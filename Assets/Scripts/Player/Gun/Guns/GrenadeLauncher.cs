@@ -57,24 +57,24 @@ public class GrenadeLauncher : Gun
     }
     IEnumerator Shoot()
     {
-        
+
         sound.Play();
 
-        photonView.RPC( nameof( RPC_Shoot ), RpcTarget.All, gameObject.transform.right * speed, PhotonNetwork.LocalPlayer );
+        photonView.RPC(nameof(RPC_Shoot), RpcTarget.All, gameObject.transform.right * speed, PhotonNetwork.LocalPlayer);
         bulletsLeft--;
         yield return new WaitForSeconds(shotDelay);
-        photonView.RPC( nameof( RPC_Shoot ), RpcTarget.All, gameObject.transform.right * speed, PhotonNetwork.LocalPlayer );
+        photonView.RPC(nameof(RPC_Shoot), RpcTarget.All, gameObject.transform.right * speed, PhotonNetwork.LocalPlayer);
         bulletsLeft--;
         yield return new WaitForSeconds(shotDelay);
-        photonView.RPC( nameof( RPC_Shoot ), RpcTarget.All, gameObject.transform.right * speed, PhotonNetwork.LocalPlayer );
+        photonView.RPC(nameof(RPC_Shoot), RpcTarget.All, gameObject.transform.right * speed, PhotonNetwork.LocalPlayer);
         bulletsLeft--;
     }
     [PunRPC]
-    public void RPC_Shoot( Vector3 vel, Player sender )
+    public void RPC_Shoot(Vector3 vel, Player sender)
     {
-        GameObject bul = Instantiate( bullet, bulletSpawn.position, bulletSpawn.transform.rotation );
+        GameObject bul = Instantiate(bullet, bulletSpawn.position, bulletSpawn.transform.rotation);
         Rigidbody2D _rigidbody2D = bul.GetComponent<Rigidbody2D>();
         _rigidbody2D.velocity = vel;
-        bul.GetComponent<BulletGrenade>().SetSender( sender.NickName.Split( '\t' )[0] );
+        bul.GetComponent<BulletGrenade>().SetSender(sender.NickName.Split('\t')[0]);
     }
 }
