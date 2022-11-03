@@ -1430,7 +1430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ccf117f0691755498df9d6ec4d35725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInfo: {fileID: 11400000, guid: 8f34daa6de381d048bd1a9d0082e404f, type: 2}
+  itemInfo: {fileID: 11400000, guid: 799db98d74ba1244abcd8972af152141, type: 2}
   itemGameObject: {fileID: 4333445856159458839}
   hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}
   maxBullets: 150
@@ -2645,7 +2645,7 @@ MonoBehaviour:
   - {x: -0.26646164, y: 0.8371175, z: -2.8511238e-10}
   m_ShapePathHash: 1873972708
   m_Mesh: {fileID: 0}
-  m_InstanceId: 115818
+  m_InstanceId: 123446
 --- !u!1 &2730310494527139221
 GameObject:
   m_ObjectHideFlags: 0
@@ -7412,7 +7412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f65e51c24257ad49bac1e70f1f66163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInfo: {fileID: 11400000, guid: f706a5fe058a4504b9c03fdf84b67763, type: 2}
+  itemInfo: {fileID: 11400000, guid: e1af451ab011262409227c215d45365e, type: 2}
   itemGameObject: {fileID: 3941493954564978960}
   hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}
   maxBullets: 25

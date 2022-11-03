@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e91a7cd3415804c92903a149f082d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInfo: {fileID: 11400000, guid: c950c7a32b0c2804c8e777bac343e50a, type: 2}
+  itemInfo: {fileID: 11400000, guid: 70c7476a4aeeeb64ca82b0a69acf5491, type: 2}
   speed: 20
   destroyTime: 7.5
   hitEffect: {fileID: 1326334261232451932, guid: cc495ab7b1b49fa42a61a207f95fb3ad, type: 3}

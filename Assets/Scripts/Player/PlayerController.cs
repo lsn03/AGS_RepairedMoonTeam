@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (!photonView.IsMine) return;
         if ( pause )
         {
-            
+
             return;
         }
         Run();
@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if (isGrounded)
             _animator.SetBool("isJump", false);
+
     }
 
     void Run()
@@ -199,11 +200,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
 
         previousItemIndex = itemIndex;
-        if (photonView.IsMine)
+        //if (photonView.IsMine)
+        //{
+        //    Hashtable hash = new Hashtable();
+        //    hash.Add("itemIndex", itemIndex);
+        //    PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        //}
+        if ( photonView.IsMine )
         {
-            Hashtable hash = new Hashtable();
-            hash.Add("itemIndex", itemIndex);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+            Hashtable hash =  PhotonNetwork.LocalPlayer.CustomProperties;
+            hash.Remove( "itemIndex" );
+            hash.Add( "itemIndex", itemIndex );
+            PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
         }
 
         return true;
@@ -215,7 +223,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             EquipItem((int)changedProps["itemIndex"]);
         }
-        if(changedProps.ContainsKey("pause") && targetPlayer == photonView.Owner )
+
+        if ( changedProps.ContainsKey( "pause" ) && targetPlayer == photonView.Owner )
         {
             changedProps.TryGetValue( "pause", out object p );
             pause = ( bool )p;
@@ -223,7 +232,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
                 itemHolder.SetActive( false );
             }
-            else 
+            else
             {
                 itemHolder.SetActive( true );
             }
