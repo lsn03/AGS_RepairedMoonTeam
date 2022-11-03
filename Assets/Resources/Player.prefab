@@ -1178,7 +1178,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 68518b5f38fa79d4a92d5f26e618eb5b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1838,7 +1838,7 @@ EdgeCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.15}
   m_EdgeRadius: 0.15
   m_Points:
   - {x: -0.6, y: 0}
@@ -2216,7 +2216,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07, y: -0.45}
+  m_Offset: {x: -0.07, y: -0.7}
   m_Size: {x: 0.9, y: 2.55}
   m_Direction: 0
 --- !u!114 &7302656434929887845
@@ -2643,7 +2643,7 @@ MonoBehaviour:
   - {x: -0.26646164, y: 0.8371175, z: -2.8511238e-10}
   m_ShapePathHash: 1873972708
   m_Mesh: {fileID: 0}
-  m_InstanceId: 1084534
+  m_InstanceId: 117266
 --- !u!1 &2730310494527139221
 GameObject:
   m_ObjectHideFlags: 0
@@ -9280,6 +9280,10 @@ PrefabInstance:
     - target: {fileID: -8653719598885068355, guid: 5f7b3474554875a41b623c95121ff8fe, type: 3}
       propertyPath: m_Name
       value: ShotGun
+      objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 5f7b3474554875a41b623c95121ff8fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8078847899713035290, guid: 5f7b3474554875a41b623c95121ff8fe, type: 3}
       propertyPath: m_LocalPosition.x
