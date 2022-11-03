@@ -200,19 +200,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
 
         previousItemIndex = itemIndex;
-        //if (photonView.IsMine)
-        //{
-        //    Hashtable hash = new Hashtable();
-        //    hash.Add("itemIndex", itemIndex);
-        //    PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-        //}
         if ( photonView.IsMine )
         {
-            Hashtable hash =  PhotonNetwork.LocalPlayer.CustomProperties;
-            hash.Remove( "itemIndex" );
+            Hashtable hash = new Hashtable();
             hash.Add( "itemIndex", itemIndex );
             PhotonNetwork.LocalPlayer.SetCustomProperties( hash );
         }
+
 
         return true;
     }

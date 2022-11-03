@@ -93,8 +93,9 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
            
             ht.Add( "pause", true );
             PhotonNetwork.LocalPlayer.SetCustomProperties( ht );
-           
-            
+            Hastable ht1 = PhotonNetwork.LocalPlayer.CustomProperties;
+
+
         }
     }
     public void RemovePause()
