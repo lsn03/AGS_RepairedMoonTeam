@@ -2169,6 +2169,8 @@ MonoBehaviour:
   armorSound: {fileID: 6476173225947989587}
   hpSound: {fileID: 3938013606912404601}
   deathSound: {fileID: 1196365527550798284}
+  isBlue: 0
+  isRed: 0
 --- !u!232 &3601841711091348183
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -2645,7 +2647,7 @@ MonoBehaviour:
   - {x: -0.26646164, y: 0.8371175, z: -2.8511238e-10}
   m_ShapePathHash: 1873972708
   m_Mesh: {fileID: 0}
-  m_InstanceId: 123446
+  m_InstanceId: 441120
 --- !u!1 &2730310494527139221
 GameObject:
   m_ObjectHideFlags: 0
@@ -8404,6 +8406,18 @@ PrefabInstance:
     - target: {fileID: -7489861541247912070, guid: 0df44ef9a0d399d4cb1fc724a4030bbe, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.2303285
+      objectReference: {fileID: 0}
+    - target: {fileID: -7169979984070963402, guid: 0df44ef9a0d399d4cb1fc724a4030bbe, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7169979984070963402, guid: 0df44ef9a0d399d4cb1fc724a4030bbe, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7169979984070963402, guid: 0df44ef9a0d399d4cb1fc724a4030bbe, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6998829562116120356, guid: 0df44ef9a0d399d4cb1fc724a4030bbe, type: 3}
       propertyPath: m_LocalRotation.w

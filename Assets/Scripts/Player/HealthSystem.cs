@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using Photon.Realtime;
+using Hastable = ExitGames.Client.Photon.Hashtable;
 
 public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmor, IDamageBooster
 {
@@ -22,7 +23,8 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     [SerializeField] AudioSource armorSound;
     [SerializeField] AudioSource hpSound;
     [SerializeField] AudioSource deathSound;
-
+    [SerializeField] bool isBlue;
+    [SerializeField] bool isRed;
     PlayerManager playerManager;
     PhotonView photonView;
 
@@ -117,7 +119,10 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
     void RPC_TakeDamage(float damage, string autor, string weapon, PhotonMessageInfo info )
     {
         if (!photonView.IsMine) return;
-        if (autor == photonView.Owner.NickName.Split('\t')[0] || info.Sender == PhotonNetwork.LocalPlayer)
+        Hastable ht = info.Sender.CustomProperties;
+        ht.TryGetValue( "team",out object t );
+        string team = (string)t;
+        if (autor == photonView.Owner.NickName.Split('\t')[0] || info.Sender == PhotonNetwork.LocalPlayer || team == "blue" && isBlue || team=="red"&&isRed)
         {
             return;
         }
