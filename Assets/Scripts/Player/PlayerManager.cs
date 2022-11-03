@@ -43,13 +43,13 @@ public class PlayerManager : MonoBehaviour
         if (team == "blue" )
         {
             Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchBlueSpawnpoint();
-            controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+            controller = PhotonNetwork.Instantiate( "PlayerBlue", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
 
         }
         else if (team == "red" )
         {
             Transform spawnpoint = SpawnManager.Instance.GetTeamDeathMatchRedSpawnpoint();
-            controller = PhotonNetwork.Instantiate( "Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
+            controller = PhotonNetwork.Instantiate( "PlayerRed", spawnpoint.position, spawnpoint.rotation, 0, new object[] { photonView.ViewID } );
 
         }
         else
