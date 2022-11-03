@@ -169,9 +169,10 @@ public class HealthSystem : MonoBehaviourPunCallbacks, IDamage, IAddHp, IAddArmo
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "spikes" && photonView.IsMine)
+        if (collision.tag == "spikes" && photonView.IsMine && currentHP > 0)
         {
             Die();
+            currentHP = 0;
         }
     }
 }
