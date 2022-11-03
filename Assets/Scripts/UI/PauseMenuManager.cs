@@ -56,7 +56,7 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
         if(isOpenMainMenu || isOpenSettingMenu )
         {
             SetPause();
-            //Time.timeScale = 0; 
+           
         }
 
         if ( isOpenMainMenu && !isOpenSettingMenu )
@@ -81,7 +81,7 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
         pausePannel.SetActive(false);
         settingPanel.SetActive( false );
         gameObjectWithButtons.SetActive( true );
-        RemovePause();
+      RemovePause();
         isOpenSettingMenu = isOpenMainMenu = false;
     }
    
@@ -90,19 +90,24 @@ public class PauseMenuManager : MonoBehaviourPunCallbacks
         if ( PhotonNetwork.LocalPlayer.IsLocal )
         {
             Hastable ht = new Hastable();
+           
             ht.Add( "pause", true );
             PhotonNetwork.LocalPlayer.SetCustomProperties( ht );
+            Hastable ht1 = PhotonNetwork.LocalPlayer.CustomProperties;
+
+
         }
     }
     public void RemovePause()
     {
         if ( PhotonNetwork.LocalPlayer.IsLocal )
         {
-            Hastable ht = PhotonNetwork.LocalPlayer.CustomProperties;
+            Hastable ht = new Hastable();
             
-            ht.Remove( "pause");
             ht.Add( "pause", false );
             PhotonNetwork.LocalPlayer.SetCustomProperties( ht );
+            
+            
         }
     }
     public void ExitGame()
