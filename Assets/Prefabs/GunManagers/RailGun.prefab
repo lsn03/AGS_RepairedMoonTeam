@@ -95,8 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f28944c5fdeff4aaf97ad500e37df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInfo: {fileID: 11400000, guid: f706a5fe058a4504b9c03fdf84b67763, type: 2}
+  itemInfo: {fileID: 11400000, guid: e1af451ab011262409227c215d45365e, type: 2}
   itemGameObject: {fileID: 4076928328479744453}
+  reloadTimer: 0
   bulletToAdd: 1
   reloadTime: 5
 --- !u!1 &4076928328190609874
@@ -172,7 +173,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5a74d0e05c8460944bae5f3be0e86a19, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da7b0cd7dcb097044ab98f7580d011b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

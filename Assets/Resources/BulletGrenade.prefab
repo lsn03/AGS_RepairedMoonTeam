@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9172039762690713551}
   - component: {fileID: -3620782714138338211}
   - component: {fileID: 4284814715079890045}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BulletGrenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
