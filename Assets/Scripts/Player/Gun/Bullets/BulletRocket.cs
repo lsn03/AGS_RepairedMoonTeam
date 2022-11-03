@@ -71,11 +71,13 @@ public class BulletRocket : MonoBehaviour
                     if ( player != null ) 
                         player.gameObject.transform.GetComponent<Rigidbody2D>().AddForce((-1) * pushForce * damagePercent * forseVector);
                    
+                    hitEffectController hitText = Instantiate(hitEffect, _hitCollider.transform.position, Quaternion.identity).GetComponent<hitEffectController>();
+                    //переделать!!!!
+                    hitText.ShowDamage(finalDamage);
 
-                    hitEffectController hit =  Instantiate(hitEffect, _hitCollider.transform.position, Quaternion.identity).GetComponent<hitEffectController>();
-                    hit.ShowDamage(finalDamage);
-
+                    
                 }
+                hitEffectController hitPaticle = Instantiate(hitEffect, transform.position, Quaternion.identity).GetComponent<hitEffectController>();
             }
             DestroyBullet();
         }
